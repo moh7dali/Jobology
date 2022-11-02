@@ -12,7 +12,12 @@ class _Start_pageState extends State<Start_page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Text("Start Up page"),
+      body: ElevatedButton.icon(
+          onPressed: () {
+            Navigator.pushNamed(context, "Login");
+          },
+          icon: Icon(Icons.start),
+          label: Text("Get Started")),
     );
   }
 }
