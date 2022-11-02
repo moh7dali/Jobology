@@ -12,6 +12,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  void nav(){
+    Navigator.popAndPushNamed(context,'forgetpassword' );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +29,7 @@ class _LoginState extends State<Login> {
           ),
           TextField(
             controller: passController,
-          ),
+          ),TextButton(onPressed:nav , child: Text("ForgetPassword")),
           ElevatedButton.icon(
               onPressed: () async {
                 try {

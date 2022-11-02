@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:jobology/Screens/ForgetPass.dart';
 import 'package:jobology/Screens/Home.dart';
 import 'package:jobology/Screens/Login.dart';
 import 'package:jobology/Screens/signup.dart';
@@ -16,7 +17,8 @@ Future<void> main() async {
       "Login": (context) => const Login(),
       "Sign_Up": (context) => const Sign_up(),
       "Home": (context) => const Home(),
-      "Start": (context) => Start_page()
+      "Start": (context) => Start_page(),
+      "forgetpassword":(context) => ForgetPassword()
     },
     home: const MyApp(),
   ));
