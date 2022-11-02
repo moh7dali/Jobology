@@ -41,7 +41,7 @@ class _Sign_upState extends State<Sign_up> {
                 }
               },
               icon: Icon(Icons.login),
-              label: Text("Log in"))
+              label: Text("Sign UP"))
         ]),
       ),
     );
