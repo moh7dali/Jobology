@@ -29,6 +29,13 @@
             {
               "client_id": "640696484068-rg6guiri77d6t8lpgk4e4nejs2es5l8c.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "640696484068-c05dlo4t6tpqrbllehvduh4mp55lum47.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jobology"
+              }
             }
           ]
         }
