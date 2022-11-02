@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "640696484068",
+    "project_id": "jobology-8cf83",
+    "storage_bucket": "jobology-8cf83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640696484068:android:a8635454faf13d3bc9acf1",
+        "android_client_info": {
+          "package_name": "com.example.jobology"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640696484068-rg6guiri77d6t8lpgk4e4nejs2es5l8c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADGyRVfzL0LqcAGLE1mBCglUSJLTpRnGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640696484068-rg6guiri77d6t8lpgk4e4nejs2es5l8c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
