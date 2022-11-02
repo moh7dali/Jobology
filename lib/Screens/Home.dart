@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
               onPressed: () async {
                 final GoogleSignInAccount? googleUser =
                     await GoogleSignIn().signOut();
-                //await FirebaseAuth.instance.signOut();
+                await FirebaseAuth.instance.signOut();
 
                 print("User Sign Out");
                 Navigator.pushNamed(context, "Start");
