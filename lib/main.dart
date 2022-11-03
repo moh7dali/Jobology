@@ -27,10 +27,9 @@ Future<void> main() async {
       "Sign_Up": (context) => Sign_up(),
       "Home": (context) => Home(),
       "Start": (context) => Start_page(),
-       "forgetpassword":(context) => ForgetPassword(),
-      "jobInfo":(context) => jobInfo(),
-      "jobs":(context) => jobs(),
-      
+      "forgetpassword": (context) => ForgetPassword(),
+      "jobInfo": (context) => jobInfo(),
+      "jobs": (context) => jobs(),
     },
     home: const MyApp(),
   ));
@@ -41,6 +40,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Home();
+    return Start_page();
   }
 }
