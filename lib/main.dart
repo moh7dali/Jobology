@@ -7,6 +7,7 @@ import 'package:jobology/Screens/signup.dart';
 import 'package:jobology/Screens/start.dart';
 import 'firebase_options.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // raghad@firebase.com password: raghad12345
 Future<void> main() async {
