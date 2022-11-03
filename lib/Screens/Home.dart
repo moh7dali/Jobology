@@ -27,7 +27,10 @@ class _HomeState extends State<Home> {
                 Navigator.pushNamed(context, "Start");
               },
               icon: Icon(Icons.exit_to_app),
-              label: Text("Log out"))
+              label: Text("Log out")),
+              ElevatedButton(onPressed: () {
+             Navigator.pushNamed(context, "jobs");   
+              }, child: Text("jobs"))
         ],
       ),
     );

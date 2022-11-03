@@ -3,7 +3,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'Login.dart';
 
 
 
@@ -32,7 +31,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   }
   void nav(){
     
-                Navigator.popAndPushNamed(context, 'Login');
+     Navigator.popAndPushNamed(context, 'Login');
                   
   }
 
