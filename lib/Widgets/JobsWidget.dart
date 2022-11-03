@@ -24,9 +24,9 @@ class _ListTaleWState extends State<ListTaleW> {
           leading: Container(width:80 ,height: 80,
             child: Image.asset(widget.imageUrl!),
           ),
-          trailing: Icon(Icons.work,color: Colors.white,),
-          title: Text(widget.name!,style: TextStyle(color: Colors.white),),
-          subtitle: Text(widget.subTitle!,style: TextStyle(color: Colors.white)),
+          trailing: Icon(Icons.work,color: Colors.blue,),
+          title: Text(widget.name!,style: TextStyle(color: Colors.blue),),
+          subtitle: Text(widget.subTitle!,style: TextStyle(color: Colors.green)),
         ));
   }
 }

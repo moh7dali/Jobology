@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:jobology/Widgets/JobsWidget.dart';
 
 class jobs extends StatefulWidget {
@@ -11,7 +13,17 @@ class jobs extends StatefulWidget {
 class _jobsState extends State<jobs> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Color.fromARGB(255, 168, 104, 104),
+    return Scaffold(appBar: AppBar(
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.lightbulb),
+              onPressed: () {
+                Get.isDarkMode
+                    ? Get.changeTheme(ThemeData.light())
+                    : Get.changeTheme(ThemeData.dark());
+              })
+        ],
+      ),
       body: SafeArea(
           child: ListView.builder(
             itemCount: 6,
