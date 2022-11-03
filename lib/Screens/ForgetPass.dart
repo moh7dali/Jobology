@@ -1,11 +1,6 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'Login.dart';
-
-
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
@@ -19,31 +14,37 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   Future passwordReset() async {
     try {
       await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailRestconroller.text.toLowerCase() );
-          showDialog(context: context, builder: (context) {
-        return AlertDialog(content: Text("check your email"),);
-      },);
+          .sendPasswordResetEmail(email: emailRestconroller.text.toLowerCase());
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text("check your email"),
+          );
+        },
+      );
     } on FirebaseAuthException catch (e) {
       print(e);
-      showDialog(context: context, builder: (context) {
-        return AlertDialog(content: Text(e.message.toString()),);
-      },);
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(e.message.toString()),
+          );
+        },
+      );
     }
   }
-  void nav(){
-    
-                Navigator.popAndPushNamed(context, 'Login');
-                  
+
+  void nav() {
+    Navigator.popAndPushNamed(context, 'Login');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(actions: [
-          IconButton(
-              onPressed: nav,
-              icon: Icon(Icons.logout))
-        ]),
+        appBar: AppBar(
+            actions: [IconButton(onPressed: nav, icon: Icon(Icons.logout))]),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text("Reset your password "),
           Padding(

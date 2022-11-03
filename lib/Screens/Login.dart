@@ -12,9 +12,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
-  void nav(){
-    Navigator.popAndPushNamed(context,'forgetpassword' );
+  void nav() {
+    Navigator.popAndPushNamed(context, 'forgetpassword');
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +30,8 @@ class _LoginState extends State<Login> {
           ),
           TextField(
             controller: passController,
-          ),TextButton(onPressed:nav , child: Text("ForgetPassword")),
+          ),
+          TextButton(onPressed: nav, child: Text("ForgetPassword")),
           ElevatedButton.icon(
               onPressed: () async {
                 try {
@@ -37,7 +39,7 @@ class _LoginState extends State<Login> {
                   UserCredential myuser = await auth.signInWithEmailAndPassword(
                       email: emailController.text,
                       password: passController.text);
-                  Navigator.pushNamed(context, "Home");
+                  Navigator.popAndPushNamed(context, "Home");
                 } catch (e) {
                   ScaffoldMessenger.of(context)
                       .showSnackBar(SnackBar(content: Text(e.toString())));
@@ -60,7 +62,7 @@ class _LoginState extends State<Login> {
                   UserCredential myuser =
                       await auth.signInWithCredential(credential);
 
-                  Navigator.pushNamed(context, "Home");
+                  Navigator.popAndPushNamed(context, "Home");
                 } catch (e) {
                   ScaffoldMessenger.of(context)
                       .showSnackBar(SnackBar(content: Text(e.toString())));

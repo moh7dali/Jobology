@@ -6,19 +6,24 @@ import 'package:jobology/Screens/Login.dart';
 import 'package:jobology/Screens/signup.dart';
 import 'package:jobology/Screens/start.dart';
 import 'firebase_options.dart';
+import 'package:get/get.dart';
 
 // raghad@firebase.com password: raghad12345
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(MaterialApp(
+  runApp(GetMaterialApp(
+    themeMode: ThemeMode.system,
+    theme: ThemeData(brightness: Brightness.light, primarySwatch: Colors.red),
+    darkTheme:
+        ThemeData(brightness: Brightness.dark, primarySwatch: Colors.purple),
     debugShowCheckedModeBanner: false,
     routes: {
-      "Login": (context) => const Login(),
-      "Sign_Up": (context) => const Sign_up(),
-      "Home": (context) => const Home(),
+      "Login": (context) => Login(),
+      "Sign_Up": (context) => Sign_up(),
+      "Home": (context) => Home(),
       "Start": (context) => Start_page(),
-      "forgetpassword":(context) => ForgetPassword()
+      "forgetpassword": (context) => ForgetPassword()
     },
     home: const MyApp(),
   ));
