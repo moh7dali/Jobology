@@ -15,9 +15,9 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(GetMaterialApp(
     themeMode: ThemeMode.system,
-    theme: ThemeData(brightness: Brightness.light, primarySwatch: Colors.red),
+    theme: ThemeData(brightness: Brightness.light, primarySwatch: Colors.pink),
     darkTheme:
-        ThemeData(brightness: Brightness.dark, primarySwatch: Colors.purple),
+        ThemeData(brightness: Brightness.dark, primarySwatch: Colors.green),
     debugShowCheckedModeBanner: false,
     routes: {
       "Login": (context) => Login(),

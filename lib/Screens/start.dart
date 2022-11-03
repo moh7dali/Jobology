@@ -14,6 +14,7 @@ class _Start_pageState extends State<Start_page> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
+        //backgroundColor: Get.isDarkMode ? Colors.blue.shade300 : Colors.black,
         body: Padding(
       padding: const EdgeInsets.all(30.0),
       child: Column(
@@ -66,6 +67,7 @@ class _Start_pageState extends State<Start_page> {
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(),
                       side: BorderSide(color: Colors.black),
+                      //backgroundColor: Color.fromRGBO(121, 188, 198, 1),
                       padding: EdgeInsets.symmetric(vertical: 15),
                     ),
                     child: Text("SIGN UP",
