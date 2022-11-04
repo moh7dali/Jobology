@@ -16,10 +16,6 @@ class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   bool _isObscure = true;
-  void nav() {
-    Navigator.popAndPushNamed(context, 'forgetpassword');
-  }
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -89,7 +85,11 @@ class _LoginState extends State<Login> {
             Container(
                 alignment: Alignment.bottomRight,
                 child: TextButton(
-                    onPressed: nav, child: const Text("Forget Password ?"))),
+                    onPressed: () {
+                      Navigator.popAndPushNamed(context, 'forgetpassword');
+                    },
+                    child: Text("Forget Password ?",
+                        style: GoogleFonts.montserrat(fontSize: 15)))),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

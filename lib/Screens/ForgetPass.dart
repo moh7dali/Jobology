@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import 'Login.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
@@ -11,11 +10,11 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
-  TextEditingController emailRestconroller = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   Future passwordReset() async {
     try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailRestconroller.text.toLowerCase());
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+          email: emailController.text.toLowerCase().trim());
       showDialog(
         context: context,
         builder: (context) {
@@ -36,37 +35,64 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       );
     }
   }
-  void nav(){
-    
-                Navigator.popAndPushNamed(context, 'Login');
-                  
-  }
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
-        appBar: AppBar(
-            actions: [IconButton(onPressed: nav, icon: Icon(Icons.logout))]),
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text("Reset your password "),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.circular(12)),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: TextField(
-                  controller: emailRestconroller,
-                  decoration: InputDecoration(
-                      hintText: "enter your email", border: InputBorder.none),
+      body: Padding(
+        padding: const EdgeInsets.all(30),
+        child: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Image.network(
+              'https://static.wixstatic.com/media/bcace9_c8332fc9319a4cb79cce54c1324673c7~mv2.png/v1/fill/w_370,h_104,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/JOBOLOGY%20LOGO%20FINAL.png',
+              height: height * 0.2,
+            ),
+            Text(
+              "Forget Password ",
+              style: GoogleFonts.montserrat(
+                  fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "Just Enter your Email and Reset Your password",
+              style: GoogleFonts.poppins(fontSize: 20),
+            ),
+            Form(
+              child: Container(
+                padding: EdgeInsets.only(top: 25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.person_outline_outlined),
+                          labelText: 'E-mail',
+                          hintText: 'Enter Your Email',
+                          border: OutlineInputBorder()),
+                      controller: emailController,
+                    ),
+                  ],
                 ),
               ),
             ),
-          ),
-          ElevatedButton(onPressed: passwordReset, child: Text("reset"))
-        ]));
+            SizedBox(
+              height: 40,
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                  style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(),
+                      padding: EdgeInsets.symmetric(vertical: 15)),
+                  onPressed: passwordReset,
+                  child: Text("Reset Password",
+                      style: GoogleFonts.montserrat(
+                          fontSize: 20, fontWeight: FontWeight.bold))),
+            ),
+          ]),
+        ),
+      ),
+    );
   }
 }
