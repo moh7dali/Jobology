@@ -14,7 +14,7 @@ class _Start_pageState extends State<Start_page> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-        //backgroundColor: Get.isDarkMode ? Colors.blue.shade300 : Colors.black,
+        //backgroundColor: Get.isDarkMode ? Colors.blue.shade300 : Colors.red,
         body: Padding(
       padding: const EdgeInsets.all(30.0),
       child: Column(
