@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 75,
-          backgroundColor: Color.fromARGB(0, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(0, 255, 255, 255),
           elevation: 0,
           leading: Builder(
             builder: (context) => IconButton(
@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
           ),
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Text(
                 "Welcome",
                 style: TextStyle(
@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
               children: [
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Image.asset(
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
               ],
@@ -80,14 +80,14 @@ class _HomeState extends State<Home> {
                       "images/user.png",
                       width: 80,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       "Username",
                       style: TextStyle(fontSize: 18),
                     ),
-                    Text(
+                    const Text(
                       "example@example.com",
                       style: TextStyle(
                         fontSize: 15,
@@ -102,12 +102,12 @@ class _HomeState extends State<Home> {
                 children: [
                   FlutterSwitch(
                     value: status8,
-                    activeColor: Color.fromARGB(255, 1, 95, 87),
-                    activeIcon: Icon(
+                    activeColor: const Color.fromARGB(255, 1, 95, 87),
+                    activeIcon: const Icon(
                       Icons.dark_mode,
                       color: Color.fromARGB(255, 6, 135, 113),
                     ),
-                    inactiveIcon: Icon(
+                    inactiveIcon: const Icon(
                       Icons.light_mode,
                       color: Color.fromARGB(255, 6, 135, 113),
                     ),
@@ -124,22 +124,22 @@ class _HomeState extends State<Home> {
                       });
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(147, 76, 175, 111),
+                  color: const Color.fromARGB(147, 76, 175, 111),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ListTile(
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.home,
                     color: Colors.black,
                   ),
@@ -157,13 +157,13 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(147, 76, 175, 111),
+                  color: const Color.fromARGB(147, 76, 175, 111),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ListTile(
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.person,
                     color: Colors.black,
                   ),
@@ -181,13 +181,13 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(147, 76, 175, 111),
+                  color: const Color.fromARGB(147, 76, 175, 111),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ListTile(
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.logout,
                     color: Colors.black,
                   ),
@@ -209,13 +209,13 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(147, 76, 175, 111),
+                  color: const Color.fromARGB(147, 76, 175, 111),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ListTile(
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.exit_to_app,
                     color: Colors.black,
                   ),
@@ -240,15 +240,17 @@ class _HomeState extends State<Home> {
           child: ListView(
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, "course");
+                },
                 child: Container(
-                  margin: EdgeInsets.only(bottom: 15),
+                  margin: const EdgeInsets.only(bottom: 15),
                   height: 180,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 1, 95, 87),
+                    color: const Color.fromARGB(255, 1, 95, 87),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: ListTile(
+                  child: const ListTile(
                     title: Text(
                       "Courses",
                       style: TextStyle(
@@ -268,13 +270,13 @@ class _HomeState extends State<Home> {
                   Navigator.pushNamed(context, "jobs");
                 },
                 child: Container(
-                  margin: EdgeInsets.only(bottom: 15),
+                  margin: const EdgeInsets.only(bottom: 15),
                   height: 180,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 1, 95, 87),
+                    color: const Color.fromARGB(255, 1, 95, 87),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: ListTile(
+                  child: const ListTile(
                     title: Text(
                       "Jobs",
                       style: TextStyle(
@@ -292,13 +294,13 @@ class _HomeState extends State<Home> {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(bottom: 15),
+                  margin: const EdgeInsets.only(bottom: 15),
                   height: 180,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 1, 95, 87),
+                    color: const Color.fromARGB(255, 1, 95, 87),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: ListTile(
+                  child: const ListTile(
                     title: Text(
                       "CV",
                       style: TextStyle(
@@ -316,13 +318,13 @@ class _HomeState extends State<Home> {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(bottom: 15),
+                  margin: const EdgeInsets.only(bottom: 15),
                   height: 180,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 1, 95, 87),
+                    color: const Color.fromARGB(255, 1, 95, 87),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: ListTile(
+                  child: const ListTile(
                     title: Text(
                       "Interview questions",
                       style: TextStyle(

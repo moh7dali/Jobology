@@ -3,13 +3,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:jobology/Screens/ForgetPass.dart';
 import 'package:jobology/Screens/Home.dart';
 import 'package:jobology/Screens/Login.dart';
+import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/jobInfo.dart';
 import 'package:jobology/Screens/jobs.dart';
 import 'package:jobology/Screens/signup.dart';
 import 'package:jobology/Screens/start.dart';
 import 'firebase_options.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 // raghad@firebase.com password: raghad12345
 
@@ -23,13 +23,14 @@ Future<void> main() async {
         ThemeData(brightness: Brightness.dark, primarySwatch: Colors.green),
     debugShowCheckedModeBanner: false,
     routes: {
-      "Login": (context) => Login(),
-      "Sign_Up": (context) => Sign_up(),
-      "Home": (context) => Home(),
-      "Start": (context) => Start_page(),
-      "forgetpassword": (context) => ForgetPassword(),
-      "jobInfo": (context) => jobInfo(),
-      "jobs": (context) => jobs(),
+      "Login": (context) => const Login(),
+      "Sign_Up": (context) => const Sign_up(),
+      "Home": (context) => const Home(),
+      "Start": (context) => const Start_page(),
+      "forgetpassword": (context) => const ForgetPassword(),
+      "jobInfo": (context) => const jobInfo(),
+      "jobs": (context) => const jobs(),
+      "course": (context) => const Course(),
     },
     home: const MyApp(),
   ));
@@ -40,6 +41,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Start_page();
+    return const Start_page();
   }
 }
