@@ -104,9 +104,9 @@ class _LoginState extends State<Login> {
                               email: emailController.text,
                               password: passController.text);
                       Navigator.popAndPushNamed(context, "Home");
-                    } catch (e) {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text(e.toString())));
+                    } on FirebaseAuthException catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(e.message.toString())));
                     }
                   },
                   child: Text("LOGIN",

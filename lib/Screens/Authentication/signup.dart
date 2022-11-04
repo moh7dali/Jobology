@@ -124,9 +124,9 @@ class _Sign_upState extends State<Sign_up> {
                               email: emailController.text,
                               password: passController.text);
                       Navigator.popAndPushNamed(context, "Login");
-                    } catch (e) {
+                    } on FirebaseAuthException catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("${e.toString()}")));
+                          SnackBar(content: Text(e.message.toString())));
                     }
                   },
                   child: Text("SIGN UP",
