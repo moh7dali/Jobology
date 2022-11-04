@@ -15,6 +15,9 @@ class Sign_up extends StatefulWidget {
 class _Sign_upState extends State<Sign_up> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+
   bool _isObscure = true;
 
   @override
@@ -51,7 +54,7 @@ class _Sign_upState extends State<Sign_up> {
                           labelText: 'Full Name',
                           hintText: 'Enter Your Name',
                           border: OutlineInputBorder()),
-                      controller: emailController,
+                      controller: nameController,
                     ),
                     const SizedBox(
                       height: 10,
@@ -73,7 +76,7 @@ class _Sign_upState extends State<Sign_up> {
                           labelText: 'Phone',
                           hintText: 'Enter Your Phone',
                           border: OutlineInputBorder()),
-                      controller: emailController,
+                      controller: phoneController,
                     ),
                     const SizedBox(
                       height: 10,
@@ -120,16 +123,18 @@ class _Sign_upState extends State<Sign_up> {
                           await auth.createUserWithEmailAndPassword(
                               email: emailController.text,
                               password: passController.text);
-                      Navigator.pushNamed(context, "Login");
+                      Navigator.popAndPushNamed(context, "Login");
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("${e.toString()}")));
                     }
                   },
-                  child: Text("Sign UP"),
+                  child: Text("SIGN UP",
+                      style: GoogleFonts.montserrat(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(),
-                      padding: EdgeInsets.symmetric(vertical: 15)),
+                      padding: EdgeInsets.all(15)),
                 )),
             SizedBox(
               height: 20,
@@ -178,7 +183,7 @@ class _Sign_upState extends State<Sign_up> {
             ),
             TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, "Login");
+                  Navigator.popAndPushNamed(context, "Login");
                 },
                 child: Text.rich(TextSpan(
                     text: "Aleardy have an account ? ",
