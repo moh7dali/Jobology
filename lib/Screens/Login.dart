@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
@@ -157,22 +158,25 @@ class _LoginState extends State<Login> {
                       style: GoogleFonts.montserrat(
                           fontSize: 20, fontWeight: FontWeight.bold))),
             ),
-            SingleChildScrollView(scrollDirection: Axis.horizontal,
-              child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Row(children: [
-                    Text("Don't have an account ?",
-                        style: GoogleFonts.poppins(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "Sign_Up");
-                        },
-                        child: Text("SIGN UP",
-                            style: GoogleFonts.poppins(
-                                fontSize: 20, fontWeight: FontWeight.bold))),
-                  ])),
+            SizedBox(
+              height: 10,
             ),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "Sign_Up");
+                },
+                child: Text.rich(TextSpan(
+                    text: "Don't Have An Account ? ",
+                    style: GoogleFonts.poppins(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Get.isDarkMode ? Colors.white : Colors.black),
+                    children: const [
+                      TextSpan(
+                        text: "Sign Up",
+                        style: TextStyle(color: Colors.blue),
+                      )
+                    ]))),
           ]),
         ),
       ),

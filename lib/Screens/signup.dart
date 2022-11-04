@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ionicons/ionicons.dart';
@@ -133,65 +134,64 @@ class _Sign_upState extends State<Sign_up> {
             SizedBox(
               height: 20,
             ),
-            // Container(
-            //   alignment: Alignment.center,
-            //   child: Text(
-            //     "OR",
-            //     style: GoogleFonts.montserrat(fontSize: 20),
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 10,
-            // ),
-            // SizedBox(
-            //   width: double.infinity,
-            //   child: OutlinedButton.icon(
-            //       style: OutlinedButton.styleFrom(
-            //           shape: RoundedRectangleBorder(),
-            //           side: BorderSide(color: Colors.grey),
-            //           padding: EdgeInsets.symmetric(vertical: 15)),
-            //       onPressed: () async {
-            //         try {
-            //           final GoogleSignInAccount? googleUser =
-            //               await GoogleSignIn().signIn();
-            //           final GoogleSignInAuthentication? googleAuth =
-            //               await googleUser?.authentication;
-            //           final credential = GoogleAuthProvider.credential(
-            //             accessToken: googleAuth?.accessToken,
-            //             idToken: googleAuth?.idToken,
-            //           );
-            //           var auth = FirebaseAuth.instance;
-            //           UserCredential myuser =
-            //               await auth.signInWithCredential(credential);
-
-            //           Navigator.popAndPushNamed(context, "Home");
-            //         } catch (e) {
-            //           ScaffoldMessenger.of(context)
-            //               .showSnackBar(SnackBar(content: Text(e.toString())));
-            //         }
-            //       },
-            //       icon: Icon(Ionicons.logo_google),
-            //       label: Text("continue with google",
-            //           style: GoogleFonts.montserrat(
-            //               fontSize: 20, fontWeight: FontWeight.bold))),
-            // ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                  child: Row(children: [
-                    Text("Aleardy have an account ?",
-                        style: GoogleFonts.poppins(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "Login");
-                        },
-                        child: Text("LOG IN",
-                            style: GoogleFonts.poppins(
-                                fontSize: 20, fontWeight: FontWeight.bold))),
-                  ])),
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                "OR",
+                style: GoogleFonts.montserrat(fontSize: 20),
+              ),
             ),
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                  style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(),
+                      side: BorderSide(color: Colors.grey),
+                      padding: EdgeInsets.symmetric(vertical: 15)),
+                  onPressed: () async {
+                    try {
+                      final GoogleSignInAccount? googleUser =
+                          await GoogleSignIn().signIn();
+                      final GoogleSignInAuthentication? googleAuth =
+                          await googleUser?.authentication;
+                      final credential = GoogleAuthProvider.credential(
+                        accessToken: googleAuth?.accessToken,
+                        idToken: googleAuth?.idToken,
+                      );
+                      var auth = FirebaseAuth.instance;
+                      UserCredential myuser =
+                          await auth.signInWithCredential(credential);
+
+                      Navigator.popAndPushNamed(context, "Home");
+                    } catch (e) {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(e.toString())));
+                    }
+                  },
+                  icon: Icon(Ionicons.logo_google),
+                  label: Text("continue with google",
+                      style: GoogleFonts.montserrat(
+                          fontSize: 20, fontWeight: FontWeight.bold))),
+            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "Login");
+                },
+                child: Text.rich(TextSpan(
+                    text: "Aleardy have an account ? ",
+                    style: GoogleFonts.poppins(
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold,
+                        color: Get.isDarkMode ? Colors.white : Colors.black),
+                    children: const [
+                      TextSpan(
+                        text: "LOG IN",
+                        style: TextStyle(color: Colors.blue),
+                      )
+                    ]))),
           ]),
         ),
       ),
