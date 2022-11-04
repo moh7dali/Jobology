@@ -102,31 +102,12 @@ class _Sign_upState extends State<Sign_up> {
                     const SizedBox(
                       height: 10,
                     ),
-                    TextFormField(
-                      obscureText: _isObscure,
-                      decoration: InputDecoration(
-                        labelText: 'Confirm Password',
-                        hintText: 'Enter Your password',
-                        prefixIcon: Icon(Icons.fingerprint),
-                        border: OutlineInputBorder(),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _isObscure
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _isObscure = !_isObscure;
-                            });
-                          },
-                        ),
-                      ),
-                      controller: passController,
-                    ),
                   ],
                 ),
               ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             SizedBox(
                 width: double.infinity,
@@ -152,61 +133,61 @@ class _Sign_upState extends State<Sign_up> {
             SizedBox(
               height: 20,
             ),
-            Container(
-              alignment: Alignment.center,
-              child: Text(
-                "OR",
-                style: GoogleFonts.montserrat(fontSize: 20),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton.icon(
-                  style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(),
-                      side: BorderSide(color: Colors.grey),
-                      padding: EdgeInsets.symmetric(vertical: 15)),
-                  onPressed: () async {
-                    try {
-                      final GoogleSignInAccount? googleUser =
-                          await GoogleSignIn().signIn();
-                      final GoogleSignInAuthentication? googleAuth =
-                          await googleUser?.authentication;
-                      final credential = GoogleAuthProvider.credential(
-                        accessToken: googleAuth?.accessToken,
-                        idToken: googleAuth?.idToken,
-                      );
-                      var auth = FirebaseAuth.instance;
-                      UserCredential myuser =
-                          await auth.signInWithCredential(credential);
+            // Container(
+            //   alignment: Alignment.center,
+            //   child: Text(
+            //     "OR",
+            //     style: GoogleFonts.montserrat(fontSize: 20),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // SizedBox(
+            //   width: double.infinity,
+            //   child: OutlinedButton.icon(
+            //       style: OutlinedButton.styleFrom(
+            //           shape: RoundedRectangleBorder(),
+            //           side: BorderSide(color: Colors.grey),
+            //           padding: EdgeInsets.symmetric(vertical: 15)),
+            //       onPressed: () async {
+            //         try {
+            //           final GoogleSignInAccount? googleUser =
+            //               await GoogleSignIn().signIn();
+            //           final GoogleSignInAuthentication? googleAuth =
+            //               await googleUser?.authentication;
+            //           final credential = GoogleAuthProvider.credential(
+            //             accessToken: googleAuth?.accessToken,
+            //             idToken: googleAuth?.idToken,
+            //           );
+            //           var auth = FirebaseAuth.instance;
+            //           UserCredential myuser =
+            //               await auth.signInWithCredential(credential);
 
-                      Navigator.popAndPushNamed(context, "Home");
-                    } catch (e) {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text(e.toString())));
-                    }
-                  },
-                  icon: Icon(Ionicons.logo_google),
-                  label: Text("continue with google",
-                      style: GoogleFonts.montserrat(
-                          fontSize: 20, fontWeight: FontWeight.bold))),
-            ),
+            //           Navigator.popAndPushNamed(context, "Home");
+            //         } catch (e) {
+            //           ScaffoldMessenger.of(context)
+            //               .showSnackBar(SnackBar(content: Text(e.toString())));
+            //         }
+            //       },
+            //       icon: Icon(Ionicons.logo_google),
+            //       label: Text("continue with google",
+            //           style: GoogleFonts.montserrat(
+            //               fontSize: 20, fontWeight: FontWeight.bold))),
+            // ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                   child: Row(children: [
-                    Text("Don't have an account ?",
+                    Text("Aleardy have an account ?",
                         style: GoogleFonts.poppins(
                             fontSize: 20, fontWeight: FontWeight.bold)),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "Sign_Up");
+                          Navigator.pushNamed(context, "Login");
                         },
-                        child: Text("SIGN UP",
+                        child: Text("LOG IN",
                             style: GoogleFonts.poppins(
                                 fontSize: 20, fontWeight: FontWeight.bold))),
                   ])),
