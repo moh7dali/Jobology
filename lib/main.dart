@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Welcome.dart';
-import 'package:jobology/Screens/buttonnav.dart';
 import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/jobInfo.dart';
 import 'package:jobology/Screens/jobs.dart';
