@@ -7,6 +7,7 @@ import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/jobInfo.dart';
 import 'package:jobology/Screens/jobs.dart';
 import 'package:jobology/Screens/Authentication/signup.dart';
+import 'package:jobology/Screens/personalpage.dart';
 import 'package:jobology/Screens/start.dart';
 import 'Screens/Authentication/ForgetPass.dart';
 import 'firebase_options.dart';
@@ -32,6 +33,7 @@ Future<void> main() async {
       "jobInfo": (context) => const jobInfo(),
       "jobs": (context) => const jobs(),
       "course": (context) => const Course(),
+      'personalPage': (context) => const personalInfo(),
     },
     home: const MyApp(),
   ));
