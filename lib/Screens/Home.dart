@@ -3,17 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:jobology/HomeComponents/sectionscard.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
-
+  Home({super.key});
+  static GlobalKey<CurvedNavigationBarState> bottomNavigationKey =
+      GlobalKey<CurvedNavigationBarState>();
   @override
   State<Home> createState() => _HomeState();
 }
 
 bool status8 = false;
+int _page = 0;
 
 class _HomeState extends State<Home> {
+  GlobalKey<CurvedNavigationBarState> bottomNavigationKey =
+      GlobalKey<CurvedNavigationBarState>();
+
+  void initState() {
+    super.initState();
+    Home.bottomNavigationKey = bottomNavigationKey;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,20 +43,32 @@ class _HomeState extends State<Home> {
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
           ),
-          title: Column(
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
-                "Welcome",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 153, 152, 152),
-                  fontSize: 15,
-                ),
+            children: [
+              Image.asset(
+                "images/user.png",
+                width: 50,
               ),
-              Text(
-                "Username,",
-                style: TextStyle(color: Colors.black),
-              )
+              SizedBox(
+                width: 15,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Welcome",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 153, 152, 152),
+                      fontSize: 15,
+                    ),
+                  ),
+                  Text(
+                    "Username,",
+                    style: TextStyle(color: Colors.black),
+                  )
+                ],
+              ),
             ],
           ),
           centerTitle: true,
@@ -56,9 +80,29 @@ class _HomeState extends State<Home> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Image.asset(
-                      "images/user.png",
-                      width: 50,
+                    FlutterSwitch(
+                      value: status8,
+                      activeColor: Color.fromARGB(135, 16, 153, 130),
+                      activeIcon: const Icon(
+                        Icons.dark_mode,
+                        color: Color.fromARGB(255, 118, 122, 121),
+                      ),
+                      inactiveIcon: const Icon(
+                        Icons.light_mode,
+                        color: Color.fromARGB(255, 223, 239, 3),
+                      ),
+                      onToggle: (val) {
+                        setState(() {
+                          status8 = val;
+                          if (Get.isDarkMode) {
+                            Get.changeTheme(ThemeData.light());
+                          } else {
+                            Get.changeTheme(
+                              ThemeData.dark(),
+                            );
+                          }
+                        });
+                      },
                     ),
                   ],
                 ),
@@ -100,30 +144,6 @@ class _HomeState extends State<Home> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  FlutterSwitch(
-                    value: status8,
-                    activeColor: const Color.fromARGB(255, 1, 95, 87),
-                    activeIcon: const Icon(
-                      Icons.dark_mode,
-                      color: Color.fromARGB(255, 6, 135, 113),
-                    ),
-                    inactiveIcon: const Icon(
-                      Icons.light_mode,
-                      color: Color.fromARGB(255, 6, 135, 113),
-                    ),
-                    onToggle: (val) {
-                      setState(() {
-                        status8 = val;
-                        if (Get.isDarkMode) {
-                          Get.changeTheme(ThemeData.light());
-                        } else {
-                          Get.changeTheme(
-                            ThemeData.dark(),
-                          );
-                        }
-                      });
-                    },
-                  ),
                   const SizedBox(
                     width: 10,
                   ),
@@ -235,108 +255,111 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: ListView(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, "course");
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 15),
-                  height: 180,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 1, 95, 87),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const ListTile(
-                    title: Text(
-                      "Courses",
+        body: ListView(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    const Text(
+                      "Start your\ntrip,",
                       style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    subtitle: Text(
-                      "Best courses ever",
-                      style: TextStyle(color: Colors.white),
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
+                    SectionsCard(
+                      OnTapping: () {},
+                      CardTitle: "Courses",
+                      CardSubTitle: "Your way to your job",
+                      ImageName: "images/Courses.png",
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SectionsCard(
+                      OnTapping: () {},
+                      CardTitle: "CV",
+                      CardSubTitle: "Create your CV",
+                      ImageName: "images/cv.png",
+                    ),
+                  ],
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, "jobs");
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 15),
-                  height: 180,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 1, 95, 87),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const ListTile(
-                    title: Text(
-                      "Jobs",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    subtitle: Text(
-                      "Find your job easly",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                const SizedBox(
+                  width: 30,
                 ),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 15),
-                  height: 180,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 1, 95, 87),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const ListTile(
-                    title: Text(
-                      "CV",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
                     ),
-                    subtitle: Text(
-                      "Make your CV professionally",
-                      style: TextStyle(color: Colors.white),
+                    SectionsCard(
+                      OnTapping: () {},
+                      CardTitle: "Jobs",
+                      CardSubTitle: "Find your job easly",
+                      ImageName: "images/job.png",
                     ),
-                  ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SectionsCard(
+                      OnTapping: () {},
+                      CardTitle: "Interview Questions",
+                      CardSubTitle: "",
+                      ImageName: "images/interview.png",
+                    ),
+                  ],
                 ),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 15),
-                  height: 180,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 1, 95, 87),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const ListTile(
-                    title: Text(
-                      "Interview questions",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
+        ),
+        bottomNavigationBar: CurvedNavigationBar(
+          key: bottomNavigationKey,
+          index: _page,
+          height: 60.0,
+          items: const <Widget>[
+            Icon(Icons.logout, size: 30),
+            SizedBox(
+              width: 30,
+            ),
+            Icon(Icons.home, size: 30),
+            SizedBox(
+              width: 30,
+            ),
+            Icon(Icons.perm_identity, size: 30),
+          ],
+          color: Colors.white,
+          buttonBackgroundColor: Colors.white,
+          backgroundColor: const Color.fromARGB(163, 12, 117, 99),
+          animationCurve: Curves.easeInOut,
+          animationDuration: Duration(milliseconds: 600),
+          onTap: (index) {
+            setState(() async {
+              _page = index;
+              if (_page == 0) {
+                final GoogleSignInAccount? googleUser =
+                    await GoogleSignIn().signOut();
+                await FirebaseAuth.instance.signOut();
+
+                print("User Sign Out");
+                Navigator.pushNamed(context, "Start");
+              }
+              if (_page == 2) {
+                Navigator.pushNamed(context, "Home");
+              }
+              if (_page == 4) {
+                Navigator.pushNamed(context, "personalInfo");
+              }
+            });
+          },
+          letIndexChange: (index) => true,
         ),
       ),
     );
