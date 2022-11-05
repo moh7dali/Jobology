@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:jobology/HomeComponents/sectionscard.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:jobology/Screens/EditProfile.dart';
+import 'package:jobology/Screens/jobs.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
@@ -300,7 +302,16 @@ class _HomeState extends State<Home> {
                       height: 10,
                     ),
                     SectionsCard(
-                      OnTapping: () {},
+                      OnTapping: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return jobs();
+                            },
+                          ),
+                        );
+                      },
                       CardTitle: "Jobs",
                       CardSubTitle: "Find your job easly",
                       ImageName: "images/job.png",
@@ -322,7 +333,7 @@ class _HomeState extends State<Home> {
         ),
         bottomNavigationBar: CurvedNavigationBar(
           key: bottomNavigationKey,
-          index: _page,
+          index: 0,
           height: 60.0,
           items: const <Widget>[
             Icon(Icons.logout, size: 30),
@@ -355,7 +366,14 @@ class _HomeState extends State<Home> {
                 Navigator.pushNamed(context, "Home");
               }
               if (_page == 4) {
-                Navigator.pushNamed(context, "personalInfo");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return PersonalInfo();
+                    },
+                  ),
+                );
               }
             });
           },

@@ -61,7 +61,14 @@ class _PersonalInfoState extends State<PersonalInfo> {
               } else if (_page == 2) {
                 Navigator.pushNamed(context, "Home");
               } else if (_page == 4) {
-                Navigator.pushNamed(context, "personalInfo");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return PersonalInfo();
+                    },
+                  ),
+                );
               }
             });
           },
