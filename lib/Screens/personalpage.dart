@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jobology/Screens/buttonnav.dart';
 
@@ -15,8 +16,18 @@ class _personalInfoState extends State<personalInfo> {
     Icons.thumb_up,
     color: Colors.blue,
   );
+  String username = "";
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        username = event['Fullname'];
+      });
+    });
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -64,7 +75,7 @@ class _personalInfoState extends State<personalInfo> {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "Jeff Bezos",
+                    username,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                   ),
                 ),

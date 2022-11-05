@@ -24,10 +24,20 @@ final Home _Home = Home();
 bool status8 = false;
 int _page = 0;
 Widget _showPage = new Home();
+String username = "";
 
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        username = event['Fullname'];
+      });
+    });
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -57,7 +67,7 @@ class _HomeState extends State<Home> {
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     "Welcome",
                     style: TextStyle(
@@ -66,7 +76,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Text(
-                    "Username,",
+                    username,
                     style: TextStyle(color: Colors.black),
                   )
                 ],
@@ -198,6 +208,7 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
+        bottomNavigationBar: Button(),
       ),
     );
   }
