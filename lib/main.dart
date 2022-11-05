@@ -33,7 +33,8 @@ Future<void> main() async {
       "jobInfo": (context) => const jobInfo(),
       "jobs": (context) => const jobs(),
       "course": (context) => const Course(),
-      'personalPage': (context) => const personalInfo(),
+      "personalPage": (context) => const personalInfo(),
+      "welcome": (context) => Welcome()
     },
     home: const MyApp(),
   ));
@@ -44,6 +45,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Welcome();
+    return Start_page();
   }
 }
