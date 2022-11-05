@@ -3,10 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:jobology/Screens/Home.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Welcome.dart';
+import 'package:jobology/Screens/buttonnav.dart';
 import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/jobInfo.dart';
 import 'package:jobology/Screens/jobs.dart';
 import 'package:jobology/Screens/Authentication/signup.dart';
+import 'package:jobology/Screens/personalpage.dart';
 import 'package:jobology/Screens/start.dart';
 import 'Screens/Authentication/ForgetPass.dart';
 import 'firebase_options.dart';
@@ -32,6 +34,8 @@ Future<void> main() async {
       "jobInfo": (context) => const jobInfo(),
       "jobs": (context) => const jobs(),
       "course": (context) => const Course(),
+      "personalPage": (context) => const personalInfo(),
+      "welcome": (context) => Welcome()
     },
     home: const MyApp(),
   ));
@@ -42,6 +46,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Welcome();
+    return Home();
   }
 }

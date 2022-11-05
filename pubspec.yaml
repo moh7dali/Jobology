@@ -47,6 +47,7 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   smooth_page_indicator: ^1.0.0+2
   liquid_swipe: ^3.0.0
+  font_awesome_flutter: ^10.2.1
 
 dev_dependencies:
   flutter_test:

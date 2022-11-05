@@ -29,29 +29,40 @@ class _WelcomeState extends State<Welcome> {
               color: Colors.blue.shade200,
               child: Welcome_widget(
                 height: height,
-                title: "this is title",
-                Subtitle: "this is Sub title",
-                img_url: "images/ltuc.jpg",
-                num: "1/3",
+                title: "Find a Job Easily !",
+                Subtitle:
+                    "Do you want Find a job ? just discover our job section and start your career",
+                img_url: "images/job.png",
+                num: "1/4",
               )),
           Container(
             color: Color((0xfffddcdf)),
             child: Welcome_widget(
               height: height,
-              title: "this is title",
-              Subtitle: "this is Sub title",
-              img_url: "images/ltuc.png",
-              num: "2/3",
+              title: "Discover a new Courses",
+              Subtitle: "this is Sub title of courses",
+              img_url: "images/Courses.png",
+              num: "2/4",
             ),
           ),
           Container(
             color: Color(0xffffdcbd),
             child: Welcome_widget(
               height: height,
-              title: "this is title",
-              Subtitle: "this is Sub title",
-              img_url: "images/js.webp",
-              num: "3/3",
+              title: "Start build your cv",
+              Subtitle: "this is Sub title for cv",
+              img_url: "images/cv.png",
+              num: "3/4",
+            ),
+          ),
+          Container(
+            color: Color(0xFFBEF988),
+            child: Welcome_widget(
+              height: height,
+              title: "Interview Questions",
+              Subtitle: "this is Sub title interview questions",
+              img_url: "images/interview.png",
+              num: "4/4",
             ),
           ),
         ],
@@ -66,6 +77,9 @@ class _WelcomeState extends State<Welcome> {
           onPressed: () {
             int nextPage = controller.currentPage + 1;
             controller.animateToPage(page: nextPage);
+            if (nextPage == 4) {
+              Navigator.pushNamed(context, "Login");
+            }
           },
           style: ElevatedButton.styleFrom(
             side: const BorderSide(color: Colors.black26),
@@ -86,7 +100,7 @@ class _WelcomeState extends State<Welcome> {
         right: 20,
         child: TextButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, "Home");
+            Navigator.popAndPushNamed(context, "Login");
           },
           child: const Text("Skip"),
         ),
@@ -94,7 +108,7 @@ class _WelcomeState extends State<Welcome> {
       Positioned(
         bottom: 10,
         child: AnimatedSmoothIndicator(
-          count: 3,
+          count: 4,
           activeIndex: controller.currentPage,
           effect: const WormEffect(
             activeDotColor: Color(0xff272727),

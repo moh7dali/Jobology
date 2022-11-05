@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:get/get.dart';
 
 class Start_page extends StatefulWidget {
   const Start_page({super.key});
@@ -44,32 +43,13 @@ class _Start_pageState extends State<Start_page> {
           ),
           Row(
             children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "Login");
-                  },
-                  style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(),
-                    side: BorderSide(color: Colors.grey),
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                  ),
-                  child: Text(
-                    "LOGIN",
-                    style: GoogleFonts.montserrat(
-                      fontSize: 25,
-                      color: Color.fromARGB(255, 5, 108, 106),
-                    ),
-                  ),
-                ),
-              ),
               SizedBox(
                 width: 10,
               ),
               Expanded(
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "Sign_Up");
+                      Navigator.pushNamed(context, "welcome");
                     },
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(),
@@ -77,7 +57,7 @@ class _Start_pageState extends State<Start_page> {
                       backgroundColor: Color.fromARGB(255, 5, 108, 106),
                       padding: EdgeInsets.symmetric(vertical: 15),
                     ),
-                    child: Text("SIGN UP",
+                    child: Text("Get Started",
                         style: GoogleFonts.montserrat(fontSize: 25))),
               ),
             ],

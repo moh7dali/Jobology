@@ -197,7 +197,9 @@ class _Sign_upState extends State<Sign_up> {
                               style: GoogleFonts.montserrat(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black),
                             ),
                           ],
                         ),

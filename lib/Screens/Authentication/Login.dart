@@ -178,7 +178,9 @@ class _LoginState extends State<Login> {
                               style: GoogleFonts.montserrat(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black),
                             ),
                           ],
                         ),
