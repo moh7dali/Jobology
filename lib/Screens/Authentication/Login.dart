@@ -178,7 +178,9 @@ class _LoginState extends State<Login> {
                               style: GoogleFonts.montserrat(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                                  color: Get.isDarkMode
+                                      ? Colors.black
+                                      : Colors.white),
                             ),
                           ],
                         ),
@@ -197,8 +199,8 @@ class _LoginState extends State<Login> {
                                 fontSize: 15,
                                 // fontWeight: FontWeight.bold,
                                 color: Get.isDarkMode
-                                    ? Colors.white
-                                    : Colors.black),
+                                    ? Colors.black
+                                    : Colors.white),
                             children: const [
                               TextSpan(
                                 text: "Sign Up",

@@ -19,7 +19,7 @@ class _Welcome_widgetState extends State<Welcome_widget> {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       Image(
         image: AssetImage('${widget.img_url}'),
-        height: widget.height! * 0.5,
+        height: widget.height! * 0.4,
       ),
       Column(
         children: [
@@ -27,6 +27,9 @@ class _Welcome_widgetState extends State<Welcome_widget> {
             "${widget.title}",
             style: GoogleFonts.montserrat(
                 fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Text(
             "${widget.Subtitle}",
