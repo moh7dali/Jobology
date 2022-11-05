@@ -3,15 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:jobology/Screens/Authentication/Company_signup.dart';
-<<<<<<< HEAD
+import 'package:jobology/Screens/Authentication/Login.dart';
+import 'package:jobology/Screens/Authentication/signup.dart';
 import 'package:jobology/Screens/Company/AddNewJob.dart';
 import 'package:jobology/Screens/Company/AddNewTraining.dart';
 import 'package:jobology/Screens/Company/HomeCompany.dart';
-import 'package:jobology/Screens/Users/Home.dart';
-=======
->>>>>>> c2163656234d690a90bf8d70bd6d60e9f48c201b
-import 'package:jobology/Screens/Authentication/Login.dart';
-import 'package:jobology/Screens/Authentication/signup.dart';
 import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Welcome.dart';
 import 'package:jobology/Screens/course.dart';

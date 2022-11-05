@@ -124,11 +124,7 @@ class _LoginState extends State<Login> {
                                     Navigator.popAndPushNamed(context, "Home");
                                   } else if (type == "company") {
                                     Navigator.popAndPushNamed(
-<<<<<<< HEAD
-                                        context, "companyHome");
-=======
                                         context, "course");
->>>>>>> c2163656234d690a90bf8d70bd6d60e9f48c201b
                                   }
                                 });
                               });
