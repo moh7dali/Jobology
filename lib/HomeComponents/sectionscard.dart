@@ -24,7 +24,7 @@ class SectionsCard extends StatelessWidget {
             image: AssetImage("${ImageName}"),
             fit: BoxFit.contain,
           ),
-          color: Color.fromARGB(135, 16, 153, 130),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(

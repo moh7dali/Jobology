@@ -10,6 +10,7 @@ import 'package:jobology/Screens/buttonnav.dart';
 import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/jobs.dart';
 import 'package:jobology/HomeComponents/Navigationbar.dart';
+import 'package:jobology/Screens/settings.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
@@ -18,219 +19,210 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+final PersonalInfo _personalInfo = PersonalInfo();
+final Home _Home = Home();
+final Settings _settings = Settings();
 bool status8 = false;
 int _page = 0;
+Widget _showPage = new Home();
 
 class _HomeState extends State<Home> {
 //OnTapping on NavBar
-  void OnTapping(int index) {
-    setState(() {
-      setState(() async {
-        _page = index;
-        if (_page == 0) {
-          final GoogleSignInAccount? googleUser =
-              await GoogleSignIn().signOut();
-          await FirebaseAuth.instance.signOut();
+  Widget _pageChooser(int page) {
+    switch (page) {
+      case 0:
+        return _personalInfo;
+        break;
 
-          print("User Sign Out");
-          Navigator.pushNamed(context, "Start");
-        }
-        if (_page == 2) {
-          Navigator.pushNamed(context, "Home");
-        }
-        if (_page == 4) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return PersonalInfo();
-              },
-            ),
-          );
-        }
-      });
-    });
+      case 1:
+        return _Home;
+        break;
+
+      case 2:
+        return _settings;
+        break;
+
+      default:
+        return _Home;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 75,
-            backgroundColor: const Color.fromARGB(0, 255, 255, 255),
-            elevation: 0,
-            leading: Builder(
-              builder: (context) => IconButton(
-                icon: Image.asset(
-                  "images/back.png",
-                  width: 26,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+        appBar: AppBar(
+          toolbarHeight: 75,
+          backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+          elevation: 0,
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: Image.asset(
+                "images/back.png",
+                width: 26,
               ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, 'personalPage');
-                  },
-                  child: Image.asset(
-                    "images/user.png",
-                    width: 50,
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "images/user.png",
+                width: 50,
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Welcome",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 153, 152, 152),
+                      fontSize: 15,
+                    ),
                   ),
+                  Text(
+                    "Username,",
+                    style: TextStyle(color: Colors.black),
+                  )
+                ],
+              ),
+            ],
+          ),
+          centerTitle: true,
+          actions: [
+            Row(
+              children: [
+                Column(
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    FlutterSwitch(
+                      value: status8,
+                      activeColor: Color.fromARGB(135, 16, 153, 130),
+                      activeIcon: const Icon(
+                        Icons.dark_mode,
+                        color: Color.fromARGB(255, 118, 122, 121),
+                      ),
+                      inactiveIcon: const Icon(
+                        Icons.light_mode,
+                        color: Color.fromARGB(255, 223, 239, 3),
+                      ),
+                      onToggle: (val) {
+                        setState(() {
+                          status8 = val;
+                          if (Get.isDarkMode) {
+                            Get.changeTheme(ThemeData.light());
+                          } else {
+                            Get.changeTheme(
+                              ThemeData.dark(),
+                            );
+                          }
+                        });
+                      },
+                    ),
+                  ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
+              ],
+            ),
+          ],
+        ),
+        body: ListView(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      "Welcome",
+                  children: [
+                    const Text(
+                      "Start your\ntrip,",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 153, 152, 152),
-                        fontSize: 15,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      "Username,",
-                      style: TextStyle(color: Colors.black),
-                    )
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SectionsCard(
+                      OnTapping: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Course();
+                            },
+                          ),
+                        );
+                      },
+                      CardTitle: "Courses",
+                      CardSubTitle: "Your way to your job",
+                      ImageName: "images/Courses.png",
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SectionsCard(
+                      OnTapping: () {},
+                      CardTitle: "CV",
+                      CardSubTitle: "Create your CV",
+                      ImageName: "images/cv.png",
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SectionsCard(
+                      OnTapping: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return jobs();
+                            },
+                          ),
+                        );
+                      },
+                      CardTitle: "Jobs",
+                      CardSubTitle: "Find your job easly",
+                      ImageName: "images/job.png",
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SectionsCard(
+                      OnTapping: () {},
+                      CardTitle: "Interview Questions",
+                      CardSubTitle: "",
+                      ImageName: "images/interview.png",
+                    ),
                   ],
                 ),
               ],
             ),
-            centerTitle: true,
-            actions: [
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      FlutterSwitch(
-                        value: status8,
-                        activeColor: Color.fromARGB(135, 16, 153, 130),
-                        activeIcon: const Icon(
-                          Icons.dark_mode,
-                          color: Color.fromARGB(255, 118, 122, 121),
-                        ),
-                        inactiveIcon: const Icon(
-                          Icons.light_mode,
-                          color: Color.fromARGB(255, 223, 239, 3),
-                        ),
-                        onToggle: (val) {
-                          setState(() {
-                            status8 = val;
-                            if (Get.isDarkMode) {
-                              Get.changeTheme(ThemeData.light());
-                            } else {
-                              Get.changeTheme(
-                                ThemeData.dark(),
-                              );
-                            }
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          body: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      const Text(
-                        "Start your\ntrip,",
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SectionsCard(
-                        OnTapping: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return Course();
-                              },
-                            ),
-                          );
-                        },
-                        CardTitle: "Courses",
-                        CardSubTitle: "Your way to your job",
-                        ImageName: "images/Courses.png",
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SectionsCard(
-                        OnTapping: () {},
-                        CardTitle: "CV",
-                        CardSubTitle: "Create your CV",
-                        ImageName: "images/cv.png",
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 30,
-                  ),
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SectionsCard(
-                        OnTapping: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return jobs();
-                              },
-                            ),
-                          );
-                        },
-                        CardTitle: "Jobs",
-                        CardSubTitle: "Find your job easly",
-                        ImageName: "images/job.png",
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SectionsCard(
-                        OnTapping: () {},
-                        CardTitle: "Interview Questions",
-                        CardSubTitle: "",
-                        ImageName: "images/interview.png",
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          bottomNavigationBar: Button()),
+          ],
+        ),
+        bottomNavigationBar: BottomBNavigator(
+          OnTapping: OnTapping,
+        ),
+      ),
     );
   }
 }

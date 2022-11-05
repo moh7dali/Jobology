@@ -18,35 +18,14 @@ class BottomBNavigator extends StatelessWidget {
       height: 60.0,
       items: const <Widget>[
         Icon(Icons.logout, size: 30),
-        SizedBox(
-          width: 30,
-        ),
         Icon(Icons.home, size: 30),
-        SizedBox(
-          width: 30,
-        ),
         Icon(Icons.perm_identity, size: 30),
       ],
-      color: Colors.white,
-      buttonBackgroundColor: Colors.white,
-      backgroundColor: const Color.fromARGB(163, 12, 117, 99),
-      animationCurve: Curves.easeInOut,
+      color: Color.fromARGB(255, 12, 117, 100),
+      // buttonBackgroundColor: const Color.fromARGB(163, 12, 117, 99),
+      backgroundColor: Colors.white,
       animationDuration: Duration(milliseconds: 600),
       onTap: OnTapping,
-      letIndexChange: (index) => true,
     );
   }
 }
-// bottomNavigationBar: CurvedNavigationBar(
-//           key: _bottomNavigationKey,
-//           items: <Widget>[
-//             Icon(Icons.add, size: 30),
-//             Icon(Icons.list, size: 30),
-//             Icon(Icons.compare_arrows, size: 30),
-//           ],
-//           onTap: (index) {
-//             setState(() {
-//               _page = index;
-//             });
-//           },
-//         ),
