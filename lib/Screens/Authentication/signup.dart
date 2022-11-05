@@ -198,8 +198,8 @@ class _Sign_upState extends State<Sign_up> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Get.isDarkMode
-                                      ? Colors.black
-                                      : Colors.white),
+                                      ? Colors.white
+                                      : Colors.black),
                             ),
                           ],
                         ),
