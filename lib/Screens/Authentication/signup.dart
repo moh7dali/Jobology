@@ -215,8 +215,8 @@ class _Sign_upState extends State<Sign_up> {
                                 fontSize: 15,
                                 // fontWeight: FontWeight.bold,
                                 color: Get.isDarkMode
-                                    ? Colors.black
-                                    : Colors.white),
+                                    ? Colors.white
+                                    : Colors.black),
                             children: const [
                               TextSpan(
                                 text: "LOG IN",

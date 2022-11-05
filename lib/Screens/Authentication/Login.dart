@@ -179,8 +179,8 @@ class _LoginState extends State<Login> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Get.isDarkMode
-                                      ? Colors.black
-                                      : Colors.white),
+                                      ? Colors.white
+                                      : Colors.black),
                             ),
                           ],
                         ),
@@ -199,8 +199,8 @@ class _LoginState extends State<Login> {
                                 fontSize: 15,
                                 // fontWeight: FontWeight.bold,
                                 color: Get.isDarkMode
-                                    ? Colors.black
-                                    : Colors.white),
+                                    ? Colors.white
+                                    : Colors.black),
                             children: const [
                               TextSpan(
                                 text: "Sign Up",
