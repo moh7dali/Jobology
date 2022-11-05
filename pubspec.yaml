@@ -49,6 +49,7 @@ dependencies:
   liquid_swipe: ^3.0.0
   font_awesome_flutter: ^10.2.1
   cloud_firestore: ^4.0.4
+  flutter_speed_dial: ^6.2.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:jobology/Screens/Authentication/Company_signup.dart';
+import 'package:jobology/Screens/Company/AddNewJob.dart';
+import 'package:jobology/Screens/Company/AddNewTraining.dart';
+import 'package:jobology/Screens/Company/HomeCompany.dart';
 import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Welcome.dart';
@@ -37,6 +40,9 @@ Future<void> main() async {
       "course": (context) => const Course(),
       "personalPage": (context) => const personalInfo(),
       "welcome": (context) => Welcome(),
+      "companyHome": (context) => CompanyHome(),
+      "addNewPage": (context) => AddNewJob(),
+      "addNewTraining": (context) => AddNewTraining(),
     },
     home: const MyApp(),
   ));

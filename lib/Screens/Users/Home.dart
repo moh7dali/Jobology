@@ -10,8 +10,6 @@ import 'package:jobology/Screens/EditUserInfo.dart';
 import 'package:jobology/Screens/buttonnav.dart';
 import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/jobs.dart';
-import 'package:jobology/HomeComponents/Navigationbar.dart';
-import 'package:jobology/Screens/settings.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
