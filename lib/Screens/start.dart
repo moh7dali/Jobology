@@ -20,8 +20,9 @@ class _Start_pageState extends State<Start_page> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Image.network(
-            'https://static.wixstatic.com/media/bcace9_c8332fc9319a4cb79cce54c1324673c7~mv2.png/v1/fill/w_370,h_104,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/JOBOLOGY%20LOGO%20FINAL.png',
+          Image.asset(
+            "images/Logo.png",
+            // width: 600,
             height: height * 0.5,
           ),
           Column(
@@ -45,16 +46,22 @@ class _Start_pageState extends State<Start_page> {
             children: [
               Expanded(
                 child: OutlinedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "Login");
-                    },
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(),
-                      side: BorderSide(color: Colors.grey),
-                      padding: EdgeInsets.symmetric(vertical: 15),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "Login");
+                  },
+                  style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(),
+                    side: BorderSide(color: Colors.grey),
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                  ),
+                  child: Text(
+                    "LOGIN",
+                    style: GoogleFonts.montserrat(
+                      fontSize: 25,
+                      color: Color.fromARGB(255, 5, 108, 106),
                     ),
-                    child: Text("LOGIN",
-                        style: GoogleFonts.montserrat(fontSize: 25))),
+                  ),
+                ),
               ),
               SizedBox(
                 width: 10,
@@ -67,7 +74,7 @@ class _Start_pageState extends State<Start_page> {
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(),
                       side: BorderSide(color: Colors.black),
-                      //backgroundColor: Color.fromRGBO(121, 188, 198, 1),
+                      backgroundColor: Color.fromARGB(255, 5, 108, 106),
                       padding: EdgeInsets.symmetric(vertical: 15),
                     ),
                     child: Text("SIGN UP",
