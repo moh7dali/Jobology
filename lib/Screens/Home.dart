@@ -6,6 +6,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:jobology/HomeComponents/sectionscard.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:jobology/Screens/EditProfile.dart';
+import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/jobs.dart';
 
 class Home extends StatefulWidget {
@@ -38,11 +39,10 @@ class _HomeState extends State<Home> {
           elevation: 0,
           leading: Builder(
             builder: (context) => IconButton(
-              icon: Image.asset(
-                "images/drawer.png",
-                width: 35,
-              ),
-              onPressed: () => Scaffold.of(context).openDrawer(),
+              icon: Image.asset("images/back.png"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ),
           title: Row(
@@ -115,148 +115,6 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                child: Column(
-                  children: [
-                    Image.asset(
-                      "images/user.png",
-                      width: 80,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      "Username",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    const Text(
-                      "example@example.com",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(255, 145, 143, 143),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const SizedBox(
-                    width: 10,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(147, 76, 175, 111),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: ListTile(
-                  leading: const Icon(
-                    Icons.home,
-                    color: Colors.black,
-                  ),
-                  title: const Text(
-                    "Home",
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onTap: () {
-                    // Update the state of the app.
-                    // ...
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(147, 76, 175, 111),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: ListTile(
-                  leading: const Icon(
-                    Icons.person,
-                    color: Colors.black,
-                  ),
-                  title: const Text(
-                    "Personal information",
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onTap: () {
-                    // Update the state of the app.
-                    // ...
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(147, 76, 175, 111),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: ListTile(
-                  leading: const Icon(
-                    Icons.logout,
-                    color: Colors.black,
-                  ),
-                  title: const Text(
-                    "Logout",
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onTap: () async {
-                    final GoogleSignInAccount? googleUser =
-                        await GoogleSignIn().signOut();
-                    await FirebaseAuth.instance.signOut();
-
-                    print("User Sign Out");
-                    Navigator.pushNamed(context, "Start");
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(147, 76, 175, 111),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: ListTile(
-                  leading: const Icon(
-                    Icons.exit_to_app,
-                    color: Colors.black,
-                  ),
-                  title: const Text(
-                    "Exit the app",
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onTap: () {
-                    // Update the state of the app.
-                    // ...
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
         body: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
@@ -277,7 +135,16 @@ class _HomeState extends State<Home> {
                       height: 20,
                     ),
                     SectionsCard(
-                      OnTapping: () {},
+                      OnTapping: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Course();
+                            },
+                          ),
+                        );
+                      },
                       CardTitle: "Courses",
                       CardSubTitle: "Your way to your job",
                       ImageName: "images/Courses.png",
