@@ -1,15 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:jobology/Screens/Authentication/Company_signup.dart';
-<<<<<<< HEAD
 import 'package:jobology/Screens/Company/AddNewJob.dart';
 import 'package:jobology/Screens/Company/AddNewTraining.dart';
 import 'package:jobology/Screens/Company/HomeCompany.dart';
 import 'package:jobology/Screens/Users/Home.dart';
-=======
->>>>>>> c2163656234d690a90bf8d70bd6d60e9f48c201b
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Authentication/signup.dart';
 import 'package:jobology/Screens/Users/Home.dart';
@@ -30,7 +26,7 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(GetMaterialApp(
     themeMode: ThemeMode.system,
-    theme: ThemeData(brightness: Brightness.light, primarySwatch: Colors.pink),
+    theme: ThemeData(brightness: Brightness.light, primarySwatch: Colors.grey),
     darkTheme:
         ThemeData(brightness: Brightness.dark, primarySwatch: Colors.green),
     debugShowCheckedModeBanner: false,
