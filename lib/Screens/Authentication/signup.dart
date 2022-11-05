@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class _Sign_upState extends State<Sign_up> {
   TextEditingController passController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-
+  String us_id = "";
   bool _isObscure = true;
 
   @override
@@ -32,10 +33,6 @@ class _Sign_upState extends State<Sign_up> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Image.network(
-                    //   'https://static.wixstatic.com/media/bcace9_c8332fc9319a4cb79cce54c1324673c7~mv2.png/v1/fill/w_370,h_104,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/JOBOLOGY%20LOGO%20FINAL.png',
-                    //   height: height * 0.2,
-                    // ),
                     Text(
                       "Get on Board!",
                       style: GoogleFonts.montserrat(
@@ -45,6 +42,11 @@ class _Sign_upState extends State<Sign_up> {
                       "Create Your Profile to start your journey",
                       style: GoogleFonts.poppins(fontSize: 20),
                     ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.popAndPushNamed(context, "Company Sign up");
+                        },
+                        child: Text("Sign as a Company")),
                     Form(
                       child: Container(
                         padding: EdgeInsets.only(top: 15),
@@ -127,6 +129,23 @@ class _Sign_upState extends State<Sign_up> {
                                   await auth.createUserWithEmailAndPassword(
                                       email: emailController.text,
                                       password: passController.text);
+                              us_id = myuser.user!.uid;
+
+                              FirebaseFirestore.instance
+                                  .collection('Users')
+                                  .doc(myuser.user!.uid)
+                                  .set({
+                                'user_id': us_id,
+                                'Fullname': nameController.text,
+                                'Email': emailController.text,
+                                'phone': phoneController.text,
+                                'img': "",
+                                'address': "",
+                                'age': "",
+                                'major': "",
+                                'rules': "User"
+                              });
+
                               Navigator.popAndPushNamed(context, "Login");
                             } on FirebaseAuthException catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(

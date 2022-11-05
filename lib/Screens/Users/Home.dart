@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,32 +22,12 @@ class Home extends StatefulWidget {
 
 final PersonalInfo _personalInfo = PersonalInfo();
 final Home _Home = Home();
-final Settings _settings = Settings();
+
 bool status8 = false;
 int _page = 0;
 Widget _showPage = new Home();
 
 class _HomeState extends State<Home> {
-//OnTapping on NavBar
-  Widget _pageChooser(int page) {
-    switch (page) {
-      case 0:
-        return _personalInfo;
-        break;
-
-      case 1:
-        return _Home;
-        break;
-
-      case 2:
-        return _settings;
-        break;
-
-      default:
-        return _Home;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -1,24 +1,27 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:jobology/Screens/Users/Home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Company_Sign_up extends StatefulWidget {
+  const Company_Sign_up({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Company_Sign_up> createState() => _Company_Sign_upState();
 }
 
-class _LoginState extends State<Login> {
+class _Company_Sign_upState extends State<Company_Sign_up> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   String us_id = "";
+
   bool _isObscure = true;
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -32,18 +35,17 @@ class _LoginState extends State<Login> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Welcome Back,",
+                      "Get on Board!",
                       style: GoogleFonts.montserrat(
                           fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "Make it fast ...",
-                      textAlign: TextAlign.center,
+                      "Create Your Profile to start your journey",
                       style: GoogleFonts.poppins(fontSize: 20),
                     ),
                     Form(
                       child: Container(
-                        padding: EdgeInsets.only(top: 25),
+                        padding: EdgeInsets.only(top: 15),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -51,13 +53,35 @@ class _LoginState extends State<Login> {
                               decoration: const InputDecoration(
                                   prefixIcon:
                                       Icon(Icons.person_outline_outlined),
-                                  labelText: 'Email',
-                                  hintText: 'Enter Your Email',
+                                  labelText: 'Company Name',
+                                  hintText: 'Enter Your Company Name',
+                                  border: OutlineInputBorder()),
+                              controller: nameController,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.mail),
+                                  labelText: 'Company Email',
+                                  hintText: 'Enter Your Company Email',
                                   border: OutlineInputBorder()),
                               controller: emailController,
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 10,
+                            ),
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.phone),
+                                  labelText: 'Phone',
+                                  hintText: 'Enter Your Company Phone',
+                                  border: OutlineInputBorder()),
+                              controller: phoneController,
+                            ),
+                            const SizedBox(
+                              height: 10,
                             ),
                             TextFormField(
                               obscureText: _isObscure,
@@ -81,62 +105,56 @@ class _LoginState extends State<Login> {
                               ),
                               controller: passController,
                             ),
+                            const SizedBox(
+                              height: 10,
+                            ),
                           ],
                         ),
                       ),
                     ),
-                    Container(
-                        alignment: Alignment.bottomRight,
-                        child: TextButton(
-                            onPressed: () {
-                              Navigator.popAndPushNamed(
-                                  context, 'forgetpassword');
-                            },
-                            child: Text("Forget Password ?",
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 15,
-                                  color: Color.fromARGB(255, 5, 108, 106),
-                                )))),
                     SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                          style: OutlinedButton.styleFrom(
-                              backgroundColor: Color.fromARGB(255, 5, 108, 106),
-                              shape: RoundedRectangleBorder(),
-                              padding: EdgeInsets.symmetric(vertical: 15)),
+                      height: 20,
+                    ),
+                    SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
                           onPressed: () async {
                             try {
                               var auth = FirebaseAuth.instance;
-                              var type;
                               UserCredential myuser =
-                                  await auth.signInWithEmailAndPassword(
+                                  await auth.createUserWithEmailAndPassword(
                                       email: emailController.text,
                                       password: passController.text);
                               us_id = myuser.user!.uid;
+
                               FirebaseFirestore.instance
                                   .collection('Users')
-                                  .doc(us_id)
-                                  .snapshots()
-                                  .listen((event) {
-                                setState(() {
-                                  type = event['rules'];
-                                });
+                                  .doc(myuser.user!.uid)
+                                  .set({
+                                'user_id': us_id,
+                                'Fullname': nameController.text,
+                                'Email': emailController.text,
+                                'phone': phoneController.text,
+                                'img': "",
+                                'address': "",
+                                'rules': "company"
                               });
-                              if (type == "User") {
-                                Navigator.popAndPushNamed(context, "Home");
-                              } else if (type == "Company") {
-                                Navigator.popAndPushNamed(context, "course");
-                              }
+
+                              Navigator.popAndPushNamed(context, "Login");
                             } on FirebaseAuthException catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text(e.message.toString())));
                             }
                           },
-                          child: Text("LOGIN",
+                          child: Text("SIGN UP",
                               style: GoogleFonts.montserrat(
-                                  fontSize: 20, fontWeight: FontWeight.bold))),
-                    ),
+                                  fontSize: 15, fontWeight: FontWeight.bold)),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromARGB(255, 5, 108, 106),
+                              shape: RoundedRectangleBorder(),
+                              padding: EdgeInsets.all(15)),
+                        )),
                     SizedBox(
                       height: 20,
                     ),
@@ -200,15 +218,12 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
                     TextButton(
                         onPressed: () {
-                          Navigator.popAndPushNamed(context, "Sign_Up");
+                          Navigator.popAndPushNamed(context, "Login");
                         },
                         child: Text.rich(TextSpan(
-                            text: "Don't Have An Account ? ",
+                            text: "Aleardy have an account ? ",
                             style: GoogleFonts.poppins(
                                 fontSize: 15,
                                 // fontWeight: FontWeight.bold,
@@ -217,7 +232,7 @@ class _LoginState extends State<Login> {
                                     : Colors.black),
                             children: const [
                               TextSpan(
-                                text: "Sign Up",
+                                text: "LOG IN",
                                 style: TextStyle(color: Colors.blue),
                               )
                             ]))),

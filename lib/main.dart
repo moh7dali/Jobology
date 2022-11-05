@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:jobology/Screens/Authentication/Company_signup.dart';
 import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Welcome.dart';
@@ -27,6 +28,7 @@ Future<void> main() async {
     routes: {
       "Login": (context) => const Login(),
       "Sign_Up": (context) => const Sign_up(),
+      "Company Sign up": (context) => Company_Sign_up(),
       "Home": (context) => Home(),
       "Start": (context) => const Start_page(),
       "forgetpassword": (context) => const ForgetPassword(),
@@ -34,7 +36,7 @@ Future<void> main() async {
       "jobs": (context) => const jobs(),
       "course": (context) => const Course(),
       "personalPage": (context) => const personalInfo(),
-      "welcome": (context) => Welcome()
+      "welcome": (context) => Welcome(),
     },
     home: const MyApp(),
   ));

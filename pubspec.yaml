@@ -48,6 +48,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   liquid_swipe: ^3.0.0
   font_awesome_flutter: ^10.2.1
+  cloud_firestore: ^4.0.4
 
 dev_dependencies:
   flutter_test:
