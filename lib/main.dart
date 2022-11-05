@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:jobology/Screens/Home.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Welcome.dart';
+import 'package:jobology/Screens/buttonnav.dart';
 import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/jobInfo.dart';
 import 'package:jobology/Screens/jobs.dart';
@@ -45,6 +46,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Start_page();
+    return Home();
   }
 }

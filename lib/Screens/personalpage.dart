@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jobology/Screens/buttonnav.dart';
 
 class personalInfo extends StatefulWidget {
   const personalInfo({super.key});
@@ -58,13 +58,19 @@ class _personalInfoState extends State<personalInfo> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-               SizedBox(width: 130,), Align(
+                SizedBox(
+                  width: 130,
+                ),
+                Align(
                   alignment: Alignment.center,
                   child: Text(
                     "Jeff Bezos",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                   ),
-                ),SizedBox(width: 80,),
+                ),
+                SizedBox(
+                  width: 80,
+                ),
                 IconButton(
                     onPressed: () {
                       if (Icon1.toString() ==
@@ -78,8 +84,7 @@ class _personalInfoState extends State<personalInfo> {
                             color: Colors.blue,
                           );
                         });
-                      }
-                      else {
+                      } else {
                         setState(() {
                           Icon1 = Icon(
                             Icons.thumb_up,
