@@ -1,26 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:jobology/HomeComponents/sectionscard.dart';
-import 'package:jobology/Screens/EditUserInfo.dart';
-import 'package:jobology/Screens/course.dart';
-import 'package:jobology/Screens/jobs.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobology/HomeComponents/Navigationbar.dart';
+import 'package:get/get.dart';
 
-class Home extends StatefulWidget {
-  Home({super.key});
+class PersonalInfo extends StatefulWidget {
+  PersonalInfo({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<PersonalInfo> createState() => _PersonalInfoState();
 }
 
 bool status8 = false;
+
 int _page = 0;
 
-class _HomeState extends State<Home> {
-//OnTapping on NavBar
+class _PersonalInfoState extends State<PersonalInfo> {
   void OnTapping(int index) {
     setState(() {
       setState(() async {
@@ -139,89 +135,7 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        body: ListView(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    const Text(
-                      "Start your\ntrip,",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SectionsCard(
-                      OnTapping: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return Course();
-                            },
-                          ),
-                        );
-                      },
-                      CardTitle: "Courses",
-                      CardSubTitle: "Your way to your job",
-                      ImageName: "images/Courses.png",
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SectionsCard(
-                      OnTapping: () {},
-                      CardTitle: "CV",
-                      CardSubTitle: "Create your CV",
-                      ImageName: "images/cv.png",
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  width: 30,
-                ),
-                Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SectionsCard(
-                      OnTapping: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return jobs();
-                            },
-                          ),
-                        );
-                      },
-                      CardTitle: "Jobs",
-                      CardSubTitle: "Find your job easly",
-                      ImageName: "images/job.png",
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SectionsCard(
-                      OnTapping: () {},
-                      CardTitle: "Interview Questions",
-                      CardSubTitle: "",
-                      ImageName: "images/interview.png",
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
+        body: Column(),
         bottomNavigationBar: BottomBNavigator(
           OnTapping: OnTapping,
         ),
