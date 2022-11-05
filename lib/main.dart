@@ -1,18 +1,20 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:jobology/Screens/Authentication/Company_signup.dart';
-import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
+import 'package:jobology/Screens/Authentication/signup.dart';
+import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Welcome.dart';
 import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/jobInfo.dart';
 import 'package:jobology/Screens/jobs.dart';
-import 'package:jobology/Screens/Authentication/signup.dart';
 import 'package:jobology/Screens/personalpage.dart';
 import 'package:jobology/Screens/start.dart';
+
 import 'Screens/Authentication/ForgetPass.dart';
 import 'firebase_options.dart';
-import 'package:get/get.dart';
 
 // raghad@firebase.com password: raghad12345
 

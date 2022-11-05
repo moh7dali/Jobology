@@ -120,13 +120,14 @@ class _LoginState extends State<Login> {
                                   .listen((event) {
                                 setState(() {
                                   type = event['rules'];
+                                  if (type == "User") {
+                                    Navigator.popAndPushNamed(context, "Home");
+                                  } else if (type == "company") {
+                                    Navigator.popAndPushNamed(
+                                        context, "course");
+                                  }
                                 });
                               });
-                              if (type == "User") {
-                                Navigator.popAndPushNamed(context, "Home");
-                              } else if (type == "Company") {
-                                Navigator.popAndPushNamed(context, "course");
-                              }
                             } on FirebaseAuthException catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
