@@ -1,23 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ionicons/ionicons.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Sign_up extends StatefulWidget {
+  const Sign_up({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Sign_up> createState() => _Sign_upState();
 }
 
-class _LoginState extends State<Login> {
+class _Sign_upState extends State<Sign_up> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+
   bool _isObscure = true;
-  void nav() {
-    Navigator.popAndPushNamed(context, 'forgetpassword');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,31 +34,52 @@ class _LoginState extends State<Login> {
               height: height * 0.2,
             ),
             Text(
-              "Welcome Back,",
+              "Get on Board!",
               style: GoogleFonts.montserrat(
                   fontSize: 30, fontWeight: FontWeight.bold),
             ),
             Text(
-              "Make it fast ...",
-              textAlign: TextAlign.center,
+              "Create Your Profile to start your journey",
               style: GoogleFonts.poppins(fontSize: 20),
             ),
             Form(
               child: Container(
-                padding: EdgeInsets.only(top: 25),
+                padding: EdgeInsets.only(top: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
                       decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.person_outline_outlined),
+                          labelText: 'Full Name',
+                          hintText: 'Enter Your Name',
+                          border: OutlineInputBorder()),
+                      controller: nameController,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.mail),
                           labelText: 'Email',
                           hintText: 'Enter Your Email',
                           border: OutlineInputBorder()),
                       controller: emailController,
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.phone),
+                          labelText: 'Phone',
+                          hintText: 'Enter Your Phone',
+                          border: OutlineInputBorder()),
+                      controller: phoneController,
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     TextFormField(
                       obscureText: _isObscure,
@@ -81,37 +103,39 @@ class _LoginState extends State<Login> {
                       ),
                       controller: passController,
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               ),
             ),
-            Container(
-                alignment: Alignment.bottomRight,
-                child: TextButton(
-                    onPressed: nav, child: const Text("Forget Password ?"))),
             SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                  style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(),
-                      padding: EdgeInsets.symmetric(vertical: 15)),
+              height: 20,
+            ),
+            SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
                   onPressed: () async {
                     try {
                       var auth = FirebaseAuth.instance;
                       UserCredential myuser =
-                          await auth.signInWithEmailAndPassword(
+                          await auth.createUserWithEmailAndPassword(
                               email: emailController.text,
                               password: passController.text);
-                      Navigator.popAndPushNamed(context, "Home");
-                    } catch (e) {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text(e.toString())));
+                      Navigator.popAndPushNamed(context, "Login");
+                    } on FirebaseAuthException catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(e.message.toString())));
                     }
                   },
-                  child: Text("LOGIN",
+                  child: Text("SIGN UP",
                       style: GoogleFonts.montserrat(
-                          fontSize: 20, fontWeight: FontWeight.bold))),
-            ),
+                          fontSize: 15, fontWeight: FontWeight.bold)),
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(),
+                      padding: EdgeInsets.all(15)),
+                )),
             SizedBox(
               height: 20,
             ),
@@ -157,22 +181,22 @@ class _LoginState extends State<Login> {
                       style: GoogleFonts.montserrat(
                           fontSize: 20, fontWeight: FontWeight.bold))),
             ),
-            SingleChildScrollView(scrollDirection: Axis.horizontal,
-              child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Row(children: [
-                    Text("Don't have an account ?",
-                        style: GoogleFonts.poppins(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "Sign_Up");
-                        },
-                        child: Text("SIGN UP",
-                            style: GoogleFonts.poppins(
-                                fontSize: 20, fontWeight: FontWeight.bold))),
-                  ])),
-            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.popAndPushNamed(context, "Login");
+                },
+                child: Text.rich(TextSpan(
+                    text: "Aleardy have an account ? ",
+                    style: GoogleFonts.poppins(
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold,
+                        color: Get.isDarkMode ? Colors.white : Colors.black),
+                    children: const [
+                      TextSpan(
+                        text: "LOG IN",
+                        style: TextStyle(color: Colors.blue),
+                      )
+                    ]))),
           ]),
         ),
       ),
