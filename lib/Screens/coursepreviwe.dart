@@ -3,9 +3,24 @@
 import 'package:flutter/material.dart';
 import 'package:jobology/Widgets/bottun.dart';
 import '../Widgets/mytext.dart';
+import 'course.dart';
 
 class Course_previwe extends StatefulWidget {
-  const Course_previwe({super.key});
+  Course_previwe(
+      {this.imageUrl,
+      this.company_name,
+      this.title,
+      this.breif,
+      this.url,
+      this.req,
+      this.docnid});
+  String? company_name;
+  String? title;
+  String? imageUrl;
+  String? breif;
+  String? req;
+  String? url;
+  dynamic docnid;
 
   @override
   State<Course_previwe> createState() => _Course_previweState();
@@ -14,10 +29,11 @@ class Course_previwe extends StatefulWidget {
 class _Course_previweState extends State<Course_previwe> {
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         width: double.maxFinite,
-        height: double.maxFinite,
+        height: double.infinity,
         child: Stack(children: [
           Positioned(
               left: 0,
@@ -37,7 +53,6 @@ class _Course_previweState extends State<Course_previwe> {
                 child: IconButton(
               onPressed: () {},
               icon: const Icon(Icons.menu),
-              color: Colors.white,
             )),
           ),
           Positioned(
@@ -45,7 +60,7 @@ class _Course_previweState extends State<Course_previwe> {
               child: Container(
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
                 width: MediaQuery.of(context).size.width,
-                height: 400,
+                height: height * 0.7,
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -58,7 +73,7 @@ class _Course_previweState extends State<Course_previwe> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         MyText(
-                          text: "Flutter",
+                          text: widget.title,
                           size: 40,
                           mycolor: Colors.black54.withOpacity(0.9),
                         ),
@@ -102,21 +117,45 @@ class _Course_previweState extends State<Course_previwe> {
                         trailing:
                             const Image(image: AssetImage("images/ltuc.jpg")),
                         title: MyText(
-                          text: "LTUC",
+                          text: widget.company_name,
                           size: 20,
                           mycolor: Colors.black54.withOpacity(0.9),
                         ),
                         subtitle: MyText(
-                            text:
-                                "An existing technical university that offers many specializations and training courses,/n especially information technology programs",
+                            text: widget.breif,
                             size: 14,
                             mycolor: Colors.black54.withOpacity(0.8))),
                     const SizedBox(
                       height: 8,
                     ),
-                    Center(
-                      child: Bottun_Navigater(),
-                    )
+                    MyText(
+                        text: widget.req,
+                        size: 14,
+                        mycolor: Colors.black54.withOpacity(0.8)),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Padding(
+                        padding: EdgeInsets.only(top: height * 0.2, left: 130),
+                        child: MaterialButton(
+                          height: 60,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0)),
+                          color: Colors.purple,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Course()));
+                          },
+                          child: const Text(
+                            "Get Started",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          ),
+                        )),
                   ],
                 ),
               ))
