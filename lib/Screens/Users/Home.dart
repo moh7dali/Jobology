@@ -225,7 +225,45 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      bottomNavigationBar: Button(),
+      floatingActionButton: SpeedDial(
+          buttonSize: Size(70, 70),
+          spaceBetweenChildren: 15,
+          child: Icon(
+            Ionicons.menu,
+            size: 30,
+          ),
+          backgroundColor: Color.fromARGB(255, 61, 14, 70),
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.logout),
+              label: 'Logout',
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Login();
+                    },
+                  ),
+                );
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Ionicons.person),
+              label: 'Profile',
+              onTap: () {
+                Navigator.pushNamed(context, "personalPage");
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Ionicons.home),
+              label: 'Home',
+              onTap: () {
+                Navigator.pushNamed(context, "Home");
+              },
+            ),
+          ]),
     );
   }
 }
