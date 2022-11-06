@@ -4,9 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/buttonnav.dart';
-
-import '../Authentication/Login.dart';
 
 class personalInfo extends StatefulWidget {
   const personalInfo({super.key});
@@ -113,7 +112,11 @@ class _personalInfoState extends State<personalInfo> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-               IconButton(onPressed: (){Navigator.pushNamed(context, "editProfile");}, icon: Icon(Icons.edit)),
+                IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "editProfile");
+                    },
+                    icon: Icon(Icons.edit)),
                 Align(
                   alignment: Alignment.center,
                   child: Text(
@@ -121,7 +124,6 @@ class _personalInfoState extends State<personalInfo> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                   ),
                 ),
-                
                 IconButton(
                     onPressed: () {
                       if (Icon1.toString() ==
@@ -184,26 +186,45 @@ class _personalInfoState extends State<personalInfo> {
                   "About Me:",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 )),
-            Align( alignment: Alignment.bottomLeft,
+            Align(
+              alignment: Alignment.bottomLeft,
               child: Column(
                 children: [
-                  ListTile(trailing: Icon(Icons.phone),title: Text("Phone Number",style :TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                  ListTile(
+                    trailing: Icon(Icons.phone),
+                    title: Text("Phone Number",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
                     subtitle: Text(
                       phone,
                       style: TextStyle(fontSize: 15),
                     ),
-                  ),  ListTile(trailing: Icon(FontAwesomeIcons.book),title: Text("Major",style :TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                  ),
+                  ListTile(
+                    trailing: Icon(FontAwesomeIcons.book),
+                    title: Text("Major",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
                     subtitle: Text(
                       major,
                       style: TextStyle(fontSize: 15),
                     ),
-                  ),ListTile(trailing: Icon(FontAwesomeIcons.locationArrow),title: Text("address",style :TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                  ),
+                  ListTile(
+                    trailing: Icon(FontAwesomeIcons.locationArrow),
+                    title: Text("address",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
                     subtitle: Text(
                       address,
                       style: TextStyle(fontSize: 15),
                     ),
                   ),
-                  ListTile(trailing: Icon(FontAwesomeIcons.person),title: Text("Age",style :TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                  ListTile(
+                    trailing: Icon(FontAwesomeIcons.person),
+                    title: Text("Age",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
                     subtitle: Text(
                       age,
                       style: TextStyle(fontSize: 15),

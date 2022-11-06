@@ -14,11 +14,6 @@ import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/interview.dart';
 import 'package:jobology/Screens/jobInfo.dart';
 import 'package:jobology/Screens/jobs.dart';
-<<<<<<< HEAD
-import 'package:jobology/Screens/Users/personalpage.dart';
-=======
-
->>>>>>> 05f835c7fac7d4fbe48adf27519f05dbca124930
 import 'package:jobology/Screens/start.dart';
 import 'Screens/Authentication/ForgetPass.dart';
 import 'Screens/Users/peronalPage/personalpage.dart';
@@ -51,7 +46,7 @@ Future<void> main() async {
       "addNewPage": (context) => AddNewJob(),
       "addNewTraining": (context) => AddNewTraining(),
       "interview": (context) => InterView(),
-      "editProfile":(context) => editProfile()
+      "editProfile": (context) => editProfile()
     },
     home: const MyApp(),
   ));
