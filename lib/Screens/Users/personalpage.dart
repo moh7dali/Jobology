@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/buttonnav.dart';
+
+import '../Authentication/Login.dart';
 
 class personalInfo extends StatefulWidget {
   const personalInfo({super.key});
@@ -155,6 +159,45 @@ class _personalInfoState extends State<personalInfo> {
           ],
         ),
       )),
+      floatingActionButton: SpeedDial(
+          buttonSize: Size(70, 70),
+          spaceBetweenChildren: 15,
+          child: Icon(
+            Ionicons.menu,
+            size: 30,
+          ),
+          backgroundColor: Color.fromARGB(255, 61, 14, 70),
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.logout),
+              label: 'Logout',
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Login();
+                    },
+                  ),
+                );
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Ionicons.person),
+              label: 'Profile',
+              onTap: () {
+                Navigator.pushNamed(context, "personalPage");
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Ionicons.home),
+              label: 'Home',
+              onTap: () {
+                Navigator.pushNamed(context, "Home");
+              },
+            ),
+          ]),
     );
   }
 }

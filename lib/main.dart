@@ -13,9 +13,8 @@ import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/interview.dart';
 import 'package:jobology/Screens/jobInfo.dart';
 import 'package:jobology/Screens/jobs.dart';
-import 'package:jobology/Screens/personalpage.dart';
+import 'package:jobology/Screens/Users/personalpage.dart';
 import 'package:jobology/Screens/start.dart';
-
 import 'Screens/Authentication/ForgetPass.dart';
 import 'firebase_options.dart';
 

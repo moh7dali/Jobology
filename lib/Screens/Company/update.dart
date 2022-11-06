@@ -118,9 +118,10 @@ class _Update_jobState extends State<Update_job> {
                     'requirements': reqController.text,
                     'url': urlController.text
                   });
+                  Navigator.pop(context);
                 },
                 child: Text(
-                  "Add",
+                  "Update",
                   style: GoogleFonts.montserrat(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

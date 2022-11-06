@@ -2,10 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:jobology/HomeComponents/sectionscard.dart';
+import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/EditUserInfo.dart';
 import 'package:jobology/Screens/Users/interview_preview.dart';
 import 'package:jobology/Screens/buttonnav.dart';
@@ -22,7 +25,6 @@ class Home extends StatefulWidget {
 
 final PersonalInfo _personalInfo = PersonalInfo();
 final Home _Home = Home();
-
 bool status8 = false;
 int _page = 0;
 Widget _showPage = new Home();
@@ -52,21 +54,22 @@ class _HomeState extends State<Home> {
                 "images/back.png",
                 width: 26,
               ),
-              onPressed: () {
-                Navigator.pop(context);
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Login();
+                    },
+                  ),
+                );
               },
             ),
           ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "images/user.png",
-                width: 50,
-              ),
-              SizedBox(
-                width: 15,
-              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -87,44 +90,51 @@ class _HomeState extends State<Home> {
           ),
           centerTitle: true,
           actions: [
-            Row(
-              children: [
-                Column(
-                  children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    FlutterSwitch(
-                      value: status8,
-                      activeColor: Color.fromARGB(135, 16, 153, 130),
-                      activeIcon: const Icon(
-                        Icons.dark_mode,
-                        color: Color.fromARGB(255, 118, 122, 121),
-                      ),
-                      inactiveIcon: const Icon(
-                        Icons.light_mode,
-                        color: Color.fromARGB(255, 223, 239, 3),
-                      ),
-                      onToggle: (val) {
-                        setState(() {
-                          status8 = val;
-                          if (Get.isDarkMode) {
-                            Get.changeTheme(ThemeData.light());
-                          } else {
-                            Get.changeTheme(
-                              ThemeData.dark(),
-                            );
-                          }
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-              ],
+            Image.asset(
+              "images/user.png",
+              width: 50,
             ),
+            SizedBox(
+              width: 15,
+            ),
+            // Row(
+            //   children: [
+            //     Column(
+            //       children: [
+            //         const SizedBox(
+            //           height: 15,
+            //         ),
+            //         FlutterSwitch(
+            //           value: status8,
+            //           activeColor: Color.fromARGB(135, 16, 153, 130),
+            //           activeIcon: const Icon(
+            //             Icons.dark_mode,
+            //             color: Color.fromARGB(255, 118, 122, 121),
+            //           ),
+            //           inactiveIcon: const Icon(
+            //             Icons.light_mode,
+            //             color: Color.fromARGB(255, 223, 239, 3),
+            //           ),
+            //           onToggle: (val) {
+            //             setState(() {
+            //               status8 = val;
+            //               if (Get.isDarkMode) {
+            //                 Get.changeTheme(ThemeData.light());
+            //               } else {
+            //                 Get.changeTheme(
+            //                   ThemeData.dark(),
+            //                 );
+            //               }
+            //             });
+            //           },
+            //         ),
+            //       ],
+            //     ),
+            //     const SizedBox(
+            //       width: 15,
+            //     ),
+            //   ],
+            // ),
           ],
         ),
         body: ListView(
@@ -219,7 +229,46 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        bottomNavigationBar: Button(),
+        // bottomNavigationBar: Button(),
+        floatingActionButton: SpeedDial(
+            buttonSize: Size(70, 70),
+            spaceBetweenChildren: 15,
+            child: Icon(
+              Ionicons.menu,
+              size: 30,
+            ),
+            backgroundColor: Color.fromARGB(255, 61, 14, 70),
+            children: [
+              SpeedDialChild(
+                child: Icon(Icons.logout),
+                label: 'Logout',
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Login();
+                      },
+                    ),
+                  );
+                },
+              ),
+              SpeedDialChild(
+                child: Icon(Ionicons.person),
+                label: 'Profile',
+                onTap: () {
+                  Navigator.pushNamed(context, "personalPage");
+                },
+              ),
+              SpeedDialChild(
+                child: Icon(Ionicons.home),
+                label: 'Home',
+                onTap: () {
+                  Navigator.pushNamed(context, "Home");
+                },
+              ),
+            ]),
       ),
     );
   }

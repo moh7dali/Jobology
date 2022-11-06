@@ -1,41 +1,47 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class AddNewTraining extends StatefulWidget {
-  AddNewTraining({Key? key}) : super(key: key);
+class Update_training extends StatefulWidget {
+  Update_training(
+      {this.imageUrl,
+      this.title,
+      this.breif,
+      this.url,
+      this.years,
+      this.req,
+      this.docnid});
+  String? title;
+  String? imageUrl;
+  String? breif;
+  String? req;
+  String? years;
+  String? url;
+  dynamic docnid;
 
   @override
-  State<AddNewTraining> createState() => _AddNewTrainingState();
+  State<Update_training> createState() => _Update_trainingState();
 }
 
-class _AddNewTrainingState extends State<AddNewTraining> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController briefController = TextEditingController();
-  TextEditingController reqController = TextEditingController();
-  TextEditingController urlController = TextEditingController();
-
-  String comp_name = "";
+class _Update_trainingState extends State<Update_training> {
   @override
   Widget build(BuildContext context) {
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .snapshots()
-        .listen((event) {
-      setState(() {
-        comp_name = event['Fullname'];
-      });
-    });
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(),
-        body: Padding(
-          padding: EdgeInsets.all(20),
-          child: Form(
-              child: ListView(
+    TextEditingController titleController =
+        TextEditingController(text: widget.title);
+    TextEditingController briefController =
+        TextEditingController(text: widget.breif);
+    TextEditingController yearController =
+        TextEditingController(text: widget.years);
+    TextEditingController reqController =
+        TextEditingController(text: widget.req);
+    TextEditingController urlController =
+        TextEditingController(text: widget.url);
+    return Scaffold(
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Form(
+          child: ListView(
             children: [
               Image.asset("images/training.png"),
               SizedBox(
@@ -78,7 +84,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person_outline_outlined),
                     labelText: 'Url',
-                    hintText: 'Add url to your ad',
+                    hintText: 'Add url to your course',
                     border: OutlineInputBorder()),
                 controller: urlController,
               ),
@@ -91,8 +97,10 @@ class _AddNewTrainingState extends State<AddNewTraining> {
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
                 onPressed: () {
-                  FirebaseFirestore.instance.collection('Training').add({
-                    'Company name': comp_name,
+                  FirebaseFirestore.instance
+                      .collection('Training')
+                      .doc(widget.docnid)
+                      .update({
                     'job_title': titleController.text,
                     'breif': briefController.text,
                     'requirements': reqController.text,
@@ -101,7 +109,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  "Add",
+                  "Update",
                   style: GoogleFonts.montserrat(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -109,7 +117,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
                 ),
               ),
             ],
-          )),
+          ),
         ),
       ),
     );

@@ -110,6 +110,7 @@ class _AddNewJobState extends State<AddNewJob> {
                       'requirements': reqController.text,
                       'url': urlController.text
                     });
+                    Navigator.pop(context);
                   },
                   child: Text(
                     "Add",
