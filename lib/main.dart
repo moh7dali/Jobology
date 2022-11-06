@@ -18,6 +18,7 @@ import 'package:jobology/Screens/start.dart';
 import 'Screens/Authentication/ForgetPass.dart';
 import 'Screens/Users/peronalPage/personalpage.dart';
 import 'firebase_options.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

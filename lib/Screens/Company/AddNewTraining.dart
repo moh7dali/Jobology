@@ -1,8 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddNewTraining extends StatefulWidget {
   AddNewTraining({Key? key}) : super(key: key);
@@ -12,9 +15,21 @@ class AddNewTraining extends StatefulWidget {
 }
 
 class _AddNewTrainingState extends State<AddNewTraining> {
+  final ImagePicker _picker = ImagePicker();
+  File? pickedimg;
+  funimg(ImageSource src) async {
+    final XFile? image = await _picker.pickImage(source: src);
+    if (image == null) {
+      return;
+    }
+    setState(() {
+      pickedimg = File(image.path);
+    });
+  }
+
   TextEditingController titleController = TextEditingController();
   TextEditingController briefController = TextEditingController();
-  TextEditingController reqController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
   TextEditingController urlController = TextEditingController();
 
   String comp_name = "";
@@ -37,9 +52,36 @@ class _AddNewTrainingState extends State<AddNewTraining> {
           child: Form(
               child: ListView(
             children: [
-              Image.asset("images/training.png"),
+              //Image.asset("images/training.png"),
+              CircleAvatar(
+                  radius: 100,
+                  backgroundColor: Colors.grey,
+                  backgroundImage:
+                      pickedimg == null ? null : FileImage(pickedimg!)),
               SizedBox(
-                height: 30,
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Choose image From ?",
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                      )),
+                  TextButton(
+                      onPressed: () => funimg(ImageSource.gallery),
+                      child: Text("Gallery",
+                          style: GoogleFonts.poppins(
+                              fontSize: 18, fontWeight: FontWeight.bold))),
+                  TextButton(
+                      onPressed: () => funimg(ImageSource.camera),
+                      child: Text("Camera",
+                          style: GoogleFonts.poppins(
+                              fontSize: 18, fontWeight: FontWeight.bold))),
+                ],
+              ),
+              SizedBox(
+                height: 5,
               ),
               TextFormField(
                 decoration: const InputDecoration(
@@ -66,10 +108,10 @@ class _AddNewTrainingState extends State<AddNewTraining> {
               TextFormField(
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person_outline_outlined),
-                    labelText: 'Requirments',
-                    hintText: 'Add requirments',
+                    labelText: 'price',
+                    hintText: 'Add price',
                     border: OutlineInputBorder()),
-                controller: reqController,
+                controller: priceController,
               ),
               SizedBox(
                 height: 30,
@@ -90,13 +132,26 @@ class _AddNewTrainingState extends State<AddNewTraining> {
                     backgroundColor: Color.fromARGB(255, 5, 108, 106),
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
-                onPressed: () {
+                onPressed: () async {
+                  DateTime now = DateTime.now();
+                  final storageRef = FirebaseStorage.instance
+                      .ref()
+                      .child('jobs_img')
+                      .child(comp_name +
+                          now.hour.toString() +
+                          now.minute.toString() +
+                          now.second.toString() +
+                          '.jpg');
+                  await storageRef.putFile(pickedimg!);
+                  final url = await storageRef.getDownloadURL();
+
                   FirebaseFirestore.instance.collection('Training').add({
-                    'Company name': comp_name,
-                    'job_title': titleController.text,
+                    'Company_name': comp_name,
+                    'course_title': titleController.text,
                     'breif': briefController.text,
-                    'requirements': reqController.text,
-                    'url': urlController.text
+                    'price': priceController.text,
+                    'url': urlController.text,
+                    'img_url': url
                   });
                   Navigator.pop(context);
                 },

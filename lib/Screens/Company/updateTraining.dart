@@ -9,12 +9,12 @@ class Update_training extends StatefulWidget {
       this.breif,
       this.url,
       this.years,
-      this.req,
+      this.price,
       this.docnid});
   String? title;
   String? imageUrl;
   String? breif;
-  String? req;
+  String? price;
   String? years;
   String? url;
   dynamic docnid;
@@ -32,8 +32,8 @@ class _Update_trainingState extends State<Update_training> {
         TextEditingController(text: widget.breif);
     TextEditingController yearController =
         TextEditingController(text: widget.years);
-    TextEditingController reqController =
-        TextEditingController(text: widget.req);
+    TextEditingController priceController =
+        TextEditingController(text: widget.price);
     TextEditingController urlController =
         TextEditingController(text: widget.url);
     return Scaffold(
@@ -72,10 +72,10 @@ class _Update_trainingState extends State<Update_training> {
               TextFormField(
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person_outline_outlined),
-                    labelText: 'Requirments',
-                    hintText: 'Add requirments',
+                    labelText: 'price',
+                    hintText: 'Add price',
                     border: OutlineInputBorder()),
-                controller: reqController,
+                controller: priceController,
               ),
               SizedBox(
                 height: 30,
@@ -103,7 +103,7 @@ class _Update_trainingState extends State<Update_training> {
                       .update({
                     'job_title': titleController.text,
                     'breif': briefController.text,
-                    'requirements': reqController.text,
+                    'price': priceController.text,
                     'url': urlController.text
                   });
                   Navigator.pop(context);

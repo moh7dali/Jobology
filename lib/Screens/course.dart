@@ -100,11 +100,11 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                                   MaterialPageRoute(
                                 builder: (context) {
                                   return Course_previwe(
-                                    imageUrl: "",
-                                    company_name: docs[index]['Company name'],
-                                    title: docs[index]['job_title'],
+                                    imageUrl: docs[index]['img_url'],
+                                    company_name: docs[index]['Company_name'],
+                                    title: docs[index]['course_title'],
                                     breif: docs[index]['breif'],
-                                    req: docs[index]['requirements'],
+                                    price: docs[index]['price'],
                                     url: docs[index]['url'],
                                   );
                                 },
@@ -121,15 +121,16 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
                                     image: DecorationImage(
-                                        image: AssetImage("images/flutter.png"),
+                                        image: NetworkImage(
+                                            docs[index]['img_url']),
                                         fit: BoxFit.cover)),
                               ),
                               SizedBox(
                                 height: 3,
                               ),
                               ListTile(
-                                title: Text(docs[index]['job_title']),
-                                subtitle: Text(docs[index]['Company name']),
+                                title: Text(docs[index]['course_title']),
+                                subtitle: Text(docs[index]['Company_name']),
                                 leading: Icon(Icons.school),
                               )
                             ],

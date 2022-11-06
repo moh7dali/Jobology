@@ -61,7 +61,7 @@ class _ListTaleWState extends State<ListTaleW> {
       leading: Container(
         width: 80,
         height: 80,
-        child: Image.asset(widget.imageUrl!),
+        child: Image.network(widget.imageUrl!),
       ),
       trailing: Icon(
         Icons.work,

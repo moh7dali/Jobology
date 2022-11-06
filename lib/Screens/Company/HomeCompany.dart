@@ -151,7 +151,9 @@ class _CompanyHomeState extends State<CompanyHome> {
                           return Container(
                             height: 200,
                             decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 233, 214, 242),
+                              image: DecorationImage(
+                                  image: NetworkImage(docs[index]['img_url']),
+                                  fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(25),
                             ),
                             child: ListTile(
@@ -327,23 +329,26 @@ class _CompanyHomeState extends State<CompanyHome> {
                       ),
                       itemCount: docs.length,
                       itemBuilder: (context, index) {
-                        if (comp_name == docs[index]['Company name']) {
+                        if (comp_name == docs[index]['Company_name']) {
                           return Container(
                             height: 200,
                             decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 223, 210, 230),
+                              //color: Color.fromARGB(255, 223, 210, 230),
+                              image: DecorationImage(
+                                  image: NetworkImage(docs[index]['img_url']),
+                                  fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(25),
                             ),
                             child: ListTile(
                               title: Text(
-                                docs[index]['Company name'],
+                                docs[index]['Company_name'],
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               subtitle: Text(
-                                docs[index]['job_title'],
+                                docs[index]['course_title'],
                                 style: TextStyle(
                                   fontSize: 15,
                                 ),
@@ -354,7 +359,7 @@ class _CompanyHomeState extends State<CompanyHome> {
                                     builder: (context) {
                                       return CupertinoAlertDialog(
                                         title: Text(
-                                          docs[index]['job_title'],
+                                          docs[index]['course_title'],
                                           style: TextStyle(fontSize: 25),
                                         ),
                                         content: Column(
@@ -385,7 +390,7 @@ class _CompanyHomeState extends State<CompanyHome> {
                                               decoration: BoxDecoration(
                                                   color: Colors.grey),
                                               child: Text(
-                                                "Requirements:",
+                                                "Price:",
                                                 style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold,
@@ -393,7 +398,7 @@ class _CompanyHomeState extends State<CompanyHome> {
                                               ),
                                             ),
                                             Text(
-                                              docs[index]['requirements'],
+                                              docs[index]['price'],
                                               style: TextStyle(
                                                 fontSize: 15,
                                               ),
@@ -426,11 +431,11 @@ class _CompanyHomeState extends State<CompanyHome> {
                                                   builder: (context) {
                                                     return Update_training(
                                                       title: docs[index]
-                                                          ['job_title'],
+                                                          ['course_title'],
                                                       breif: docs[index]
                                                           ['breif'],
-                                                      req: docs[index]
-                                                          ['requirements'],
+                                                      price: docs[index]
+                                                          ['price'],
                                                       url: docs[index]['url'],
                                                       docnid: docs[index].id,
                                                     );

@@ -12,13 +12,13 @@ class Course_previwe extends StatefulWidget {
       this.title,
       this.breif,
       this.url,
-      this.req,
+      this.price,
       this.docnid});
   String? company_name;
   String? title;
   String? imageUrl;
   String? breif;
-  String? req;
+  String? price;
   String? url;
   dynamic docnid;
 
@@ -78,7 +78,7 @@ class _Course_previweState extends State<Course_previwe> {
                           mycolor: Colors.black54.withOpacity(0.9),
                         ),
                         MyText(
-                            text: "\$ Free",
+                            text: "${widget.price}" + "\$",
                             size: 30,
                             mycolor: Colors.black12.withOpacity(0.7))
                       ],
@@ -126,13 +126,6 @@ class _Course_previweState extends State<Course_previwe> {
                             size: 14,
                             mycolor: Colors.black54.withOpacity(0.8))),
                     const SizedBox(
-                      height: 8,
-                    ),
-                    MyText(
-                        text: widget.req,
-                        size: 14,
-                        mycolor: Colors.black54.withOpacity(0.8)),
-                    SizedBox(
                       height: 8,
                     ),
                     Padding(
