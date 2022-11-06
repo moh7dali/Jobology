@@ -17,6 +17,10 @@ class _personalInfoState extends State<personalInfo> {
     color: Colors.blue,
   );
   String username = "";
+  String address = "";
+  String phone = "";
+  String major = "";
+  String age = "";
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore.instance
@@ -26,6 +30,42 @@ class _personalInfoState extends State<personalInfo> {
         .listen((event) {
       setState(() {
         username = event['Fullname'];
+      });
+    });
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        phone = event['phone'];
+      });
+    });
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        major = event['major'];
+      });
+    });
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        age = event['age'];
+      });
+    });
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        address = event['address'];
       });
     });
     return Scaffold(
@@ -67,11 +107,9 @@ class _personalInfoState extends State<personalInfo> {
               ]),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  width: 130,
-                ),
+               IconButton(onPressed: (){Navigator.pushNamed(context, "editProfile");}, icon: Icon(Icons.edit)),
                 Align(
                   alignment: Alignment.center,
                   child: Text(
@@ -79,9 +117,7 @@ class _personalInfoState extends State<personalInfo> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                   ),
                 ),
-                SizedBox(
-                  width: 80,
-                ),
+                
                 IconButton(
                     onPressed: () {
                       if (Icon1.toString() ==
@@ -141,16 +177,36 @@ class _personalInfoState extends State<personalInfo> {
             Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  "About Me",
+                  "About Me:",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 )),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                  child: Text(
-                "Born in Albuquerque and raised in Houston and Miami, Bezos graduated from Princeton University in 1986. He holds a degree in  electrical engineering and computer science",
-                style: TextStyle(fontSize: 20),
-              )),
+            Align( alignment: Alignment.bottomLeft,
+              child: Column(
+                children: [
+                  ListTile(trailing: Icon(Icons.phone),title: Text("Phone Number",style :TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                    subtitle: Text(
+                      phone,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),  ListTile(trailing: Icon(FontAwesomeIcons.book),title: Text("Major",style :TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                    subtitle: Text(
+                      major,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),ListTile(trailing: Icon(FontAwesomeIcons.locationArrow),title: Text("address",style :TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                    subtitle: Text(
+                      address,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  ListTile(trailing: Icon(FontAwesomeIcons.person),title: Text("Age",style :TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                    subtitle: Text(
+                      age,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),

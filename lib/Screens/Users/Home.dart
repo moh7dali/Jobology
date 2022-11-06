@@ -59,9 +59,13 @@ class _HomeState extends State<Home> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              "images/user.png",
-              width: 50,
+            GestureDetector(onTap: () {
+              Navigator.pushNamed(context, "personalPage");
+            },
+              child: Image.asset(
+                "images/user.png",
+                width: 50,
+              ),
             ),
             SizedBox(
               width: 15,
