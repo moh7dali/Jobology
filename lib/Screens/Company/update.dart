@@ -120,7 +120,7 @@ class _Update_jobState extends State<Update_job> {
                   });
                 },
                 child: Text(
-                  "Add",
+                  "Update",
                   style: GoogleFonts.montserrat(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
