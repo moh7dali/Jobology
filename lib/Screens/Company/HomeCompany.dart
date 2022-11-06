@@ -98,11 +98,8 @@ class _CompanyHomeState extends State<CompanyHome> {
                       );
                     },
                   );
-                } else {
-                  return Container(
-                    child: Text("Nothing here"),
-                  );
-                }
+                } else
+                  return Container();
               },
             ),
           );
