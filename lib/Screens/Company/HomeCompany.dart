@@ -484,7 +484,10 @@ class _CompanyHomeState extends State<CompanyHome> {
               SpeedDialChild(
                 child: Icon(Ionicons.log_out),
                 label: 'Logout',
-                onTap: () {},
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pushNamed(context, "Login");
+                },
               ),
               SpeedDialChild(
                 child: Icon(Ionicons.person),

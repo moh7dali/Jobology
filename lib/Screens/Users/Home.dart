@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:ionicons/ionicons.dart';
@@ -11,9 +9,7 @@ import 'package:jobology/HomeComponents/sectionscard.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/EditUserInfo.dart';
 import 'package:jobology/Screens/Users/interview_preview.dart';
-import 'package:jobology/Screens/buttonnav.dart';
 import 'package:jobology/Screens/course.dart';
-import 'package:jobology/Screens/interview.dart';
 import 'package:jobology/Screens/jobs.dart';
 
 class Home extends StatefulWidget {
@@ -69,18 +65,6 @@ class _HomeState extends State<Home> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, "personalPage");
-              },
-              child: Image.asset(
-                "images/user.png",
-                width: 50,
-              ),
-            ),
-            SizedBox(
-              width: 15,
-            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -101,43 +85,17 @@ class _HomeState extends State<Home> {
         ),
         centerTitle: true,
         actions: [
-          Row(
-            children: [
-              Column(
-                children: [
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  FlutterSwitch(
-                    value: status8,
-                    activeColor: Color.fromARGB(135, 16, 153, 130),
-                    activeIcon: const Icon(
-                      Icons.dark_mode,
-                      color: Color.fromARGB(255, 118, 122, 121),
-                    ),
-                    inactiveIcon: const Icon(
-                      Icons.light_mode,
-                      color: Color.fromARGB(255, 223, 239, 3),
-                    ),
-                    onToggle: (val) {
-                      setState(() {
-                        status8 = val;
-                        if (Get.isDarkMode) {
-                          Get.changeTheme(ThemeData.light());
-                        } else {
-                          Get.changeTheme(
-                            ThemeData.dark(),
-                          );
-                        }
-                      });
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-            ],
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, "personalPage");
+            },
+            child: Image.asset(
+              "images/user.png",
+              width: 50,
+            ),
+          ),
+          SizedBox(
+            width: 15,
           ),
         ],
       ),
@@ -151,7 +109,7 @@ class _HomeState extends State<Home> {
               Column(
                 children: [
                   const Text(
-                    "Start your\ntrip,",
+                    "Start your\njourney,",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
