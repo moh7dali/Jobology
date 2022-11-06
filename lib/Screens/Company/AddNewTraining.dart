@@ -136,7 +136,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
                   DateTime now = DateTime.now();
                   final storageRef = FirebaseStorage.instance
                       .ref()
-                      .child('jobs_img')
+                      .child('course_img')
                       .child(comp_name +
                           now.hour.toString() +
                           now.minute.toString() +
