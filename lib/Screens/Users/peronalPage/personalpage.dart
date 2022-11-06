@@ -5,7 +5,6 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
-import 'package:jobology/Screens/buttonnav.dart';
 
 class personalInfo extends StatefulWidget {
   const personalInfo({super.key});

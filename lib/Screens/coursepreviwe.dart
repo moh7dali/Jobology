@@ -1,7 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
-import 'package:jobology/Widgets/bottun.dart';
+
 import '../Widgets/mytext.dart';
 import 'course.dart';
 
