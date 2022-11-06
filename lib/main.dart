@@ -8,14 +8,20 @@ import 'package:jobology/Screens/Company/AddNewJob.dart';
 import 'package:jobology/Screens/Company/AddNewTraining.dart';
 import 'package:jobology/Screens/Company/HomeCompany.dart';
 import 'package:jobology/Screens/Users/Home.dart';
+import 'package:jobology/Screens/Users/peronalPage/editProfile.dart';
 import 'package:jobology/Screens/Welcome.dart';
 import 'package:jobology/Screens/course.dart';
 import 'package:jobology/Screens/interview.dart';
 import 'package:jobology/Screens/jobInfo.dart';
 import 'package:jobology/Screens/jobs.dart';
+<<<<<<< HEAD
 import 'package:jobology/Screens/Users/personalpage.dart';
+=======
+
+>>>>>>> 05f835c7fac7d4fbe48adf27519f05dbca124930
 import 'package:jobology/Screens/start.dart';
 import 'Screens/Authentication/ForgetPass.dart';
+import 'Screens/Users/peronalPage/personalpage.dart';
 import 'firebase_options.dart';
 
 // raghad@firebase.com password: raghad12345
@@ -45,6 +51,7 @@ Future<void> main() async {
       "addNewPage": (context) => AddNewJob(),
       "addNewTraining": (context) => AddNewTraining(),
       "interview": (context) => InterView(),
+      "editProfile":(context) => editProfile()
     },
     home: const MyApp(),
   ));
