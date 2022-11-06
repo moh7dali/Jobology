@@ -3,13 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ListTaleW extends StatefulWidget {
   ListTaleW(
-      {required this.imageUrl,
-      required this.title,
-      required this.breif,
+      {this.imageUrl,
+      this.company_name,
+      this.title,
+      this.breif,
       this.url,
       this.years,
       this.req,
       this.docnid});
+  String? company_name;
   String? title;
   String? imageUrl;
   String? breif;
@@ -33,10 +35,11 @@ class _ListTaleWState extends State<ListTaleW> {
         showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: Text(widget.title.toString()),
+            title: Text(widget.company_name!),
             actions: <Widget>[
               Column(
                 children: [
+                  Text(widget.title!),
                   Text(widget.breif!),
                   Text(widget.req!),
                   Text(widget.years!),
@@ -65,10 +68,10 @@ class _ListTaleWState extends State<ListTaleW> {
         color: Colors.blue,
       ),
       title: Text(
-        widget.title!,
+        widget.company_name!,
         style: TextStyle(color: Colors.blue),
       ),
-      subtitle: Text(widget.breif!, style: TextStyle(color: Colors.green)),
+      subtitle: Text(widget.title!, style: TextStyle(color: Colors.green)),
     );
   }
 }

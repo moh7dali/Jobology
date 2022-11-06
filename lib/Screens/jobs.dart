@@ -37,6 +37,7 @@ class _jobsState extends State<jobs> {
                       itemBuilder: (context, index) {
                         return ListTaleW(
                           imageUrl: "images/aspaire.png",
+                          company_name: docs[index]['Company name'],
                           title: docs[index]['job_title'],
                           breif: docs[index]['breif'],
                           req: docs[index]['requirements'],
