@@ -172,37 +172,89 @@ class _CompanyHomeState extends State<CompanyHome> {
                                 showDialog(
                                   context: context,
                                   builder: (ctx) => CupertinoAlertDialog(
-                                    title: Text(docs[index]['job_title']),
+                                    title: Text(
+                                      docs[index]['job_title'],
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                      ),
+                                    ),
                                     content: Column(
                                       children: [
+                                        SizedBox(
+                                          height: 10,
+                                        ),
                                         Container(
                                           width: double.infinity,
                                           decoration:
                                               BoxDecoration(color: Colors.grey),
-                                          child: Text("About training:"),
+                                          child: Text(
+                                            "About training:",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                         ),
-                                        Text(docs[index]['breif']),
+                                        Text(
+                                          docs[index]['breif'],
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                        ),
                                         Container(
                                           width: double.infinity,
                                           decoration:
                                               BoxDecoration(color: Colors.grey),
-                                          child: Text("Requirements:"),
+                                          child: Text(
+                                            "Requirements:",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                         ),
-                                        Text(docs[index]['requirements']),
+                                        Text(
+                                          docs[index]['requirements'],
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                        ),
                                         Container(
                                           width: double.infinity,
                                           decoration:
                                               BoxDecoration(color: Colors.grey),
-                                          child: Text("Years of experience:"),
+                                          child: Text(
+                                            "Years of experience:",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                         ),
-                                        Text(docs[index]['years']),
+                                        Text(
+                                          docs[index]['years'],
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                        ),
                                         Container(
                                           width: double.infinity,
                                           decoration:
                                               BoxDecoration(color: Colors.grey),
-                                          child: Text("Link:"),
+                                          child: Text(
+                                            "Link:",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                         ),
-                                        Text(docs[index]['url']),
+                                        Text(
+                                          docs[index]['url'],
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     actions: <Widget>[
@@ -224,16 +276,28 @@ class _CompanyHomeState extends State<CompanyHome> {
                                               },
                                             ));
                                           },
-                                          child: Text('Edit')),
+                                          child: Text(
+                                            'Edit',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black,
+                                            ),
+                                          )),
                                       TextButton(
                                         onPressed: () {
                                           FirebaseFirestore.instance
-                                              .collection('Training')
+                                              .collection('Jobs')
                                               .doc(docs[index].id)
                                               .delete();
                                           Navigator.pop(context);
                                         },
-                                        child: Text('Delete'),
+                                        child: Text(
+                                          'Delete',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.black,
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -289,30 +353,69 @@ class _CompanyHomeState extends State<CompanyHome> {
                                     context: context,
                                     builder: (context) {
                                       return CupertinoAlertDialog(
-                                        title: Text(docs[index]['job_title']),
+                                        title: Text(
+                                          docs[index]['job_title'],
+                                          style: TextStyle(fontSize: 25),
+                                        ),
                                         content: Column(
                                           children: [
+                                            SizedBox(
+                                              height: 10,
+                                            ),
                                             Container(
                                               width: double.infinity,
                                               decoration: BoxDecoration(
                                                   color: Colors.grey),
-                                              child: Text("About training:"),
+                                              child: Text(
+                                                "About training:",
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
                                             ),
-                                            Text(docs[index]['breif']),
+                                            Text(
+                                              docs[index]['breif'],
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                            ),
                                             Container(
                                               width: double.infinity,
                                               decoration: BoxDecoration(
                                                   color: Colors.grey),
-                                              child: Text("Requirements:"),
+                                              child: Text(
+                                                "Requirements:",
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
                                             ),
-                                            Text(docs[index]['requirements']),
+                                            Text(
+                                              docs[index]['requirements'],
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                            ),
                                             Container(
                                               width: double.infinity,
                                               decoration: BoxDecoration(
                                                   color: Colors.grey),
-                                              child: Text("Link:"),
+                                              child: Text(
+                                                "Link:",
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
                                             ),
-                                            Text(docs[index]['url']),
+                                            Text(
+                                              docs[index]['url'],
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                            ),
                                           ],
                                         ),
                                         actions: <Widget>[
@@ -334,7 +437,12 @@ class _CompanyHomeState extends State<CompanyHome> {
                                                   },
                                                 ));
                                               },
-                                              child: Text('Edit')),
+                                              child: Text(
+                                                'Edit',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.black),
+                                              )),
                                           TextButton(
                                             onPressed: () {
                                               FirebaseFirestore.instance
@@ -343,7 +451,13 @@ class _CompanyHomeState extends State<CompanyHome> {
                                                   .delete();
                                               Navigator.pop(context);
                                             },
-                                            child: Text('Delete'),
+                                            child: Text(
+                                              'Delete',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.black,
+                                              ),
+                                            ),
                                           )
                                         ],
                                       );
