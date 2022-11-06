@@ -10,6 +10,7 @@ import 'package:jobology/Screens/Company/HomeCompany.dart';
 import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Welcome.dart';
 import 'package:jobology/Screens/course.dart';
+import 'package:jobology/Screens/interview.dart';
 import 'package:jobology/Screens/jobInfo.dart';
 import 'package:jobology/Screens/jobs.dart';
 import 'package:jobology/Screens/personalpage.dart';
@@ -44,6 +45,7 @@ Future<void> main() async {
       "companyHome": (context) => CompanyHome(),
       "addNewPage": (context) => AddNewJob(),
       "addNewTraining": (context) => AddNewTraining(),
+      "interview": (context) => InterView(),
     },
     home: const MyApp(),
   ));

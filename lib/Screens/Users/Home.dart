@@ -7,8 +7,10 @@ import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:jobology/HomeComponents/sectionscard.dart';
 import 'package:jobology/Screens/EditUserInfo.dart';
+import 'package:jobology/Screens/Users/interview_preview.dart';
 import 'package:jobology/Screens/buttonnav.dart';
 import 'package:jobology/Screens/course.dart';
+import 'package:jobology/Screens/interview.dart';
 import 'package:jobology/Screens/jobs.dart';
 
 class Home extends StatefulWidget {
@@ -197,7 +199,16 @@ class _HomeState extends State<Home> {
                       height: 20,
                     ),
                     SectionsCard(
-                      OnTapping: () {},
+                      OnTapping: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Interviwe_Preview();
+                            },
+                          ),
+                        );
+                      },
                       CardTitle: "Interview Questions",
                       CardSubTitle: "",
                       ImageName: "images/interview.png",
