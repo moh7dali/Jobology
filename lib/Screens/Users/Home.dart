@@ -53,8 +53,16 @@ class _HomeState extends State<Home> {
               "images/back.png",
               width: 26,
             ),
-            onPressed: () {
-              Navigator.pop(context);
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Login();
+                  },
+                ),
+              );
             },
           ),
         ),

@@ -37,6 +37,7 @@ class _CompanyHomeState extends State<CompanyHome> {
       initialIndex: 0,
       length: 2,
       child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
           toolbarHeight: 75,
           backgroundColor: const Color.fromARGB(0, 255, 255, 255),
@@ -139,83 +140,106 @@ class _CompanyHomeState extends State<CompanyHome> {
                   final docs = snapshot.data!.docs;
                   return Padding(
                     padding: const EdgeInsets.all(10),
-                    child: ListView.builder(
+                    child: ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(
+                        height: 7,
+                      ),
                       itemCount: docs.length,
                       itemBuilder: (context, index) {
                         if (comp_name == docs[index]['Company name']) {
-                          return ListTile(
-                            title: Text(docs[index]['Company name']),
-                            subtitle: Text(docs[index]['job_title']),
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (ctx) => CupertinoAlertDialog(
-                                  title: Text(docs[index]['job_title']),
-                                  content: Column(
-                                    children: [
-                                      Container(
-                                        width: double.infinity,
-                                        decoration:
-                                            BoxDecoration(color: Colors.grey),
-                                        child: Text("About training:"),
+                          return Container(
+                            height: 200,
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 233, 214, 242),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                docs[index]['Company name'],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Text(
+                                docs[index]['job_title'],
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (ctx) => CupertinoAlertDialog(
+                                    title: Text(docs[index]['job_title']),
+                                    content: Column(
+                                      children: [
+                                        Container(
+                                          width: double.infinity,
+                                          decoration:
+                                              BoxDecoration(color: Colors.grey),
+                                          child: Text("About training:"),
+                                        ),
+                                        Text(docs[index]['breif']),
+                                        Container(
+                                          width: double.infinity,
+                                          decoration:
+                                              BoxDecoration(color: Colors.grey),
+                                          child: Text("Requirements:"),
+                                        ),
+                                        Text(docs[index]['requirements']),
+                                        Container(
+                                          width: double.infinity,
+                                          decoration:
+                                              BoxDecoration(color: Colors.grey),
+                                          child: Text("Years of experience:"),
+                                        ),
+                                        Text(docs[index]['years']),
+                                        Container(
+                                          width: double.infinity,
+                                          decoration:
+                                              BoxDecoration(color: Colors.grey),
+                                          child: Text("Link:"),
+                                        ),
+                                        Text(docs[index]['url']),
+                                      ],
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                              builder: (context) {
+                                                return Update_job(
+                                                  title: docs[index]
+                                                      ['job_title'],
+                                                  breif: docs[index]['breif'],
+                                                  req: docs[index]
+                                                      ['requirements'],
+                                                  years: docs[index]['years'],
+                                                  url: docs[index]['url'],
+                                                  docnid: docs[index].id,
+                                                );
+                                              },
+                                            ));
+                                          },
+                                          child: Text('Edit')),
+                                      TextButton(
+                                        onPressed: () {
+                                          FirebaseFirestore.instance
+                                              .collection('Training')
+                                              .doc(docs[index].id)
+                                              .delete();
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Delete'),
                                       ),
-                                      Text(docs[index]['breif']),
-                                      Container(
-                                        width: double.infinity,
-                                        decoration:
-                                            BoxDecoration(color: Colors.grey),
-                                        child: Text("Requirements:"),
-                                      ),
-                                      Text(docs[index]['requirements']),
-                                      Container(
-                                        width: double.infinity,
-                                        decoration:
-                                            BoxDecoration(color: Colors.grey),
-                                        child: Text("Years of experience:"),
-                                      ),
-                                      Text(docs[index]['years']),
-                                      Container(
-                                        width: double.infinity,
-                                        decoration:
-                                            BoxDecoration(color: Colors.grey),
-                                        child: Text("Link:"),
-                                      ),
-                                      Text(docs[index]['url']),
                                     ],
                                   ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                            builder: (context) {
-                                              return Update_job(
-                                                title: docs[index]['job_title'],
-                                                breif: docs[index]['breif'],
-                                                req: docs[index]
-                                                    ['requirements'],
-                                                years: docs[index]['years'],
-                                                url: docs[index]['url'],
-                                                docnid: docs[index].id,
-                                              );
-                                            },
-                                          ));
-                                        },
-                                        child: Text('Edit')),
-                                    TextButton(
-                                      onPressed: () {
-                                        FirebaseFirestore.instance
-                                            .collection('Training')
-                                            .doc(docs[index].id)
-                                            .delete();
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text('Delete'),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           );
                         } else
                           return Container();
@@ -232,77 +256,100 @@ class _CompanyHomeState extends State<CompanyHome> {
                   final docs = snapshot.data!.docs;
                   return Padding(
                     padding: const EdgeInsets.all(10),
-                    child: ListView.builder(
+                    child: ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(
+                        height: 7,
+                      ),
                       itemCount: docs.length,
                       itemBuilder: (context, index) {
                         if (comp_name == docs[index]['Company name']) {
-                          return ListTile(
-                            title: Text(docs[index]['Company name']),
-                            subtitle: Text(docs[index]['job_title']),
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return CupertinoAlertDialog(
-                                      title: Text(docs[index]['job_title']),
-                                      content: Column(
-                                        children: [
-                                          Container(
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                                color: Colors.grey),
-                                            child: Text("About training:"),
-                                          ),
-                                          Text(docs[index]['breif']),
-                                          Container(
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                                color: Colors.grey),
-                                            child: Text("Requirements:"),
-                                          ),
-                                          Text(docs[index]['requirements']),
-                                          Container(
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                                color: Colors.grey),
-                                            child: Text("Link:"),
-                                          ),
-                                          Text(docs[index]['url']),
-                                        ],
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
+                          return Container(
+                            height: 200,
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 223, 210, 230),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                docs[index]['Company name'],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Text(
+                                docs[index]['job_title'],
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return CupertinoAlertDialog(
+                                        title: Text(docs[index]['job_title']),
+                                        content: Column(
+                                          children: [
+                                            Container(
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey),
+                                              child: Text("About training:"),
+                                            ),
+                                            Text(docs[index]['breif']),
+                                            Container(
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey),
+                                              child: Text("Requirements:"),
+                                            ),
+                                            Text(docs[index]['requirements']),
+                                            Container(
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey),
+                                              child: Text("Link:"),
+                                            ),
+                                            Text(docs[index]['url']),
+                                          ],
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.push(context,
+                                                    MaterialPageRoute(
+                                                  builder: (context) {
+                                                    return Update_training(
+                                                      title: docs[index]
+                                                          ['job_title'],
+                                                      breif: docs[index]
+                                                          ['breif'],
+                                                      req: docs[index]
+                                                          ['requirements'],
+                                                      url: docs[index]['url'],
+                                                      docnid: docs[index].id,
+                                                    );
+                                                  },
+                                                ));
+                                              },
+                                              child: Text('Edit')),
+                                          TextButton(
                                             onPressed: () {
-                                              Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                builder: (context) {
-                                                  return Update_training(
-                                                    title: docs[index]
-                                                        ['job_title'],
-                                                    breif: docs[index]['breif'],
-                                                    req: docs[index]
-                                                        ['requirements'],
-                                                    url: docs[index]['url'],
-                                                    docnid: docs[index].id,
-                                                  );
-                                                },
-                                              ));
+                                              FirebaseFirestore.instance
+                                                  .collection('Training')
+                                                  .doc(docs[index].id)
+                                                  .delete();
+                                              Navigator.pop(context);
                                             },
-                                            child: Text('Edit')),
-                                        TextButton(
-                                          onPressed: () {
-                                            FirebaseFirestore.instance
-                                                .collection('Training')
-                                                .doc(docs[index].id)
-                                                .delete();
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text('Delete'),
-                                        )
-                                      ],
-                                    );
-                                  });
-                            },
+                                            child: Text('Delete'),
+                                          )
+                                        ],
+                                      );
+                                    });
+                              },
+                            ),
                           );
                         } else
                           return Container();
