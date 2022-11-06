@@ -4,10 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobology/Screens/coursepreviwe.dart';
-import '../Widgets/JobsWidget.dart';
-import '../Widgets/courseWidget.dart';
-import '../Widgets/mytext.dart';
+import 'package:jobology/Widgets/coursepreviwe.dart';
+import '../../Widgets/JobsWidget.dart';
+import '../../Widgets/mytext.dart';
 
 class Course extends StatefulWidget {
   const Course({super.key});

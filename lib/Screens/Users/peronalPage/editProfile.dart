@@ -3,9 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class editProfile extends StatefulWidget {
-   editProfile();
+  editProfile({super.key});
 // String? Fullname;
 // String? address;
 // String? age;
@@ -17,16 +16,11 @@ class editProfile extends StatefulWidget {
 }
 
 class _editProfileState extends State<editProfile> {
-  TextEditingController Fullnameconrller =
-        TextEditingController();
-    TextEditingController addressController =
-        TextEditingController();
-    TextEditingController ageController =
-        TextEditingController();
-    TextEditingController majorController =
-        TextEditingController();
-    TextEditingController phoneController =
-        TextEditingController();
+  TextEditingController Fullnameconrller = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  TextEditingController majorController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +30,10 @@ class _editProfileState extends State<editProfile> {
         child: Form(
           child: ListView(
             children: [
-              Container(width: 100,height: 100,child: Image.asset("images/user.png")),
+              Container(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset("images/user.png")),
               SizedBox(
                 height: 30,
               ),

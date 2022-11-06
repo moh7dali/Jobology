@@ -3,8 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
+import 'package:jobology/Screens/Users/peronalPage/editProfile.dart';
 
 class personalInfo extends StatefulWidget {
   const personalInfo({super.key});
@@ -14,17 +16,28 @@ class personalInfo extends StatefulWidget {
 }
 
 class _personalInfoState extends State<personalInfo> {
-  Icon Icon1 = Icon(
+  Icon Icon1 = const Icon(
     Icons.thumb_up,
     color: Colors.blue,
   );
+  String img_url = "";
   String username = "";
   String address = "";
   String phone = "";
   String major = "";
   String age = "";
+  String bio = "";
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        img_url = event['img'];
+      });
+    });
     FirebaseFirestore.instance
         .collection('Users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -70,6 +83,15 @@ class _personalInfoState extends State<personalInfo> {
         address = event['address'];
       });
     });
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        bio = event['bio'];
+      });
+    });
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -83,7 +105,7 @@ class _personalInfoState extends State<personalInfo> {
                 Container(
                   width: 410,
                   height: 250,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
                             "https://www.incimages.com/uploaded_files/image/1920x1080/getty_509107562_2000133320009280346_351827.jpg"),
@@ -100,8 +122,7 @@ class _personalInfoState extends State<personalInfo> {
                       child: Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg"),
+                              image: NetworkImage(img_url),
                             ),
                             borderRadius: BorderRadius.circular(50)),
                       ),
@@ -113,32 +134,36 @@ class _personalInfoState extends State<personalInfo> {
               children: [
                 IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "editProfile");
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return editProfile();
+                      }));
                     },
-                    icon: Icon(Icons.edit)),
+                    icon: const Icon(Icons.edit)),
                 Align(
                   alignment: Alignment.center,
                   child: Text(
                     username,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 30),
                   ),
                 ),
                 IconButton(
                     onPressed: () {
                       if (Icon1.toString() ==
-                          (Icon(
+                          (const Icon(
                             Icons.thumb_up,
                             color: Colors.blue,
                           )).toString()) {
                         setState(() {
-                          Icon1 = Icon(
+                          Icon1 = const Icon(
                             Icons.thumb_down,
                             color: Colors.blue,
                           );
                         });
                       } else {
                         setState(() {
-                          Icon1 = Icon(
+                          Icon1 = const Icon(
                             Icons.thumb_up,
                             color: Colors.blue,
                           );
@@ -151,11 +176,11 @@ class _personalInfoState extends State<personalInfo> {
             Align(
               alignment: Alignment.center,
               child: Text(
-                "owner of amazon",
+                bio,
                 style: TextStyle(fontWeight: FontWeight.w200, fontSize: 20),
               ),
             ),
-            Align(
+            const Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
                   "Accounts:",
@@ -164,22 +189,22 @@ class _personalInfoState extends State<personalInfo> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(FontAwesomeIcons.twitter),
+                icon: const Icon(FontAwesomeIcons.twitter),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(FontAwesomeIcons.instagram),
+                icon: const Icon(FontAwesomeIcons.instagram),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(FontAwesomeIcons.linkedin),
+                icon: const Icon(FontAwesomeIcons.linkedin),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.facebook),
+                icon: const Icon(Icons.facebook),
               ),
             ]),
-            Align(
+            const Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
                   "About Me:",
@@ -190,43 +215,43 @@ class _personalInfoState extends State<personalInfo> {
               child: Column(
                 children: [
                   ListTile(
-                    trailing: Icon(Icons.phone),
-                    title: Text("Phone Number",
+                    trailing: const Icon(Icons.phone),
+                    title: const Text("Phone Number",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20)),
                     subtitle: Text(
                       phone,
-                      style: TextStyle(fontSize: 15),
+                      style: const TextStyle(fontSize: 15),
                     ),
                   ),
                   ListTile(
-                    trailing: Icon(FontAwesomeIcons.book),
-                    title: Text("Major",
+                    trailing: const Icon(FontAwesomeIcons.book),
+                    title: const Text("Major",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20)),
                     subtitle: Text(
                       major,
-                      style: TextStyle(fontSize: 15),
+                      style: const TextStyle(fontSize: 15),
                     ),
                   ),
                   ListTile(
-                    trailing: Icon(FontAwesomeIcons.locationArrow),
-                    title: Text("address",
+                    trailing: const Icon(FontAwesomeIcons.locationArrow),
+                    title: const Text("address",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20)),
                     subtitle: Text(
                       address,
-                      style: TextStyle(fontSize: 15),
+                      style: const TextStyle(fontSize: 15),
                     ),
                   ),
                   ListTile(
-                    trailing: Icon(FontAwesomeIcons.person),
-                    title: Text("Age",
+                    trailing: const Icon(FontAwesomeIcons.person),
+                    title: const Text("Age",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20)),
                     subtitle: Text(
                       age,
-                      style: TextStyle(fontSize: 15),
+                      style: const TextStyle(fontSize: 15),
                     ),
                   ),
                 ],
@@ -236,16 +261,12 @@ class _personalInfoState extends State<personalInfo> {
         ),
       )),
       floatingActionButton: SpeedDial(
-          buttonSize: Size(70, 70),
+          buttonSize: const Size(70, 70),
           spaceBetweenChildren: 15,
-          child: Icon(
-            Ionicons.menu,
-            size: 30,
-          ),
-          backgroundColor: Color.fromARGB(255, 61, 14, 70),
+          backgroundColor: const Color.fromARGB(255, 61, 14, 70),
           children: [
             SpeedDialChild(
-              child: Icon(Icons.logout),
+              child: const Icon(Icons.logout),
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
@@ -253,27 +274,31 @@ class _personalInfoState extends State<personalInfo> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return Login();
+                      return const Login();
                     },
                   ),
                 );
               },
             ),
             SpeedDialChild(
-              child: Icon(Ionicons.person),
+              child: const Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
                 Navigator.pushNamed(context, "personalPage");
               },
             ),
             SpeedDialChild(
-              child: Icon(Ionicons.home),
+              child: const Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
                 Navigator.pushNamed(context, "Home");
               },
             ),
-          ]),
+          ],
+          child: Icon(
+            Ionicons.menu,
+            size: 30,
+          )),
     );
   }
 }

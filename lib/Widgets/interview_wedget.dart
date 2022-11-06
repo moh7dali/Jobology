@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:jobology/Screens/interview.dart';
+import 'package:jobology/Screens/Users/interview.dart';
 
 class ListTaleW extends StatefulWidget {
   ListTaleW(
-      {required this.imageUrl,
-      required this.title,
-      required this.breif,
+      {this.imageUrl,
+      this.title,
+      this.breif,
       this.url,
       this.years,
       this.req,

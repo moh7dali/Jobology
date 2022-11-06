@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../Widgets/mytext.dart';
-import 'course.dart';
+import 'mytext.dart';
+import '../Screens/Users/course.dart';
 
 class Course_previwe extends StatefulWidget {
   Course_previwe(

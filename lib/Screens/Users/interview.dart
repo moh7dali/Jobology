@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Widgets/questin_wedget.dart';
+import '../../Widgets/questin_wedget.dart';
 
 class InterView extends StatefulWidget {
   @override

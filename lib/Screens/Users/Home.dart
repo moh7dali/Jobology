@@ -5,12 +5,11 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:jobology/HomeComponents/sectionscard.dart';
+import 'package:jobology/Widgets/sectionscard.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
-import 'package:jobology/Screens/EditUserInfo.dart';
 import 'package:jobology/Screens/Users/interview_preview.dart';
-import 'package:jobology/Screens/course.dart';
-import 'package:jobology/Screens/jobs.dart';
+import 'package:jobology/Screens/Users/course.dart';
+import 'package:jobology/Screens/Users/jobs.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
@@ -19,7 +18,6 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-final PersonalInfo _personalInfo = PersonalInfo();
 final Home _Home = Home();
 bool status8 = false;
 int _page = 0;

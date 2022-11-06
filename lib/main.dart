@@ -10,10 +10,9 @@ import 'package:jobology/Screens/Company/HomeCompany.dart';
 import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Users/peronalPage/editProfile.dart';
 import 'package:jobology/Screens/Welcome.dart';
-import 'package:jobology/Screens/course.dart';
-import 'package:jobology/Screens/interview.dart';
-import 'package:jobology/Screens/jobInfo.dart';
-import 'package:jobology/Screens/jobs.dart';
+import 'package:jobology/Screens/Users/course.dart';
+import 'package:jobology/Screens/Users/interview.dart';
+import 'package:jobology/Screens/Users/jobs.dart';
 import 'package:jobology/Screens/start.dart';
 import 'Screens/Authentication/ForgetPass.dart';
 import 'Screens/Users/peronalPage/personalpage.dart';
@@ -36,7 +35,6 @@ Future<void> main() async {
       "Home": (context) => Home(),
       "Start": (context) => const Start_page(),
       "forgetpassword": (context) => const ForgetPassword(),
-      "jobInfo": (context) => const jobInfo(),
       "jobs": (context) => const jobs(),
       "course": (context) => const Course(),
       "personalPage": (context) => const personalInfo(),
@@ -45,7 +43,6 @@ Future<void> main() async {
       "addNewPage": (context) => AddNewJob(),
       "addNewTraining": (context) => AddNewTraining(),
       "interview": (context) => InterView(),
-      "editProfile": (context) => editProfile()
     },
     home: const MyApp(),
   ));
