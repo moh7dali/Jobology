@@ -143,6 +143,7 @@ class _Sign_upState extends State<Sign_up> {
                                 'address': "",
                                 'age': "",
                                 'major': "",
+                                'bio': "",
                                 'rules': "User"
                               });
 
