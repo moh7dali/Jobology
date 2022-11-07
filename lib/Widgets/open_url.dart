@@ -14,14 +14,23 @@ class _Open_urlState extends State<Open_url> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          _url = Uri.parse('${widget.url}');
-          Open();
-        },
-        child: Container(
-            color: Colors.green,
-            padding: const EdgeInsets.all(14),
-            child: Text("Visit")));
+      onTap: () {
+        _url = Uri.parse('${widget.url}');
+        Open();
+      },
+      child: Container(
+        color: Color.fromARGB(0, 64, 8, 132),
+        padding: const EdgeInsets.all(14),
+        child: Text(
+          "Visit",
+          style: TextStyle(
+            color: Color.fromARGB(255, 103, 100, 100),
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
+        ),
+      ),
+    );
   }
 }
 
