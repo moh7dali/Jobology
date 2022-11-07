@@ -7,6 +7,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:jobology/Screens/Users/cv.dart';
 import 'package:jobology/Widgets/sectionscard.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/interview_preview.dart';
@@ -136,7 +137,16 @@ class _HomeState extends State<Home> {
                       height: 20,
                     ),
                     SectionsCard(
-                      OnTapping: () {},
+                      OnTapping: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Cv();
+                            },
+                          ),
+                        );
+                      },
                       CardTitle: "CV",
                       CardSubTitle: "Create your CV",
                       ImageName: "images/cv.png",
