@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/material.dart';
@@ -137,6 +139,9 @@ class _CompanyHomeState extends State<CompanyHome> {
                 stream:
                     FirebaseFirestore.instance.collection('Jobs').snapshots(),
                 builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  }
                   final docs = snapshot.data!.docs;
                   return Padding(
                     padding: const EdgeInsets.all(10),
