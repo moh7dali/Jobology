@@ -42,9 +42,9 @@ class _personalInfoState extends State<personalInfo> {
         phone = event['phone'];
         major = event['major'];
         age = event['age'];
-        address = event['address'];
       });
     });
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
