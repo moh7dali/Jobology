@@ -44,7 +44,10 @@ class _ListTaleWState extends State<ListTaleW> {
                   Text(widget.breif!),
                   Text(widget.req!),
                   Text(widget.years!),
-                  Open_url(url: widget.url!),
+                  Open_url(
+                    url: widget.url!,
+                    text: "visit",
+                  ),
                 ],
               ),
             ],
