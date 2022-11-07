@@ -41,9 +41,9 @@ class _Course_previweState extends State<Course_previwe> {
               child: Container(
                 width: double.maxFinite,
                 height: 320,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("images/cp.webp"), fit: BoxFit.cover),
+                      image: NetworkImage(widget.imageUrl!), fit: BoxFit.cover),
                 ),
               )),
           Positioned(
@@ -114,8 +114,7 @@ class _Course_previweState extends State<Course_previwe> {
                       height: 9,
                     ),
                     ListTile(
-                        trailing:
-                            const Image(image: AssetImage("images/ltuc.jpg")),
+                        trailing: Image(image: NetworkImage(widget.imageUrl!)),
                         title: MyText(
                           text: widget.company_name,
                           size: 20,
