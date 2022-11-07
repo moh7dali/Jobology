@@ -27,15 +27,15 @@ class _Start_pageState extends State<Start_page> {
           Column(
             children: [
               Text(
-                "Jobology",
+                "Jobology,",
                 style: GoogleFonts.montserrat(
-                    fontSize: 30, fontWeight: FontWeight.bold),
+                    fontSize: 25, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 5,
               ),
               Text(
-                "lqw ws rdtsyc ic djij sghgchgscs fcsfghdf dfgdjfd sgdfgfd sdfg dg",
+                "Your guide to find your dream job,",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(fontSize: 20),
               ),

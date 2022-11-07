@@ -102,7 +102,16 @@ class _WelcomeState extends State<Welcome> {
           onPressed: () {
             Navigator.popAndPushNamed(context, "Login");
           },
-          child: const Text("Skip"),
+          child: Container(
+              decoration:
+                  BoxDecoration(color: Color.fromARGB(255, 202, 202, 202)),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: const Text(
+                  "Skip",
+                  style: TextStyle(color: Colors.white),
+                ),
+              )),
         ),
       ),
       Positioned(
