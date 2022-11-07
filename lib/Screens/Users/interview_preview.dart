@@ -43,7 +43,7 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "Home");
             },
           ),
         ),

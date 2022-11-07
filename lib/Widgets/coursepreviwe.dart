@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 import 'mytext.dart';
 import '../Screens/Users/course.dart';
@@ -51,12 +52,18 @@ class _Course_previweState extends State<Course_previwe> {
             left: 15,
             child: Container(
                 child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Navigator.pushNamed(context, "course");
+              },
+              icon: const Icon(
+                Ionicons.chevron_back_outline,
+                size: 35,
+                color: Colors.white,
+              ),
             )),
           ),
           Positioned(
-              top: 300,
+              top: 290,
               child: Container(
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
                 width: MediaQuery.of(context).size.width,
@@ -72,14 +79,16 @@ class _Course_previweState extends State<Course_previwe> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        MyText(
-                          text: widget.title,
-                          size: 40,
-                          mycolor: Colors.black54.withOpacity(0.9),
+                        Text(
+                          widget.title!,
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
                         ),
                         MyText(
                             text: "${widget.price}" + "\$",
-                            size: 30,
+                            size: 25,
                             mycolor: Colors.black12.withOpacity(0.7))
                       ],
                     ),
@@ -102,30 +111,58 @@ class _Course_previweState extends State<Course_previwe> {
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 9,
+                    const Divider(
+                      height: 15,
                     ),
-                    MyText(
-                      text: "Provider",
-                      size: 30,
-                      mycolor: Colors.black.withOpacity(0.9),
-                    ),
-                    const SizedBox(
-                      height: 9,
-                    ),
-                    ListTile(
-                        trailing: Image(image: NetworkImage(widget.imageUrl!)),
-                        title: MyText(
-                          text: widget.company_name,
-                          size: 20,
-                          mycolor: Colors.black54.withOpacity(0.9),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(160, 158, 158, 158),
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          "About course:",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
-                        subtitle: MyText(
-                            text: widget.breif,
-                            size: 14,
-                            mycolor: Colors.black54.withOpacity(0.8))),
-                    const SizedBox(
-                      height: 8,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        widget.breif!,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(160, 158, 158, 158),
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          "Provider:",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        widget.company_name!,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
                     ),
                     Padding(
                         padding: EdgeInsets.only(top: height * 0.2, left: 130),
@@ -133,7 +170,7 @@ class _Course_previweState extends State<Course_previwe> {
                           height: 60,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0)),
-                          color: Colors.purple,
+                          color: Color.fromARGB(255, 74, 15, 84),
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -144,7 +181,7 @@ class _Course_previweState extends State<Course_previwe> {
                             "Get Started",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: 20,
                                 color: Colors.white),
                           ),
                         )),

@@ -68,7 +68,7 @@ class _job_previweState extends State<job_previwe> {
           Positioned(
               top: 300,
               child: Container(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 width: MediaQuery.of(context).size.width,
                 height: height * 0.7,
                 decoration: const BoxDecoration(
@@ -77,6 +77,7 @@ class _job_previweState extends State<job_previwe> {
                         topLeft: Radius.circular(35),
                         topRight: Radius.circular(35))),
                 child: ListView(
+                  physics: AlwaysScrollableScrollPhysics(),
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MyText(
@@ -85,7 +86,7 @@ class _job_previweState extends State<job_previwe> {
                       mycolor: Colors.black54.withOpacity(0.9),
                     ),
                     const SizedBox(
-                      height: 9,
+                      height: 15,
                     ),
                     Container(
                       width: double.infinity,
@@ -98,7 +99,7 @@ class _job_previweState extends State<job_previwe> {
                           "Job title: ",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                            fontSize: 20,
                           ),
                         ),
                       ),
@@ -108,7 +109,7 @@ class _job_previweState extends State<job_previwe> {
                       child: Text(
                         widget.title!,
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 20,
                         ),
                       ),
                     ),
@@ -123,7 +124,7 @@ class _job_previweState extends State<job_previwe> {
                           "About job ",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                            fontSize: 20,
                           ),
                         ),
                       ),
@@ -133,7 +134,7 @@ class _job_previweState extends State<job_previwe> {
                       child: Text(
                         widget.breif!,
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 20,
                         ),
                       ),
                     ),
@@ -148,7 +149,7 @@ class _job_previweState extends State<job_previwe> {
                           "Requirements: ",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                            fontSize: 20,
                           ),
                         ),
                       ),
@@ -158,7 +159,7 @@ class _job_previweState extends State<job_previwe> {
                       child: Text(
                         widget.req!,
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 20,
                         ),
                       ),
                     ),
@@ -173,7 +174,7 @@ class _job_previweState extends State<job_previwe> {
                           "Years of experience: ",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                            fontSize: 20,
                           ),
                         ),
                       ),
@@ -183,7 +184,7 @@ class _job_previweState extends State<job_previwe> {
                       child: Text(
                         widget.years!,
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 20,
                         ),
                       ),
                     ),

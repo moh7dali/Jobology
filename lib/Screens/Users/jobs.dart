@@ -42,7 +42,7 @@ class _jobsState extends State<jobs> {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "Home");
             },
           ),
         ),
