@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:jobology/Screens/Users/cv.dart';
 import 'package:jobology/Widgets/sectionscard.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/interview_preview.dart';
@@ -23,6 +26,7 @@ bool status8 = false;
 int _page = 0;
 Widget _showPage = new Home();
 String username = "";
+String img_url = "";
 
 class _HomeState extends State<Home> {
   @override
@@ -34,6 +38,7 @@ class _HomeState extends State<Home> {
         .listen((event) {
       setState(() {
         username = event['Fullname'];
+        img_url = event['img'];
       });
     });
     return Scaffold(
@@ -49,14 +54,7 @@ class _HomeState extends State<Home> {
             ),
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return Login();
-                  },
-                ),
-              );
+              Navigator.popAndPushNamed(context, "Login");
             },
           ),
         ),
@@ -66,6 +64,7 @@ class _HomeState extends State<Home> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // ignore: prefer_const_constructors
                 Text(
                   "Welcome",
                   style: TextStyle(
@@ -87,9 +86,10 @@ class _HomeState extends State<Home> {
             onTap: () {
               Navigator.pushNamed(context, "personalPage");
             },
-            child: Image.asset(
-              "images/user.png",
-              width: 50,
+            child: CircleAvatar(
+              radius: 25,
+              backgroundColor: Colors.grey,
+              backgroundImage: NetworkImage(img_url),
             ),
           ),
           SizedBox(
@@ -97,97 +97,109 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: ListView(
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  const Text(
-                    "Start your\njourney,",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListView(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    const Text(
+                      "Start your\njourney,",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SectionsCard(
-                    OnTapping: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return Course();
-                          },
-                        ),
-                      );
-                    },
-                    CardTitle: "Courses",
-                    CardSubTitle: "Your way to your job",
-                    ImageName: "images/Courses.png",
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SectionsCard(
-                    OnTapping: () {},
-                    CardTitle: "CV",
-                    CardSubTitle: "Create your CV",
-                    ImageName: "images/cv.png",
-                  ),
-                ],
-              ),
-              const SizedBox(
-                width: 30,
-              ),
-              Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SectionsCard(
-                    OnTapping: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return jobs();
-                          },
-                        ),
-                      );
-                    },
-                    CardTitle: "Jobs",
-                    CardSubTitle: "Find your job easly",
-                    ImageName: "images/job.png",
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SectionsCard(
-                    OnTapping: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return Interviwe_Preview();
-                          },
-                        ),
-                      );
-                    },
-                    CardTitle: "Interview Questions",
-                    CardSubTitle: "",
-                    ImageName: "images/interview.png",
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SectionsCard(
+                      OnTapping: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Course();
+                            },
+                          ),
+                        );
+                      },
+                      CardTitle: "Courses",
+                      CardSubTitle: "Your way to your job",
+                      ImageName: "images/Courses.png",
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SectionsCard(
+                      OnTapping: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Cv();
+                            },
+                          ),
+                        );
+                      },
+                      CardTitle: "CV",
+                      CardSubTitle: "Create your CV",
+                      ImageName: "images/cv.png",
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SectionsCard(
+                      OnTapping: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return jobs();
+                            },
+                          ),
+                        );
+                      },
+                      CardTitle: "Jobs",
+                      CardSubTitle: "Find your job easly",
+                      ImageName: "images/job.png",
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SectionsCard(
+                      OnTapping: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Interviwe_Preview();
+                            },
+                          ),
+                        );
+                      },
+                      CardTitle: "Interview Questions",
+                      CardSubTitle: "",
+                      ImageName: "images/interview.png",
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       floatingActionButton: SpeedDial(
           buttonSize: Size(70, 70),

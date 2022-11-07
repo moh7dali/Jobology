@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/peronalPage/editProfile.dart';
@@ -93,175 +94,166 @@ class _personalInfoState extends State<personalInfo> {
       });
     });
     return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: 410,
-              height: 300,
-              color: Colors.white,
-              child: Stack(children: [
-                Container(
-                  width: 410,
-                  height: 250,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            "https://www.incimages.com/uploaded_files/image/1920x1080/getty_509107562_2000133320009280346_351827.jpg"),
-                        fit: BoxFit.cover),
-                    // borderRadius: BorderRadius.only(
-                    //     bottomLeft: Radius.circular(100),
-                    //     bottomRight: Radius.circular(100))
-                  ),
-                ),
-                Align(
-                  alignment: AlignmentDirectional.bottomCenter,
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.grey,
-                    backgroundImage: NetworkImage(img_url),
-                  ),
-                )
-              ]),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return editProfile(
-                            Fullname: username,
-                            phone: phone,
-                            address: address,
-                            age: age,
-                            major: major,
-                            bio: bio);
-                      }));
-                    },
-                    icon: const Icon(Icons.edit)),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    username,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 30),
-                  ),
-                ),
-                IconButton(
-                    onPressed: () {
-                      if (Icon1.toString() ==
-                          (const Icon(
-                            Icons.thumb_up,
-                            color: Colors.blue,
-                          )).toString()) {
-                        setState(() {
-                          Icon1 = const Icon(
-                            Icons.thumb_down,
-                            color: Colors.blue,
-                          );
-                        });
-                      } else {
-                        setState(() {
-                          Icon1 = const Icon(
-                            Icons.thumb_up,
-                            color: Colors.blue,
-                          );
-                        });
-                      }
-                    },
-                    icon: Icon(Icon1.icon))
-              ],
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Text(
-                bio,
-                style: TextStyle(fontWeight: FontWeight.w200, fontSize: 20),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 35,
               ),
-            ),
-            const Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  "Accounts:",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                )),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(FontAwesomeIcons.twitter),
+              CircleAvatar(
+                radius: 100,
+                backgroundColor: Colors.grey,
+                backgroundImage: NetworkImage(img_url),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(FontAwesomeIcons.instagram),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(FontAwesomeIcons.linkedin),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.facebook),
-              ),
-            ]),
-            const Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  "About Me:",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                )),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Column(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ListTile(
-                    trailing: const Icon(Icons.phone),
-                    title: const Text("Phone Number",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    subtitle: Text(
-                      phone,
-                      style: const TextStyle(fontSize: 15),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return editProfile(
+                              Fullname: username,
+                              phone: phone,
+                              address: address,
+                              age: age,
+                              major: major,
+                              bio: bio);
+                        }));
+                      },
+                      icon: const Icon(Icons.edit)),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      username,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 30),
                     ),
                   ),
-                  ListTile(
-                    trailing: const Icon(FontAwesomeIcons.book),
-                    title: const Text("Major",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    subtitle: Text(
-                      major,
-                      style: const TextStyle(fontSize: 15),
-                    ),
-                  ),
-                  ListTile(
-                    trailing: const Icon(FontAwesomeIcons.locationArrow),
-                    title: const Text("address",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    subtitle: Text(
-                      address,
-                      style: const TextStyle(fontSize: 15),
-                    ),
-                  ),
-                  ListTile(
-                    trailing: const Icon(FontAwesomeIcons.person),
-                    title: const Text("Age",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    subtitle: Text(
-                      age,
-                      style: const TextStyle(fontSize: 15),
-                    ),
-                  ),
+                  IconButton(
+                      onPressed: () {
+                        if (Icon1.toString() ==
+                            (const Icon(
+                              Icons.thumb_up,
+                              color: Colors.blue,
+                            )).toString()) {
+                          setState(() {
+                            Icon1 = const Icon(
+                              Icons.thumb_down,
+                              color: Colors.blue,
+                            );
+                          });
+                        } else {
+                          setState(() {
+                            Icon1 = const Icon(
+                              Icons.thumb_up,
+                              color: Colors.blue,
+                            );
+                          });
+                        }
+                      },
+                      icon: Icon(Icon1.icon))
                 ],
               ),
-            )
-          ],
+              SizedBox(
+                height: 10,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  bio,
+                  style: GoogleFonts.poppins(fontSize: 20),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    "Accounts:",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  )),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(FontAwesomeIcons.twitter),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(FontAwesomeIcons.instagram),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(FontAwesomeIcons.linkedin),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.facebook),
+                ),
+              ]),
+              const Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    "About Me:",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  )),
+              SizedBox(
+                height: 10,
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Column(
+                  children: [
+                    ListTile(
+                      trailing: const Icon(Icons.phone),
+                      title: const Text("Phone Number",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                      subtitle: Text(
+                        phone,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    ListTile(
+                      trailing: const Icon(FontAwesomeIcons.book),
+                      title: const Text("Major",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                      subtitle: Text(
+                        major,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    ListTile(
+                      trailing: const Icon(FontAwesomeIcons.locationArrow),
+                      title: const Text("address",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                      subtitle: Text(
+                        address,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    ListTile(
+                      trailing: const Icon(FontAwesomeIcons.person),
+                      title: const Text("Age",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                      subtitle: Text(
+                        age,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
-      )),
+      ),
       floatingActionButton: SpeedDial(
           buttonSize: const Size(70, 70),
           spaceBetweenChildren: 15,

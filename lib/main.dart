@@ -8,6 +8,7 @@ import 'package:jobology/Screens/Company/AddNewJob.dart';
 import 'package:jobology/Screens/Company/AddNewTraining.dart';
 import 'package:jobology/Screens/Company/HomeCompany.dart';
 import 'package:jobology/Screens/Users/Home.dart';
+import 'package:jobology/Screens/Users/cv.dart';
 import 'package:jobology/Screens/Welcome.dart';
 import 'package:jobology/Screens/Users/course.dart';
 import 'package:jobology/Screens/Users/interview.dart';
