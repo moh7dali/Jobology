@@ -37,60 +37,12 @@ class _personalInfoState extends State<personalInfo> {
         .listen((event) {
       setState(() {
         img_url = event['img'];
-      });
-    });
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .snapshots()
-        .listen((event) {
-      setState(() {
-        username = event['Fullname'];
-      });
-    });
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .snapshots()
-        .listen((event) {
-      setState(() {
-        phone = event['phone'];
-      });
-    });
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .snapshots()
-        .listen((event) {
-      setState(() {
-        major = event['major'];
-      });
-    });
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .snapshots()
-        .listen((event) {
-      setState(() {
-        age = event['age'];
-      });
-    });
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .snapshots()
-        .listen((event) {
-      setState(() {
-        address = event['address'];
-      });
-    });
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .snapshots()
-        .listen((event) {
-      setState(() {
         bio = event['bio'];
+        username = event['Fullname'];
+        phone = event['phone'];
+        major = event['major'];
+        age = event['age'];
+        address = event['address'];
       });
     });
     return Scaffold(
