@@ -76,8 +76,8 @@ class _job_previweState extends State<job_previwe> {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(35),
                         topRight: Radius.circular(35))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: ListView(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 15,
@@ -87,8 +87,9 @@ class _job_previweState extends State<job_previwe> {
                       size: 40,
                       mycolor: Colors.black54.withOpacity(0.9),
                     ),
-                    const SizedBox(
+                    const Divider(
                       height: 15,
+                      thickness: 2,
                     ),
                     Container(
                       width: double.infinity,

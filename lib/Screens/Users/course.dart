@@ -134,13 +134,14 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                       docs[index]['Company_name']!,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     subtitle: Text(
                       docs[index]['course_title']!,
                       style: TextStyle(
+                        fontSize: 15,
                         color: Color.fromARGB(255, 163, 167, 165),
                         fontWeight: FontWeight.bold,
                       ),
