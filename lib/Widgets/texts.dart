@@ -8,7 +8,7 @@ class Cvt1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 80, top: 20),
+      padding: EdgeInsets.all(20),
       width: double.maxFinite,
       child: Text(
         "A CV—short for the Latin “curriculum vitae,” meaning “course of life”—is a detailed document highlighting your professional and academic"
@@ -33,7 +33,7 @@ class Cvt2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 80, top: 20),
+      padding: EdgeInsets.all(20),
       width: double.maxFinite,
       child: Text(
         "A resume is a formal document providing an overview of your professional"
@@ -55,7 +55,7 @@ class Cvt3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 80, top: 20),
+      padding: EdgeInsets.all(20),
       width: double.maxFinite,
       child: Text(
         "As noted, a CV and resume are similar in that they’re both formal, details"
@@ -80,7 +80,7 @@ class Cvt4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 80, top: 20),
+      padding: EdgeInsets.all(20),
       width: double.maxFinite,
       child: Text(
         "While most CV documents share the same basic structure and format, the"

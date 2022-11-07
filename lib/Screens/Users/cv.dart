@@ -38,7 +38,7 @@ class Cv extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "Welcome ",
+                  "Welcome lits learn how to creat your CV",
                   style: TextStyle(
                     color: Color.fromARGB(255, 14, 11, 11),
                     fontSize: 15,
@@ -69,7 +69,7 @@ class Cv extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(70),
+        padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
