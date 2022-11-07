@@ -4,13 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class editProfile extends StatefulWidget {
-  editProfile({super.key});
-// String? Fullname;
-// String? address;
-// String? age;
-// String? major;
-// String? phone;
-// dynamic docnid;
+  editProfile({
+    this.img_url,
+    this.Fullname,
+    this.address,
+    this.age,
+    this.phone,
+    this.major,
+  });
+  String? img_url;
+  String? Fullname;
+  String? address;
+  String? age;
+  String? major;
+  String? phone;
+  String? bio;
   @override
   State<editProfile> createState() => _editProfileState();
 }
@@ -21,6 +29,7 @@ class _editProfileState extends State<editProfile> {
   TextEditingController ageController = TextEditingController();
   TextEditingController majorController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController bioController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +115,9 @@ class _editProfileState extends State<editProfile> {
                     'address': addressController.text,
                     'age': ageController.text,
                     'major': majorController.text,
-                    'phone': phoneController.text
+                    'phone': phoneController.text,
+                    'bio': bioController.text,
+                    'img': ""
                   });
                 },
                 child: Text(
