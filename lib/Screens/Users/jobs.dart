@@ -88,15 +88,8 @@ class _jobsState extends State<jobs> {
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('Jobs').snapshots(),
         builder: (context, snapshot) {
-          final docs = snapshot.data!.docs;
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
           if (snapshot.hasData) {
+            final docs = snapshot.data!.docs;
             return Padding(
               padding: const EdgeInsets.all(10),
               child: ListView.separated(
@@ -153,12 +146,10 @@ class _jobsState extends State<jobs> {
                 },
               ),
             );
+          } else if (snapshot.hasError) {
+            const Text('No data avaible right now');
           }
-          return Scaffold(
-            body: Center(
-              child: Text("Check your connection"),
-            ),
-          );
+          return Center(child: CircularProgressIndicator());
         },
       ),
       floatingActionButton: SpeedDial(

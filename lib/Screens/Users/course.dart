@@ -92,15 +92,8 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('Training').snapshots(),
         builder: (context, snapshot) {
-          final docs = snapshot.data!.docs;
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
           if (snapshot.hasData) {
+            final docs = snapshot.data!.docs;
             return Padding(
               padding: const EdgeInsets.all(10),
               child: ListView.builder(
@@ -150,12 +143,10 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                 },
               ),
             );
+          } else if (snapshot.hasError) {
+            const Text('No data avaible right now');
           }
-          return Scaffold(
-            body: Center(
-              child: Text("Check your connection"),
-            ),
-          );
+          return Center(child: CircularProgressIndicator());
         },
       ),
       floatingActionButton: SpeedDial(
