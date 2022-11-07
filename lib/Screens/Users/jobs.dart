@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
-import 'package:jobology/Widgets/JobsWidget.dart';
 import 'package:jobology/Widgets/jobpreview.dart';
 
 class jobs extends StatefulWidget {
