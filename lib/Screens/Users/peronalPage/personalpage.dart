@@ -116,17 +116,13 @@ class _personalInfoState extends State<personalInfo> {
                   ),
                 ),
                 Align(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    child: CircleAvatar(
-                      radius: 50,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(img_url),
-                            ),
-                            borderRadius: BorderRadius.circular(50)),
-                      ),
-                    ))
+                  alignment: AlignmentDirectional.bottomCenter,
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.grey,
+                    backgroundImage: NetworkImage(img_url),
+                  ),
+                )
               ]),
             ),
             Row(
@@ -136,7 +132,13 @@ class _personalInfoState extends State<personalInfo> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return editProfile();
+                        return editProfile(
+                            Fullname: username,
+                            phone: phone,
+                            address: address,
+                            age: age,
+                            major: major,
+                            bio: bio);
                       }));
                     },
                     icon: const Icon(Icons.edit)),

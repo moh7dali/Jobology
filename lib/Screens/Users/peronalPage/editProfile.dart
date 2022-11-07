@@ -2,17 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class editProfile extends StatefulWidget {
-  editProfile({
-    this.img_url,
-    this.Fullname,
-    this.address,
-    this.age,
-    this.phone,
-    this.major,
-  });
-  String? img_url;
+  editProfile(
+      {this.Fullname,
+      this.address,
+      this.age,
+      this.phone,
+      this.major,
+      this.bio});
   String? Fullname;
   String? address;
   String? age;
@@ -24,14 +25,32 @@ class editProfile extends StatefulWidget {
 }
 
 class _editProfileState extends State<editProfile> {
-  TextEditingController Fullnameconrller = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController ageController = TextEditingController();
-  TextEditingController majorController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController bioController = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
+  File? pickedimg;
+  funimg(ImageSource src) async {
+    final XFile? image = await _picker.pickImage(source: src);
+    if (image == null) {
+      return;
+    }
+    setState(() {
+      pickedimg = File(image.path);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController Fullnameconrller = TextEditingController(
+        text: widget.Fullname == null ? null : widget.Fullname);
+    TextEditingController addressController = TextEditingController(
+        text: widget.address == null ? null : widget.address);
+    TextEditingController ageController =
+        TextEditingController(text: widget.age == null ? null : widget.age);
+    TextEditingController majorController =
+        TextEditingController(text: widget.major == null ? null : widget.major);
+    TextEditingController phoneController =
+        TextEditingController(text: widget.phone == null ? null : widget.phone);
+    TextEditingController bioController =
+        TextEditingController(text: widget.bio == null ? null : widget.bio);
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -39,17 +58,40 @@ class _editProfileState extends State<editProfile> {
         child: Form(
           child: ListView(
             children: [
-              Container(
-                  width: 100,
-                  height: 100,
-                  child: Image.asset("images/user.png")),
+              CircleAvatar(
+                  radius: 100,
+                  backgroundColor: Colors.grey,
+                  backgroundImage:
+                      pickedimg == null ? null : FileImage(pickedimg!)),
               SizedBox(
-                height: 30,
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Choose image From ?",
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                      )),
+                  TextButton(
+                      onPressed: () => funimg(ImageSource.gallery),
+                      child: Text("Gallery",
+                          style: GoogleFonts.poppins(
+                              fontSize: 18, fontWeight: FontWeight.bold))),
+                  TextButton(
+                      onPressed: () => funimg(ImageSource.camera),
+                      child: Text("Camera",
+                          style: GoogleFonts.poppins(
+                              fontSize: 18, fontWeight: FontWeight.bold))),
+                ],
+              ),
+              SizedBox(
+                height: 5,
               ),
               TextFormField(
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person_outline_outlined),
-                    labelText: 'full name',
+                    labelText: 'Full name',
                     hintText: 'edit your name',
                     border: OutlineInputBorder()),
                 controller: Fullnameconrller,
@@ -60,8 +102,8 @@ class _editProfileState extends State<editProfile> {
               TextFormField(
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person_outline_outlined),
-                    labelText: 'address',
-                    hintText: 'enter your address',
+                    labelText: 'Address',
+                    hintText: 'Enter your address',
                     border: OutlineInputBorder()),
                 controller: addressController,
               ),
@@ -71,8 +113,8 @@ class _editProfileState extends State<editProfile> {
               TextFormField(
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person_outline_outlined),
-                    labelText: 'age',
-                    hintText: 'enter your age',
+                    labelText: 'Age',
+                    hintText: 'Enter your age',
                     border: OutlineInputBorder()),
                 controller: ageController,
               ),
@@ -82,31 +124,56 @@ class _editProfileState extends State<editProfile> {
               TextFormField(
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person_outline_outlined),
-                    labelText: 'major',
-                    hintText: 'enter your major',
+                    labelText: 'Major',
+                    hintText: 'Enter your major',
                     border: OutlineInputBorder()),
                 controller: majorController,
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    labelText: 'Bio',
+                    hintText: 'Enter your Bio',
+                    border: OutlineInputBorder()),
+                controller: bioController,
+              ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               TextFormField(
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person_outline_outlined),
                     labelText: 'phone',
-                    hintText: 'enter your phone num',
+                    hintText: 'Enter your phone num',
                     border: OutlineInputBorder()),
                 controller: phoneController,
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               ElevatedButton(
                 style: OutlinedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 5, 108, 106),
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
-                onPressed: () {
+                onPressed: () async {
+                  DateTime now = DateTime.now();
+                  final storageRef = FirebaseStorage.instance
+                      .ref()
+                      .child('Users_img')
+                      .child(widget.Fullname.toString() +
+                          now.hour.toString() +
+                          now.minute.toString() +
+                          now.second.toString() +
+                          '.jpg');
+
+                  await storageRef.putFile(pickedimg!);
+
+                  final url = await storageRef.getDownloadURL();
+
                   FirebaseFirestore.instance
                       .collection('Users')
                       .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -117,8 +184,9 @@ class _editProfileState extends State<editProfile> {
                     'major': majorController.text,
                     'phone': phoneController.text,
                     'bio': bioController.text,
-                    'img': ""
+                    'img': url
                   });
+                  Navigator.pop(context);
                 },
                 child: Text(
                   "Update",
