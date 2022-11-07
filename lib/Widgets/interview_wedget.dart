@@ -37,20 +37,27 @@ class _ListTaleWState extends State<ListTaleW> {
           Navigator.pushNamed(context, "interview");
         });
       },
-      leading: Container(
-        width: 80,
-        height: 80,
-        child: Image.asset(widget.imageUrl!),
-      ),
-      trailing: Icon(
-        Icons.school,
-        color: Colors.blue,
-      ),
+      leading: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.asset(
+            widget.imageUrl!,
+            fit: BoxFit.contain,
+          )),
       title: Text(
         widget.title!,
-        style: TextStyle(color: Colors.blue),
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
       ),
-      subtitle: Text(widget.breif!, style: TextStyle(color: Colors.green)),
+      subtitle: Text(
+        widget.breif!,
+        style: TextStyle(
+          color: Color.fromARGB(255, 163, 167, 165),
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

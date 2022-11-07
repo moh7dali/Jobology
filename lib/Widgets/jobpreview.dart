@@ -76,10 +76,12 @@ class _job_previweState extends State<job_previwe> {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(35),
                         topRight: Radius.circular(35))),
-                child: ListView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  // crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
                     MyText(
                       text: widget.company_name!,
                       size: 40,
