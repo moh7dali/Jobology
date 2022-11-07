@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:jobology/Widgets/open_url.dart';
 
 class ListTaleW extends StatefulWidget {
   ListTaleW(
@@ -43,15 +44,7 @@ class _ListTaleWState extends State<ListTaleW> {
                   Text(widget.breif!),
                   Text(widget.req!),
                   Text(widget.years!),
-                  Text(widget.url!),
-                  TextButton(
-                    onPressed: () {},
-                    child: Container(
-                      color: Colors.green,
-                      padding: const EdgeInsets.all(14),
-                      child: Text("Visit"),
-                    ),
-                  ),
+                  Open_url(url: widget.url!),
                 ],
               ),
             ],
