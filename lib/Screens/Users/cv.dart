@@ -38,7 +38,7 @@ class Cv extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "Welcome lits learn how to creat your CV",
+                  "Welcome ",
                   style: TextStyle(
                     color: Color.fromARGB(255, 14, 11, 11),
                     fontSize: 15,

@@ -16,16 +16,26 @@ class Open_url extends StatefulWidget {
 class _Open_urlState extends State<Open_url> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          _url = Uri.parse('${widget.url}');
-          Open();
-        },
-        child: Text(
-          "${widget.text}",
-          style: TextStyle(
-              fontSize: 24, color: Colors.blue, fontWeight: FontWeight.bold),
-        ));
+    return Container(
+      decoration: BoxDecoration(
+          color: Color.fromARGB(255, 82, 10, 95),
+          borderRadius: BorderRadius.circular(20)),
+      child: GestureDetector(
+          onTap: () {
+            _url = Uri.parse('${widget.url}');
+            Open();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(
+              "${widget.text}",
+              style: TextStyle(
+                  fontSize: 24,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontWeight: FontWeight.bold),
+            ),
+          )),
+    );
   }
 }
 

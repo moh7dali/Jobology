@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Widgets/JobsWidget.dart';
+import 'package:jobology/Widgets/jobpreview.dart';
 
 class jobs extends StatefulWidget {
   const jobs({super.key});
@@ -91,15 +92,174 @@ class _jobsState extends State<jobs> {
                   separatorBuilder: (context, index) => Divider(),
                   itemCount: docs.length,
                   itemBuilder: (context, index) {
-                    return ListTaleW(
-                      imageUrl: docs[index]['img_url'],
-                      company_name: docs[index]['Company name'],
-                      title: docs[index]['job_title'],
-                      breif: docs[index]['breif'],
-                      req: docs[index]['requirements'],
-                      years: docs[index]['years'],
-                      url: docs[index]['url'],
+                    return ListTile(
+                      onTap: () {
+                        setState(() {
+                          Navigator.pushReplacement(context, MaterialPageRoute(
+                            builder: (context) {
+                              return job_previwe(
+                                imageUrl: docs[index]['img_url'],
+                                company_name: docs[index]['Company name'],
+                                title: docs[index]['job_title'],
+                                breif: docs[index]['breif'],
+                                req: docs[index]['requirements'],
+                                years: docs[index]['years'],
+                                url: docs[index]['url'],
+                              );
+                            },
+                          ));
+                        });
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (ctx) => CupertinoAlertDialog(
+                        //     title: Text(
+                        //       widget.company_name!.toUpperCase(),
+                        //       style: TextStyle(
+                        //         fontSize: 25,
+                        //       ),
+                        //     ),
+                        //     content: Column(
+                        //       children: [
+                        //         SizedBox(
+                        //           height: 15,
+                        //         ),
+                        //         Container(
+                        //           width: double.infinity,
+                        //           decoration: BoxDecoration(
+                        //             color: Color.fromARGB(160, 158, 158, 158),
+                        //           ),
+                        //           child: Text(
+                        //             "Job title: ",
+                        //             style: TextStyle(
+                        //               fontWeight: FontWeight.bold,
+                        //               fontSize: 15,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //         Text(
+                        //           widget.title!,
+                        //           style: TextStyle(
+                        //             fontSize: 15,
+                        //           ),
+                        //         ),
+                        //         Container(
+                        //           width: double.infinity,
+                        //           decoration: BoxDecoration(
+                        //             color: Color.fromARGB(160, 158, 158, 158),
+                        //           ),
+                        //           child: Text(
+                        //             "About job: ",
+                        //             style: TextStyle(
+                        //               fontWeight: FontWeight.bold,
+                        //               fontSize: 15,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //         Text(
+                        //           widget.breif!,
+                        //           style: TextStyle(
+                        //             fontSize: 15,
+                        //           ),
+                        //         ),
+                        //         Container(
+                        //           width: double.infinity,
+                        //           decoration: BoxDecoration(
+                        //             color: Color.fromARGB(160, 158, 158, 158),
+                        //           ),
+                        //           child: Text(
+                        //             "Requirements: ",
+                        //             style: TextStyle(
+                        //               fontWeight: FontWeight.bold,
+                        //               fontSize: 15,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //         Text(
+                        //           widget.req!,
+                        //           style: TextStyle(
+                        //             fontSize: 15,
+                        //           ),
+                        //         ),
+                        //         Container(
+                        //           width: double.infinity,
+                        //           decoration: BoxDecoration(
+                        //             color: Color.fromARGB(160, 158, 158, 158),
+                        //           ),
+                        //           child: Text(
+                        //             "Years of experience: ",
+                        //             style: TextStyle(
+                        //               fontWeight: FontWeight.bold,
+                        //               fontSize: 15,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //         Text(
+                        //           widget.years!,
+                        //           style: TextStyle(
+                        //             fontSize: 15,
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //     actions: <Widget>[
+                        //       Column(
+                        //         children: [
+                        //           Text(widget.title!),
+                        //           Text(widget.breif!),
+                        //           Text(widget.req!),
+                        //           Text(widget.years!),
+                        //           Open_url(
+                        //             url: widget.url!,
+                        //             text: "visit",
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ],
+                        //   ),
+                        // );
+                      },
+                      leading: Container(
+                        width: 80,
+                        height: 80,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image(
+                            image: NetworkImage(
+                              docs[index]['img_url']!,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      // trailing: Icon(
+                      //   Icons.work,
+                      //   color: Colors.black,
+                      // ),
+                      title: Text(
+                        docs[index]['Company name']!,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        docs[index]['job_title']!,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 163, 167, 165),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     );
+                    //  ListTaleW(
+                    //   imageUrl: docs[index]['img_url'],
+                    //   company_name: docs[index]['Company name'],
+                    //   title: docs[index]['job_title'],
+                    //   breif: docs[index]['breif'],
+                    //   req: docs[index]['requirements'],
+                    //   years: docs[index]['years'],
+                    //   url: docs[index]['url'],
+                    // );
                   }));
         },
       ),
