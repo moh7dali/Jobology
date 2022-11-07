@@ -46,22 +46,14 @@ class _CompanyHomeState extends State<CompanyHome> {
           elevation: 0,
           leading: Builder(
             builder: (context) => IconButton(
-              icon: Image.asset(
-                "images/back.png",
-                width: 26,
-              ),
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Login();
-                    },
-                  ),
-                );
-              },
-            ),
+                icon: Image.asset(
+                  "images/back.png",
+                  width: 26,
+                ),
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.popAndPushNamed(context, "Login");
+                }),
           ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -139,184 +131,186 @@ class _CompanyHomeState extends State<CompanyHome> {
                 stream:
                     FirebaseFirestore.instance.collection('Jobs').snapshots(),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  }
-                  final docs = snapshot.data!.docs;
-                  return Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: ListView.separated(
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const SizedBox(
-                        height: 7,
-                      ),
-                      itemCount: docs.length,
-                      itemBuilder: (context, index) {
-                        if (comp_name == docs[index]['Company name']) {
-                          return Container(
-                            height: 200,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(docs[index]['img_url']),
-                                  fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: ListTile(
-                              title: Text(
-                                docs[index]['Company name'],
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                  if (snapshot.hasData) {
+                    final docs = snapshot.data!.docs;
+                    return Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: ListView.separated(
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(
+                          height: 7,
+                        ),
+                        itemCount: docs.length,
+                        itemBuilder: (context, index) {
+                          if (comp_name == docs[index]['Company name']) {
+                            return Container(
+                              height: 200,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: NetworkImage(docs[index]['img_url']),
+                                    fit: BoxFit.cover),
+                                borderRadius: BorderRadius.circular(25),
                               ),
-                              subtitle: Text(
-                                docs[index]['job_title'],
-                                style: TextStyle(
-                                  fontSize: 15,
+                              child: ListTile(
+                                title: Text(
+                                  docs[index]['Company name'],
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (ctx) => CupertinoAlertDialog(
-                                    title: Text(
-                                      docs[index]['job_title'],
-                                      style: TextStyle(
-                                        fontSize: 25,
+                                subtitle: Text(
+                                  docs[index]['job_title'],
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (ctx) => CupertinoAlertDialog(
+                                      title: Text(
+                                        docs[index]['job_title'],
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                        ),
                                       ),
-                                    ),
-                                    content: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Container(
-                                          width: double.infinity,
-                                          decoration:
-                                              BoxDecoration(color: Colors.grey),
-                                          child: Text(
-                                            "About training:",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
+                                      content: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey),
+                                            child: Text(
+                                              "About training:",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Text(
-                                          docs[index]['breif'],
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                        Container(
-                                          width: double.infinity,
-                                          decoration:
-                                              BoxDecoration(color: Colors.grey),
-                                          child: Text(
-                                            "Requirements:",
+                                          Text(
+                                            docs[index]['breif'],
                                             style: TextStyle(
                                               fontSize: 15,
-                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                        ),
-                                        Text(
-                                          docs[index]['requirements'],
-                                          style: TextStyle(
-                                            fontSize: 15,
+                                          Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey),
+                                            child: Text(
+                                              "Requirements:",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                        Container(
-                                          width: double.infinity,
-                                          decoration:
-                                              BoxDecoration(color: Colors.grey),
-                                          child: Text(
-                                            "Years of experience:",
+                                          Text(
+                                            docs[index]['requirements'],
                                             style: TextStyle(
                                               fontSize: 15,
-                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                        ),
-                                        Text(
-                                          docs[index]['years'],
-                                          style: TextStyle(
-                                            fontSize: 15,
+                                          Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey),
+                                            child: Text(
+                                              "Years of experience:",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                        Container(
-                                          width: double.infinity,
-                                          decoration:
-                                              BoxDecoration(color: Colors.grey),
-                                          child: Text(
-                                            "Link:",
+                                          Text(
+                                            docs[index]['years'],
                                             style: TextStyle(
                                               fontSize: 15,
-                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                        ),
-                                        Text(
-                                          docs[index]['url'],
-                                          style: TextStyle(
-                                            fontSize: 15,
+                                          Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey),
+                                            child: Text(
+                                              "Link:",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
+                                          Text(
+                                            docs[index]['url'],
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                builder: (context) {
+                                                  return Update_job(
+                                                    title: docs[index]
+                                                        ['job_title'],
+                                                    breif: docs[index]['breif'],
+                                                    req: docs[index]
+                                                        ['requirements'],
+                                                    years: docs[index]['years'],
+                                                    url: docs[index]['url'],
+                                                    docnid: docs[index].id,
+                                                  );
+                                                },
+                                              ));
+                                            },
+                                            child: Text(
+                                              'Edit',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.black,
+                                              ),
+                                            )),
+                                        TextButton(
                                           onPressed: () {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(
-                                              builder: (context) {
-                                                return Update_job(
-                                                  title: docs[index]
-                                                      ['job_title'],
-                                                  breif: docs[index]['breif'],
-                                                  req: docs[index]
-                                                      ['requirements'],
-                                                  years: docs[index]['years'],
-                                                  url: docs[index]['url'],
-                                                  docnid: docs[index].id,
-                                                );
-                                              },
-                                            ));
+                                            FirebaseFirestore.instance
+                                                .collection('Jobs')
+                                                .doc(docs[index].id)
+                                                .delete();
+                                            Navigator.pop(context);
                                           },
                                           child: Text(
-                                            'Edit',
+                                            'Delete',
                                             style: TextStyle(
                                               fontSize: 15,
                                               color: Colors.black,
                                             ),
-                                          )),
-                                      TextButton(
-                                        onPressed: () {
-                                          FirebaseFirestore.instance
-                                              .collection('Jobs')
-                                              .doc(docs[index].id)
-                                              .delete();
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text(
-                                          'Delete',
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.black,
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        } else
-                          return Container();
-                      },
-                    ),
-                  );
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          } else
+                            return Container();
+                        },
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    const Text('No data avaible right now');
+                  }
+                  return Center(child: CircularProgressIndicator());
                 },
               ),
               StreamBuilder(
@@ -324,162 +318,167 @@ class _CompanyHomeState extends State<CompanyHome> {
                     .collection('Training')
                     .snapshots(),
                 builder: (context, snapshot) {
-                  final docs = snapshot.data!.docs;
-                  return Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: ListView.separated(
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const SizedBox(
-                        height: 7,
-                      ),
-                      itemCount: docs.length,
-                      itemBuilder: (context, index) {
-                        if (comp_name == docs[index]['Company_name']) {
-                          return Container(
-                            height: 200,
-                            decoration: BoxDecoration(
-                              //color: Color.fromARGB(255, 223, 210, 230),
-                              image: DecorationImage(
-                                  image: NetworkImage(docs[index]['img_url']),
-                                  fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: ListTile(
-                              title: Text(
-                                docs[index]['Company_name'],
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                  if (snapshot.hasData) {
+                    final docs = snapshot.data!.docs;
+                    return Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: ListView.separated(
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(
+                          height: 7,
+                        ),
+                        itemCount: docs.length,
+                        itemBuilder: (context, index) {
+                          if (comp_name == docs[index]['Company_name']) {
+                            return Container(
+                              height: 200,
+                              decoration: BoxDecoration(
+                                //color: Color.fromARGB(255, 223, 210, 230),
+                                image: DecorationImage(
+                                    image: NetworkImage(docs[index]['img_url']),
+                                    fit: BoxFit.cover),
+                                borderRadius: BorderRadius.circular(25),
                               ),
-                              subtitle: Text(
-                                docs[index]['course_title'],
-                                style: TextStyle(
-                                  fontSize: 15,
+                              child: ListTile(
+                                title: Text(
+                                  docs[index]['Company_name'],
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return CupertinoAlertDialog(
-                                        title: Text(
-                                          docs[index]['course_title'],
-                                          style: TextStyle(fontSize: 25),
-                                        ),
-                                        content: Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Container(
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey),
-                                              child: Text(
-                                                "About training:",
-                                                style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold,
+                                subtitle: Text(
+                                  docs[index]['course_title'],
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return CupertinoAlertDialog(
+                                          title: Text(
+                                            docs[index]['course_title'],
+                                            style: TextStyle(fontSize: 25),
+                                          ),
+                                          content: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey),
+                                                child: Text(
+                                                  "About training:",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Text(
-                                              docs[index]['breif'],
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                            Container(
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey),
-                                              child: Text(
-                                                "Price:",
+                                              Text(
+                                                docs[index]['breif'],
                                                 style: TextStyle(
                                                   fontSize: 15,
-                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                            ),
-                                            Text(
-                                              docs[index]['price'],
-                                              style: TextStyle(
-                                                fontSize: 15,
+                                              Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey),
+                                                child: Text(
+                                                  "Price:",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                            Container(
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey),
-                                              child: Text(
-                                                "Link:",
+                                              Text(
+                                                docs[index]['price'],
                                                 style: TextStyle(
                                                   fontSize: 15,
-                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                            ),
-                                            Text(
-                                              docs[index]['url'],
-                                              style: TextStyle(
-                                                fontSize: 15,
+                                              Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey),
+                                                child: Text(
+                                                  "Link:",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        actions: <Widget>[
-                                          TextButton(
+                                              Text(
+                                                docs[index]['url'],
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          actions: <Widget>[
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(context,
+                                                      MaterialPageRoute(
+                                                    builder: (context) {
+                                                      return Update_training(
+                                                        title: docs[index]
+                                                            ['course_title'],
+                                                        breif: docs[index]
+                                                            ['breif'],
+                                                        price: docs[index]
+                                                            ['price'],
+                                                        url: docs[index]['url'],
+                                                        docnid: docs[index].id,
+                                                      );
+                                                    },
+                                                  ));
+                                                },
+                                                child: Text(
+                                                  'Edit',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.black),
+                                                )),
+                                            TextButton(
                                               onPressed: () {
-                                                Navigator.push(context,
-                                                    MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return Update_training(
-                                                      title: docs[index]
-                                                          ['course_title'],
-                                                      breif: docs[index]
-                                                          ['breif'],
-                                                      price: docs[index]
-                                                          ['price'],
-                                                      url: docs[index]['url'],
-                                                      docnid: docs[index].id,
-                                                    );
-                                                  },
-                                                ));
+                                                FirebaseFirestore.instance
+                                                    .collection('Training')
+                                                    .doc(docs[index].id)
+                                                    .delete();
+                                                Navigator.pop(context);
                                               },
                                               child: Text(
-                                                'Edit',
+                                                'Delete',
                                                 style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.black),
-                                              )),
-                                          TextButton(
-                                            onPressed: () {
-                                              FirebaseFirestore.instance
-                                                  .collection('Training')
-                                                  .doc(docs[index].id)
-                                                  .delete();
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text(
-                                              'Delete',
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.black,
+                                                  fontSize: 15,
+                                                  color: Colors.black,
+                                                ),
                                               ),
-                                            ),
-                                          )
-                                        ],
-                                      );
-                                    });
-                              },
-                            ),
-                          );
-                        } else
-                          return Container();
-                      },
-                    ),
-                  );
+                                            )
+                                          ],
+                                        );
+                                      });
+                                },
+                              ),
+                            );
+                          } else
+                            return Container();
+                        },
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    const Text('No data avaible right now');
+                  }
+                  return Center(child: CircularProgressIndicator());
                 },
               ),
             ],
