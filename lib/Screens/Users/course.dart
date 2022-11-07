@@ -18,6 +18,7 @@ class Course extends StatefulWidget {
 }
 
 String username = "";
+String img_url = "";
 
 class _CourseState extends State<Course> with TickerProviderStateMixin {
   @override
@@ -29,6 +30,7 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
         .listen((event) {
       setState(() {
         username = event['Fullname'];
+        img_url = event['img'];
       });
     });
 
@@ -54,6 +56,7 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // ignore: prefer_const_constructors
                 Text(
                   "Welcome",
                   style: TextStyle(
@@ -75,9 +78,10 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
             onTap: () {
               Navigator.pushNamed(context, "personalPage");
             },
-            child: Image.asset(
-              "images/user.png",
-              width: 50,
+            child: CircleAvatar(
+              radius: 25,
+              backgroundColor: Colors.grey,
+              backgroundImage: NetworkImage(img_url),
             ),
           ),
           SizedBox(

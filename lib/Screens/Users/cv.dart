@@ -1,7 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Widgets/mytext.dart';
 import 'package:jobology/Widgets/open_url.dart';
@@ -9,11 +14,29 @@ import 'package:jobology/Widgets/texts.dart';
 import 'package:jobology/Widgets/vedio.dart';
 import 'package:video_player/video_player.dart';
 
-class Cv extends StatelessWidget {
-  const Cv({super.key});
+class Cv extends StatefulWidget {
+  Cv({Key? key}) : super(key: key);
 
   @override
+  State<Cv> createState() => _CvState();
+}
+
+String username = "";
+String img_url = "";
+
+class _CvState extends State<Cv> {
+  @override
   Widget build(BuildContext context) {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        username = event['Fullname'];
+        img_url = event['img'];
+      });
+    });
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 240, 236, 236),
       appBar: AppBar(
@@ -37,16 +60,17 @@ class Cv extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "Welcome lits learn how to creat your CV",
+                // ignore: prefer_const_constructors
+                Text(
+                  "Welcome",
                   style: TextStyle(
-                    color: Color.fromARGB(255, 14, 11, 11),
+                    color: Color.fromARGB(255, 153, 152, 152),
                     fontSize: 15,
                   ),
                 ),
                 Text(
                   username,
-                  style: const TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.black),
                 )
               ],
             ),
@@ -58,12 +82,13 @@ class Cv extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, "personalPage");
             },
-            child: Image.asset(
-              "images/user.png",
-              width: 50,
+            child: CircleAvatar(
+              radius: 25,
+              backgroundColor: Colors.grey,
+              backgroundImage: NetworkImage(img_url),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             width: 15,
           ),
         ],
@@ -76,58 +101,52 @@ class Cv extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
-                padding: EdgeInsets.only(left: 100, top: 30),
+                padding: EdgeInsets.all(20),
                 child: Text(
                   "In this article, we offer a guide to writing a powerful CV that will help you stand out to employers, along with easy-to-follow examples.",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.justify,
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               Container(
                 width: double.maxFinite,
-                height: 500,
+                height: 300,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(30),
                     image: DecorationImage(
                         image: AssetImage("images/cv1.jpg"), fit: BoxFit.fill)),
               ),
               const SizedBox(
-                height: 5,
+                height: 15,
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 100, top: 30),
-                child: Text(
-                  "what is the Cv ?",
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-                ),
+              Text(
+                "What is the CV ?",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 5,
               ),
               Cvt1(),
-              Padding(
-                padding: EdgeInsets.only(left: 100, top: 30),
-                child: Row(
-                  children: [
-                    Text(
-                      "Related:",
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Open_url(
-                      url:
-                          "https://www.indeed.com/career-advice/resumes-cover-letters/what-to-include-in-your-cv",
-                      text: "What To Include in Your CV",
-                    ),
-                  ],
-                ),
+              Text(
+                "Related:",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Open_url(
+                url:
+                    "https://www.indeed.com/career-advice/resumes-cover-letters/what-to-include-in-your-cv",
+                text: "What To Include in Your CV",
               ),
               const SizedBox(
                 height: 10,
@@ -286,6 +305,45 @@ class Cv extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: SpeedDial(
+          buttonSize: Size(70, 70),
+          spaceBetweenChildren: 15,
+          child: Icon(
+            Ionicons.menu,
+            size: 30,
+          ),
+          backgroundColor: Color.fromARGB(255, 61, 14, 70),
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.logout),
+              label: 'Logout',
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Login();
+                    },
+                  ),
+                );
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Ionicons.person),
+              label: 'Profile',
+              onTap: () {
+                Navigator.pushNamed(context, "personalPage");
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Ionicons.home),
+              label: 'Home',
+              onTap: () {
+                Navigator.pushNamed(context, "Home");
+              },
+            ),
+          ]),
     );
   }
 }

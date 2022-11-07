@@ -19,9 +19,11 @@ class Cvt1 extends StatelessWidget {
         "\n be much longer for mid-level or senior job applicants as a CV serves as"
         " \n a full outline of one’s career accomplishments.",
         style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 26, 25, 25)),
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 26, 25, 25),
+        ),
+        textAlign: TextAlign.justify,
       ),
     );
   }
