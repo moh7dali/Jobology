@@ -112,6 +112,7 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                               breif: docs[index]['breif'],
                               price: docs[index]['price'],
                               url: docs[index]['url'],
+                              doc_id: docs[index].id,
                             );
                           },
                         ));

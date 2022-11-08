@@ -1,5 +1,8 @@
 // ignore_for_file: camel_case_types
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -14,14 +17,14 @@ class Course_previwe extends StatefulWidget {
       this.breif,
       this.url,
       this.price,
-      this.docnid});
+      this.doc_id});
   String? company_name;
   String? title;
   String? imageUrl;
   String? breif;
   String? price;
   String? url;
-  dynamic docnid;
+  dynamic doc_id;
 
   @override
   State<Course_previwe> createState() => _Course_previweState();
@@ -171,11 +174,23 @@ class _Course_previweState extends State<Course_previwe> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0)),
                           color: Color.fromARGB(255, 74, 15, 84),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Course()));
+                          onPressed: () async {
+                            String user_id =
+                                FirebaseAuth.instance.currentUser!.uid;
+                            await FirebaseFirestore.instance
+                                .collection('Training')
+                                .doc(widget.doc_id)
+                                .update({
+                              'Applied': FieldValue.arrayUnion([user_id])
+                            });
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  actions: [Text("Applied")],
+                                );
+                              },
+                            );
                           },
                           child: const Text(
                             "Get Started",
