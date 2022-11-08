@@ -144,7 +144,9 @@ class _Sign_upState extends State<Sign_up> {
                                 'age': "",
                                 'major': "",
                                 'bio': "",
-                                'rules': "User"
+                                'rules': "User",
+                                'facebookurl':"",
+                                'linkedinurl':""
                               });
 
                               Navigator.popAndPushNamed(context, "Login");

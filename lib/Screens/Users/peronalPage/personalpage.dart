@@ -45,6 +45,8 @@ class _personalInfoState extends State<personalInfo> {
         phone = event['phone'];
         major = event['major'];
         age = event['age'];
+        facebook =event['facebookurl'];
+        LinkedIn =event['linkedinurl'];
       });
     });
 
@@ -76,7 +78,7 @@ class _personalInfoState extends State<personalInfo> {
                               address: address,
                               age: age,
                               major: major,
-                              bio: bio);
+                              bio: bio,facebook: facebook,linkedin: LinkedIn,);
                         }));
                       },
                       icon: const Icon(Icons.edit)),
