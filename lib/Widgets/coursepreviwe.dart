@@ -193,7 +193,7 @@ class _Course_previweState extends State<Course_previwe> {
                             );
                           },
                           child: const Text(
-                            "Get Started",
+                            "Apply To the Course",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,

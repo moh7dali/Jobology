@@ -12,7 +12,7 @@ class Show_info extends StatefulWidget {
 
 class _Show_infoState extends State<Show_info> {
   List Applied = [];
-  String name = "";
+
   @override
   Widget build(BuildContext context) {
     if (widget.type == "Training") {

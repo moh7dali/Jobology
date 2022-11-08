@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
+import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/jobpreview.dart';
 
 class jobs extends StatefulWidget {
@@ -72,7 +73,13 @@ class _jobsState extends State<jobs> {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, "personalPage");
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return personalInfo(
+                    user_id: FirebaseAuth.instance.currentUser!.uid,
+                  );
+                },
+              ));
             },
             child: CircleAvatar(
               radius: 25,
@@ -102,6 +109,7 @@ class _jobsState extends State<jobs> {
                         Navigator.pushReplacement(context, MaterialPageRoute(
                           builder: (context) {
                             return job_previwe(
+                              doc_id: docs[index].id,
                               imageUrl: docs[index]['img_url'],
                               company_name: docs[index]['Company name'],
                               title: docs[index]['job_title'],

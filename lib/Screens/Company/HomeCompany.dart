@@ -235,6 +235,18 @@ class _CompanyHomeState extends State<CompanyHome> {
                                               fontSize: 15,
                                             ),
                                           ),
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.push(context,
+                                                    MaterialPageRoute(
+                                                  builder: (context) {
+                                                    return Show_info(
+                                                        doc_id: docs[index].id,
+                                                        type: "Jobs");
+                                                  },
+                                                ));
+                                              },
+                                              child: Text("Show More")),
                                           Container(
                                             width: double.infinity,
                                             decoration: BoxDecoration(
