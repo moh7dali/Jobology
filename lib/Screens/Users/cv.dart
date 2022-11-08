@@ -50,7 +50,7 @@ class _CvState extends State<Cv> {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "Home");
             },
           ),
         ),

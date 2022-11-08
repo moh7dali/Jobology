@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/peronalPage/editProfile.dart';
+import 'package:jobology/Widgets/iconUrl.dart';
 
 class personalInfo extends StatefulWidget {
   const personalInfo({super.key});
@@ -28,6 +29,8 @@ class _personalInfoState extends State<personalInfo> {
   String major = "";
   String age = "";
   String bio = "";
+  String facebook = "";
+  String LinkedIn = "";
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore.instance
@@ -42,7 +45,6 @@ class _personalInfoState extends State<personalInfo> {
         phone = event['phone'];
         major = event['major'];
         age = event['age'];
-        address = event['address'];
       });
     });
 
@@ -68,7 +70,6 @@ class _personalInfoState extends State<personalInfo> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return editProfile(
-                              img_url: img_url,
                               Fullname: username,
                               phone: phone,
                               address: address,
@@ -131,21 +132,13 @@ class _personalInfoState extends State<personalInfo> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   )),
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(FontAwesomeIcons.twitter),
+                Icon_Url(
+                  icon: Icon(FontAwesomeIcons.linkedin),
+                  url: LinkedIn,
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(FontAwesomeIcons.instagram),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(FontAwesomeIcons.linkedin),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.facebook),
+                Icon_Url(
+                  icon: Icon(FontAwesomeIcons.facebook),
+                  url: facebook,
                 ),
               ]),
               const Align(

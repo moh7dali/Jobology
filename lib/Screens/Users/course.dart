@@ -46,7 +46,7 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "Home");
             },
           ),
         ),
@@ -96,10 +96,11 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
             final docs = snapshot.data!.docs;
             return Padding(
               padding: const EdgeInsets.all(10),
-              child: ListView.builder(
+              child: ListView.separated(
+                separatorBuilder: (context, index) => Divider(),
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
+                  return ListTile(
                     onTap: () {
                       setState(() {
                         Navigator.pushReplacement(context, MaterialPageRoute(
@@ -116,28 +117,34 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                         ));
                       });
                     },
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                              top: 15, right: 10, left: 10, bottom: 10),
-                          width: double.maxFinite,
-                          height: 300,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              image: DecorationImage(
-                                  image: NetworkImage(docs[index]['img_url']),
-                                  fit: BoxFit.cover)),
+                    leading: Container(
+                      width: 80,
+                      height: 80,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image(
+                          image: NetworkImage(
+                            docs[index]['img_url']!,
+                          ),
+                          fit: BoxFit.cover,
                         ),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        ListTile(
-                          title: Text(docs[index]['course_title']),
-                          subtitle: Text(docs[index]['Company_name']),
-                          leading: Icon(Icons.school),
-                        )
-                      ],
+                      ),
+                    ),
+                    title: Text(
+                      docs[index]['Company_name']!,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(
+                      docs[index]['course_title']!,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 163, 167, 165),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   );
                 },

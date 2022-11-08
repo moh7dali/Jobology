@@ -43,7 +43,7 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "Home");
             },
           ),
         ),
@@ -92,7 +92,8 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
           final docs = snapshot.data!.docs;
           return Padding(
             padding: const EdgeInsets.all(10),
-            child: ListView.builder(
+            child: ListView.separated(
+              separatorBuilder: (context, index) => Divider(),
               itemCount: docs.length,
               itemBuilder: (context, index) {
                 return ListTaleW(

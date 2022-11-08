@@ -42,7 +42,7 @@ class _jobsState extends State<jobs> {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "Home");
             },
           ),
         ),
@@ -131,13 +131,14 @@ class _jobsState extends State<jobs> {
                       docs[index]['Company name']!,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     subtitle: Text(
                       docs[index]['job_title']!,
                       style: TextStyle(
+                        fontSize: 15,
                         color: Color.fromARGB(255, 163, 167, 165),
                         fontWeight: FontWeight.bold,
                       ),
