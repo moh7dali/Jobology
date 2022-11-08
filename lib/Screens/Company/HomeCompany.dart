@@ -7,6 +7,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:jobology/Screens/Company/showInfo.dart';
 import 'package:jobology/Screens/Company/update.dart';
 import 'package:jobology/Screens/Company/updateTraining.dart';
 
@@ -421,6 +422,31 @@ class _CompanyHomeState extends State<CompanyHome> {
                                                   fontSize: 15,
                                                 ),
                                               ),
+                                              Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey),
+                                                child: Text(
+                                                  "More info:",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.push(context,
+                                                        MaterialPageRoute(
+                                                      builder: (context) {
+                                                        return Show_info(
+                                                            doc_id:
+                                                                docs[index].id,
+                                                            type: "Training");
+                                                      },
+                                                    ));
+                                                  },
+                                                  child: Text("Show More"))
                                             ],
                                           ),
                                           actions: <Widget>[

@@ -11,8 +11,8 @@ import 'package:jobology/Screens/Users/peronalPage/editProfile.dart';
 import 'package:jobology/Widgets/iconUrl.dart';
 
 class personalInfo extends StatefulWidget {
-  const personalInfo({super.key});
-
+  personalInfo({this.user_id});
+  String? user_id;
   @override
   State<personalInfo> createState() => _personalInfoState();
 }
@@ -31,11 +31,12 @@ class _personalInfoState extends State<personalInfo> {
   String bio = "";
   String facebook = "";
   String LinkedIn = "";
+  bool visibilty = false;
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore.instance
         .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(widget.user_id)
         .snapshots()
         .listen((event) {
       setState(() {
@@ -50,7 +51,11 @@ class _personalInfoState extends State<personalInfo> {
         LinkedIn = event['linkedinurl'];
       });
     });
-
+    if (widget.user_id == FirebaseAuth.instance.currentUser!.uid) {
+      setState(() {
+        visibilty = true;
+      });
+    }
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -68,24 +73,27 @@ class _personalInfoState extends State<personalInfo> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return editProfile(
-                            img_url: img_url,
-                            Fullname: username,
-                            phone: phone,
-                            address: address,
-                            age: age,
-                            major: major,
-                            bio: bio,
-                            facebook: facebook,
-                            linkedin: LinkedIn,
-                          );
-                        }));
-                      },
-                      icon: const Icon(Icons.edit)),
+                  Visibility(
+                    visible: visibilty,
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return editProfile(
+                              img_url: img_url,
+                              Fullname: username,
+                              phone: phone,
+                              address: address,
+                              age: age,
+                              major: major,
+                              bio: bio,
+                              facebook: facebook,
+                              linkedin: LinkedIn,
+                            );
+                          }));
+                        },
+                        icon: const Icon(Icons.edit)),
+                  ),
                   Align(
                     alignment: Alignment.center,
                     child: Text(
@@ -208,45 +216,54 @@ class _personalInfoState extends State<personalInfo> {
           ),
         ),
       ),
-      floatingActionButton: SpeedDial(
-          buttonSize: const Size(70, 70),
-          spaceBetweenChildren: 15,
-          backgroundColor: const Color.fromARGB(255, 61, 14, 70),
-          children: [
-            SpeedDialChild(
-              child: const Icon(Icons.logout),
-              label: 'Logout',
-              onTap: () async {
-                await FirebaseAuth.instance.signOut();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
+      floatingActionButton: Visibility(
+        visible: visibilty,
+        child: SpeedDial(
+            buttonSize: const Size(70, 70),
+            spaceBetweenChildren: 15,
+            backgroundColor: const Color.fromARGB(255, 61, 14, 70),
+            children: [
+              SpeedDialChild(
+                child: const Icon(Icons.logout),
+                label: 'Logout',
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const Login();
+                      },
+                    ),
+                  );
+                },
+              ),
+              SpeedDialChild(
+                child: const Icon(Ionicons.person),
+                label: 'Profile',
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return const Login();
+                      return personalInfo(
+                        user_id: FirebaseAuth.instance.currentUser!.uid,
+                      );
                     },
-                  ),
-                );
-              },
-            ),
-            SpeedDialChild(
-              child: const Icon(Ionicons.person),
-              label: 'Profile',
-              onTap: () {
-                Navigator.pushNamed(context, "personalPage");
-              },
-            ),
-            SpeedDialChild(
-              child: const Icon(Ionicons.home),
-              label: 'Home',
-              onTap: () {
-                Navigator.pushNamed(context, "Home");
-              },
-            ),
-          ],
-          child: Icon(
-            Ionicons.menu,
-            size: 30,
-          )),
+                  ));
+                },
+              ),
+              SpeedDialChild(
+                child: const Icon(Ionicons.home),
+                label: 'Home',
+                onTap: () {
+                  Navigator.pushNamed(context, "Home");
+                },
+              ),
+            ],
+            child: Icon(
+              Ionicons.menu,
+              size: 30,
+            )),
+      ),
     );
   }
 }

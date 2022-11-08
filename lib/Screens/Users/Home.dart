@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Users/cv.dart';
+import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/sectionscard.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/interview_preview.dart';
@@ -84,7 +85,13 @@ class _HomeState extends State<Home> {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, "personalPage");
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return personalInfo(
+                    user_id: FirebaseAuth.instance.currentUser!.uid,
+                  );
+                },
+              ));
             },
             child: CircleAvatar(
               radius: 25,
@@ -229,7 +236,13 @@ class _HomeState extends State<Home> {
               child: Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
-                Navigator.pushNamed(context, "personalPage");
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return personalInfo(
+                      user_id: FirebaseAuth.instance.currentUser!.uid,
+                    );
+                  },
+                ));
               },
             ),
             SpeedDialChild(

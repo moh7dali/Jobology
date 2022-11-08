@@ -37,7 +37,6 @@ Future<void> main() async {
       "forgetpassword": (context) => const ForgetPassword(),
       "jobs": (context) => const jobs(),
       "course": (context) => const Course(),
-      "personalPage": (context) => const personalInfo(),
       "welcome": (context) => Welcome(),
       "companyHome": (context) => CompanyHome(),
       "addNewPage": (context) => AddNewJob(),
