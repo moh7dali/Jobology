@@ -14,7 +14,9 @@ class editProfile extends StatefulWidget {
       this.age,
       this.phone,
       this.major,
-      this.bio,this.facebook,this.linkedin});
+      this.bio,
+      this.facebook,
+      this.linkedin});
   String? img_url;
   String? Fullname;
   String? address;
@@ -56,10 +58,10 @@ class _editProfileState extends State<editProfile> {
         TextEditingController(text: widget.phone == null ? null : widget.phone);
     TextEditingController bioController =
         TextEditingController(text: widget.bio == null ? null : widget.bio);
-        TextEditingController facebookController =
-        TextEditingController(text: widget.bio == null ? null : widget.facebook);
-        TextEditingController linkedinController =
-        TextEditingController(text: widget.bio == null ? null : widget.linkedin);
+    TextEditingController facebookController = TextEditingController(
+        text: widget.facebook == null ? null : widget.facebook);
+    TextEditingController linkedinController = TextEditingController(
+        text: widget.linkedin == null ? null : widget.linkedin);
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -218,9 +220,8 @@ class _editProfileState extends State<editProfile> {
                     'phone': phoneController.text,
                     'bio': bioController.text,
                     'img': url,
-                    'linkedinurl':linkedinController,
-                    'facebookurl':facebookController
-                    
+                    'linkedinurl': linkedinController.text,
+                    'facebookurl': facebookController.text
                   });
                   Navigator.pop(context);
                 },

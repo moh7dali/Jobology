@@ -43,6 +43,7 @@ class _personalInfoState extends State<personalInfo> {
         bio = event['bio'];
         username = event['Fullname'];
         phone = event['phone'];
+        address = event['address'];
         major = event['major'];
         age = event['age'];
         facebook = event['facebookurl'];
