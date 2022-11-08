@@ -3,12 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/peronalPage/editProfile.dart';
 import 'package:jobology/Widgets/iconUrl.dart';
+import 'package:jobology/constants.dart';
 
 class personalInfo extends StatefulWidget {
   personalInfo({this.user_id});
@@ -62,13 +62,16 @@ class _personalInfoState extends State<personalInfo> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
               CircleAvatar(
-                radius: 100,
+                radius: 80,
                 backgroundColor: Colors.grey,
                 backgroundImage: NetworkImage(img_url),
+              ),
+              const SizedBox(
+                height: 15,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,7 +102,7 @@ class _personalInfoState extends State<personalInfo> {
                     child: Text(
                       username,
                       style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 30),
+                          fontWeight: FontWeight.bold, fontSize: titleSize),
                     ),
                   ),
                   IconButton(
