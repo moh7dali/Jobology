@@ -45,8 +45,8 @@ class _personalInfoState extends State<personalInfo> {
         phone = event['phone'];
         major = event['major'];
         age = event['age'];
-        facebook =event['facebookurl'];
-        LinkedIn =event['linkedinurl'];
+        facebook = event['facebookurl'];
+        LinkedIn = event['linkedinurl'];
       });
     });
 
@@ -72,13 +72,16 @@ class _personalInfoState extends State<personalInfo> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return editProfile(
-                              img_url: img_url,
-                              Fullname: username,
-                              phone: phone,
-                              address: address,
-                              age: age,
-                              major: major,
-                              bio: bio,facebook: facebook,linkedin: LinkedIn,);
+                            img_url: img_url,
+                            Fullname: username,
+                            phone: phone,
+                            address: address,
+                            age: age,
+                            major: major,
+                            bio: bio,
+                            facebook: facebook,
+                            linkedin: LinkedIn,
+                          );
                         }));
                       },
                       icon: const Icon(Icons.edit)),
