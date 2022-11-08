@@ -39,8 +39,9 @@ class _Show_infoState extends State<Show_info> {
     return Scaffold(
       appBar: AppBar(),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('Users').snapshots(),
-          builder: (context, snapshot) {
+        stream: FirebaseFirestore.instance.collection('Users').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
             final docs = snapshot.data!.docs;
             return Padding(
               padding: EdgeInsets.all(10),
@@ -70,7 +71,12 @@ class _Show_infoState extends State<Show_info> {
                 },
               ),
             );
-          }),
+          } else if (snapshot.hasError) {
+            const Text('No data avaible right now');
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
     );
   }
 }
