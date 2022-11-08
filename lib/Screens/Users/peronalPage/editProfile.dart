@@ -8,12 +8,14 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 class editProfile extends StatefulWidget {
   editProfile(
-      {this.Fullname,
+      {this.img_url,
+      this.Fullname,
       this.address,
       this.age,
       this.phone,
       this.major,
       this.bio});
+  String? img_url;
   String? Fullname;
   String? address;
   String? age;
@@ -160,20 +162,22 @@ class _editProfileState extends State<editProfile> {
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
                 onPressed: () async {
-                  DateTime now = DateTime.now();
-                  final storageRef = FirebaseStorage.instance
-                      .ref()
-                      .child('Users_img')
-                      .child(widget.Fullname.toString() +
-                          now.hour.toString() +
-                          now.minute.toString() +
-                          now.second.toString() +
-                          '.jpg');
-
-                  await storageRef.putFile(pickedimg!);
-
-                  final url = await storageRef.getDownloadURL();
-
+                  final url;
+                  if (pickedimg == null) {
+                    url = widget.img_url!;
+                  } else {
+                    DateTime now = DateTime.now();
+                    final storageRef = FirebaseStorage.instance
+                        .ref()
+                        .child('Users_img')
+                        .child(widget.Fullname.toString() +
+                            now.hour.toString() +
+                            now.minute.toString() +
+                            now.second.toString() +
+                            '.jpg');
+                    await storageRef.putFile(pickedimg!);
+                    url = await storageRef.getDownloadURL();
+                  }
                   FirebaseFirestore.instance
                       .collection('Users')
                       .doc(FirebaseAuth.instance.currentUser!.uid)
