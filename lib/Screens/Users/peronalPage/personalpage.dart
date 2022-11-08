@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/peronalPage/editProfile.dart';
+import 'package:jobology/Widgets/iconUrl.dart';
 
 class personalInfo extends StatefulWidget {
   const personalInfo({super.key});
@@ -28,6 +29,8 @@ class _personalInfoState extends State<personalInfo> {
   String major = "";
   String age = "";
   String bio = "";
+  String facebook = "";
+  String LinkedIn = "";
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore.instance
@@ -42,6 +45,8 @@ class _personalInfoState extends State<personalInfo> {
         phone = event['phone'];
         major = event['major'];
         age = event['age'];
+        facebook = event['facebookurl'];
+        LinkedIn = event['linkedinUrl'];
       });
     });
 
@@ -67,12 +72,15 @@ class _personalInfoState extends State<personalInfo> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return editProfile(
-                              Fullname: username,
-                              phone: phone,
-                              address: address,
-                              age: age,
-                              major: major,
-                              bio: bio);
+                            Fullname: username,
+                            phone: phone,
+                            address: address,
+                            age: age,
+                            major: major,
+                            bio: bio,
+                            LinkedIn: LinkedIn,
+                            facebook: facebook,
+                          );
                         }));
                       },
                       icon: const Icon(Icons.edit)),
@@ -128,23 +136,10 @@ class _personalInfoState extends State<personalInfo> {
                     "Accounts:",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   )),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(FontAwesomeIcons.twitter),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(FontAwesomeIcons.instagram),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(FontAwesomeIcons.linkedin),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.facebook),
-                ),
+               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+             Icon_Url(icon: Icon(FontAwesomeIcons.linkedin),url: LinkedIn,),
+
+              Icon_Url(icon: Icon(FontAwesomeIcons.facebook),url: facebook,),
               ]),
               const Align(
                   alignment: Alignment.bottomLeft,

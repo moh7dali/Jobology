@@ -13,13 +13,16 @@ class editProfile extends StatefulWidget {
       this.age,
       this.phone,
       this.major,
-      this.bio});
+      this.bio,
+      this.facebook,this.LinkedIn});
   String? Fullname;
   String? address;
   String? age;
   String? major;
   String? phone;
   String? bio;
+  String? facebook;
+  String? LinkedIn;
   @override
   State<editProfile> createState() => _editProfileState();
 }
@@ -51,6 +54,10 @@ class _editProfileState extends State<editProfile> {
         TextEditingController(text: widget.phone == null ? null : widget.phone);
     TextEditingController bioController =
         TextEditingController(text: widget.bio == null ? null : widget.bio);
+        TextEditingController facebookController =
+        TextEditingController(text: widget.bio == null ? null : widget.facebook);
+        TextEditingController LinkedInController =
+        TextEditingController(text: widget.bio == null ? null : widget.LinkedIn);
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -153,6 +160,26 @@ class _editProfileState extends State<editProfile> {
               ),
               SizedBox(
                 height: 20,
+              ),TextFormField(
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    labelText: 'facebook ',
+                    hintText: 'Enter your facebook link',
+                    border: OutlineInputBorder()),
+                controller: facebookController,
+              ),  SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    labelText: 'LinkedIn',
+                    hintText: 'Enter your LinkedIn link',
+                    border: OutlineInputBorder()),
+                controller: LinkedInController,
+              ),
+              SizedBox(
+                height: 20,
               ),
               ElevatedButton(
                 style: OutlinedButton.styleFrom(
@@ -184,7 +211,9 @@ class _editProfileState extends State<editProfile> {
                     'major': majorController.text,
                     'phone': phoneController.text,
                     'bio': bioController.text,
-                    'img': url
+                    'img': url,
+                    'facebookurl':facebookController.text,
+                    "linkedinUrl":LinkedInController.text
                   });
                   Navigator.pop(context);
                 },
