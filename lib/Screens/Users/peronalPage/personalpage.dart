@@ -70,6 +70,7 @@ class _personalInfoState extends State<personalInfo> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return editProfile(
+                              img_url: img_url,
                               Fullname: username,
                               phone: phone,
                               address: address,
