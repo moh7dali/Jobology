@@ -105,6 +105,7 @@ class _LoginState extends State<Login> {
                         padding: EdgeInsets.symmetric(vertical: 15)),
                     onPressed: () async {
                       try {
+                        FocusScope.of(context).unfocus();
                         var auth = FirebaseAuth.instance;
                         var type;
                         UserCredential myuser =
