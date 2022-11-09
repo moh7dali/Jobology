@@ -30,7 +30,7 @@ class _Open_urlState extends State<Open_url> {
             child: Text(
               "${widget.text}",
               style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 18,
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontWeight: FontWeight.bold),
             ),

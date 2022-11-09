@@ -45,7 +45,7 @@ class _jobsState extends State<jobs> {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pushNamed(context, "Home");
+              Navigator.pop(context);
             },
           ),
         ),
@@ -108,7 +108,7 @@ class _jobsState extends State<jobs> {
                   return ListTile(
                     onTap: () {
                       setState(() {
-                        Navigator.pushReplacement(context, MaterialPageRoute(
+                        Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
                             return job_previwe(
                               doc_id: docs[index].id,
@@ -191,14 +191,20 @@ class _jobsState extends State<jobs> {
               child: Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
-                Navigator.pushNamed(context, "personalPage");
+                Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return personalInfo(
+                    user_id: FirebaseAuth.instance.currentUser!.uid,
+                  );
+                },
+              ));
               },
             ),
             SpeedDialChild(
               child: Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.pushNamed(context, "Home");
+                Navigator.pop(context);
               },
             ),
           ]),

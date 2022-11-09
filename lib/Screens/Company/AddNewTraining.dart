@@ -59,7 +59,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
                   width: 26,
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "companyHome");
+                  Navigator.pop(context);
                 }),
           ),
         ),

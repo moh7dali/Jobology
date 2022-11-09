@@ -220,7 +220,7 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.popAndPushNamed(context, "Login");
+                          Navigator.pop(context);
                         },
                         child: Text.rich(TextSpan(
                             text: "Aleardy have an account ? ",

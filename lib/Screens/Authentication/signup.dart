@@ -222,7 +222,7 @@ class _Sign_upState extends State<Sign_up> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.popAndPushNamed(context,"Login");
+                      Navigator.pop(context);
                     },
                     child: Text.rich(
                       TextSpan(

@@ -59,7 +59,7 @@ class _CvState extends State<Cv> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              
               children: [
                 // ignore: prefer_const_constructors
                 Text(
@@ -128,14 +128,16 @@ class _CvState extends State<Cv> {
               const SizedBox(
                 height: 15,
               ),
-              Text(
-                "What is the CV ?",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              Align(alignment: Alignment.center,
+                child: Text(
+                  "What is the CV ?",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
               ),
               const SizedBox(
                 height: 5,
               ),
-              Cvt1(),
+               Cvt1(),
               Text(
                 "Related:",
                 style: TextStyle(
@@ -176,38 +178,32 @@ class _CvState extends State<Cv> {
                 height: 10,
               ),
               Cvt2(),
-              Padding(
-                padding: EdgeInsets.only(left: 100, top: 30),
-                child: Row(
-                  children: [
-                    Text(
-                      "Related:",
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Open_url(
-                      url:
-                          "https://www.indeed.com/career-advice/resumes-cover-letters/10-resume-writing-tips",
-                      text:
-                          "10 Resume Writing Tips To Help You Land a Position",
-                    ),
-                  ],
-                ),
+              Row(
+                children: [
+                  Text(
+                    "Related:",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Open_url(
+                    url:
+                        "https://www.indeed.com/career-advice/resumes-cover-letters/10-resume-writing-tips",
+                    text:
+                        "10 Resume Writing Tips To Help\n You Land a Position",
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 100, top: 30),
-                child: Text(
-                  "CV vs. resume differences",
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-                ),
+              Text(
+                "(CV vs resume differences)",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 10,
@@ -222,37 +218,33 @@ class _CvState extends State<Cv> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("images/cv3.jpg"), fit: BoxFit.fill)),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 100, top: 30),
-                child: Row(
-                  children: [
-                    Text(
-                      "Read more:",
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Open_url(
-                      url:
-                          "https://www.indeed.com/career-advice/resumes-cover-letters/difference-between-resume-and-cv",
-                      text: "What’s the Difference Between a Resume and a CV?",
-                    ),
-                  ],
-                ),
+              ),SizedBox(height: 10,),
+              Row( mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Read more:",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Open_url(
+                    url:
+                        "https://www.indeed.com/career-advice/resumes-cover-letters/difference-between-resume-and-cv",
+                    text: "What’s the Difference Between \na Resume and a CV?",
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 100, top: 30),
+              Align(alignment: Alignment.bottomCenter,
                 child: Text(
                   "CV template",
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
               ),
               Cvt4(),
@@ -273,36 +265,33 @@ class _CvState extends State<Cv> {
                     image: DecorationImage(
                         image: AssetImage("images/cv5.jpg"), fit: BoxFit.fill)),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 100, top: 30),
-                child: Row(
-                  children: [
-                    Text(
-                      "Related: ",
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Open_url(
-                      url:
-                          "https://www.indeed.com/career-advice/resumes-cover-letters/cv-template",
-                      text:
-                          "Curriculum Vitae (CV) Templates for a Successful\n Application",
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Expanded(
-                        child: Padding(
-                      padding: EdgeInsets.only(left: 100, top: 30),
-                      child: Video(),
-                    )),
-                  ],
-                ),
+              Row(mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Related: ",
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Open_url(
+                    url:
+                        "https://www.indeed.com/career-advice/resumes-cover-letters/cv-template",
+                    text:
+                        "Curriculum Vitae (CV) Templates \nfor a Successful Application",
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Expanded(
+                      child: Padding(
+                    padding: EdgeInsets.only(left: 100, top: 30),
+                    child: Video(),
+                  )),
+                ],
               ),
             ],
           ),

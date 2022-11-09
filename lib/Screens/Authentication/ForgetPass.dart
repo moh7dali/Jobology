@@ -99,7 +99,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               child: ElevatedButton(style: OutlinedButton.styleFrom(
                           backgroundColor: buttonColor,
                           shape: RoundedRectangleBorder(),
-                          padding: EdgeInsets.symmetric(vertical: 15)),onPressed: (){Navigator.popAndPushNamed(context, "Login");}, child: Text("Return to Login page",style: GoogleFonts.montserrat(
+                          padding: EdgeInsets.symmetric(vertical: 15)),onPressed: (){Navigator.pop(context);}, child: Text("Return to Login page",style: GoogleFonts.montserrat(
                               fontSize: 20, fontWeight: FontWeight.bold))),
             ),
           ]),

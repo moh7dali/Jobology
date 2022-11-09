@@ -58,7 +58,7 @@ class _job_previweState extends State<job_previwe> {
             child: Container(
                 child: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, "jobs");
+                Navigator.pop(context);
               },
               icon: const Icon(
                 Ionicons.chevron_back_outline,

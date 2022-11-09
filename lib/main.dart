@@ -41,7 +41,7 @@ Future<void> main() async {
       "cv":(context) => Cv() ,
       "welcome": (context) => Welcome(),
       "companyHome": (context) => CompanyHome(),
-      "addNewPage": (context) => AddNewJob(),
+      "addNewjob": (context) => AddNewJob(),
       "addNewTraining": (context) => AddNewTraining(),
       "interview": (context) => Interviwe_Preview(),
       // "interview_question": (context) => InterView(),
