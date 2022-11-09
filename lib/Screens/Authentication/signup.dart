@@ -121,8 +121,8 @@ class _Sign_upState extends State<Sign_up> {
                             var auth = FirebaseAuth.instance;
                             UserCredential myuser =
                                 await auth.createUserWithEmailAndPassword(
-                                    email: emailController.text,
-                                    password: passController.text);
+                                    email: emailController.text.trim(),
+                                    password: passController.text.trim());
                             us_id = myuser.user!.uid;
 
                             FirebaseFirestore.instance

@@ -110,8 +110,8 @@ class _LoginState extends State<Login> {
                         var type;
                         UserCredential myuser =
                             await auth.signInWithEmailAndPassword(
-                                email: emailController.text,
-                                password: passController.text);
+                                email: emailController.text.trim(),
+                                password: passController.text.trim());
                         us_id = myuser.user!.uid;
                         FirebaseFirestore.instance
                             .collection('Users')
