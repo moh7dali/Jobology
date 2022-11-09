@@ -25,9 +25,8 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(GetMaterialApp(
     themeMode: ThemeMode.system,
-    theme: ThemeData(brightness: Brightness.light, primarySwatch: Colors.pink),
-    darkTheme:
-        ThemeData(brightness: Brightness.dark, primarySwatch: Colors.green),
+    theme: ThemeData(brightness: Brightness.light),
+    darkTheme: ThemeData(brightness: Brightness.dark),
     debugShowCheckedModeBanner: false,
     routes: {
       "Login": (context) => const Login(),
@@ -38,7 +37,7 @@ Future<void> main() async {
       "forgetpassword": (context) => const ForgetPassword(),
       "jobs": (context) => const jobs(),
       "course": (context) => const Course(),
-      "cv":(context) => Cv() ,
+      "cv": (context) => Cv(),
       "welcome": (context) => Welcome(),
       "companyHome": (context) => CompanyHome(),
       "addNewjob": (context) => AddNewJob(),
