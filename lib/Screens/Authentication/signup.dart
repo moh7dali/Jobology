@@ -191,7 +191,7 @@ class _Sign_upState extends State<Sign_up> {
                           UserCredential myuser =
                               await auth.signInWithCredential(credential);
 
-                          Navigator.popAndPushNamed(context, "Home");
+                          Navigator.pushNamed(context, "Home");
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(e.toString())));
@@ -222,7 +222,7 @@ class _Sign_upState extends State<Sign_up> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.popAndPushNamed(context, "Login");
+                      Navigator.popAndPushNamed(context,"Login");
                     },
                     child: Text.rich(
                       TextSpan(
@@ -244,7 +244,7 @@ class _Sign_upState extends State<Sign_up> {
                   Center(
                     child: TextButton(
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, "Company Sign up");
+                        Navigator.pushNamed(context, "Company Sign up");
                       },
                       child: const Text(
                         "Sign as a Company",

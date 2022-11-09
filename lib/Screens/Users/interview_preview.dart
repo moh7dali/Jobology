@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
+import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 // import 'package:jobology/Widgets/JobsWidget.dart';
 import 'package:jobology/Widgets/interview_wedget.dart';
 
@@ -43,7 +44,7 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pushNamed(context, "Home");
+              Navigator.pop(context);
             },
           ),
         ),
@@ -73,7 +74,10 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, "personalPage");
+               Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return personalInfo(user_id: FirebaseAuth.instance.currentUser!.uid,);
+              },));
+              
             },
             child: CircleAvatar(
               radius: 25,
@@ -120,13 +124,9 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.push(
+                Navigator.popAndPushNamed(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Login();
-                    },
-                  ),
+               "Login"
                 );
               },
             ),
@@ -134,14 +134,17 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               child: Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
-                Navigator.pushNamed(context, "personalPage");
+                 Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return personalInfo(user_id: FirebaseAuth.instance.currentUser!.uid,);
+              },));
               },
+              
             ),
             SpeedDialChild(
               child: Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.pushNamed(context, "Home");
+                Navigator.pop(context);
               },
             ),
           ]),

@@ -120,9 +120,9 @@ class _LoginState extends State<Login> {
                           setState(() {
                             type = event['rules'];
                             if (type == "User") {
-                              Navigator.popAndPushNamed(context, "Home");
+                              Navigator.pushNamed(context, "Home");
                             } else if (type == "company") {
-                              Navigator.popAndPushNamed(context, "companyHome");
+                              Navigator.pushNamed(context, "companyHome");
                             }
                           });
                         });
@@ -202,7 +202,7 @@ class _LoginState extends State<Login> {
               ),
               TextButton(
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, "Sign_Up");
+                    Navigator.pushNamed(context, "Sign_Up");
                   },
                   child: Text.rich(TextSpan(
                       text: "Don't Have An Account ? ",

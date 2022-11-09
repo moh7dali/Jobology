@@ -50,7 +50,7 @@ class _Start_pageState extends State<Start_page> {
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "welcome");
+                          Navigator.popAndPushNamed(context, "welcome");
                         },
                         style: OutlinedButton.styleFrom(
                           shape: const RoundedRectangleBorder(),

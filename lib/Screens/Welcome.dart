@@ -78,7 +78,7 @@ class _WelcomeState extends State<Welcome> {
             int nextPage = controller.currentPage + 1;
             controller.animateToPage(page: nextPage);
             if (nextPage == 4) {
-              Navigator.pushNamed(context, "Login");
+              Navigator.popAndPushNamed(context, "Login");
             }
           },
           style: ElevatedButton.styleFrom(

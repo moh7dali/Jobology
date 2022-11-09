@@ -7,6 +7,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
+import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/coursepreviwe.dart';
 import '../../Widgets/mytext.dart';
 
@@ -46,7 +47,7 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pushNamed(context, "Home");
+              Navigator.pop(context);
             },
           ),
         ),
@@ -76,7 +77,9 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, "personalPage");
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return personalInfo(user_id: FirebaseAuth.instance.currentUser!.uid,);
+              },));
             },
             child: CircleAvatar(
               radius: 25,
@@ -103,7 +106,7 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                   return ListTile(
                     onTap: () {
                       setState(() {
-                        Navigator.pushReplacement(context, MaterialPageRoute(
+                        Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
                             return Course_previwe(
                               imageUrl: docs[index]['img_url'],
@@ -185,14 +188,16 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
               child: Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
-                Navigator.pushNamed(context, "personalPage");
+                 Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return personalInfo(user_id: FirebaseAuth.instance.currentUser!.uid,);
+              },));
               },
             ),
             SpeedDialChild(
               child: Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.pushNamed(context, "Home");
+                Navigator.pop(context);
               },
             ),
           ]),

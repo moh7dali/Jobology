@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jobology/constants.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
@@ -15,24 +16,28 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(
           email: emailController.text.toLowerCase().trim());
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text("check your email"),
-          );
-        },
-      );
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("check your email")));
+      // showDialog(
+      //   context: context,
+      //   builder: (context) {
+      //     return AlertDialog(
+      //       content: Column(mainAxisAlignment: MainAxisAlignment.center,
+      //         children: [
+      //           Text("check your email"),
+      //           ElevatedButton(style: OutlinedButton.styleFrom(
+      //                   backgroundColor: buttonColor,
+      //                   shape: RoundedRectangleBorder(),
+      //                   padding: EdgeInsets.symmetric(vertical: 15)),onPressed: (){Navigator.popAndPushNamed(context, "Login");}, child: Text("Return to Login page",style: GoogleFonts.montserrat(
+      //                       fontSize: 15, fontWeight: FontWeight.bold))),
+      //         ],
+      //       ),
+
+      //     );
+      //   },
+      // );
     } on FirebaseAuthException catch (e) {
       print(e);
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text(e.message.toString()),
-          );
-        },
-      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message.toString())));
     }
   }
 
@@ -83,12 +88,19 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               width: double.infinity,
               child: ElevatedButton(
                   style: OutlinedButton.styleFrom(
+                    backgroundColor: buttonColor,
                       shape: RoundedRectangleBorder(),
                       padding: EdgeInsets.symmetric(vertical: 15)),
                   onPressed: passwordReset,
                   child: Text("Reset Password",
                       style: GoogleFonts.montserrat(
                           fontSize: 20, fontWeight: FontWeight.bold))),
+            ),Divider(height: 25,), SizedBox(width: double.infinity,
+              child: ElevatedButton(style: OutlinedButton.styleFrom(
+                          backgroundColor: buttonColor,
+                          shape: RoundedRectangleBorder(),
+                          padding: EdgeInsets.symmetric(vertical: 15)),onPressed: (){Navigator.popAndPushNamed(context, "Login");}, child: Text("Return to Login page",style: GoogleFonts.montserrat(
+                              fontSize: 20, fontWeight: FontWeight.bold))),
             ),
           ]),
         ),

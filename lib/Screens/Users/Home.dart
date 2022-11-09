@@ -127,13 +127,8 @@ class _HomeState extends State<Home> {
                     ),
                     SectionsCard(
                       OnTapping: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return Course();
-                            },
-                          ),
+                        Navigator.pushNamed(context,"course"
+                          
                         );
                       },
                       CardTitle: "Courses",
@@ -145,13 +140,9 @@ class _HomeState extends State<Home> {
                     ),
                     SectionsCard(
                       OnTapping: () {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return Cv();
-                            },
-                          ),
+                       "cv"
                         );
                       },
                       CardTitle: "CV",
@@ -170,13 +161,9 @@ class _HomeState extends State<Home> {
                     ),
                     SectionsCard(
                       OnTapping: () {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return jobs();
-                            },
-                          ),
+                        "jobs"
                         );
                       },
                       CardTitle: "Jobs",
@@ -188,13 +175,9 @@ class _HomeState extends State<Home> {
                     ),
                     SectionsCard(
                       OnTapping: () {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return Interviwe_Preview();
-                            },
-                          ),
+                        "interview"
                         );
                       },
                       CardTitle: "Interview Questions",
@@ -222,13 +205,9 @@ class _HomeState extends State<Home> {
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.push(
+                Navigator.popAndPushNamed(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Login();
-                    },
-                  ),
+                  "Login"
                 );
               },
             ),
@@ -249,7 +228,7 @@ class _HomeState extends State<Home> {
               child: Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.pushNamed(context, "Home");
+                Navigator.popAndPushNamed(context, "Home");
               },
             ),
           ]),

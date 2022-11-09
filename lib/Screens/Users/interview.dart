@@ -119,30 +119,44 @@ class _InterViewState extends State<InterView> {
       isLastQuestion = true;
     }
 
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.5,
-      height: 48,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: const StadiumBorder(),
-          primary: Colors.blueAccent,
-          onPrimary: Colors.white,
-        ),
-        onPressed: () {
-          if (isLastQuestion) {
-            //display score
+    return Column(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: 48,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: const StadiumBorder(),
+              backgroundColor: Colors.blueAccent,
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () {
+              if (isLastQuestion) {
+                //display score
 
-            showDialog(context: context, builder: (_) => _showScoreDialog());
-          } else {
-            //next question
-            setState(() {
-              selectedAnswer = null;
-              currentQuestionIndex++;
-            });
-          }
-        },
-        child: Text(isLastQuestion ? "Submit" : "Next"),
-      ),
+                showDialog(context: context, builder: (_) => _showScoreDialog());
+              } else {
+                //next question
+                setState(() {
+                  selectedAnswer = null;
+                  currentQuestionIndex++;
+                });
+              }
+            },
+            child: Text(isLastQuestion ? "Submit" : "Next"),
+          ),
+        ),SizedBox(height: 15), Container(width: MediaQuery.of(context).size.width * 0.5,
+          height: 48,
+          child: ElevatedButton(style: ElevatedButton.styleFrom(
+                shape: const StadiumBorder(),
+                backgroundColor: Colors.blueAccent,
+                foregroundColor: Colors.white,
+              ),onPressed: () {
+            
+                Navigator.pop(context);
+              }, child: Text("Back")),
+        )
+      ],
     );
   }
 

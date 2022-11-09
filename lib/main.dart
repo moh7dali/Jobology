@@ -10,6 +10,7 @@ import 'package:jobology/Screens/Company/AddNewJob.dart';
 import 'package:jobology/Screens/Company/AddNewTraining.dart';
 import 'package:jobology/Screens/Company/HomeCompany.dart';
 import 'package:jobology/Screens/Users/Home.dart';
+import 'package:jobology/Screens/Users/cv.dart';
 import 'package:jobology/Screens/Welcome.dart';
 import 'package:jobology/Screens/Users/course.dart';
 import 'package:jobology/Screens/Users/interview.dart';
@@ -37,6 +38,7 @@ Future<void> main() async {
       "forgetpassword": (context) => const ForgetPassword(),
       "jobs": (context) => const jobs(),
       "course": (context) => const Course(),
+      "cv":(context) => Cv() ,
       "welcome": (context) => Welcome(),
       "companyHome": (context) => CompanyHome(),
       "addNewPage": (context) => AddNewJob(),
@@ -53,6 +55,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Start_page();
+    return Login();
   }
 }

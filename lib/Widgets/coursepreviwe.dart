@@ -56,7 +56,7 @@ class _Course_previweState extends State<Course_previwe> {
             child: Container(
                 child: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, "course");
+                Navigator.pop(context);
               },
               icon: const Icon(
                 Ionicons.chevron_back_outline,

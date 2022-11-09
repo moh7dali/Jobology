@@ -8,6 +8,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/Home.dart';
+import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/mytext.dart';
 import 'package:jobology/Widgets/open_url.dart';
 import 'package:jobology/Widgets/texts.dart';
@@ -50,7 +51,7 @@ class _CvState extends State<Cv> {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pushNamed(context, "Home");
+              Navigator.pop(context);
             },
           ),
         ),
@@ -80,7 +81,9 @@ class _CvState extends State<Cv> {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, "personalPage");
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return personalInfo(user_id: FirebaseAuth.instance.currentUser!.uid,);
+              },));;
             },
             child: CircleAvatar(
               radius: 25,
@@ -319,13 +322,9 @@ class _CvState extends State<Cv> {
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.push(
+                Navigator.popAndPushNamed(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Login();
-                    },
-                  ),
+                 "Login"
                 );
               },
             ),
@@ -333,14 +332,16 @@ class _CvState extends State<Cv> {
               child: Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
-                Navigator.pushNamed(context, "personalPage");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return personalInfo(user_id: FirebaseAuth.instance.currentUser!.uid,);
+              },));
               },
             ),
             SpeedDialChild(
               child: Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.pushNamed(context, "Home");
+                Navigator.pop(context);
               },
             ),
           ]),
