@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +16,7 @@ import 'package:jobology/Screens/Users/interview.dart';
 import 'package:jobology/Screens/Users/jobs.dart';
 import 'package:jobology/Screens/start.dart';
 import 'Screens/Authentication/ForgetPass.dart';
+import 'Screens/Users/interview_preview.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -38,7 +41,8 @@ Future<void> main() async {
       "companyHome": (context) => CompanyHome(),
       "addNewPage": (context) => AddNewJob(),
       "addNewTraining": (context) => AddNewTraining(),
-      "interview": (context) => InterView(),
+      "interview": (context) => Interviwe_Preview(),
+      // "interview_question": (context) => InterView(),
     },
     home: const MyApp(),
   ));

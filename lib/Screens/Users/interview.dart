@@ -1,15 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../../Widgets/questin_wedget.dart';
 
 class InterView extends StatefulWidget {
+  InterView({required this.questionList});
+  List<Question>? questionList;
   @override
   State<InterView> createState() => _InterViewState();
 }
 
 class _InterViewState extends State<InterView> {
-  List<Question> questionList = getQuestions();
+  // List<Question> questionList = getQuestions();
   int currentQuestionIndex = 0;
   int score = 0;
   Answer? selectedAnswer;
@@ -43,7 +46,7 @@ class _InterViewState extends State<InterView> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Question ${currentQuestionIndex + 1}/${questionList.length.toString()}",
+          "Question ${currentQuestionIndex + 1}/${widget.questionList!.length.toString()}",
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -60,7 +63,7 @@ class _InterViewState extends State<InterView> {
             borderRadius: BorderRadius.circular(16),
           ),
           child: Text(
-            questionList[currentQuestionIndex].questionText,
+            widget.questionList![currentQuestionIndex].questionText,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
@@ -74,8 +77,7 @@ class _InterViewState extends State<InterView> {
 
   _answerList() {
     return Column(
-      children: questionList[currentQuestionIndex]
-          .answersList
+      children: widget.questionList![currentQuestionIndex].answersList
           .map(
             (e) => _answerButton(e),
           )
@@ -113,7 +115,7 @@ class _InterViewState extends State<InterView> {
 
   _nextButton() {
     bool isLastQuestion = false;
-    if (currentQuestionIndex == questionList.length - 1) {
+    if (currentQuestionIndex == widget.questionList!.length - 1) {
       isLastQuestion = true;
     }
 
@@ -147,8 +149,7 @@ class _InterViewState extends State<InterView> {
   _showScoreDialog() {
     bool isPassed = false;
 
-    if (score >= questionList.length * 0.6) {
-      //pass if 60 %
+    if (score >= widget.questionList!.length * 0.6) {
       isPassed = true;
     }
     String title = isPassed ? "Passed " : "Failed";

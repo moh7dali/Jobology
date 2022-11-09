@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:jobology/Screens/Users/interview.dart';
+import 'package:jobology/Widgets/questin_wedget.dart';
 
 class ListTaleW extends StatefulWidget {
   ListTaleW(
@@ -25,7 +28,17 @@ class ListTaleW extends StatefulWidget {
 
 class _ListTaleWState extends State<ListTaleW> {
   void nav() {
-    Navigator.pushNamed(context, "jobInfo");
+    if (widget.title! == "flutter") {
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) {
+          return InterView(
+            questionList: getQuestions(),
+          );
+        },
+      ));
+    } else {
+      return;
+    }
   }
 
   bool ispressd = true;
@@ -34,7 +47,7 @@ class _ListTaleWState extends State<ListTaleW> {
     return ListTile(
       onTap: () {
         setState(() {
-          Navigator.pushNamed(context, "interview");
+          nav();
         });
       },
       leading: ClipRRect(
