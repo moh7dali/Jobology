@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +27,8 @@ class _InterViewState extends State<InterView> {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          const Text(
-            "Hlutter interviwe",
+          Text(
+            "interviwe",
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -119,44 +121,30 @@ class _InterViewState extends State<InterView> {
       isLastQuestion = true;
     }
 
-    return Column(
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          height: 48,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: const StadiumBorder(),
-              backgroundColor: Colors.blueAccent,
-              foregroundColor: Colors.white,
-            ),
-            onPressed: () {
-              if (isLastQuestion) {
-                //display score
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.5,
+      height: 48,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: const StadiumBorder(),
+          primary: Colors.blueAccent,
+          onPrimary: Colors.white,
+        ),
+        onPressed: () {
+          if (isLastQuestion) {
+            //display score
 
-                showDialog(context: context, builder: (_) => _showScoreDialog());
-              } else {
-                //next question
-                setState(() {
-                  selectedAnswer = null;
-                  currentQuestionIndex++;
-                });
-              }
-            },
-            child: Text(isLastQuestion ? "Submit" : "Next"),
-          ),
-        ),SizedBox(height: 15), Container(width: MediaQuery.of(context).size.width * 0.5,
-          height: 48,
-          child: ElevatedButton(style: ElevatedButton.styleFrom(
-                shape: const StadiumBorder(),
-                backgroundColor: Colors.blueAccent,
-                foregroundColor: Colors.white,
-              ),onPressed: () {
-            
-                Navigator.pop(context);
-              }, child: Text("Back")),
-        )
-      ],
+            showDialog(context: context, builder: (_) => _showScoreDialog());
+          } else {
+            //next question
+            setState(() {
+              selectedAnswer = null;
+              currentQuestionIndex++;
+            });
+          }
+        },
+        child: Text(isLastQuestion ? "Submit" : "Next"),
+      ),
     );
   }
 

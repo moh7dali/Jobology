@@ -29,13 +29,31 @@ class ListTaleW extends StatefulWidget {
 class _ListTaleWState extends State<ListTaleW> {
   void nav() {
     if (widget.title! == "flutter") {
-      Navigator.push(context, MaterialPageRoute(
-        builder: (context) {
-          return InterView(
-            questionList: getQuestions(),
-          );
-        },
-      ));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  InterView(questionList: getFlutterQuestions())));
+    }
+    if (widget.title! == "asp") {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  InterView(questionList: getAspQuestions())));
+    }
+    if (widget.title! == "js") {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => InterView(questionList: getJsQuestions())));
+    }
+    if (widget.title! == "php") {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  InterView(questionList: getPhpQuestions())));
     } else {
       return;
     }
