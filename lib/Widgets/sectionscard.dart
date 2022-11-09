@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobology/constants.dart';
 
 class SectionsCard extends StatelessWidget {
   SectionsCard({
@@ -20,6 +21,7 @@ class SectionsCard extends StatelessWidget {
         height: 250,
         width: 160,
         decoration: BoxDecoration(
+          boxShadow: kElevationToShadow[1],
           image: DecorationImage(
             image: AssetImage("${ImageName}"),
             fit: BoxFit.contain,
@@ -34,12 +36,18 @@ class SectionsCard extends StatelessWidget {
               title: Text(
                 "${CardTitle}",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: subTitleSize,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              subtitle: Text(
-                "${CardSubTitle}",
+              subtitle: Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  "${CardSubTitle}",
+                  style: TextStyle(
+                    fontSize: ParagraphSize,
+                  ),
+                ),
               ),
             ),
           ],

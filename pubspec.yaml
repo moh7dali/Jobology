@@ -54,6 +54,7 @@ dependencies:
   image_picker: ^0.8.6
   url_launcher: ^6.1.6
   video_player: ^2.4.7
+  bottom_sheet: ^3.1.2
 
 dev_dependencies:
   flutter_test:

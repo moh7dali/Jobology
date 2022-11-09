@@ -4,8 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:get/get.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/constants.dart';
 import 'package:jobology/Screens/Users/cv.dart';
@@ -120,7 +118,7 @@ class _HomeState extends State<Home> {
                     const Text(
                       "Start your\njourney,",
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: titleSize,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -217,7 +215,7 @@ class _HomeState extends State<Home> {
             Ionicons.menu,
             size: 30,
           ),
-          backgroundColor: Color.fromARGB(255, 61, 14, 70),
+          backgroundColor: buttonColor,
           children: [
             SpeedDialChild(
               child: Icon(Icons.logout),

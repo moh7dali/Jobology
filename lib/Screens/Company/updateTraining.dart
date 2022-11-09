@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jobology/constants.dart';
 
 class Update_training extends StatefulWidget {
   Update_training(
@@ -23,9 +25,22 @@ class Update_training extends StatefulWidget {
   State<Update_training> createState() => _Update_trainingState();
 }
 
+String comp_name = "";
+String img_url = "";
+
 class _Update_trainingState extends State<Update_training> {
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        comp_name = event['Fullname'];
+        img_url = event['img'];
+      });
+    });
     TextEditingController titleController =
         TextEditingController(text: widget.title);
     TextEditingController briefController =
@@ -37,7 +52,53 @@ class _Update_trainingState extends State<Update_training> {
     TextEditingController urlController =
         TextEditingController(text: widget.url);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        toolbarHeight: 75,
+        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+        elevation: 0,
+        leading: Builder(
+          builder: (context) => IconButton(
+              icon: Image.asset(
+                "images/back.png",
+                width: 26,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, "companyHome");
+              }),
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Welcome",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 153, 152, 152),
+                    fontSize: subTitleSize,
+                  ),
+                ),
+                Text(
+                  "$comp_name ,",
+                  style: const TextStyle(color: Colors.black),
+                )
+              ],
+            ),
+          ],
+        ),
+        centerTitle: true,
+        actions: [
+          CircleAvatar(
+            radius: 25,
+            backgroundColor: Colors.grey,
+            backgroundImage: NetworkImage(img_url),
+          ),
+          const SizedBox(
+            width: 15,
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Form(
@@ -93,7 +154,7 @@ class _Update_trainingState extends State<Update_training> {
               ),
               ElevatedButton(
                 style: OutlinedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 5, 108, 106),
+                    backgroundColor: buttonColor,
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
                 onPressed: () {

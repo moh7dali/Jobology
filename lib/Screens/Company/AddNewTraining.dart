@@ -6,6 +6,8 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:jobology/constants.dart';
 
 class AddNewTraining extends StatefulWidget {
   AddNewTraining({Key? key}) : super(key: key);
@@ -46,7 +48,21 @@ class _AddNewTrainingState extends State<AddNewTraining> {
     });
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          toolbarHeight: 75,
+          backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+          elevation: 0,
+          leading: Builder(
+            builder: (context) => IconButton(
+                icon: Image.asset(
+                  "images/back.png",
+                  width: 26,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, "companyHome");
+                }),
+          ),
+        ),
         body: Padding(
           padding: EdgeInsets.all(20),
           child: Form(
@@ -54,30 +70,34 @@ class _AddNewTrainingState extends State<AddNewTraining> {
             children: [
               //Image.asset("images/training.png"),
               CircleAvatar(
-                  radius: 100,
+                  radius: 60,
                   backgroundColor: Colors.grey,
                   backgroundImage:
                       pickedimg == null ? null : FileImage(pickedimg!)),
               SizedBox(
                 height: 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
                 children: [
                   Text("Choose image From ?",
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                       )),
-                  TextButton(
-                      onPressed: () => funimg(ImageSource.gallery),
-                      child: Text("Gallery",
-                          style: GoogleFonts.poppins(
-                              fontSize: 18, fontWeight: FontWeight.bold))),
-                  TextButton(
-                      onPressed: () => funimg(ImageSource.camera),
-                      child: Text("Camera",
-                          style: GoogleFonts.poppins(
-                              fontSize: 18, fontWeight: FontWeight.bold))),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () => funimg(ImageSource.gallery),
+                        icon: Icon(Ionicons.folder),
+                      ),
+                      IconButton(
+                        onPressed: () => funimg(ImageSource.camera),
+                        icon: Icon(
+                          Ionicons.camera,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
               SizedBox(
@@ -129,7 +149,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
               ),
               ElevatedButton(
                 style: OutlinedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 5, 108, 106),
+                    backgroundColor: buttonColor,
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
                 onPressed: () async {
