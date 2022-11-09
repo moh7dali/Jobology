@@ -31,7 +31,7 @@ class _personalInfoState extends State<personalInfo> {
   String major = "";
   String age = "";
   String bio = "";
-  String facebook = "";
+  String github = "";
   String LinkedIn = "";
 
   bool visibilty = false;
@@ -50,7 +50,7 @@ class _personalInfoState extends State<personalInfo> {
         address = event['address'];
         major = event['major'];
         age = event['age'];
-        facebook = event['facebookurl'];
+        github = event['facebookurl'];
         LinkedIn = event['linkedinurl'];
       });
     });
@@ -89,7 +89,7 @@ class _personalInfoState extends State<personalInfo> {
                     age: age,
                     major: major,
                     bio: bio,
-                    facebook: facebook,
+                    facebook: github,
                     linkedin: LinkedIn,
                   );
                 }));
@@ -166,8 +166,8 @@ class _personalInfoState extends State<personalInfo> {
                       ),
                     ),
                     Icon_Url(
-                      icon: const Icon(FontAwesomeIcons.facebook),
-                      url: facebook,
+                      icon: const Icon(FontAwesomeIcons.github),
+                      url: github,
                     ),
                   ],
                 ),

@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:jobology/Screens/Users/Home.dart';
+import 'package:jobology/constants.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -83,21 +82,25 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Container(
-                  alignment: Alignment.bottomRight,
-                  child: TextButton(
-                      onPressed: () {
-                        Navigator.popAndPushNamed(context, 'forgetpassword');
-                      },
-                      child: Text("Forget Password ?",
-                          style: GoogleFonts.montserrat(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 5, 108, 106),
-                          )))),
+                alignment: Alignment.bottomRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, 'forgetpassword');
+                  },
+                  child: Text(
+                    "Forget Password ?",
+                    style: GoogleFonts.montserrat(
+                      fontSize: 15,
+                      color: buttonColor,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                     style: OutlinedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 5, 108, 106),
+                        backgroundColor: buttonColor,
                         shape: RoundedRectangleBorder(),
                         padding: EdgeInsets.symmetric(vertical: 15)),
                     onPressed: () async {

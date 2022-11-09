@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:jobology/constants.dart';
 
 class Company_Sign_up extends StatefulWidget {
   const Company_Sign_up({super.key});
@@ -151,7 +151,7 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                               style: GoogleFonts.montserrat(
                                   fontSize: 15, fontWeight: FontWeight.bold)),
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromARGB(255, 5, 108, 106),
+                              backgroundColor: buttonColor,
                               shape: RoundedRectangleBorder(),
                               padding: EdgeInsets.all(15)),
                         )),

@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:jobology/constants.dart';
 
 class editProfile extends StatefulWidget {
   editProfile(
@@ -63,37 +65,55 @@ class _editProfileState extends State<editProfile> {
     TextEditingController linkedinController = TextEditingController(
         text: widget.linkedin == null ? null : widget.linkedin);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        toolbarHeight: 75,
+        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+        elevation: 0,
+        leading: Builder(
+          builder: (context) => IconButton(
+              icon: Image.asset(
+                "images/back.png",
+                width: 26,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Form(
           child: ListView(
             children: [
               CircleAvatar(
-                  radius: 100,
+                  radius: 60,
                   backgroundColor: Colors.grey,
                   backgroundImage:
                       pickedimg == null ? null : FileImage(pickedimg!)),
               SizedBox(
                 height: 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
                 children: [
                   Text("Choose image From ?",
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                       )),
-                  TextButton(
-                      onPressed: () => funimg(ImageSource.gallery),
-                      child: Text("Gallery",
-                          style: GoogleFonts.poppins(
-                              fontSize: 18, fontWeight: FontWeight.bold))),
-                  TextButton(
-                      onPressed: () => funimg(ImageSource.camera),
-                      child: Text("Camera",
-                          style: GoogleFonts.poppins(
-                              fontSize: 18, fontWeight: FontWeight.bold))),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () => funimg(ImageSource.gallery),
+                        icon: Icon(Ionicons.folder),
+                      ),
+                      IconButton(
+                        onPressed: () => funimg(ImageSource.camera),
+                        icon: Icon(
+                          Ionicons.camera,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
               SizedBox(
@@ -189,7 +209,7 @@ class _editProfileState extends State<editProfile> {
               ),
               ElevatedButton(
                 style: OutlinedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 5, 108, 106),
+                    backgroundColor: buttonColor,
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
                 onPressed: () async {
