@@ -127,9 +127,7 @@ class _HomeState extends State<Home> {
                     ),
                     SectionsCard(
                       OnTapping: () {
-                        Navigator.pushNamed(context,"course"
-                          
-                        );
+                        Navigator.pushNamed(context, "course");
                       },
                       CardTitle: "Courses",
                       CardSubTitle: "Your way to your job",
@@ -140,10 +138,7 @@ class _HomeState extends State<Home> {
                     ),
                     SectionsCard(
                       OnTapping: () {
-                        Navigator.pushNamed(
-                          context,
-                       "cv"
-                        );
+                        Navigator.pushNamed(context, "cv");
                       },
                       CardTitle: "CV",
                       CardSubTitle: "Create your CV",
@@ -161,10 +156,7 @@ class _HomeState extends State<Home> {
                     ),
                     SectionsCard(
                       OnTapping: () {
-                        Navigator.pushNamed(
-                          context,
-                        "jobs"
-                        );
+                        Navigator.pushNamed(context, "jobs");
                       },
                       CardTitle: "Jobs",
                       CardSubTitle: "Find your job easly",
@@ -175,10 +167,7 @@ class _HomeState extends State<Home> {
                     ),
                     SectionsCard(
                       OnTapping: () {
-                        Navigator.pushNamed(
-                          context,
-                        "interview"
-                        );
+                        Navigator.pushNamed(context, "interview");
                       },
                       CardTitle: "Interview Questions",
                       CardSubTitle: "",
@@ -205,10 +194,7 @@ class _HomeState extends State<Home> {
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.popAndPushNamed(
-                  context,
-                  "Login"
-                );
+                Navigator.popAndPushNamed(context, "Login");
               },
             ),
             SpeedDialChild(

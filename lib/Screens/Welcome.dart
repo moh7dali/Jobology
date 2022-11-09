@@ -100,7 +100,7 @@ class _WelcomeState extends State<Welcome> {
         right: 20,
         child: TextButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, "Login");
+            Navigator.popAndPushNamed(context, "Check");
           },
           child: Container(
               decoration:

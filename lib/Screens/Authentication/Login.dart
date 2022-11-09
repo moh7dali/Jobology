@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jobology/Widgets/ck_login.dart';
 import 'package:jobology/constants.dart';
 
 class Login extends StatefulWidget {
@@ -113,20 +114,8 @@ class _LoginState extends State<Login> {
                                 email: emailController.text,
                                 password: passController.text);
                         us_id = myuser.user!.uid;
-                        FirebaseFirestore.instance
-                            .collection('Users')
-                            .doc(us_id)
-                            .snapshots()
-                            .listen((event) {
-                          setState(() {
-                            type = event['rules'];
-                            if (type == "User") {
-                              Navigator.pushNamed(context, "Home");
-                            } else if (type == "company") {
-                              Navigator.pushNamed(context, "companyHome");
-                            }
-                          });
-                        });
+
+                        Navigator.popAndPushNamed(context, "Check");
                       } on FirebaseAuthException catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(e.message.toString())));

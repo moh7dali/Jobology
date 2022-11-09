@@ -14,6 +14,7 @@ import 'package:jobology/Screens/Users/course.dart';
 import 'package:jobology/Screens/Users/interview.dart';
 import 'package:jobology/Screens/Users/jobs.dart';
 import 'package:jobology/Screens/start.dart';
+import 'package:jobology/Widgets/ck_login.dart';
 import 'Screens/Authentication/ForgetPass.dart';
 import 'Screens/Users/peronalPage/personalpage.dart';
 import 'firebase_options.dart';
@@ -24,13 +25,13 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(GetMaterialApp(
     themeMode: ThemeMode.system,
-    theme: ThemeData(brightness: Brightness.light, primarySwatch: Colors.pink),
-    darkTheme:
-        ThemeData(brightness: Brightness.dark, primarySwatch: Colors.green),
+    theme: ThemeData(brightness: Brightness.light),
+    darkTheme: ThemeData(brightness: Brightness.dark),
     debugShowCheckedModeBanner: false,
     routes: {
       "Login": (context) => const Login(),
       "Sign_Up": (context) => const Sign_up(),
+      "Check": (context) => const Check(),
       "Company Sign up": (context) => Company_Sign_up(),
       "Home": (context) => Home(),
       "Start": (context) => const Start_page(),
@@ -52,6 +53,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Start_page();
+    return Check();
   }
 }

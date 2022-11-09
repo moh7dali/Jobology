@@ -142,8 +142,10 @@ class _Sign_upState extends State<Sign_up> {
                               'facebookurl': "",
                               'linkedinurl': ""
                             });
-
-                            Navigator.popAndPushNamed(context, "Login");
+                            print(myuser.additionalUserInfo!.isNewUser);
+                            if (myuser.additionalUserInfo!.isNewUser) {
+                              Navigator.popAndPushNamed(context, "Start");
+                            }
                           } on FirebaseAuthException catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(e.message.toString())));
