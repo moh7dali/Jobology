@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:jobology/Screens/Company/company_info.dart';
 import 'package:jobology/constants.dart';
 import 'package:jobology/Screens/Company/showInfo.dart';
 import 'package:jobology/Screens/Company/update.dart';
@@ -634,7 +635,15 @@ class _CompanyHomeState extends State<CompanyHome> {
                 Ionicons.person,
               ),
               label: 'profile',
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return Company_info(
+                      user_id: FirebaseAuth.instance.currentUser!.uid,
+                    );
+                  },
+                ));
+              },
             ),
             SpeedDialChild(
               child: const Icon(
