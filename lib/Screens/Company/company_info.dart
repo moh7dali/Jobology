@@ -84,6 +84,7 @@ class _Company_infoState extends State<Company_info> {
                     img_url: img_url,
                     linkedin: LinkedIn,
                     phone: phone,
+                    email: email,
                     info: info,
                   );
                 }));
