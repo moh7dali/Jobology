@@ -140,8 +140,7 @@ class _CompanyHomeState extends State<CompanyHome> {
                     final docs = snapshot.data!.docs;
                     return Padding(
                       padding: const EdgeInsets.all(10),
-                      child: ListView.separated(
-                        separatorBuilder: (context, index) => Divider(),
+                      child: ListView.builder(
                         itemCount: docs.length,
                         itemBuilder: (context, index) {
                           if (comp_name == docs[index]['Company name']) {
@@ -392,9 +391,7 @@ class _CompanyHomeState extends State<CompanyHome> {
                     final docs = snapshot.data!.docs;
                     return Padding(
                       padding: const EdgeInsets.all(10),
-                      child: ListView.separated(
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const Divider(),
+                      child: ListView.builder(
                         itemCount: docs.length,
                         itemBuilder: (context, index) {
                           if (comp_name == docs[index]['Company_name']) {

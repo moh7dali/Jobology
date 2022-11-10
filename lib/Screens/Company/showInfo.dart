@@ -107,8 +107,7 @@ class _Show_infoState extends State<Show_info> {
             final docs = snapshot.data!.docs;
             return Padding(
               padding: const EdgeInsets.all(10),
-              child: ListView.separated(
-                separatorBuilder: (context, index) => const Divider(),
+              child: ListView.builder(
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
                   for (int i = 0; i < Applied.length; i++) {

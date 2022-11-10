@@ -1,13 +1,12 @@
 // ignore_for_file: camel_case_types
+import 'package:flutter/cupertino.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-
+import 'package:jobology/constants.dart';
 import 'mytext.dart';
-import '../Screens/Users/course.dart';
 
 class Course_previwe extends StatefulWidget {
   Course_previwe(
@@ -47,7 +46,9 @@ class _Course_previweState extends State<Course_previwe> {
                 height: 320,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(widget.imageUrl!), fit: BoxFit.cover),
+                    image: NetworkImage(widget.imageUrl!),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               )),
           Positioned(
@@ -76,131 +77,161 @@ class _Course_previweState extends State<Course_previwe> {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(35),
                         topRight: Radius.circular(35))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          widget.title!,
-                          style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "${widget.title!.toString().toUpperCase()}",
+                              style: const TextStyle(
+                                  fontSize: titleSize,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            MyText(
+                                text: "${widget.price}" + "\$",
+                                size: 25,
+                                mycolor: Colors.black12.withOpacity(0.7))
+                          ],
                         ),
-                        MyText(
-                            text: "${widget.price}" + "\$",
-                            size: 25,
-                            mycolor: Colors.black12.withOpacity(0.7))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_on,
-                          color: Colors.blue,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        MyText(
-                          text: "Amman-Jordan",
-                          size: 16,
-                          mycolor: Colors.blue.withOpacity(0.8),
-                        )
-                      ],
-                    ),
-                    const Divider(
-                      height: 15,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(160, 158, 158, 158),
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          "About course:",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on,
+                            color: Colors.blue,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          MyText(
+                            text: "Amman-Jordan",
+                            size: 16,
+                            mycolor: Colors.blue.withOpacity(0.8),
+                          )
+                        ],
+                      ),
+                      const Divider(
+                        height: 15,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(160, 158, 158, 158),
+                            borderRadius: BorderRadius.circular(15)),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            "About course:",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: subTitleSize,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        widget.breif!,
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(160, 158, 158, 158),
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
                         child: Text(
-                          "Provider:",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                          widget.breif!,
+                          style: const TextStyle(
+                            fontSize: subTitleSize,
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        widget.company_name!,
-                        style: TextStyle(
-                          fontSize: 20,
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(160, 158, 158, 158),
+                            borderRadius: BorderRadius.circular(15)),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            "Provider:",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: subTitleSize,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(top: height * 0.2, left: 130),
-                        child: MaterialButton(
-                          height: 60,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0)),
-                          color: Color.fromARGB(255, 74, 15, 84),
-                          onPressed: () async {
-                            String user_id =
-                                FirebaseAuth.instance.currentUser!.uid;
-                            await FirebaseFirestore.instance
-                                .collection('Training')
-                                .doc(widget.doc_id)
-                                .update({
-                              'Applied': FieldValue.arrayUnion([user_id])
-                            });
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  actions: [Text("Applied")],
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          widget.company_name!,
+                          style: const TextStyle(
+                            fontSize: subTitleSize,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Center(
+                            child: MaterialButton(
+                              height: 60,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              color: buttonColor,
+                              onPressed: () async {
+                                String user_id =
+                                    FirebaseAuth.instance.currentUser!.uid;
+                                await FirebaseFirestore.instance
+                                    .collection('Training')
+                                    .doc(widget.doc_id)
+                                    .update({
+                                  'Applied': FieldValue.arrayUnion([user_id])
+                                });
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return CupertinoAlertDialog(
+                                      content: const Text(
+                                        "Applied Successfully!",
+                                        style: TextStyle(
+                                          fontSize: subTitleSize,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                        ),
+                                      ),
+                                      actions: [
+                                        MaterialButton(
+                                          onPressed: () {
+                                            Navigator.pop(context, "course");
+                                          },
+                                          child: const Text(
+                                            "Done",
+                                            style: TextStyle(
+                                              fontSize: subTitleSize,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
                                 );
                               },
-                            );
-                          },
-                          child: const Text(
-                            "Apply To the Course",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.white),
-                          ),
-                        )),
-                  ],
+                              child: const Text(
+                                "Apply now",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          )),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                    ],
+                  ),
                 ),
               ))
         ]),

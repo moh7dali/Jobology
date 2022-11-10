@@ -4,12 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/coursepreviwe.dart';
-import '../../Widgets/mytext.dart';
+import 'package:jobology/constants.dart';
 
 class Course extends StatefulWidget {
   const Course({super.key});
@@ -60,14 +59,14 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                 // ignore: prefer_const_constructors
                 Text(
                   "Welcome",
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color.fromARGB(255, 153, 152, 152),
                     fontSize: 15,
                   ),
                 ),
                 Text(
-                  username,
-                  style: TextStyle(color: Colors.black),
+                  "${username},",
+                  style: const TextStyle(color: Colors.black),
                 )
               ],
             ),
@@ -77,9 +76,13 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return personalInfo(user_id: FirebaseAuth.instance.currentUser!.uid,);
-              },));
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return personalInfo(
+                    user_id: FirebaseAuth.instance.currentUser!.uid,
+                  );
+                },
+              ));
             },
             child: CircleAvatar(
               radius: 25,
@@ -99,8 +102,7 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
             final docs = snapshot.data!.docs;
             return Padding(
               padding: const EdgeInsets.all(10),
-              child: ListView.separated(
-                separatorBuilder: (context, index) => Divider(),
+              child: ListView.builder(
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
                   return ListTile(
@@ -121,7 +123,7 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                         ));
                       });
                     },
-                    leading: Container(
+                    leading: SizedBox(
                       width: 80,
                       height: 80,
                       child: ClipRRect(
@@ -136,16 +138,16 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                     ),
                     title: Text(
                       docs[index]['Company_name']!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 22,
+                        fontSize: subTitleSize,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     subtitle: Text(
                       docs[index]['course_title']!,
-                      style: TextStyle(
-                        fontSize: 15,
+                      style: const TextStyle(
+                        fontSize: ParagraphSize,
                         color: Color.fromARGB(255, 163, 167, 165),
                         fontWeight: FontWeight.bold,
                       ),
@@ -157,20 +159,20 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
           } else if (snapshot.hasError) {
             const Text('No data avaible right now');
           }
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
       floatingActionButton: SpeedDial(
-          buttonSize: Size(70, 70),
+          buttonSize: const Size(70, 70),
           spaceBetweenChildren: 15,
-          child: Icon(
+          child: const Icon(
             Ionicons.menu,
             size: 30,
           ),
-          backgroundColor: Color.fromARGB(255, 61, 14, 70),
+          backgroundColor: buttonColor,
           children: [
             SpeedDialChild(
-              child: Icon(Icons.logout),
+              child: const Icon(Icons.logout),
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
@@ -185,16 +187,20 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
               },
             ),
             SpeedDialChild(
-              child: Icon(Ionicons.person),
+              child: const Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
-                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return personalInfo(user_id: FirebaseAuth.instance.currentUser!.uid,);
-              },));
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return personalInfo(
+                      user_id: FirebaseAuth.instance.currentUser!.uid,
+                    );
+                  },
+                ));
               },
             ),
             SpeedDialChild(
-              child: Icon(Ionicons.home),
+              child: const Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
                 Navigator.pop(context);

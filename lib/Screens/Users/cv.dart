@@ -13,6 +13,7 @@ import 'package:jobology/Widgets/mytext.dart';
 import 'package:jobology/Widgets/open_url.dart';
 import 'package:jobology/Widgets/texts.dart';
 import 'package:jobology/Widgets/vedio.dart';
+import 'package:jobology/constants.dart';
 import 'package:video_player/video_player.dart';
 
 class Cv extends StatefulWidget {
@@ -59,7 +60,6 @@ class _CvState extends State<Cv> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
-              
               children: [
                 // ignore: prefer_const_constructors
                 Text(
@@ -81,9 +81,14 @@ class _CvState extends State<Cv> {
         actions: [
           GestureDetector(
             onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return personalInfo(user_id: FirebaseAuth.instance.currentUser!.uid,);
-              },));;
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return personalInfo(
+                    user_id: FirebaseAuth.instance.currentUser!.uid,
+                  );
+                },
+              ));
+              ;
             },
             child: CircleAvatar(
               radius: 25,
@@ -128,7 +133,8 @@ class _CvState extends State<Cv> {
               const SizedBox(
                 height: 15,
               ),
-              Align(alignment: Alignment.center,
+              Align(
+                alignment: Alignment.center,
                 child: Text(
                   "What is the CV ?",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -137,7 +143,7 @@ class _CvState extends State<Cv> {
               const SizedBox(
                 height: 5,
               ),
-               Cvt1(),
+              Cvt1(),
               Text(
                 "Related:",
                 style: TextStyle(
@@ -218,8 +224,12 @@ class _CvState extends State<Cv> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("images/cv3.jpg"), fit: BoxFit.fill)),
-              ),SizedBox(height: 10,),
-              Row( mainAxisAlignment: MainAxisAlignment.start,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     "Read more:",
@@ -241,7 +251,8 @@ class _CvState extends State<Cv> {
               const SizedBox(
                 height: 10,
               ),
-              Align(alignment: Alignment.bottomCenter,
+              Align(
+                alignment: Alignment.bottomCenter,
                 child: Text(
                   "CV template",
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
@@ -265,7 +276,8 @@ class _CvState extends State<Cv> {
                     image: DecorationImage(
                         image: AssetImage("images/cv5.jpg"), fit: BoxFit.fill)),
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.start,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     "Related: ",
@@ -304,26 +316,27 @@ class _CvState extends State<Cv> {
             Ionicons.menu,
             size: 30,
           ),
-          backgroundColor: Color.fromARGB(255, 61, 14, 70),
+          backgroundColor: buttonColor,
           children: [
             SpeedDialChild(
               child: Icon(Icons.logout),
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.popAndPushNamed(
-                  context,
-                 "Login"
-                );
+                Navigator.popAndPushNamed(context, "Login");
               },
             ),
             SpeedDialChild(
               child: Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return personalInfo(user_id: FirebaseAuth.instance.currentUser!.uid,);
-              },));
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return personalInfo(
+                      user_id: FirebaseAuth.instance.currentUser!.uid,
+                    );
+                  },
+                ));
               },
             ),
             SpeedDialChild(

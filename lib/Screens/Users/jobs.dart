@@ -3,12 +3,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/jobpreview.dart';
+import 'package:jobology/constants.dart';
 
 class jobs extends StatefulWidget {
   const jobs({super.key});
@@ -101,8 +101,7 @@ class _jobsState extends State<jobs> {
             final docs = snapshot.data!.docs;
             return Padding(
               padding: const EdgeInsets.all(10),
-              child: ListView.separated(
-                separatorBuilder: (context, index) => Divider(),
+              child: ListView.builder(
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
                   return ListTile(
@@ -124,7 +123,7 @@ class _jobsState extends State<jobs> {
                         ));
                       });
                     },
-                    leading: Container(
+                    leading: SizedBox(
                       width: 80,
                       height: 80,
                       child: ClipRRect(
@@ -141,14 +140,14 @@ class _jobsState extends State<jobs> {
                       docs[index]['Company name']!,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 22,
+                        fontSize: subTitleSize,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     subtitle: Text(
                       docs[index]['job_title']!,
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: ParagraphSize,
                         color: Color.fromARGB(255, 163, 167, 165),
                         fontWeight: FontWeight.bold,
                       ),
@@ -170,7 +169,7 @@ class _jobsState extends State<jobs> {
             Ionicons.menu,
             size: 30,
           ),
-          backgroundColor: Color.fromARGB(255, 61, 14, 70),
+          backgroundColor: buttonColor,
           children: [
             SpeedDialChild(
               child: Icon(Icons.logout),
@@ -192,12 +191,12 @@ class _jobsState extends State<jobs> {
               label: 'Profile',
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return personalInfo(
-                    user_id: FirebaseAuth.instance.currentUser!.uid,
-                  );
-                },
-              ));
+                  builder: (context) {
+                    return personalInfo(
+                      user_id: FirebaseAuth.instance.currentUser!.uid,
+                    );
+                  },
+                ));
               },
             ),
             SpeedDialChild(

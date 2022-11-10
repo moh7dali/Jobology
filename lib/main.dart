@@ -15,12 +15,8 @@ import 'package:jobology/Screens/Users/course.dart';
 import 'package:jobology/Screens/Users/jobs.dart';
 import 'package:jobology/Screens/start.dart';
 import 'package:jobology/Widgets/ck_login.dart';
-import 'package:jobology/Widgets/questin_wedget.dart';
 import 'Screens/Authentication/ForgetPass.dart';
-import 'Screens/Users/peronalPage/personalpage.dart';
 import 'firebase_options.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import "./Screens/Users/interview_preview.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

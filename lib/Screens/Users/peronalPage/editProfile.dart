@@ -194,7 +194,7 @@ class _editProfileState extends State<editProfile> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.padding),
+                    prefixIcon: Icon(Icons.book),
                     labelText: 'Major',
                     hintText: 'Enter your major',
                     border: OutlineInputBorder()),
@@ -205,67 +205,97 @@ class _editProfileState extends State<editProfile> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Icons.format_quote),
                     labelText: 'Bio',
                     hintText: 'Enter your Bio',
                     border: OutlineInputBorder()),
                 controller: bioController,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Icons.phone),
                     labelText: 'phone',
                     hintText: 'Enter your phone num',
                     border: OutlineInputBorder()),
                 controller: phoneController,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
-                    labelText: 'facebook',
-                    hintText: 'Enter your facebook url',
+                    prefixIcon: Icon(Ionicons.logo_github),
+                    labelText: 'GitHub',
+                    hintText: 'Enter your Github url',
                     border: OutlineInputBorder()),
                 controller: facebookController,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Ionicons.logo_linkedin),
                     labelText: 'linkedIn',
                     hintText: 'Enter your linkedIn account',
                     border: OutlineInputBorder()),
                 controller: linkedinController,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              DropdownButtonFormField(
-                value: Selected,
-                items: skills
-                    .map((e) => DropdownMenuItem(value: e, child: Text("${e}")))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    Selected = value.toString();
-                    SelectedItem.add(Selected);
-                    print(SelectedItem);
-                  });
-                },
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.grey,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: DropdownButtonFormField(
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 130, 129, 129),
+                    ),
+                    value: Selected,
+                    items: skills
+                        .map((e) =>
+                            DropdownMenuItem(value: e, child: Text("${e}")))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        Selected = value.toString();
+                        SelectedItem.add(Selected);
+                        print(SelectedItem);
+                      });
+                    },
+                  ),
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              for (int i = 0; i < SelectedItem.length; i++)
-                Text(SelectedItem[i].toString()),
-              SizedBox(
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    for (int i = 0; i < SelectedItem.length; i++)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "${SelectedItem[i].toString()},  ",
+                          style: const TextStyle(
+                            fontSize: ParagraphSize,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(
                 height: 20,
               ),
               ElevatedButton(

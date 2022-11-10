@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
 import 'package:jobology/Screens/Users/interview.dart';
 import 'package:jobology/Widgets/questin_wedget.dart';
+import 'package:jobology/constants.dart';
 
 class ListTaleW extends StatefulWidget {
   ListTaleW({
@@ -80,14 +79,14 @@ class _ListTaleWState extends State<ListTaleW> {
         widget.title!,
         style: TextStyle(
           color: Colors.black,
-          fontSize: 22,
+          fontSize: subTitleSize,
           fontWeight: FontWeight.bold,
         ),
       ),
       subtitle: Text(
         widget.breif!,
         style: TextStyle(
-          fontSize: 15,
+          fontSize: ParagraphSize,
           color: Color.fromARGB(255, 163, 167, 165),
           fontWeight: FontWeight.bold,
         ),

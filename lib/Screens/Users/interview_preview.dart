@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 // import 'package:jobology/Widgets/JobsWidget.dart';
 import 'package:jobology/Widgets/interview_wedget.dart';
+import 'package:jobology/constants.dart';
 
 class Interviwe_Preview extends StatefulWidget {
   const Interviwe_Preview({super.key});
@@ -56,7 +56,7 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
                 // ignore: prefer_const_constructors
                 Text(
                   "Welcome",
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color.fromARGB(255, 153, 152, 152),
                     fontSize: 15,
                   ),
@@ -93,8 +93,7 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
             final docs = snapshot.data!.docs;
             return Padding(
               padding: const EdgeInsets.all(10),
-              child: ListView.separated(
-                separatorBuilder: (context, index) => Divider(),
+              child: ListView.builder(
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
                   return ListTaleW(
@@ -108,17 +107,17 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
           } else if (snapshot.hasError) {
             const Text('No data avaible right now');
           }
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
       floatingActionButton: SpeedDial(
-          buttonSize: Size(70, 70),
+          buttonSize: const Size(70, 70),
           spaceBetweenChildren: 15,
-          child: Icon(
+          child: const Icon(
             Ionicons.menu,
             size: 30,
           ),
-          backgroundColor: Color.fromARGB(255, 61, 14, 70),
+          backgroundColor: buttonColor,
           children: [
             SpeedDialChild(
               child: Icon(Icons.logout),
@@ -136,14 +135,14 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               },
             ),
             SpeedDialChild(
-              child: Icon(Ionicons.person),
+              child: const Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
                 Navigator.pushNamed(context, "personalPage");
               },
             ),
             SpeedDialChild(
-              child: Icon(Ionicons.home),
+              child: const Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
                 Navigator.pushNamed(context, "Home");

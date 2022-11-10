@@ -2,12 +2,11 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:jobology/Widgets/open_url.dart';
-
+import 'package:jobology/constants.dart';
 import 'mytext.dart';
-import '../Screens/Users/course.dart';
 
 class job_previwe extends StatefulWidget {
   job_previwe(
@@ -37,7 +36,7 @@ class _job_previweState extends State<job_previwe> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: double.maxFinite,
         height: double.infinity,
         child: Stack(children: [
@@ -68,7 +67,7 @@ class _job_previweState extends State<job_previwe> {
             )),
           ),
           Positioned(
-              top: 300,
+              top: 290,
               child: Container(
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 width: MediaQuery.of(context).size.width,
@@ -80,14 +79,15 @@ class _job_previweState extends State<job_previwe> {
                         topRight: Radius.circular(35))),
                 child: SingleChildScrollView(
                   child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(
                         height: 15,
                       ),
                       MyText(
-                        text: widget.company_name!,
-                        size: 40,
+                        text:
+                            "${widget.company_name!.toString().toUpperCase()}",
+                        size: titleSize,
                         mycolor: Colors.black54.withOpacity(0.9),
                       ),
                       const Divider(
@@ -105,17 +105,17 @@ class _job_previweState extends State<job_previwe> {
                             "Job title: ",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: subTitleSize,
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(16),
                         child: Text(
                           widget.title!,
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: subTitleSize,
                           ),
                         ),
                       ),
@@ -130,17 +130,17 @@ class _job_previweState extends State<job_previwe> {
                             "About job ",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: subTitleSize,
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(16),
                         child: Text(
                           widget.breif!,
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: subTitleSize,
                           ),
                         ),
                       ),
@@ -155,13 +155,13 @@ class _job_previweState extends State<job_previwe> {
                             "Requirements: ",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: subTitleSize,
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(16),
                         child: Text(
                           widget.req!,
                           style: TextStyle(
@@ -180,49 +180,74 @@ class _job_previweState extends State<job_previwe> {
                             "Years of experience: ",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: subTitleSize,
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(16),
                         child: Text(
                           widget.years!,
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: subTitleSize,
                           ),
                         ),
                       ),
-                      MaterialButton(
-                        height: 60,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        color: Color.fromARGB(255, 74, 15, 84),
-                        onPressed: () async {
-                          String user_id =
-                              FirebaseAuth.instance.currentUser!.uid;
-                          await FirebaseFirestore.instance
-                              .collection('Jobs')
-                              .doc(widget.doc_id)
-                              .update({
-                            'Applied': FieldValue.arrayUnion([user_id])
-                          });
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                actions: [Center(child: Text("Applied"))],
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Center(
+                          child: MaterialButton(
+                            height: 60,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0)),
+                            color: buttonColor,
+                            onPressed: () async {
+                              String user_id =
+                                  FirebaseAuth.instance.currentUser!.uid;
+                              await FirebaseFirestore.instance
+                                  .collection('Jobs')
+                                  .doc(widget.doc_id)
+                                  .update({
+                                'Applied': FieldValue.arrayUnion([user_id])
+                              });
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return CupertinoAlertDialog(
+                                    content: const Text(
+                                      "Applied Successfully!",
+                                      style: TextStyle(
+                                        fontSize: subTitleSize,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                      ),
+                                    ),
+                                    actions: [
+                                      MaterialButton(
+                                        onPressed: () {
+                                          Navigator.pop(context, "jobs");
+                                        },
+                                        child: const Text(
+                                          "Done",
+                                          style: TextStyle(
+                                            fontSize: subTitleSize,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
                               );
                             },
-                          );
-                        },
-                        child: const Text(
-                          "Apply To the Job",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white),
+                            child: const Text(
+                              "Apply now",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.white),
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
