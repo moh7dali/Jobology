@@ -33,7 +33,7 @@ class _personalInfoState extends State<personalInfo> {
   String bio = "";
   String github = "";
   String LinkedIn = "";
-
+  List Skills = [];
   bool visibilty = false;
   @override
   Widget build(BuildContext context) {
@@ -52,6 +52,7 @@ class _personalInfoState extends State<personalInfo> {
         age = event['age'];
         github = event['facebookurl'];
         LinkedIn = event['linkedinurl'];
+        Skills = event["skills"];
       });
     });
     if (widget.user_id == FirebaseAuth.instance.currentUser!.uid) {
@@ -199,6 +200,14 @@ class _personalInfoState extends State<personalInfo> {
                   ),
                 ),
               ),
+              Row(
+                children: [
+                  for (int i = 0; i < Skills.length; i++)
+                    Container(
+                      child: Text(Skills[i].toString()),
+                    ),
+                ],
+              ),
               const Divider(
                 height: 40,
               ),
@@ -277,34 +286,30 @@ class _personalInfoState extends State<personalInfo> {
       floatingActionButton: Visibility(
         visible: visibilty,
         child: SpeedDial(
-          buttonSize: Size(70, 70),
-          spaceBetweenChildren: 15,
-          child: Icon(
-            Ionicons.menu,
-            size: 30,
-          ),
-          backgroundColor: buttonColor,
-          children: [
-            SpeedDialChild(
-              child: Icon(Icons.logout),
-              label: 'Logout',
-              onTap: () async {
-                await FirebaseAuth.instance.signOut();
-                Navigator.popAndPushNamed(
-                  context,
-                  "Login"
-                );
-              },
+            buttonSize: Size(70, 70),
+            spaceBetweenChildren: 15,
+            child: Icon(
+              Ionicons.menu,
+              size: 30,
             ),
-           
-            SpeedDialChild(
-              child: Icon(Ionicons.home),
-              label: 'Home',
-              onTap: () {
-                Navigator.popAndPushNamed(context, "Home");
-              },
-            ),
-          ]),
+            backgroundColor: buttonColor,
+            children: [
+              SpeedDialChild(
+                child: Icon(Icons.logout),
+                label: 'Logout',
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.popAndPushNamed(context, "Login");
+                },
+              ),
+              SpeedDialChild(
+                child: Icon(Ionicons.home),
+                label: 'Home',
+                onTap: () {
+                  Navigator.popAndPushNamed(context, "Home");
+                },
+              ),
+            ]),
       ),
     );
   }

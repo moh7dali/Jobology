@@ -263,15 +263,17 @@ class _editProfileState extends State<editProfile> {
               SizedBox(
                 height: 20,
               ),
+              for (int i = 0; i < SelectedItem.length; i++)
+                Text(SelectedItem[i].toString()),
+              SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
                 style: OutlinedButton.styleFrom(
                     backgroundColor: buttonColor,
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
                 onPressed: () async {
-                  print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                  print(SelectedItem);
-                  print(Selected);
                   final url;
                   if (pickedimg == null) {
                     url = widget.img_url!;
@@ -300,7 +302,8 @@ class _editProfileState extends State<editProfile> {
                     'bio': bioController.text,
                     'img': url,
                     'linkedinurl': linkedinController.text,
-                    'facebookurl': facebookController.text
+                    'facebookurl': facebookController.text,
+                    'skills': FieldValue.arrayUnion(SelectedItem)
                   });
                   Navigator.pop(context);
                 },
