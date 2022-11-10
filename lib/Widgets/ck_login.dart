@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Company/HomeCompany.dart';
 import 'package:jobology/Screens/Users/Home.dart';
+import 'package:jobology/Screens/start.dart';
 
 class Check extends StatefulWidget {
   const Check({super.key});
@@ -30,13 +31,15 @@ class _CheckState extends State<Check> {
                   type = event['rules'];
                 });
               });
+
               if (type == "User") {
                 return Home();
-              } else {
+              } else if (type == "company") {
                 return CompanyHome();
               }
+              return Center(child: CircularProgressIndicator());
             } else {
-              return Login();
+              return Start_page();
             }
           }),
     );

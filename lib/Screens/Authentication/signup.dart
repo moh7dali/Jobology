@@ -144,7 +144,7 @@ class _Sign_upState extends State<Sign_up> {
                             });
                             print(myuser.additionalUserInfo!.isNewUser);
                             if (myuser.additionalUserInfo!.isNewUser) {
-                              Navigator.popAndPushNamed(context, "Start");
+                              Navigator.popAndPushNamed(context, "Login");
                             }
                           } on FirebaseAuthException catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(

@@ -46,8 +46,47 @@ class _editProfileState extends State<editProfile> {
     });
   }
 
+  List SelectedItem = [];
   @override
   Widget build(BuildContext context) {
+    String Selected = "Skills";
+    List skills = [
+      "Skills",
+      "Microsoft PowerPoint",
+      'Google Slides',
+      "SlideShare",
+      "HTML",
+      "Javascript",
+      "C++",
+      "Python",
+      "Internet Applications",
+      "Networks",
+      "Operating Systems",
+      "Troubleshooting",
+      "Internet Security",
+      "Data Privacy",
+      "Programming Languages",
+      "Agile Development",
+      "Database Administration",
+      "UI/UX",
+      "Cloud Management",
+      "Data Synchronization",
+      "Social Media Experience",
+      "Project Management",
+      "Technical Writing",
+      "Debugging",
+      "Network Architecture",
+      "Quality Assurance",
+      "Technical Support",
+      "SQL",
+      "Oracle",
+      "LINUX",
+      "Java",
+      "Software Installation",
+      "Adobe Creative Suite",
+      "Backup management",
+      "Microsoft Office"
+    ];
     TextEditingController Fullnameconrller = TextEditingController(
         text: widget.Fullname == null ? null : widget.Fullname);
     TextEditingController addressController = TextEditingController(
@@ -64,6 +103,7 @@ class _editProfileState extends State<editProfile> {
         text: widget.facebook == null ? null : widget.facebook);
     TextEditingController linkedinController = TextEditingController(
         text: widget.linkedin == null ? null : widget.linkedin);
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 75,
@@ -207,12 +247,31 @@ class _editProfileState extends State<editProfile> {
               SizedBox(
                 height: 20,
               ),
+              DropdownButtonFormField(
+                value: Selected,
+                items: skills
+                    .map((e) => DropdownMenuItem(value: e, child: Text("${e}")))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    Selected = value.toString();
+                    SelectedItem.add(Selected);
+                    print(SelectedItem);
+                  });
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
                 style: OutlinedButton.styleFrom(
                     backgroundColor: buttonColor,
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
                 onPressed: () async {
+                  print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                  print(SelectedItem);
+                  print(Selected);
                   final url;
                   if (pickedimg == null) {
                     url = widget.img_url!;
