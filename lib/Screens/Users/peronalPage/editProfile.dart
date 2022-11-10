@@ -17,7 +17,7 @@ class editProfile extends StatefulWidget {
       this.phone,
       this.major,
       this.bio,
-      this.facebook,
+      this.github,
       this.linkedin});
   String? img_url;
   String? Fullname;
@@ -26,7 +26,7 @@ class editProfile extends StatefulWidget {
   String? major;
   String? phone;
   String? bio;
-  String? facebook;
+  String? github;
   String? linkedin;
 
   @override
@@ -99,8 +99,8 @@ class _editProfileState extends State<editProfile> {
         TextEditingController(text: widget.phone == null ? null : widget.phone);
     TextEditingController bioController =
         TextEditingController(text: widget.bio == null ? null : widget.bio);
-    TextEditingController facebookController = TextEditingController(
-        text: widget.facebook == null ? null : widget.facebook);
+    TextEditingController githubController = TextEditingController(
+        text: widget.github == null ? null : widget.github);
     TextEditingController linkedinController = TextEditingController(
         text: widget.linkedin == null ? null : widget.linkedin);
 
@@ -231,7 +231,7 @@ class _editProfileState extends State<editProfile> {
                     labelText: 'GitHub',
                     hintText: 'Enter your Github url',
                     border: OutlineInputBorder()),
-                controller: facebookController,
+                controller: githubController,
               ),
               const SizedBox(
                 height: 20,
@@ -332,7 +332,7 @@ class _editProfileState extends State<editProfile> {
                     'bio': bioController.text,
                     'img': url,
                     'linkedinurl': linkedinController.text,
-                    'facebookurl': facebookController.text,
+                    'Githuburl': githubController.text,
                     'skills': FieldValue.arrayUnion(SelectedItem)
                   });
                   Navigator.pop(context);
