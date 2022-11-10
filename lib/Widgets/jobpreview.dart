@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:jobology/Screens/Company/company_info.dart';
 import 'package:jobology/constants.dart';
 import 'mytext.dart';
 
@@ -12,6 +13,7 @@ class job_previwe extends StatefulWidget {
   job_previwe(
       {this.imageUrl,
       this.company_name,
+      this.comp_id,
       this.title,
       this.breif,
       this.url,
@@ -19,6 +21,7 @@ class job_previwe extends StatefulWidget {
       this.req,
       this.doc_id});
   String? company_name;
+  String? comp_id;
   String? title;
   String? imageUrl;
   String? breif;
@@ -84,11 +87,27 @@ class _job_previweState extends State<job_previwe> {
                       const SizedBox(
                         height: 15,
                       ),
-                      MyText(
-                        text:
-                            "${widget.company_name!.toString().toUpperCase()}",
-                        size: titleSize,
-                        mycolor: Colors.black54.withOpacity(0.9),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MyText(
+                            text:
+                                "${widget.company_name!.toString().toUpperCase()}",
+                            size: titleSize,
+                            mycolor: Colors.black54.withOpacity(0.9),
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return Company_info(
+                                      user_id: widget.comp_id,
+                                    );
+                                  },
+                                ));
+                              },
+                              child: Icon(Icons.info))
+                        ],
                       ),
                       const Divider(
                         height: 15,

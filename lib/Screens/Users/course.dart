@@ -113,6 +113,7 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
                             return Course_previwe(
                               imageUrl: docs[index]['img_url'],
                               company_name: docs[index]['Company_name'],
+                              comp_id: docs[index]['comp_id'],
                               title: docs[index]['course_title'],
                               breif: docs[index]['breif'],
                               price: docs[index]['price'],

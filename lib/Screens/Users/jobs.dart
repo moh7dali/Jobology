@@ -113,6 +113,7 @@ class _jobsState extends State<jobs> {
                               doc_id: docs[index].id,
                               imageUrl: docs[index]['img_url'],
                               company_name: docs[index]['Company name'],
+                              comp_id: docs[index]['comp_id'],
                               title: docs[index]['job_title'],
                               breif: docs[index]['breif'],
                               req: docs[index]['requirements'],

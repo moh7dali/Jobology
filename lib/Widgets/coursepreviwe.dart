@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:jobology/Screens/Company/company_info.dart';
 import 'package:jobology/constants.dart';
 import 'mytext.dart';
 
@@ -12,12 +13,14 @@ class Course_previwe extends StatefulWidget {
   Course_previwe(
       {this.imageUrl,
       this.company_name,
+      this.comp_id,
       this.title,
       this.breif,
       this.url,
       this.price,
       this.doc_id});
   String? company_name;
+  String? comp_id;
   String? title;
   String? imageUrl;
   String? breif;
@@ -86,12 +89,27 @@ class _Course_previweState extends State<Course_previwe> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "${widget.title!.toString().toUpperCase()}",
-                              style: const TextStyle(
-                                  fontSize: titleSize,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
+                            Row(
+                              children: [
+                                Text(
+                                  "${widget.title!.toString().toUpperCase()}",
+                                  style: const TextStyle(
+                                      fontSize: titleSize,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(
+                                        builder: (context) {
+                                          return Company_info(
+                                            user_id: widget.comp_id,
+                                          );
+                                        },
+                                      ));
+                                    },
+                                    child: Icon(Icons.info))
+                              ],
                             ),
                             MyText(
                                 text: "${widget.price}" + "\$",
