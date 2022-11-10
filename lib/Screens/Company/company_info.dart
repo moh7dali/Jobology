@@ -172,12 +172,21 @@ class _Company_infoState extends State<Company_info> {
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      "TOP SKILLS",
+                      "Company Information",
                       style: TextStyle(
                         color: containerBackgroun,
                         fontSize: subTitleSize,
                       ),
                     ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Center(
+                  child: Text(
+                    email,
+                    style: const TextStyle(fontSize: subTitleSize),
                   ),
                 ),
               ),
