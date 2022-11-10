@@ -200,16 +200,30 @@ class _personalInfoState extends State<personalInfo> {
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  for (int i = 0; i < Skills.length; i++)
-                    Container(
-                      child: Text(Skills[i].toString()),
-                    ),
-                ],
-              ),
-              const Divider(
-                height: 40,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      for (int i = 0; i < Skills.length; i++,)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: containerBackgroun,
+                          ),
+                          child: Text(
+                            Skills[i].toString(),
+                            style: const TextStyle(
+                              fontSize: subTitleSize,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
               ),
               Container(
                 width: double.infinity,
@@ -234,16 +248,13 @@ class _personalInfoState extends State<personalInfo> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16),
                 child: Center(
                   child: Text(
                     address,
                     style: const TextStyle(fontSize: subTitleSize),
                   ),
                 ),
-              ),
-              const Divider(
-                height: 40,
               ),
               Container(
                 width: double.infinity,
@@ -268,16 +279,13 @@ class _personalInfoState extends State<personalInfo> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16),
                 child: Center(
                   child: Text(
                     major,
                     style: const TextStyle(fontSize: subTitleSize),
                   ),
                 ),
-              ),
-              const Divider(
-                height: 40,
               ),
             ],
           ),

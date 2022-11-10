@@ -130,7 +130,7 @@ class _editProfileState extends State<editProfile> {
                   backgroundColor: Colors.grey,
                   backgroundImage:
                       pickedimg == null ? null : FileImage(pickedimg!)),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Column(
@@ -144,11 +144,11 @@ class _editProfileState extends State<editProfile> {
                     children: [
                       IconButton(
                         onPressed: () => funimg(ImageSource.gallery),
-                        icon: Icon(Ionicons.folder),
+                        icon: const Icon(Ionicons.folder),
                       ),
                       IconButton(
                         onPressed: () => funimg(ImageSource.camera),
-                        icon: Icon(
+                        icon: const Icon(
                           Ionicons.camera,
                         ),
                       ),
@@ -156,7 +156,7 @@ class _editProfileState extends State<editProfile> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               TextFormField(
@@ -172,7 +172,7 @@ class _editProfileState extends State<editProfile> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Icons.location_pin),
                     labelText: 'Address',
                     hintText: 'Enter your address',
                     border: OutlineInputBorder()),
@@ -183,7 +183,7 @@ class _editProfileState extends State<editProfile> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Icons.calendar_month),
                     labelText: 'Age',
                     hintText: 'Enter your age',
                     border: OutlineInputBorder()),
@@ -194,7 +194,7 @@ class _editProfileState extends State<editProfile> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Icons.padding),
                     labelText: 'Major',
                     hintText: 'Enter your major',
                     border: OutlineInputBorder()),
