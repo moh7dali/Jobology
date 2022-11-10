@@ -90,7 +90,7 @@ class _personalInfoState extends State<personalInfo> {
                     age: age,
                     major: major,
                     bio: bio,
-                    facebook: github,
+                    github: github,
                     linkedin: LinkedIn,
                   );
                 }));
