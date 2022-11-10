@@ -2,9 +2,14 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:jobology/constants.dart';
 import '../../Widgets/questin_wedget.dart';
+import '../Authentication/Login.dart';
 
 class InterView extends StatefulWidget {
   InterView({required this.questionList});
@@ -18,27 +23,126 @@ class _InterViewState extends State<InterView> {
   int currentQuestionIndex = 0;
   int score = 0;
   Answer? selectedAnswer;
-
+  String username = "";
+  String img_url = "";
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        username = event['Fullname'];
+        img_url = event['img'];
+      });
+    });
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 5, 50, 80),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          Text(
-            "interviwe",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
+      backgroundColor: backgroud,
+      appBar: AppBar(
+        toolbarHeight: 75,
+        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+        elevation: 0,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: Image.asset(
+              "images/back.png",
+              width: 26,
+            ),
+            onPressed: () async {
+              Navigator.pushNamed(context, "Home");
+            },
+          ),
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // ignore: prefer_const_constructors
+                Text(
+                  "Welcome",
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 153, 152, 152),
+                    fontSize: 15,
+                  ),
+                ),
+                Text(
+                  username,
+                  style: TextStyle(color: Colors.black),
+                )
+              ],
+            ),
+          ],
+        ),
+        centerTitle: true,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, "personalPage");
+            },
+            child: CircleAvatar(
+              radius: 25,
+              backgroundColor: Colors.grey,
+              backgroundImage: NetworkImage(img_url),
             ),
           ),
-          _questionWidget(),
-          _answerList(),
-          _nextButton(),
-        ]),
+          SizedBox(
+            width: 15,
+          ),
+        ],
       ),
+      body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _questionWidget(),
+            _answerList(),
+            _nextButton(),
+          ],
+        ),
+      ),
+      floatingActionButton: SpeedDial(
+          buttonSize: const Size(70, 70),
+          spaceBetweenChildren: 15,
+          child: const Icon(
+            Ionicons.menu,
+            size: 30,
+          ),
+          backgroundColor: buttonColor,
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.logout),
+              label: 'Logout',
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Login();
+                    },
+                  ),
+                );
+              },
+            ),
+            SpeedDialChild(
+              child: const Icon(Ionicons.person),
+              label: 'Profile',
+              onTap: () {
+                Navigator.pushNamed(context, "personalPage");
+              },
+            ),
+            SpeedDialChild(
+              child: const Icon(Ionicons.home),
+              label: 'Home',
+              onTap: () {
+                Navigator.pushNamed(context, "Home");
+              },
+            ),
+          ]),
     );
   }
 
@@ -50,8 +154,8 @@ class _InterViewState extends State<InterView> {
         Text(
           "Question ${currentQuestionIndex + 1}/${widget.questionList!.length.toString()}",
           style: const TextStyle(
-            color: Colors.white,
-            fontSize: 20,
+            color: Colors.black,
+            fontSize: titleSize,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -61,14 +165,14 @@ class _InterViewState extends State<InterView> {
           width: double.infinity,
           padding: const EdgeInsets.all(32),
           decoration: BoxDecoration(
-            color: Colors.orangeAccent,
+            color: containerBackgroun,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Text(
             widget.questionList![currentQuestionIndex].questionText,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 18,
+              fontSize: subTitleSize,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -94,10 +198,17 @@ class _InterViewState extends State<InterView> {
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 8),
       height: 48,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: containerBackgroun,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: isSelected ? Colors.orangeAccent : Colors.white,
+          primary: isSelected ? iconColor : Colors.white,
           onPrimary: isSelected ? Colors.white : Colors.black,
         ),
         onPressed: () {
@@ -110,7 +221,12 @@ class _InterViewState extends State<InterView> {
             });
           }
         },
-        child: Text(answer.answerText!),
+        child: Text(
+          answer.answerText!,
+          style: TextStyle(
+            fontSize: subTitleSize,
+          ),
+        ),
       ),
     );
   }
@@ -127,7 +243,7 @@ class _InterViewState extends State<InterView> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: Colors.blueAccent,
+          primary: buttonColor,
           onPrimary: Colors.white,
         ),
         onPressed: () {
@@ -143,7 +259,12 @@ class _InterViewState extends State<InterView> {
             });
           }
         },
-        child: Text(isLastQuestion ? "Submit" : "Next"),
+        child: Text(
+          isLastQuestion ? "Submit" : "Next",
+          style: TextStyle(
+            fontSize: subTitleSize,
+          ),
+        ),
       ),
     );
   }
@@ -156,22 +277,56 @@ class _InterViewState extends State<InterView> {
     }
     String title = isPassed ? "Passed " : "Failed";
 
-    return AlertDialog(
-      title: Text(
-        title + " | Score is $score",
-        style: TextStyle(color: isPassed ? Colors.green : Colors.redAccent),
-      ),
-      content: ElevatedButton(
-        child: const Text("Restart"),
-        onPressed: () {
-          Navigator.pop(context);
-          setState(() {
-            currentQuestionIndex = 0;
-            score = 0;
-            selectedAnswer = null;
-          });
-        },
-      ),
-    );
+    return CupertinoAlertDialog(
+        title: Column(
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                color: isPassed ? Colors.green : Colors.redAccent,
+                fontSize: subTitleSize,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
+        content: Column(
+          children: [
+            Text(
+              "Your score",
+              style: TextStyle(
+                // color: isPassed ? Colors.green : Colors.redAccent,
+                fontSize: subTitleSize,
+              ),
+            ),
+            Text(
+              "$score out of ${widget.questionList!.length.toString()}",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: subTitleSize,
+              ),
+            )
+          ],
+        ),
+        actions: [
+          MaterialButton(
+            child: const Text(
+              "Restart",
+              style: TextStyle(
+                fontSize: subTitleSize,
+              ),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              setState(() {
+                currentQuestionIndex = 0;
+                score = 0;
+                selectedAnswer = null;
+              });
+            },
+          ),
+        ]);
   }
 }
