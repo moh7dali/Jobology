@@ -172,7 +172,7 @@ class _EditCompanyInfoState extends State<EditCompanyInfo> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Ionicons.logo_github),
+                  prefixIcon: Icon(Ionicons.logo_facebook),
                   labelText: 'FaceBook',
                   hintText: 'Enter Company Facebook url',
                   border: OutlineInputBorder()),

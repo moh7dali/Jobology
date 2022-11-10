@@ -82,6 +82,7 @@ class _Company_infoState extends State<Company_info> {
                     Fullname: username,
                     address: address,
                     img_url: img_url,
+                    facebook: Facebook,
                     linkedin: LinkedIn,
                     phone: phone,
                     email: email,
