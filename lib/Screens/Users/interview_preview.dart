@@ -89,21 +89,27 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('interview').snapshots(),
         builder: (context, snapshot) {
-          final docs = snapshot.data!.docs;
-          return Padding(
-            padding: const EdgeInsets.all(10),
-            child: ListView.separated(
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: docs.length,
-              itemBuilder: (context, index) {
-                return ListTaleW(
-                  imageUrl: "images/aspaire.png",
-                  title: docs[index]['title'],
-                  breif: docs[index]['breif'],
-                );
-              },
-            ),
-          );
+          if (snapshot.hasData) {
+            final docs = snapshot.data!.docs;
+            return Padding(
+              padding: const EdgeInsets.all(10),
+              child: ListView.separated(
+                separatorBuilder: (context, index) => Divider(),
+                itemCount: docs.length,
+                itemBuilder: (context, index) {
+                  return ListTaleW(
+                    imageUrl:
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/800px-Unofficial_JavaScript_logo_2.svg.png",
+                    title: docs[index]['title'],
+                    breif: docs[index]['breif'],
+                  );
+                },
+              ),
+            );
+          } else if (snapshot.hasError) {
+            const Text('No data avaible right now');
+          }
+          return Center(child: CircularProgressIndicator());
         },
       ),
       floatingActionButton: SpeedDial(

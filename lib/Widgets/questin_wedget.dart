@@ -64,7 +64,7 @@ List<Question> getAspQuestions() {
   list.add(Question(
     "Who is the owner of Flutter?",
     [
-      Answer("Nokia", false),
+      Answer("Asp", false),
       Answer("Samsung", false),
       Answer("Google", true),
       Answer("Apple", false),
@@ -109,7 +109,7 @@ List<Question> getJsQuestions() {
   list.add(Question(
     "Who is the owner of Flutter?",
     [
-      Answer("Nokia", false),
+      Answer("Js", false),
       Answer("Samsung", false),
       Answer("Google", true),
       Answer("Apple", false),
@@ -154,7 +154,7 @@ List<Question> getPhpQuestions() {
   list.add(Question(
     "Who is the owner of Flutter?",
     [
-      Answer("Nokia", false),
+      Answer("php", false),
       Answer("Samsung", false),
       Answer("Google", true),
       Answer("Apple", false),

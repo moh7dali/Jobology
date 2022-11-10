@@ -7,21 +7,16 @@ import 'package:jobology/Screens/Users/interview.dart';
 import 'package:jobology/Widgets/questin_wedget.dart';
 
 class ListTaleW extends StatefulWidget {
-  ListTaleW(
-      {this.imageUrl,
-      this.title,
-      this.breif,
-      this.url,
-      this.years,
-      this.req,
-      this.docnid});
+  ListTaleW({
+    this.imageUrl,
+    this.title,
+    this.breif,
+    this.url,
+  });
   String? title;
   String? imageUrl;
   String? breif;
-  String? req;
-  String? years;
   String? url;
-  dynamic docnid;
   @override
   State<ListTaleW> createState() => _ListTaleWState();
 }
@@ -68,23 +63,31 @@ class _ListTaleWState extends State<ListTaleW> {
           nav();
         });
       },
-      leading: ClipRRect(
+      leading: Container(
+        width: 80,
+        height: 80,
+        child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: Image.asset(
-            widget.imageUrl!,
-            fit: BoxFit.contain,
-          )),
+          child: Image(
+            image: NetworkImage(
+              widget.imageUrl!,
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
       title: Text(
         widget.title!,
         style: TextStyle(
           color: Colors.black,
-          fontSize: 20,
+          fontSize: 22,
           fontWeight: FontWeight.bold,
         ),
       ),
       subtitle: Text(
         widget.breif!,
         style: TextStyle(
+          fontSize: 15,
           color: Color.fromARGB(255, 163, 167, 165),
           fontWeight: FontWeight.bold,
         ),

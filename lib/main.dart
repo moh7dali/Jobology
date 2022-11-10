@@ -9,12 +9,14 @@ import 'package:jobology/Screens/Company/AddNewTraining.dart';
 import 'package:jobology/Screens/Company/HomeCompany.dart';
 import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Users/cv.dart';
+import 'package:jobology/Screens/Users/interview_preview.dart';
 import 'package:jobology/Screens/Welcome.dart';
 import 'package:jobology/Screens/Users/course.dart';
 import 'package:jobology/Screens/Users/interview.dart';
 import 'package:jobology/Screens/Users/jobs.dart';
 import 'package:jobology/Screens/start.dart';
 import 'package:jobology/Widgets/ck_login.dart';
+import 'package:jobology/Widgets/questin_wedget.dart';
 import 'Screens/Authentication/ForgetPass.dart';
 import 'Screens/Users/peronalPage/personalpage.dart';
 import 'firebase_options.dart';
@@ -42,7 +44,7 @@ Future<void> main() async {
       "companyHome": (context) => CompanyHome(),
       "addNewPage": (context) => AddNewJob(),
       "addNewTraining": (context) => AddNewTraining(),
-      //"interview": (context) => InterView(),
+      "interview": (context) => Interviwe_Preview(),
     },
     home: const MyApp(),
   ));
