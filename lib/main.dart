@@ -12,7 +12,6 @@ import 'package:jobology/Screens/Users/cv.dart';
 import 'package:jobology/Screens/Users/interview_preview.dart';
 import 'package:jobology/Screens/Welcome.dart';
 import 'package:jobology/Screens/Users/course.dart';
-import 'package:jobology/Screens/Users/interview.dart';
 import 'package:jobology/Screens/Users/jobs.dart';
 import 'package:jobology/Screens/start.dart';
 import 'package:jobology/Widgets/ck_login.dart';
@@ -21,6 +20,7 @@ import 'Screens/Authentication/ForgetPass.dart';
 import 'Screens/Users/peronalPage/personalpage.dart';
 import 'firebase_options.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import "./Screens/Users/interview_preview.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +44,7 @@ Future<void> main() async {
       "companyHome": (context) => CompanyHome(),
       "addNewPage": (context) => AddNewJob(),
       "addNewTraining": (context) => AddNewTraining(),
+      "cv": (context) => Cv(),
       "interview": (context) => Interviwe_Preview(),
     },
     home: const MyApp(),

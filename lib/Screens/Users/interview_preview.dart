@@ -98,8 +98,7 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
                   return ListTaleW(
-                    imageUrl:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/800px-Unofficial_JavaScript_logo_2.svg.png",
+                    imageUrl: docs[index]['img'],
                     title: docs[index]['title'],
                     breif: docs[index]['breif'],
                   );
