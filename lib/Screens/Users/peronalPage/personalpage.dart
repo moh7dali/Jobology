@@ -50,7 +50,7 @@ class _personalInfoState extends State<personalInfo> {
         address = event['address'];
         major = event['major'];
         age = event['age'];
-        github = event['facebookurl'];
+        github = event['Githuburl'];
         LinkedIn = event['linkedinurl'];
         Skills = event["skills"];
       });

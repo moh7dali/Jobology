@@ -48,7 +48,7 @@ class _Company_infoState extends State<Company_info> {
         email = event['Email'];
         Facebook = event['facebookurl'];
         LinkedIn = event['linkedinurl'];
-        info = event["info"];
+        info = event["Info"];
       });
     });
     if (widget.user_id == FirebaseAuth.instance.currentUser!.uid) {
@@ -152,6 +152,10 @@ class _Company_infoState extends State<Company_info> {
                         fontSize: 40,
                       ),
                     ),
+                    Icon_Url(
+                      icon: const Icon(FontAwesomeIcons.facebook),
+                      url: Facebook,
+                    ),
                   ],
                 ),
               ),
@@ -235,12 +239,21 @@ class _Company_infoState extends State<Company_info> {
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      "Major",
+                      "Breif",
                       style: TextStyle(
                         color: containerBackgroun,
                         fontSize: subTitleSize,
                       ),
                     ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Center(
+                  child: Text(
+                    info,
+                    style: const TextStyle(fontSize: subTitleSize),
                   ),
                 ),
               ),
