@@ -4,8 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Company/company_info.dart';
+import 'package:jobology/Screens/Users/Home.dart';
+import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/constants.dart';
 import 'mytext.dart';
 
@@ -40,36 +43,37 @@ class _Course_previweState extends State<Course_previwe> {
       body: Container(
         width: double.maxFinite,
         height: double.infinity,
-        child: Stack(children: [
-          Positioned(
-              left: 0,
-              right: 0,
-              child: Container(
-                width: double.maxFinite,
-                height: 320,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(widget.imageUrl!),
-                    fit: BoxFit.cover,
+        child: Stack(
+          children: [
+            Positioned(
+                left: 0,
+                right: 0,
+                child: Container(
+                  width: double.maxFinite,
+                  height: 320,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(widget.imageUrl!),
+                      fit: BoxFit.cover,
+                    ),
                   ),
+                )),
+            Positioned(
+              top: 30,
+              left: 15,
+              child: Container(
+                  child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Ionicons.chevron_back_outline,
+                  size: 35,
+                  color: Colors.white,
                 ),
               )),
-          Positioned(
-            top: 30,
-            left: 15,
-            child: Container(
-                child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Ionicons.chevron_back_outline,
-                size: 35,
-                color: Colors.white,
-              ),
-            )),
-          ),
-          Positioned(
+            ),
+            Positioned(
               top: 290,
               child: Container(
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -84,40 +88,37 @@ class _Course_previweState extends State<Course_previwe> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "${widget.title!.toString().toUpperCase()}",
-                                  style: const TextStyle(
-                                      fontSize: titleSize,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) {
-                                          return Company_info(
-                                            user_id: widget.comp_id,
-                                          );
-                                        },
-                                      ));
-                                    },
-                                    child: Icon(Icons.info))
-                              ],
-                            ),
-                            MyText(
-                                text: "${widget.price}" + "\$",
-                                size: 25,
-                                mycolor: Colors.black12.withOpacity(0.7))
-                          ],
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "${widget.title!.toString().toUpperCase()}",
+                                style: const TextStyle(
+                                    fontSize: titleSize,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return Company_info(
+                                          user_id: widget.comp_id,
+                                        );
+                                      },
+                                    ));
+                                  },
+                                  child: Icon(Icons.info))
+                            ],
+                          ),
+                        ],
                       ),
+                      MyText(
+                          text: "${widget.price}" + "\$",
+                          size: 25,
+                          mycolor: Colors.black12.withOpacity(0.7)),
                       const SizedBox(
                         height: 10,
                       ),
@@ -251,9 +252,56 @@ class _Course_previweState extends State<Course_previwe> {
                     ],
                   ),
                 ),
-              ))
-        ]),
+              ),
+            ),
+          ],
+        ),
       ),
+      floatingActionButton: SpeedDial(
+          buttonSize: Size(70, 70),
+          spaceBetweenChildren: 15,
+          child: Icon(
+            Ionicons.menu,
+            size: 30,
+          ),
+          backgroundColor: buttonColor,
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.logout),
+              label: 'Logout',
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.popAndPushNamed(context, "Login");
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Ionicons.person),
+              label: 'Profile',
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return personalInfo(
+                      user_id: FirebaseAuth.instance.currentUser!.uid,
+                    );
+                  },
+                ));
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Ionicons.home),
+              label: 'Home',
+              onTap: () {
+                Navigator.pop(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Home();
+                    },
+                  ),
+                );
+              },
+            ),
+          ]),
     );
   }
 }

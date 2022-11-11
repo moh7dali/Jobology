@@ -4,6 +4,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
+import 'package:jobology/Screens/Users/Home.dart';
 // import 'package:jobology/Widgets/JobsWidget.dart';
 import 'package:jobology/Widgets/interview_wedget.dart';
 import 'package:jobology/constants.dart';
@@ -145,7 +146,14 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               child: const Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.pushNamed(context, "Home");
+                Navigator.pop(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Home();
+                    },
+                  ),
+                );
               },
             ),
           ]),

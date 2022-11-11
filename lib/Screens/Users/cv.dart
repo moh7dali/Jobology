@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/cvpreview.dart';
 import 'package:jobology/Widgets/open_url.dart';
@@ -457,7 +458,14 @@ class _CvState extends State<Cv> {
                 child: Icon(Ionicons.home),
                 label: 'Home',
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pop(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Home();
+                      },
+                    ),
+                  );
                 },
               ),
             ]),

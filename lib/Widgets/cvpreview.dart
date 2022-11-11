@@ -1,7 +1,11 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:jobology/Screens/Users/Home.dart';
+import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/constants.dart';
 import 'open_url.dart';
 
@@ -32,37 +36,38 @@ class _cv_previweState extends State<cv_previwe> {
         body: SizedBox(
           width: double.maxFinite,
           height: double.infinity,
-          child: Stack(children: [
-            Positioned(
-              left: 0,
-              right: 0,
-              child: Container(
-                width: double.maxFinite,
-                height: 320,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(widget.imageName!),
-                    fit: BoxFit.fill,
+          child: Stack(
+            children: [
+              Positioned(
+                left: 0,
+                right: 0,
+                child: Container(
+                  width: double.maxFinite,
+                  height: 320,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(widget.imageName!),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              top: 30,
-              left: 15,
-              child: Container(
-                  child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Ionicons.chevron_back_outline,
-                  size: 35,
-                  color: Colors.white,
-                ),
-              )),
-            ),
-            Positioned(
+              Positioned(
+                top: 30,
+                left: 15,
+                child: Container(
+                    child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Ionicons.chevron_back_outline,
+                    size: 35,
+                    color: Colors.white,
+                  ),
+                )),
+              ),
+              Positioned(
                 top: 290,
                 child: Container(
                   padding: const EdgeInsets.only(left: 20, right: 20),
@@ -112,9 +117,56 @@ class _cv_previweState extends State<cv_previwe> {
                       ),
                     ),
                   ),
-                ))
-          ]),
+                ),
+              ),
+            ],
+          ),
         ),
+        floatingActionButton: SpeedDial(
+            buttonSize: Size(70, 70),
+            spaceBetweenChildren: 15,
+            child: Icon(
+              Ionicons.menu,
+              size: 30,
+            ),
+            backgroundColor: buttonColor,
+            children: [
+              SpeedDialChild(
+                child: Icon(Icons.logout),
+                label: 'Logout',
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.popAndPushNamed(context, "Login");
+                },
+              ),
+              SpeedDialChild(
+                child: Icon(Ionicons.person),
+                label: 'Profile',
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return personalInfo(
+                        user_id: FirebaseAuth.instance.currentUser!.uid,
+                      );
+                    },
+                  ));
+                },
+              ),
+              SpeedDialChild(
+                child: Icon(Ionicons.home),
+                label: 'Home',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Home();
+                      },
+                    ),
+                  );
+                },
+              ),
+            ]),
       ),
     );
   }

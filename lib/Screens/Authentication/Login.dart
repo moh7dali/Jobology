@@ -111,7 +111,7 @@ class _LoginState extends State<Login> {
                         var type;
                         UserCredential myuser =
                             await auth.signInWithEmailAndPassword(
-                                email: emailController.text,
+                                email: emailController.text.trim(),
                                 password: passController.text);
                         us_id = myuser.user!.uid;
 
