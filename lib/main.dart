@@ -28,7 +28,7 @@ Future<void> main() async {
     debugShowCheckedModeBanner: false,
     routes: {
       "Login": (context) => const Login(),
-      "Sign_Up": (context) => const Sign_up(),
+      "Sign_Up": (context) => Sign_up(),
       "Check": (context) => const Check(),
       "Company Sign up": (context) => Company_Sign_up(),
       "Home": (context) => Home(),

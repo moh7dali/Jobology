@@ -250,7 +250,7 @@ class _job_previweState extends State<job_previwe> {
                                     actions: [
                                       MaterialButton(
                                         onPressed: () {
-                                          Navigator.pop(context, "jobs");
+                                          Navigator.pop(context);
                                         },
                                         child: const Text(
                                           "Done",
