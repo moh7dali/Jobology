@@ -1,30 +1,26 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:jobology/constants.dart';
+import 'package:readmore/readmore.dart';
 
 class Cvt1 extends StatelessWidget {
   const Cvt1({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      width: double.maxFinite,
-      child: Text(
-        "A CV—short for the Latin “curriculum vitae,” meaning “course of life”—is a detailed document highlighting your professional and academic"
-        "history. CVs typically include information such as your work experience,"
-        " along with your achievements, awards, scholarships or grants you’ve"
-        " earned, coursework, research projects and publications of your work"
-        " A CV is typically two or three pages long, but it’s not unusual for it to"
-        "be much longer for mid-level or senior job applicants as a CV serves as"
-        " a full outline of one’s career accomplishments.",
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 26, 25, 25),
-        ),
-        
+    return ReadMoreText(
+      style: TextStyle(fontSize: subTitleSize),
+      "A CV—short for the Latin “curriculum vitae,” meaning “course of life”—is a detailed document highlighting your professional and academic history. CVs typically include information such as your work experience, along with your achievements, awards, scholarships or grants you’ve earned, coursework, research projects and publications of your work. A CV is typically two or three pages long, but it’s not unusual for it to be much longer for mid-level or senior job applicants as a CV serves as a full outline of one’s career accomplishments.",
+      trimLines: 5,
+      colorClickableText: containerBackgroun,
+      trimMode: TrimMode.Line,
+      trimCollapsedText: '  Read more',
+      trimExpandedText: '  Less',
+      moreStyle: TextStyle(
+        fontSize: subTitleSize,
       ),
+      textAlign: TextAlign.left,
     );
   }
 }
@@ -34,19 +30,18 @@ class Cvt2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      width: double.maxFinite,
-      child: Text(
-        "A resume is a formal document providing an overview of your professional"
-        "  background and relevant skills. Standard sections on a resume include your"
-        "  work history, education, a professional summary, and a list of your skills. The"
-        " three resume formats are reverse chronological, functional and combined.",
-        style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 26, 25, 25)),
-      )
+    return ReadMoreText(
+      style: TextStyle(fontSize: subTitleSize),
+      "A resume is a formal document providing an overview of your professional background and relevant skills. Standard sections on a resume include your work history, education, a professional summary, and a list of your skills. The three resume formats are reverse chronological, functional and combined.",
+      trimLines: 5,
+      colorClickableText: containerBackgroun,
+      trimMode: TrimMode.Line,
+      trimCollapsedText: '  Read more',
+      trimExpandedText: '  Less',
+      moreStyle: TextStyle(
+        fontSize: subTitleSize,
+      ),
+      textAlign: TextAlign.left,
     );
   }
 }
@@ -56,22 +51,18 @@ class Cvt3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      width: double.maxFinite,
-      child: Text(
-        "As noted, a CV and resume are similar in that they’re both formal, details"
-        " documents that summarize your professional history, education, skills and"
-        " achievements. They’re also both documents you may provide an employer"
-        " three resume formats are reverse chronological, functional and combined."
-        "for consideration for an open position. This said, there are differences an"
-        " it’s important you know when a CV would be preferred and how to properly"
-        "create one. Here is an overview of how CVs compare to resumes:",
-        style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 26, 25, 25)),
+    return ReadMoreText(
+      style: TextStyle(fontSize: subTitleSize),
+      "A CV—short for the Latin “curriculum vitae,” meaning “course of life”—is a detailed document highlighting your professional and academic history. CVs typically include information such as your work experience, along with your achievements, awards, scholarships or grants you’ve earned, coursework, research projects and publications of your work. A CV is typically two or three pages long, but it’s not unusual for it to be much longer for mid-level or senior job applicants as a CV serves as a full outline of one’s career accomplishments.",
+      trimLines: 5,
+      colorClickableText: containerBackgroun,
+      trimMode: TrimMode.Line,
+      trimCollapsedText: '  Read more',
+      trimExpandedText: '  Less',
+      moreStyle: TextStyle(
+        fontSize: subTitleSize,
       ),
+      textAlign: TextAlign.left,
     );
   }
 }
@@ -81,20 +72,18 @@ class Cvt4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      width: double.maxFinite,
-      child: Text(
-        "While most CV documents share the same basic structure and format,the organization"
-        "   and content of a CV depends on the type of position you apply"
-        " for.\n When organizing your CV, list the most relevant sections first to catch an"
-        " employer's attention, whether that is your work history or an impressive list"
-        " of publications. Heres a CV template to reference when creating your own:",
-        style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 26, 25, 25)),
+    return ReadMoreText(
+      style: TextStyle(fontSize: subTitleSize),
+      "While most CV documents share the same basic structure and format,the organization and content of a CV depends on the type of position you apply for.\n When organizing your CV, list the most relevant sections first to catch an employer's attention, whether that is your work history or an impressive list of publications. Heres a CV template to reference when creating your own:",
+      trimLines: 5,
+      colorClickableText: containerBackgroun,
+      trimMode: TrimMode.Line,
+      trimCollapsedText: '  Read more',
+      trimExpandedText: '  Less',
+      moreStyle: TextStyle(
+        fontSize: subTitleSize,
       ),
+      textAlign: TextAlign.left,
     );
   }
 }

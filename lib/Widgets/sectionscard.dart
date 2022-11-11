@@ -35,7 +35,7 @@ class SectionsCard extends StatelessWidget {
             ListTile(
               title: Text(
                 "${CardTitle}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: subTitleSize,
                   fontWeight: FontWeight.bold,
                 ),
