@@ -109,7 +109,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       shape: RoundedRectangleBorder(),
                       padding: EdgeInsets.symmetric(vertical: 15)),
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.popAndPushNamed(context, "Login");
                   },
                   child: Text("Return to Login page",
                       style: GoogleFonts.montserrat(
