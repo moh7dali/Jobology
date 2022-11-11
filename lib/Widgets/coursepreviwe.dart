@@ -287,13 +287,7 @@ class _Course_previweState extends State<Course_previwe> {
                 ));
               },
             ),
-            SpeedDialChild(
-              child: Icon(Ionicons.home),
-              label: 'Home',
-              onTap: () {
-                Navigator.popAndPushNamed(context, "Home");
-              },
-            ),
+          
           ]),
     );
   }

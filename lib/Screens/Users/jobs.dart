@@ -205,7 +205,7 @@ class _jobsState extends State<jobs> {
               child: Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.popAndPushNamed(context, "Home");
+                Navigator.pop(context);
               },
             ),
           ]),

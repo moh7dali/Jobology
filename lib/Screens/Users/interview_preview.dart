@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/Home.dart';
+import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 // import 'package:jobology/Widgets/JobsWidget.dart';
 import 'package:jobology/Widgets/interview_wedget.dart';
 import 'package:jobology/constants.dart';
@@ -44,7 +45,7 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               width: 26,
             ),
             onPressed: () async {
-              Navigator.pushNamed(context, "Home");
+              Navigator.pop(context);
             },
           ),
         ),
@@ -125,13 +126,9 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Login();
-                    },
-                  ),
+                Navigator.popAndPushNamed(
+                  context,"Login"
+                
                 );
               },
             ),
@@ -139,14 +136,20 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               child: const Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
-                Navigator.pushNamed(context, "personalPage");
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return personalInfo(
+                      user_id: FirebaseAuth.instance.currentUser!.uid,
+                    );
+                  },
+                ));
               },
             ),
             SpeedDialChild(
               child: const Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.popAndPushNamed(context, "Home");
+                Navigator.pop(context);
               },
             ),
           ]),

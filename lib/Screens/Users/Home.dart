@@ -210,13 +210,7 @@ class _HomeState extends State<Home> {
                 ));
               },
             ),
-            SpeedDialChild(
-              child: Icon(Ionicons.home),
-              label: 'Home',
-              onTap: () {
-                Navigator.popAndPushNamed(context, "Home");
-              },
-            ),
+            
           ]),
     );
   }

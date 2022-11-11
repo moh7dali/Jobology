@@ -315,13 +315,7 @@ class _job_previweState extends State<job_previwe> {
                 ));
               },
             ),
-            SpeedDialChild(
-              child: Icon(Ionicons.home),
-              label: 'Home',
-              onTap: () {
-                Navigator.popAndPushNamed(context, "Home");
-              },
-            ),
+          
           ]),
     );
   }

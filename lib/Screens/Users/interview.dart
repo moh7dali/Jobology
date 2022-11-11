@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/constants.dart';
 import '../../Widgets/questin_wedget.dart';
 import '../Authentication/Login.dart';
@@ -118,13 +119,9 @@ class _InterViewState extends State<InterView> {
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.push(
+                Navigator.popAndPushNamed(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Login();
-                    },
-                  ),
+                 "Login"
                 );
               },
             ),
@@ -132,16 +129,16 @@ class _InterViewState extends State<InterView> {
               child: const Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
-                Navigator.pushNamed(context, "personalPage");
+               Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return personalInfo(
+                      user_id: FirebaseAuth.instance.currentUser!.uid,
+                    );
+                  },
+                ));
               },
             ),
-            SpeedDialChild(
-              child: const Icon(Ionicons.home),
-              label: 'Home',
-              onTap: () {
-                Navigator.popAndPushNamed(context, "Home");
-              },
-            ),
+           
           ]),
     );
   }

@@ -152,13 +152,7 @@ class _cv_previweState extends State<cv_previwe> {
                   ));
                 },
               ),
-              SpeedDialChild(
-                child: Icon(Ionicons.home),
-                label: 'Home',
-                onTap: () {
-                  Navigator.popAndPushNamed(context, "Home");
-                },
-              ),
+            
             ]),
       ),
     );
