@@ -18,7 +18,8 @@ class editProfile extends StatefulWidget {
       this.major,
       this.bio,
       this.github,
-      this.linkedin});
+      this.linkedin,
+      this.ChoosenSkills});
   String? img_url;
   String? Fullname;
   String? address;
@@ -28,6 +29,7 @@ class editProfile extends StatefulWidget {
   String? bio;
   String? github;
   String? linkedin;
+  List? ChoosenSkills;
 
   @override
   State<editProfile> createState() => _editProfileState();
@@ -46,7 +48,8 @@ class _editProfileState extends State<editProfile> {
     });
   }
 
-  List SelectedItem = [];
+  //List SelectedItem = [];
+
   @override
   Widget build(BuildContext context) {
     String Selected = "Skills";
@@ -268,13 +271,34 @@ class _editProfileState extends State<editProfile> {
                     onChanged: (value) {
                       setState(() {
                         Selected = value.toString();
-                        SelectedItem.add(Selected);
-                        print(SelectedItem);
+                        //SelectedItem.add(Selected);
+                        widget.ChoosenSkills!.add(Selected);
+                        // print(SelectedItem);
                       });
                     },
                   ),
                 ),
               ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     children: [
+              //       for (int i = 0; i < SelectedItem.length; i++)
+              //         Padding(
+              //           padding: const EdgeInsets.all(8.0),
+              //           child: Text(
+              //             "${SelectedItem[i].toString()},  ",
+              //             style: const TextStyle(
+              //               fontSize: ParagraphSize,
+              //             ),
+              //           ),
+              //         ),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -282,14 +306,42 @@ class _editProfileState extends State<editProfile> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    for (int i = 0; i < SelectedItem.length; i++)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "${SelectedItem[i].toString()},  ",
-                          style: const TextStyle(
-                            fontSize: ParagraphSize,
-                          ),
+                    for (int i = 0; i < widget.ChoosenSkills!.length; i++)
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: containerBackgroun,
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              "${widget.ChoosenSkills![i].toString()},  ",
+                              style: const TextStyle(
+                                fontSize: ParagraphSize,
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () {
+                                  FirebaseFirestore.instance
+                                      .collection('Users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      .update({
+                                    'skills': FieldValue.arrayRemove(
+                                        [widget.ChoosenSkills![i]])
+                                  });
+                                  widget.ChoosenSkills!
+                                      .remove(widget.ChoosenSkills![i]);
+                                  setState(() {
+                                    widget.ChoosenSkills !=
+                                        widget.ChoosenSkills!;
+                                  });
+                                  print(widget.ChoosenSkills!);
+                                },
+                                icon: Icon(Icons.delete))
+                          ],
                         ),
                       ),
                   ],
@@ -320,6 +372,7 @@ class _editProfileState extends State<editProfile> {
                     await storageRef.putFile(pickedimg!);
                     url = await storageRef.getDownloadURL();
                   }
+
                   await FirebaseFirestore.instance
                       .collection('Users')
                       .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -333,7 +386,7 @@ class _editProfileState extends State<editProfile> {
                     'img': url,
                     'linkedinurl': linkedinController.text,
                     'Githuburl': githubController.text,
-                    'skills': FieldValue.arrayUnion(SelectedItem)
+                    'skills': FieldValue.arrayUnion(widget.ChoosenSkills!)
                   });
                   Navigator.pop(context);
                 },
