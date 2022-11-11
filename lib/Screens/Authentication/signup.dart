@@ -10,15 +10,15 @@ import 'package:jobology/constants.dart';
 import 'package:geocoding/geocoding.dart';
 
 class Sign_up extends StatefulWidget {
-   Sign_up({super.key,});
+  Sign_up({
+    super.key,
+  });
 
   @override
   State<Sign_up> createState() => _Sign_upState();
 }
 
 class _Sign_upState extends State<Sign_up> {
-  
-
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -42,31 +42,29 @@ class _Sign_upState extends State<Sign_up> {
     }
 
     return await Geolocator.getCurrentPosition();
-  } 
-  void getlocation()async{
-    _determinePosition();
-                                  Position position =
-                                      await Geolocator.getCurrentPosition(
-                                          desiredAccuracy:
-                                              LocationAccuracy.high);
-                                  double latitude = position.latitude;
-                                  double longtude = position.longitude;
-                                  List<Placemark> placemarks =
-                                      await placemarkFromCoordinates(
-                                          latitude, longtude);
-                                  
-                                  setState(() {
-                                    Location1 =
-                                       "${(placemarks[0].country).toString()} ,${(placemarks[0].administrativeArea).toString()}";
-                                       print(Location1);
-                                  });
   }
-  String Location1="";
+
+  void getlocation() async {
+    _determinePosition();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double latitude = position.latitude;
+    double longtude = position.longitude;
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(latitude, longtude);
+
+    setState(() {
+      Location1 =
+          "${(placemarks[0].country).toString()} ,${(placemarks[0].administrativeArea).toString()}";
+      print(Location1);
+    });
+  }
+
+  String Location1 = "";
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController phoneController = TextEditingController(
-        );
+  TextEditingController phoneController = TextEditingController();
   String us_id = "";
   bool _isObscure = true;
 
@@ -122,14 +120,10 @@ class _Sign_upState extends State<Sign_up> {
                           TextFormField(
                             decoration: InputDecoration(
                               labelText: 'phone',
-                              hintText:
-                                  'add your phone number',
+                              hintText: 'add your phone number',
                               hintStyle: TextStyle(fontSize: 10),
                               prefixIcon: Icon(Icons.phone),
                               border: OutlineInputBorder(),
-                            
-                              
-                              
                             ),
                             controller: phoneController,
                           ),
@@ -162,10 +156,14 @@ class _Sign_upState extends State<Sign_up> {
                             height: 10,
                           ),
                           Center(
-                            child: ElevatedButton(style: ElevatedButton.styleFrom(
-                            backgroundColor: buttonColor,),onPressed: () {
-                              getlocation();
-                            }, child: Text("add your location")),
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: buttonColor,
+                                ),
+                                onPressed: () {
+                                  getlocation();
+                                },
+                                child: Text("add your location")),
                           )
                         ],
                       ),
@@ -200,7 +198,7 @@ class _Sign_upState extends State<Sign_up> {
                               'major': "",
                               'bio': "",
                               'rules': "User",
-                              'facebookurl': "",
+                              'Githuburl': "",
                               'linkedinurl': ""
                             });
                             print(myuser.additionalUserInfo!.isNewUser);
