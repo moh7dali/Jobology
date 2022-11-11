@@ -35,6 +35,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
   TextEditingController urlController = TextEditingController();
 
   String comp_name = "";
+  String comp_id = "";
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore.instance
@@ -44,6 +45,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
         .listen((event) {
       setState(() {
         comp_name = event['Fullname'];
+        comp_id = event['user_id'];
       });
     });
     return SafeArea(
@@ -171,7 +173,8 @@ class _AddNewTrainingState extends State<AddNewTraining> {
                     'breif': briefController.text,
                     'price': priceController.text,
                     'url': urlController.text,
-                    'img_url': url
+                    'img_url': url,
+                    'comp_id': comp_id
                   });
                   Navigator.pop(context);
                 },
