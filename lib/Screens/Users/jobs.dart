@@ -205,14 +205,7 @@ class _jobsState extends State<jobs> {
               child: Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.pop(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Home();
-                    },
-                  ),
-                );
+                Navigator.popAndPushNamed(context, "Home");
               },
             ),
           ]),

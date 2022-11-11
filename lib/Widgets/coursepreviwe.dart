@@ -291,14 +291,7 @@ class _Course_previweState extends State<Course_previwe> {
               child: Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.pop(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Home();
-                    },
-                  ),
-                );
+                Navigator.popAndPushNamed(context, "Home");
               },
             ),
           ]),

@@ -139,7 +139,7 @@ class _InterViewState extends State<InterView> {
               child: const Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.pushNamed(context, "Home");
+                Navigator.popAndPushNamed(context, "Home");
               },
             ),
           ]),

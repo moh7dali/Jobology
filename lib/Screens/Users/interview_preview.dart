@@ -146,14 +146,7 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               child: const Icon(Ionicons.home),
               label: 'Home',
               onTap: () {
-                Navigator.pop(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Home();
-                    },
-                  ),
-                );
+                Navigator.popAndPushNamed(context, "Home");
               },
             ),
           ]),

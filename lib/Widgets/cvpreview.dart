@@ -156,14 +156,7 @@ class _cv_previweState extends State<cv_previwe> {
                 child: Icon(Ionicons.home),
                 label: 'Home',
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Home();
-                      },
-                    ),
-                  );
+                  Navigator.popAndPushNamed(context, "Home");
                 },
               ),
             ]),

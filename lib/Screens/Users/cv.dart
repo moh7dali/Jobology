@@ -458,14 +458,7 @@ class _CvState extends State<Cv> {
                 child: Icon(Ionicons.home),
                 label: 'Home',
                 onTap: () {
-                  Navigator.pop(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Home();
-                      },
-                    ),
-                  );
+                  Navigator.popAndPushNamed(context, "Home");
                 },
               ),
             ]),
