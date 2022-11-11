@@ -108,7 +108,7 @@ class _CvState extends State<Cv> {
               Text(
                 "Discover More\nAbout CV,",
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: titleSize,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -119,7 +119,7 @@ class _CvState extends State<Cv> {
                 child: Text(
                   "We offer a guide to writing a powerful CV that will help you stand out to employers, along with easy-to-follow examples.",
                   style: TextStyle(
-                    fontSize: titleSize,
+                    fontSize: subTitleSize,
                   ),
                   textAlign: TextAlign.left,
                 ),
