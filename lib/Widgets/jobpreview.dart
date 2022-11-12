@@ -9,6 +9,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Company/company_info.dart';
 import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
+import 'package:jobology/Widgets/open_url.dart';
 import 'package:jobology/constants.dart';
 import 'mytext.dart';
 
@@ -220,6 +221,11 @@ class _job_previweState extends State<job_previwe> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16),
+                        child: Open_url(
+                            url: widget.url!, text: "Visit the website"),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
                         child: Center(
                           child: MaterialButton(
                             height: 60,
@@ -315,7 +321,6 @@ class _job_previweState extends State<job_previwe> {
                 ));
               },
             ),
-          
           ]),
     );
   }
