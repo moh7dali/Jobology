@@ -208,7 +208,7 @@ class _Company_infoState extends State<Company_info> {
                       ),
                     ),
                     Icon_Url(
-                      icon: const Icon(FontAwesomeIcons.mailchimp),
+                      icon: const Icon(Ionicons.mail),
                       url: "mailto:${email}",
                     ),
                   ],
@@ -284,17 +284,20 @@ class _Company_infoState extends State<Company_info> {
                       ),
                     ),
                   ),
-                  TextButton(
-                      onPressed: () async {
-                        await getlocation();
-                        await FirebaseFirestore.instance
-                            .collection('Users')
-                            .doc(FirebaseAuth.instance.currentUser!.uid)
-                            .update({
-                          'address': Location1,
-                        });
-                      },
-                      child: Icon(Ionicons.locate))
+                  Visibility(
+                    visible: visibilty,
+                    child: TextButton(
+                        onPressed: () async {
+                          await getlocation();
+                          await FirebaseFirestore.instance
+                              .collection('Users')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .update({
+                            'address': Location1,
+                          });
+                        },
+                        child: Icon(Ionicons.locate)),
+                  )
                 ],
               ),
               Container(

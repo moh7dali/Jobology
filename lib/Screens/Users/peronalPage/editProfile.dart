@@ -15,6 +15,7 @@ import 'package:file_picker/file_picker.dart';
 class editProfile extends StatefulWidget {
   editProfile(
       {this.img_url,
+      this.cv,
       this.Fullname,
       this.address,
       this.age,
@@ -25,6 +26,7 @@ class editProfile extends StatefulWidget {
       this.linkedin,
       this.ChoosenSkills});
   String? img_url;
+  String? cv;
   String? Fullname;
   String? address;
   String? age;
@@ -40,6 +42,17 @@ class editProfile extends StatefulWidget {
 }
 
 class _editProfileState extends State<editProfile> {
+  PlatformFile? cv_file;
+  Future SelectCv() async {
+    final ruselt = await FilePicker.platform.pickFiles();
+    if (ruselt == null) {
+      return;
+    }
+    setState(() {
+      cv_file = ruselt.files.first;
+    });
+  }
+
   final ImagePicker _picker = ImagePicker();
   File? pickedimg;
   funimg(ImageSource src) async {
@@ -264,7 +277,10 @@ class _editProfileState extends State<editProfile> {
                 child: Padding(
                   padding: const EdgeInsets.all(5),
                   child: ElevatedButton(
-                      onPressed: () {}, child: Text("Upload Your cv")),
+                      onPressed: () {
+                        SelectCv();
+                      },
+                      child: Text("Upload Your cv")),
                 ),
               ),
               const SizedBox(
@@ -381,16 +397,25 @@ class _editProfileState extends State<editProfile> {
                     url = widget.img_url!;
                   } else {
                     DateTime now = DateTime.now();
-                    final storageRef = FirebaseStorage.instance
-                        .ref()
-                        .child('Users_img')
-                        .child(widget.Fullname.toString() +
+                    final storageRef = FirebaseStorage.instance.ref();
+                    storageRef.child('Users_img').child(
+                        widget.Fullname.toString() +
                             now.hour.toString() +
                             now.minute.toString() +
                             now.second.toString() +
                             '.jpg');
                     await storageRef.putFile(pickedimg!);
                     url = await storageRef.getDownloadURL();
+                  }
+                  final cv_url;
+                  if (cv_file == null) {
+                    cv_url = widget.cv;
+                  } else {
+                    final path = 'Users_cv/${cv_file!.name}';
+                    final file = File(cv_file!.path!);
+                    final cv_ref = FirebaseStorage.instance.ref().child(path);
+                    await cv_ref.putFile(file);
+                    cv_url = await cv_ref.getDownloadURL();
                   }
 
                   await FirebaseFirestore.instance
@@ -406,7 +431,8 @@ class _editProfileState extends State<editProfile> {
                     'img': url,
                     'linkedinurl': linkedinController.text,
                     'Githuburl': githubController.text,
-                    'skills': FieldValue.arrayUnion(widget.ChoosenSkills!)
+                    'skills': FieldValue.arrayUnion(widget.ChoosenSkills!),
+                    'cv': cv_url
                   });
                   Navigator.pop(context);
                 },

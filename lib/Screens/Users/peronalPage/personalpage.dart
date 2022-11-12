@@ -130,17 +130,17 @@ class _personalInfoState extends State<personalInfo> {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return editProfile(
-                    img_url: img_url,
-                    Fullname: username,
-                    phone: phone,
-                    address: address,
-                    age: age,
-                    major: major,
-                    bio: bio,
-                    github: github,
-                    linkedin: LinkedIn,
-                    ChoosenSkills: Skills,
-                  );
+                      img_url: img_url,
+                      Fullname: username,
+                      phone: phone,
+                      address: address,
+                      age: age,
+                      major: major,
+                      bio: bio,
+                      github: github,
+                      linkedin: LinkedIn,
+                      ChoosenSkills: Skills,
+                      cv: cv);
                 }));
               },
               icon: const Icon(Icons.edit),
@@ -228,6 +228,17 @@ class _personalInfoState extends State<personalInfo> {
                     Icon_Url(
                       icon: const Icon(Ionicons.mail),
                       url: "mailto:${email}",
+                    ),
+                    const Text(
+                      "|",
+                      style: TextStyle(
+                        color: Color.fromARGB(158, 204, 203, 203),
+                        fontSize: 40,
+                      ),
+                    ),
+                    Icon_Url(
+                      icon: const Icon(Ionicons.book_outline),
+                      url: cv,
                     ),
                   ],
                 ),
@@ -318,17 +329,20 @@ class _personalInfoState extends State<personalInfo> {
                       ),
                     ),
                   ),
-                  TextButton(
-                      onPressed: () async {
-                        await getlocation();
-                        await FirebaseFirestore.instance
-                            .collection('Users')
-                            .doc(FirebaseAuth.instance.currentUser!.uid)
-                            .update({
-                          'address': Location1,
-                        });
-                      },
-                      child: Icon(Ionicons.locate))
+                  Visibility(
+                    visible: visibilty,
+                    child: TextButton(
+                        onPressed: () async {
+                          await getlocation();
+                          await FirebaseFirestore.instance
+                              .collection('Users')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .update({
+                            'address': Location1,
+                          });
+                        },
+                        child: Icon(Ionicons.locate)),
+                  )
                 ],
               ),
               Container(
