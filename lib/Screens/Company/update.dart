@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:jobology/constants.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class Update_job extends StatefulWidget {
   Update_job(
@@ -29,6 +33,18 @@ String comp_name = "";
 String img_url = "";
 
 class _Update_jobState extends State<Update_job> {
+  final ImagePicker _picker = ImagePicker();
+  File? pickedimg;
+  funimg(ImageSource src) async {
+    final XFile? image = await _picker.pickImage(source: src);
+    if (image == null) {
+      return;
+    }
+    setState(() {
+      pickedimg = File(image.path);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore.instance
@@ -104,9 +120,39 @@ class _Update_jobState extends State<Update_job> {
         child: Form(
           child: ListView(
             children: [
-              Image.asset("images/jobCompany.png"),
-              SizedBox(
-                height: 30,
+              CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.grey,
+                  backgroundImage:
+                      pickedimg == null ? null : FileImage(pickedimg!)),
+              const SizedBox(
+                height: 10,
+              ),
+              Column(
+                children: [
+                  Text("Choose image From ?",
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () => funimg(ImageSource.gallery),
+                        icon: const Icon(Ionicons.folder),
+                      ),
+                      IconButton(
+                        onPressed: () => funimg(ImageSource.camera),
+                        icon: const Icon(
+                          Ionicons.camera,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 5,
               ),
               TextFormField(
                 decoration: const InputDecoration(
@@ -168,8 +214,25 @@ class _Update_jobState extends State<Update_job> {
                     backgroundColor: buttonColor,
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
-                onPressed: () {
-                  FirebaseFirestore.instance
+                onPressed: () async {
+                  final url;
+                  if (pickedimg == null) {
+                    url = widget.imageUrl!;
+                  } else {
+                    DateTime now = DateTime.now();
+                    final storageRef = FirebaseStorage.instance
+                        .ref()
+                        .child('Users_img')
+                        .child(comp_name.toString() +
+                            now.hour.toString() +
+                            now.minute.toString() +
+                            now.second.toString() +
+                            '.jpg');
+                    await storageRef.putFile(pickedimg!);
+                    url = await storageRef.getDownloadURL();
+                  }
+
+                  await FirebaseFirestore.instance
                       .collection('Jobs')
                       .doc(widget.docnid)
                       .update({
@@ -177,7 +240,8 @@ class _Update_jobState extends State<Update_job> {
                     'breif': briefController.text,
                     'years': yearController.text,
                     'requirements': reqController.text,
-                    'url': urlController.text
+                    'url': urlController.text,
+                    'img_url': url
                   });
                   Navigator.pop(context);
                 },

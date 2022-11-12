@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:jobology/constants.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class Update_training extends StatefulWidget {
   Update_training(
@@ -10,14 +14,12 @@ class Update_training extends StatefulWidget {
       this.title,
       this.breif,
       this.url,
-      this.years,
       this.price,
       this.docnid});
   String? title;
   String? imageUrl;
   String? breif;
   String? price;
-  String? years;
   String? url;
   dynamic docnid;
 
@@ -29,6 +31,18 @@ String comp_name = "";
 String img_url = "";
 
 class _Update_trainingState extends State<Update_training> {
+  final ImagePicker _picker = ImagePicker();
+  File? pickedimg;
+  funimg(ImageSource src) async {
+    final XFile? image = await _picker.pickImage(source: src);
+    if (image == null) {
+      return;
+    }
+    setState(() {
+      pickedimg = File(image.path);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore.instance
@@ -45,8 +59,6 @@ class _Update_trainingState extends State<Update_training> {
         TextEditingController(text: widget.title);
     TextEditingController briefController =
         TextEditingController(text: widget.breif);
-    TextEditingController yearController =
-        TextEditingController(text: widget.years);
     TextEditingController priceController =
         TextEditingController(text: widget.price);
     TextEditingController urlController =
@@ -104,9 +116,39 @@ class _Update_trainingState extends State<Update_training> {
         child: Form(
           child: ListView(
             children: [
-              Image.asset("images/training.png"),
-              SizedBox(
-                height: 30,
+              CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.grey,
+                  backgroundImage:
+                      pickedimg == null ? null : FileImage(pickedimg!)),
+              const SizedBox(
+                height: 10,
+              ),
+              Column(
+                children: [
+                  Text("Choose image From ?",
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () => funimg(ImageSource.gallery),
+                        icon: const Icon(Ionicons.folder),
+                      ),
+                      IconButton(
+                        onPressed: () => funimg(ImageSource.camera),
+                        icon: const Icon(
+                          Ionicons.camera,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 5,
               ),
               TextFormField(
                 decoration: const InputDecoration(
@@ -157,8 +199,25 @@ class _Update_trainingState extends State<Update_training> {
                     backgroundColor: buttonColor,
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(vertical: 15)),
-                onPressed: () {
-                  FirebaseFirestore.instance
+                onPressed: () async {
+                  final url;
+                  if (pickedimg == null) {
+                    url = widget.imageUrl!;
+                  } else {
+                    DateTime now = DateTime.now();
+                    final storageRef = FirebaseStorage.instance
+                        .ref()
+                        .child('Users_img')
+                        .child(comp_name.toString() +
+                            now.hour.toString() +
+                            now.minute.toString() +
+                            now.second.toString() +
+                            '.jpg');
+                    await storageRef.putFile(pickedimg!);
+                    url = await storageRef.getDownloadURL();
+                  }
+
+                  await FirebaseFirestore.instance
                       .collection('Training')
                       .doc(widget.docnid)
                       .update({

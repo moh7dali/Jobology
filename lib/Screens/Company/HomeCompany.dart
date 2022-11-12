@@ -338,6 +338,8 @@ class _CompanyHomeState extends State<CompanyHome> {
                                                       ['requirements'],
                                                   years: docs[index]['years'],
                                                   url: docs[index]['url'],
+                                                  imageUrl: docs[index]
+                                                      ['img_url'],
                                                   docnid: docs[index].id,
                                                 );
                                               },
@@ -566,6 +568,8 @@ class _CompanyHomeState extends State<CompanyHome> {
                                                       price: docs[index]
                                                           ['price'],
                                                       url: docs[index]['url'],
+                                                      imageUrl: docs[index]
+                                                          ['img_url'],
                                                       docnid: docs[index].id,
                                                     );
                                                   },
