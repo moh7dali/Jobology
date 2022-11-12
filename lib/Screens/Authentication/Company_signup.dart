@@ -137,7 +137,9 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                                 'phone': phoneController.text,
                                 'img': "",
                                 'address': "",
-                                'rules': "company"
+                                'rules': "company",
+                                'linkedinurl': "",
+                                'facebookurl': ""
                               });
 
                               Navigator.popAndPushNamed(context, "Login");
