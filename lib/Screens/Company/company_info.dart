@@ -200,6 +200,17 @@ class _Company_infoState extends State<Company_info> {
                       icon: const Icon(FontAwesomeIcons.facebook),
                       url: Facebook,
                     ),
+                    const Text(
+                      "|",
+                      style: TextStyle(
+                        color: Color.fromARGB(158, 204, 203, 203),
+                        fontSize: 40,
+                      ),
+                    ),
+                    Icon_Url(
+                      icon: const Icon(FontAwesomeIcons.mailchimp),
+                      url: "mailto:${email}",
+                    ),
                   ],
                 ),
               ),

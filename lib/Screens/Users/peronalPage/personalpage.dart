@@ -77,6 +77,7 @@ class _personalInfoState extends State<personalInfo> {
   String bio = "";
   String github = "";
   String LinkedIn = "";
+  String cv = "";
   List Skills = [];
   bool visibilty = false;
   @override
@@ -98,6 +99,7 @@ class _personalInfoState extends State<personalInfo> {
         github = event['Githuburl'];
         LinkedIn = event['linkedinurl'];
         Skills = event["skills"];
+        cv = event["cv"];
       });
     });
     if (widget.user_id == FirebaseAuth.instance.currentUser!.uid) {
@@ -215,6 +217,17 @@ class _personalInfoState extends State<personalInfo> {
                     Icon_Url(
                       icon: const Icon(FontAwesomeIcons.github),
                       url: github,
+                    ),
+                    const Text(
+                      "|",
+                      style: TextStyle(
+                        color: Color.fromARGB(158, 204, 203, 203),
+                        fontSize: 40,
+                      ),
+                    ),
+                    Icon_Url(
+                      icon: const Icon(Ionicons.mail),
+                      url: "mailto:${email}",
                     ),
                   ],
                 ),

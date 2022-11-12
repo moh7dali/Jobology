@@ -10,6 +10,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/constants.dart';
+import 'package:file_picker/file_picker.dart';
 
 class editProfile extends StatefulWidget {
   editProfile(
@@ -249,6 +250,22 @@ class _editProfileState extends State<editProfile> {
                     hintText: 'Enter your linkedIn account',
                     border: OutlineInputBorder()),
                 controller: linkedinController,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.grey,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: ElevatedButton(
+                      onPressed: () {}, child: Text("Upload Your cv")),
+                ),
               ),
               const SizedBox(
                 height: 20,
