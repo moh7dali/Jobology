@@ -68,6 +68,7 @@ class _personalInfoState extends State<personalInfo> {
     color: Colors.blue,
   );
   String img_url = "";
+  String email = "";
   String username = "";
   String address = "";
   String phone = "";
@@ -86,6 +87,7 @@ class _personalInfoState extends State<personalInfo> {
         .snapshots()
         .listen((event) {
       setState(() {
+        email = event['Email'];
         img_url = event['img'];
         bio = event['bio'];
         username = event['Fullname'];

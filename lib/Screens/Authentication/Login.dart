@@ -159,25 +159,6 @@ class _LoginState extends State<Login> {
                       UserCredential myuser =
                           await auth.signInWithCredential(credential);
 
-                      us_id = myuser.user!.uid;
-                      FirebaseFirestore.instance
-                          .collection('Users')
-                          .doc(myuser.user!.uid)
-                          .set({
-                        'user_id': us_id,
-                        'Fullname': myuser.user!.displayName,
-                        'Email': myuser.user!.email,
-                        'phone': "",
-                        'img': "",
-                        'address': "",
-                        'age': "",
-                        'major': "",
-                        'bio': "",
-                        'rules': "User",
-                        'Githuburl': "",
-                        'linkedinurl': ""
-                      });
-
                       Navigator.popAndPushNamed(context, "Check");
                     } catch (e) {
                       ScaffoldMessenger.of(context)

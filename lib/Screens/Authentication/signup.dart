@@ -141,7 +141,8 @@ class _Sign_upState extends State<Sign_up> {
                               'bio': "",
                               'rules': "User",
                               'Githuburl': "",
-                              'linkedinurl': ""
+                              'linkedinurl': "",
+                              'skills': []
                             });
                             print(myuser.additionalUserInfo!.isNewUser);
                             if (myuser.additionalUserInfo!.isNewUser) {
@@ -210,7 +211,8 @@ class _Sign_upState extends State<Sign_up> {
                             'bio': "",
                             'rules': "User",
                             'Githuburl': "",
-                            'linkedinurl': ""
+                            'linkedinurl': "",
+                            'skills': []
                           });
 
                           Navigator.popAndPushNamed(context, "Check");
