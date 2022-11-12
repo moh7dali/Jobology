@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobology/constants.dart';
-import 'package:geocoding/geocoding.dart';
 
 class Sign_up extends StatefulWidget {
   Sign_up({
@@ -19,48 +16,6 @@ class Sign_up extends StatefulWidget {
 }
 
 class _Sign_upState extends State<Sign_up> {
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    return await Geolocator.getCurrentPosition();
-  }
-
-  void getlocation() async {
-    _determinePosition();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    double latitude = position.latitude;
-    double longtude = position.longitude;
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(latitude, longtude);
-
-    setState(() {
-      Location1 =
-          "${(placemarks[0].country).toString()} ,${(placemarks[0].administrativeArea).toString()}";
-      print(Location1);
-    });
-  }
-
-  String Location1 = "";
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -152,19 +107,6 @@ class _Sign_upState extends State<Sign_up> {
                             ),
                             controller: passController,
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Center(
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: buttonColor,
-                                ),
-                                onPressed: () {
-                                  getlocation();
-                                },
-                                child: Text("add your location")),
-                          )
                         ],
                       ),
                     ),
@@ -193,7 +135,7 @@ class _Sign_upState extends State<Sign_up> {
                               'Email': emailController.text,
                               'phone': phoneController.text,
                               'img': "",
-                              'address': Location1,
+                              'address': "",
                               'age': "",
                               'major': "",
                               'bio': "",
@@ -252,7 +194,26 @@ class _Sign_upState extends State<Sign_up> {
                           UserCredential myuser =
                               await auth.signInWithCredential(credential);
 
-                          Navigator.pushNamed(context, "Home");
+                          us_id = myuser.user!.uid;
+                          FirebaseFirestore.instance
+                              .collection('Users')
+                              .doc(myuser.user!.uid)
+                              .set({
+                            'user_id': us_id,
+                            'Fullname': myuser.user!.displayName,
+                            'Email': myuser.user!.email,
+                            'phone': "",
+                            'img': "",
+                            'address': "",
+                            'age': "",
+                            'major': "",
+                            'bio': "",
+                            'rules': "User",
+                            'Githuburl': "",
+                            'linkedinurl': ""
+                          });
+
+                          Navigator.popAndPushNamed(context, "Check");
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(e.toString())));
