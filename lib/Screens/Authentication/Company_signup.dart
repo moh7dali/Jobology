@@ -139,7 +139,8 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                                 'address': "",
                                 'rules': "company",
                                 'linkedinurl': "",
-                                'facebookurl': ""
+                                'facebookurl': "",
+                                'Info': ""
                               });
 
                               Navigator.popAndPushNamed(context, "Login");
