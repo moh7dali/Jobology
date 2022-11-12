@@ -651,7 +651,7 @@ class _CompanyHomeState extends State<CompanyHome> {
               ),
               label: 'Add new job',
               onTap: () {
-                Navigator.pushNamed(context, "addNewjob");
+                Navigator.pushNamed(context, "addNewJob");
               },
             ),
             SpeedDialChild(

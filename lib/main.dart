@@ -38,7 +38,7 @@ Future<void> main() async {
       "course": (context) => const Course(),
       "welcome": (context) => Welcome(),
       "companyHome": (context) => CompanyHome(),
-      "addNewPage": (context) => AddNewJob(),
+      "addNewJob": (context) => AddNewJob(),
       "addNewTraining": (context) => AddNewTraining(),
       "cv": (context) => Cv(),
       "interview": (context) => Interviwe_Preview(),
