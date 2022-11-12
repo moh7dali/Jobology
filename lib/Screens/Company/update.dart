@@ -58,15 +58,15 @@ class _Update_jobState extends State<Update_job> {
       });
     });
     TextEditingController titleController =
-        TextEditingController(text: widget.title);
+        TextEditingController(text: widget.title == null ? null : widget.title);
     TextEditingController briefController =
-        TextEditingController(text: widget.breif);
+        TextEditingController(text: widget.breif == null ? null : widget.breif);
     TextEditingController yearController =
-        TextEditingController(text: widget.years);
+        TextEditingController(text: widget.years == null ? null : widget.years);
     TextEditingController reqController =
-        TextEditingController(text: widget.req);
+        TextEditingController(text: widget.req == null ? null : widget.req);
     TextEditingController urlController =
-        TextEditingController(text: widget.url);
+        TextEditingController(text: widget.url == null ? null : widget.url);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 75,

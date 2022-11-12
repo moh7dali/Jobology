@@ -56,13 +56,13 @@ class _Update_trainingState extends State<Update_training> {
       });
     });
     TextEditingController titleController =
-        TextEditingController(text: widget.title);
+        TextEditingController(text: widget.title == null ? null : widget.title);
     TextEditingController briefController =
-        TextEditingController(text: widget.breif);
+        TextEditingController(text: widget.breif == null ? null : widget.breif);
     TextEditingController priceController =
-        TextEditingController(text: widget.price);
+        TextEditingController(text: widget.price == null ? null : widget.price);
     TextEditingController urlController =
-        TextEditingController(text: widget.url);
+        TextEditingController(text: widget.url == null ? null : widget.url);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 75,
