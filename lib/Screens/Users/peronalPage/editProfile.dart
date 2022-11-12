@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -174,7 +177,7 @@ class _editProfileState extends State<editProfile> {
                 height: 20,
               ),
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     prefixIcon: Icon(Icons.location_pin),
                     labelText: 'Address',
                     hintText: 'Enter your address',
