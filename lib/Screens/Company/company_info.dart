@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Company/EditCompanyinfo.dart';
 import 'package:jobology/Widgets/iconUrl.dart';
@@ -20,6 +22,48 @@ class Company_info extends StatefulWidget {
 }
 
 class _Company_infoState extends State<Company_info> {
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
+
+  Future<void> getlocation() async {
+    _determinePosition();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double latitude = position.latitude;
+    double longtude = position.longitude;
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(latitude, longtude);
+
+    setState(() {
+      Location1 =
+          "${(placemarks[0].country).toString()} ,${(placemarks[0].administrativeArea).toString()}";
+      print(Location1);
+    });
+  }
+
+  String Location1 = "";
   Icon Icon1 = const Icon(
     Icons.thumb_up,
     color: Colors.blue,
@@ -217,14 +261,30 @@ class _Company_infoState extends State<Company_info> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Center(
-                  child: Text(
-                    address,
-                    style: const TextStyle(fontSize: subTitleSize),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Center(
+                      child: Text(
+                        address,
+                        style: const TextStyle(fontSize: ParagraphSize),
+                      ),
+                    ),
                   ),
-                ),
+                  TextButton(
+                      onPressed: () async {
+                        await getlocation();
+                        await FirebaseFirestore.instance
+                            .collection('Users')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .update({
+                          'address': Location1,
+                        });
+                      },
+                      child: Icon(Ionicons.locate))
+                ],
               ),
               Container(
                 width: double.infinity,
