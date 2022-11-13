@@ -397,9 +397,10 @@ class _editProfileState extends State<editProfile> {
                     url = widget.img_url!;
                   } else {
                     DateTime now = DateTime.now();
-                    final storageRef = FirebaseStorage.instance.ref();
-                    storageRef.child('Users_img').child(
-                        widget.Fullname.toString() +
+                    final storageRef = FirebaseStorage.instance
+                        .ref()
+                        .child('Users_img')
+                        .child(widget.Fullname.toString() +
                             now.hour.toString() +
                             now.minute.toString() +
                             now.second.toString() +

@@ -36,7 +36,7 @@ class _Open_urlState extends State<Open_url> {
 }
 
 Future<void> Open() async {
-  if (!await launchUrl(_url)) {
+  if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
     throw 'Could not launch $_url';
   }
 }
