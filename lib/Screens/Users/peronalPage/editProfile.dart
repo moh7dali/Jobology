@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -191,7 +188,7 @@ class _editProfileState extends State<editProfile> {
                 height: 20,
               ),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.location_pin),
                     labelText: 'Address',
                     hintText: 'Enter your address',
@@ -267,32 +264,14 @@ class _editProfileState extends State<editProfile> {
               const SizedBox(
                 height: 20,
               ),
+
               Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.grey,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        SelectCv();
-                      },
-                      child: Text("Upload Your cv")),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.grey,
-                  ),
-                ),
+                // decoration: BoxDecoration(
+                //   border: Border.all(
+                //     width: 1,
+                //     color: Colors.grey,
+                //   ),
+                // ),
                 child: Padding(
                   padding: const EdgeInsets.all(5),
                   child: DropdownButtonFormField(
@@ -345,15 +324,15 @@ class _editProfileState extends State<editProfile> {
                     for (int i = 0; i < widget.ChoosenSkills!.length; i++)
                       Container(
                         margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: containerBackgroun,
-                        ),
+                            borderRadius: BorderRadius.circular(20),
+                            // color: containerBackgroun,
+                            border: Border.all(color: containerBackgroun)),
                         child: Row(
                           children: [
                             Text(
-                              "${widget.ChoosenSkills![i].toString()},  ",
+                              "${widget.ChoosenSkills![i].toString()}",
                               style: const TextStyle(
                                 fontSize: ParagraphSize,
                               ),
@@ -386,6 +365,44 @@ class _editProfileState extends State<editProfile> {
               const SizedBox(
                 height: 20,
               ),
+              GestureDetector(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Ionicons.cloud_upload_outline,
+                          color: Color.fromARGB(255, 117, 116, 116),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Upload your CV",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 117, 116, 116),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  SelectCv();
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+
               ElevatedButton(
                 style: OutlinedButton.styleFrom(
                     backgroundColor: buttonColor,
