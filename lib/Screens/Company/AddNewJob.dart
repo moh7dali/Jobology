@@ -177,6 +177,12 @@ class _AddNewJobState extends State<AddNewJob> {
                   await storageRef.putFile(pickedimg!);
                   final url = await storageRef.getDownloadURL();
 
+                  String date = now.day.toString() +
+                      ":" +
+                      now.hour.toString() +
+                      ":" +
+                      now.minute.toString();
+
                   FirebaseFirestore.instance.collection('Jobs').add({
                     'Company name': comp_name,
                     'job_title': titleController.text,
@@ -185,7 +191,8 @@ class _AddNewJobState extends State<AddNewJob> {
                     'requirements': reqController.text,
                     'url': urlController.text,
                     'img_url': url,
-                    'comp_id': comp_id
+                    'comp_id': comp_id,
+                    'date': date
                   });
 
                   Navigator.pop(context);

@@ -50,6 +50,8 @@ class _personalInfoState extends State<personalInfo> {
         desiredAccuracy: LocationAccuracy.high);
     double latitude = position.latitude;
     double longtude = position.longitude;
+    print(latitude);
+    print(longtude);
     List<Placemark> placemarks =
         await placemarkFromCoordinates(latitude, longtude);
 

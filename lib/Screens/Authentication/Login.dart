@@ -1,14 +1,19 @@
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jobology/Widgets/ck_login.dart';
 import 'package:jobology/constants.dart';
+import 'package:validators/validators.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
@@ -19,6 +24,9 @@ class _LoginState extends State<Login> {
   TextEditingController passController = TextEditingController();
   String us_id = "";
   bool _isObscure = true;
+  bool isEmailcorrect = false;
+  bool success = false;
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -46,13 +54,46 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextFormField(
-                        decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.person_outline_outlined),
+                          controller: emailController,
+                          onChanged: (val) {
+                            setState(() {
+                              isEmailcorrect = isEmail(val);
+                            });
+                          },
+                          showCursor: true,
+                          decoration: InputDecoration(
                             labelText: 'Email',
-                            hintText: 'Enter Your Email',
-                            border: OutlineInputBorder()),
-                        controller: emailController,
-                      ),
+                            hintText: 'something@gmail.com',
+                            hintStyle:
+                                TextStyle(color: Colors.grey, fontSize: 18),
+                            prefixIcon: Icon(
+                              Icons.email_outlined,
+                              color: Colors.black87,
+                            ),
+                            suffixIcon: isEmailcorrect == false
+                                ? Icon(
+                                    Icons.close_sharp,
+                                    color: Colors.red,
+                                  )
+                                : Icon(
+                                    Icons.done,
+                                    color: Colors.green,
+                                  ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black54,
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: isEmailcorrect == false
+                                    ? Colors.red
+                                    : Colors.green,
+                                width: 2,
+                              ),
+                            ),
+                          )),
                       const SizedBox(
                         height: 20,
                       ),
@@ -62,8 +103,21 @@ class _LoginState extends State<Login> {
                           labelText: 'Password',
                           hintText: 'Enter Your password',
                           prefixIcon: Icon(Icons.fingerprint),
-                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.black54,
+                              width: 1,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color:
+                                  success == false ? Colors.red : Colors.green,
+                              width: 2,
+                            ),
+                          ),
                           suffixIcon: IconButton(
+                            color: success == false ? Colors.red : Colors.green,
                             icon: Icon(
                               _isObscure
                                   ? Icons.visibility
@@ -78,6 +132,30 @@ class _LoginState extends State<Login> {
                         ),
                         controller: passController,
                       ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      FlutterPwValidator(
+                        controller: passController,
+                        minLength: 7,
+                        width: 400,
+                        height: 150,
+                        onSuccess: () {
+                          setState(() {
+                            success = true;
+                          });
+                          print("MATCHED");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Password is matched")));
+                        },
+                        onFail: () {
+                          setState(() {
+                            success = false;
+                          });
+                          print("NOT MATCHED");
+                        },
+                      )
                     ],
                   ),
                 ),
@@ -101,24 +179,32 @@ class _LoginState extends State<Login> {
                 width: double.infinity,
                 child: ElevatedButton(
                     style: OutlinedButton.styleFrom(
-                        backgroundColor: buttonColor,
+                        backgroundColor: isEmailcorrect == false
+                            ? Colors.black45
+                            : buttonColor,
                         shape: RoundedRectangleBorder(),
                         padding: EdgeInsets.symmetric(vertical: 15)),
                     onPressed: () async {
-                      try {
-                        FocusScope.of(context).unfocus();
-                        var auth = FirebaseAuth.instance;
-                        var type;
-                        UserCredential myuser =
-                            await auth.signInWithEmailAndPassword(
-                                email: emailController.text.trim(),
-                                password: passController.text);
-                        us_id = myuser.user!.uid;
+                      if (isEmailcorrect == true && success == true) {
+                        try {
+                          FocusScope.of(context).unfocus();
+                          var auth = FirebaseAuth.instance;
+                          var type;
+                          UserCredential myuser =
+                              await auth.signInWithEmailAndPassword(
+                                  email: emailController.text.trim(),
+                                  password: passController.text);
+                          us_id = myuser.user!.uid;
 
-                        Navigator.popAndPushNamed(context, "Check");
-                      } on FirebaseAuthException catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(e.message.toString())));
+                          Navigator.popAndPushNamed(context, "Check");
+                        } on FirebaseAuthException catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content:
+                                  Text("the email or password not vaild ")));
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("correct your email or password  ")));
                       }
                     },
                     child: Text("LOGIN",

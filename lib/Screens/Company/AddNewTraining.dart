@@ -166,7 +166,11 @@ class _AddNewTrainingState extends State<AddNewTraining> {
                           '.jpg');
                   await storageRef.putFile(pickedimg!);
                   final url = await storageRef.getDownloadURL();
-
+                  String date = now.day.toString() +
+                      ":" +
+                      now.hour.toString() +
+                      ":" +
+                      now.minute.toString();
                   FirebaseFirestore.instance.collection('Training').add({
                     'Company_name': comp_name,
                     'course_title': titleController.text,
@@ -174,7 +178,8 @@ class _AddNewTrainingState extends State<AddNewTraining> {
                     'price': priceController.text,
                     'url': urlController.text,
                     'img_url': url,
-                    'comp_id': comp_id
+                    'comp_id': comp_id,
+                    'date': date
                   });
                   Navigator.pop(context);
                 },
