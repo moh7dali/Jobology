@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/peronalPage/editProfile.dart';
 import 'package:jobology/Widgets/iconUrl.dart';
 import 'package:jobology/constants.dart';
@@ -327,7 +325,7 @@ class _personalInfoState extends State<personalInfo> {
                     child: Center(
                       child: Text(
                         address,
-                        style: const TextStyle(fontSize: ParagraphSize),
+                        style: const TextStyle(fontSize: subTitleSize),
                       ),
                     ),
                   ),
