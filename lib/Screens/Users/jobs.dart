@@ -96,7 +96,10 @@ class _jobsState extends State<jobs> {
         ],
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('Jobs').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('Jobs')
+            .orderBy('date')
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final docs = snapshot.data!.docs;

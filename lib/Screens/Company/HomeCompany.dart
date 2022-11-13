@@ -133,8 +133,10 @@ class _CompanyHomeState extends State<CompanyHome> {
             children: [
               // stream builder to read data from firestore
               StreamBuilder(
-                stream:
-                    FirebaseFirestore.instance.collection('Jobs').snapshots(),
+                stream: FirebaseFirestore.instance
+                    .collection('Jobs')
+                    .orderBy('date')
+                    .snapshots(),
                 builder: (context, snapshot) {
                   // if statement for loading page
                   if (snapshot.hasData) {
@@ -388,6 +390,7 @@ class _CompanyHomeState extends State<CompanyHome> {
               StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('Training')
+                    .orderBy('date')
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
