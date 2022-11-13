@@ -1,6 +1,9 @@
+// ignore_for_file: unused_local_variable, prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -8,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobology/constants.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:validators/validators.dart';
 
 class Sign_up extends StatefulWidget {
   Sign_up({
@@ -19,6 +23,9 @@ class Sign_up extends StatefulWidget {
 }
 
 class _Sign_upState extends State<Sign_up> {
+  bool isEmailcorrect = false;
+  bool success = false;
+
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -107,13 +114,46 @@ class _Sign_upState extends State<Sign_up> {
                             height: 10,
                           ),
                           TextFormField(
-                            decoration: const InputDecoration(
-                                prefixIcon: Icon(Icons.mail),
+                              controller: emailController,
+                              onChanged: (val) {
+                                setState(() {
+                                  isEmailcorrect = isEmail(val);
+                                });
+                              },
+                              showCursor: true,
+                              decoration: InputDecoration(
                                 labelText: 'Email',
-                                hintText: 'Enter Your Email',
-                                border: OutlineInputBorder()),
-                            controller: emailController,
-                          ),
+                                hintText: 'something@gmail.com',
+                                hintStyle:
+                                    TextStyle(color: Colors.grey, fontSize: 18),
+                                prefixIcon: Icon(
+                                  Icons.email_outlined,
+                                  color: Colors.black87,
+                                ),
+                                suffixIcon: isEmailcorrect == false
+                                    ? Icon(
+                                        Icons.close_sharp,
+                                        color: Colors.red,
+                                      )
+                                    : Icon(
+                                        Icons.done,
+                                        color: Colors.green,
+                                      ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black54,
+                                    width: 1,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: isEmailcorrect == false
+                                        ? Colors.red
+                                        : Colors.green,
+                                    width: 2,
+                                  ),
+                                ),
+                              )),
                           const SizedBox(
                             height: 10,
                           ),
@@ -136,8 +176,24 @@ class _Sign_upState extends State<Sign_up> {
                               labelText: 'Password',
                               hintText: 'Enter Your password',
                               prefixIcon: Icon(Icons.fingerprint),
-                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black54,
+                                  width: 1,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: success == false
+                                      ? Colors.red
+                                      : Colors.green,
+                                  width: 2,
+                                ),
+                              ),
                               suffixIcon: IconButton(
+                                color: success == false
+                                    ? Colors.red
+                                    : Colors.green,
                                 icon: Icon(
                                   _isObscure
                                       ? Icons.visibility
@@ -151,6 +207,30 @@ class _Sign_upState extends State<Sign_up> {
                               ),
                             ),
                             controller: passController,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          FlutterPwValidator(
+                            controller: passController,
+                            minLength: 7,
+                            width: 400,
+                            height: 150,
+                            onSuccess: () {
+                              setState(() {
+                                success = true;
+                              });
+                              print("MATCHED");
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text("Password is matched")));
+                            },
+                            onFail: () {
+                              setState(() {
+                                success = false;
+                              });
+                              print("NOT MATCHED");
+                            },
                           ),
                           const SizedBox(
                             height: 10,
@@ -175,48 +255,53 @@ class _Sign_upState extends State<Sign_up> {
                   SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
+                        style: OutlinedButton.styleFrom(
+                            backgroundColor: isEmailcorrect == false
+                                ? Colors.black45
+                                : buttonColor,
+                            shape: RoundedRectangleBorder(),
+                            padding: EdgeInsets.symmetric(vertical: 15)),
                         onPressed: () async {
-                          try {
-                            var auth = FirebaseAuth.instance;
-                            UserCredential myuser =
-                                await auth.createUserWithEmailAndPassword(
-                                    email: emailController.text.trim(),
-                                    password: passController.text.trim());
-                            us_id = myuser.user!.uid;
+                          if (isEmailcorrect == true && success == true) {
+                            try {
+                              var auth = FirebaseAuth.instance;
+                              UserCredential myuser =
+                                  await auth.createUserWithEmailAndPassword(
+                                      email: emailController.text.trim(),
+                                      password: passController.text.trim());
+                              us_id = myuser.user!.uid;
 
-                            FirebaseFirestore.instance
-                                .collection('Users')
-                                .doc(myuser.user!.uid)
-                                .set({
-                              'user_id': us_id,
-                              'Fullname': nameController.text,
-                              'Email': emailController.text,
-                              'phone': phoneController.text,
-                              'img': "",
-                              'address': Location1,
-                              'age': "",
-                              'major': "",
-                              'bio': "",
-                              'rules': "User",
-                              'Githuburl': "",
-                              'linkedinurl': ""
-                            });
-                            print(myuser.additionalUserInfo!.isNewUser);
-                            if (myuser.additionalUserInfo!.isNewUser) {
-                              Navigator.popAndPushNamed(context, "Login");
+                              FirebaseFirestore.instance
+                                  .collection('Users')
+                                  .doc(myuser.user!.uid)
+                                  .set({
+                                'user_id': us_id,
+                                'Fullname': nameController.text,
+                                'Email': emailController.text,
+                                'phone': phoneController.text,
+                                'img': "",
+                                'address': Location1,
+                                'age': "",
+                                'major': "",
+                                'bio': "",
+                                'rules': "User",
+                                'Githuburl': "",
+                                'linkedinurl': ""
+                              });
+                              print(myuser.additionalUserInfo!.isNewUser);
+                              if (myuser.additionalUserInfo!.isNewUser) {
+                                Navigator.popAndPushNamed(context, "Login");
+                              }
+                            } on FirebaseAuthException catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(e.message.toString())));
                             }
-                          } on FirebaseAuthException catch (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(e.message.toString())));
                           }
                         },
                         child: Text("SIGN UP",
                             style: GoogleFonts.montserrat(
                                 fontSize: 15, fontWeight: FontWeight.bold)),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: buttonColor,
-                            shape: RoundedRectangleBorder(),
-                            padding: EdgeInsets.all(15)),
                       )),
                   const SizedBox(
                     height: 20,
