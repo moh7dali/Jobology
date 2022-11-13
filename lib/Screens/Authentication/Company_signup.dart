@@ -213,6 +213,7 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                                         password: passController.text);
                                 us_id = myuser.user!.uid;
 
+<<<<<<< HEAD
                                 FirebaseFirestore.instance
                                     .collection('Users')
                                     .doc(myuser.user!.uid)
@@ -225,6 +226,23 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                                   'address': "",
                                   'rules': "company"
                                 });
+=======
+                              FirebaseFirestore.instance
+                                  .collection('Users')
+                                  .doc(myuser.user!.uid)
+                                  .set({
+                                'user_id': us_id,
+                                'Fullname': nameController.text,
+                                'Email': emailController.text,
+                                'phone': phoneController.text,
+                                'img': "",
+                                'address': "",
+                                'rules': "company",
+                                'linkedinurl': "",
+                                'facebookurl': "",
+                                'Info': ""
+                              });
+>>>>>>> 27ca1a1492f77ba349de624c4839f9831ae6078d
 
                                 Navigator.popAndPushNamed(context, "Login");
                               } on FirebaseAuthException catch (e) {

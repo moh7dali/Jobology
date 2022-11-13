@@ -97,7 +97,10 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
         ],
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('Training').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('Training')
+            .orderBy('date', descending: true)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final docs = snapshot.data!.docs;

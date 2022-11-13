@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/constants.dart';
 import 'package:jobology/Screens/Users/cv.dart';
@@ -194,6 +195,8 @@ class _HomeState extends State<Home> {
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
+                final GoogleSignInAccount? googleUser =
+                    await GoogleSignIn().signOut();
                 Navigator.popAndPushNamed(context, "Login");
               },
             ),
@@ -210,7 +213,6 @@ class _HomeState extends State<Home> {
                 ));
               },
             ),
-            
           ]),
     );
   }

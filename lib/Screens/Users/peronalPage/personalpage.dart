@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/peronalPage/editProfile.dart';
@@ -19,11 +21,56 @@ class personalInfo extends StatefulWidget {
 }
 
 class _personalInfoState extends State<personalInfo> {
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
+
+  Future<void> getlocation() async {
+    _determinePosition();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double latitude = position.latitude;
+    double longtude = position.longitude;
+    print(latitude);
+    print(longtude);
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(latitude, longtude);
+
+    setState(() {
+      Location1 =
+          "${(placemarks[0].country).toString()} ,${(placemarks[0].administrativeArea).toString()}";
+      print(Location1);
+    });
+  }
+
+  String Location1 = "";
   Icon Icon1 = const Icon(
     Icons.thumb_up,
     color: Colors.blue,
   );
   String img_url = "";
+  String email = "";
   String username = "";
   String address = "";
   String phone = "";
@@ -32,6 +79,7 @@ class _personalInfoState extends State<personalInfo> {
   String bio = "";
   String github = "";
   String LinkedIn = "";
+  String cv = "";
   List Skills = [];
   bool visibilty = false;
   @override
@@ -42,6 +90,7 @@ class _personalInfoState extends State<personalInfo> {
         .snapshots()
         .listen((event) {
       setState(() {
+        email = event['Email'];
         img_url = event['img'];
         bio = event['bio'];
         username = event['Fullname'];
@@ -52,6 +101,7 @@ class _personalInfoState extends State<personalInfo> {
         github = event['Githuburl'];
         LinkedIn = event['linkedinurl'];
         Skills = event["skills"];
+        cv = event["cv"];
       });
     });
     if (widget.user_id == FirebaseAuth.instance.currentUser!.uid) {
@@ -82,17 +132,17 @@ class _personalInfoState extends State<personalInfo> {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return editProfile(
-                    img_url: img_url,
-                    Fullname: username,
-                    phone: phone,
-                    address: address,
-                    age: age,
-                    major: major,
-                    bio: bio,
-                    github: github,
-                    linkedin: LinkedIn,
-                    ChoosenSkills: Skills,
-                  );
+                      img_url: img_url,
+                      Fullname: username,
+                      phone: phone,
+                      address: address,
+                      age: age,
+                      major: major,
+                      bio: bio,
+                      github: github,
+                      linkedin: LinkedIn,
+                      ChoosenSkills: Skills,
+                      cv: cv);
                 }));
               },
               icon: const Icon(Icons.edit),
@@ -169,6 +219,28 @@ class _personalInfoState extends State<personalInfo> {
                     Icon_Url(
                       icon: const Icon(FontAwesomeIcons.github),
                       url: github,
+                    ),
+                    const Text(
+                      "|",
+                      style: TextStyle(
+                        color: Color.fromARGB(158, 204, 203, 203),
+                        fontSize: 40,
+                      ),
+                    ),
+                    Icon_Url(
+                      icon: const Icon(Ionicons.mail),
+                      url: "mailto:${email}",
+                    ),
+                    const Text(
+                      "|",
+                      style: TextStyle(
+                        color: Color.fromARGB(158, 204, 203, 203),
+                        fontSize: 40,
+                      ),
+                    ),
+                    Icon_Url(
+                      icon: const Icon(Ionicons.book_outline),
+                      url: cv,
                     ),
                   ],
                 ),
@@ -247,14 +319,33 @@ class _personalInfoState extends State<personalInfo> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Center(
-                  child: Text(
-                    address,
-                    style: const TextStyle(fontSize: subTitleSize),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Center(
+                      child: Text(
+                        address,
+                        style: const TextStyle(fontSize: ParagraphSize),
+                      ),
+                    ),
                   ),
-                ),
+                  Visibility(
+                    visible: visibilty,
+                    child: TextButton(
+                        onPressed: () async {
+                          await getlocation();
+                          await FirebaseFirestore.instance
+                              .collection('Users')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .update({
+                            'address': Location1,
+                          });
+                        },
+                        child: Icon(Ionicons.locate)),
+                  )
+                ],
               ),
               Container(
                 width: double.infinity,

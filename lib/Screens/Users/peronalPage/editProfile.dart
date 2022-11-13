@@ -1,16 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/constants.dart';
+import 'package:file_picker/file_picker.dart';
 
 class editProfile extends StatefulWidget {
   editProfile(
       {this.img_url,
+      this.cv,
       this.Fullname,
       this.address,
       this.age,
@@ -21,6 +26,7 @@ class editProfile extends StatefulWidget {
       this.linkedin,
       this.ChoosenSkills});
   String? img_url;
+  String? cv;
   String? Fullname;
   String? address;
   String? age;
@@ -36,6 +42,17 @@ class editProfile extends StatefulWidget {
 }
 
 class _editProfileState extends State<editProfile> {
+  PlatformFile? cv_file;
+  Future SelectCv() async {
+    final ruselt = await FilePicker.platform.pickFiles();
+    if (ruselt == null) {
+      return;
+    }
+    setState(() {
+      cv_file = ruselt.files.first;
+    });
+  }
+
   final ImagePicker _picker = ImagePicker();
   File? pickedimg;
   funimg(ImageSource src) async {
@@ -174,7 +191,7 @@ class _editProfileState extends State<editProfile> {
                 height: 20,
               ),
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     prefixIcon: Icon(Icons.location_pin),
                     labelText: 'Address',
                     hintText: 'Enter your address',
@@ -246,6 +263,25 @@ class _editProfileState extends State<editProfile> {
                     hintText: 'Enter your linkedIn account',
                     border: OutlineInputBorder()),
                 controller: linkedinController,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.grey,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        SelectCv();
+                      },
+                      child: Text("Upload Your cv")),
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -372,6 +408,16 @@ class _editProfileState extends State<editProfile> {
                     await storageRef.putFile(pickedimg!);
                     url = await storageRef.getDownloadURL();
                   }
+                  final cv_url;
+                  if (cv_file == null) {
+                    cv_url = widget.cv;
+                  } else {
+                    final path = 'Users_cv/${cv_file!.name}';
+                    final file = File(cv_file!.path!);
+                    final cv_ref = FirebaseStorage.instance.ref().child(path);
+                    await cv_ref.putFile(file);
+                    cv_url = await cv_ref.getDownloadURL();
+                  }
 
                   await FirebaseFirestore.instance
                       .collection('Users')
@@ -386,7 +432,8 @@ class _editProfileState extends State<editProfile> {
                     'img': url,
                     'linkedinurl': linkedinController.text,
                     'Githuburl': githubController.text,
-                    'skills': FieldValue.arrayUnion(widget.ChoosenSkills!)
+                    'skills': FieldValue.arrayUnion(widget.ChoosenSkills!),
+                    'cv': cv_url
                   });
                   Navigator.pop(context);
                 },

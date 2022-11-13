@@ -245,7 +245,7 @@ class _LoginState extends State<Login> {
                       UserCredential myuser =
                           await auth.signInWithCredential(credential);
 
-                      Navigator.popAndPushNamed(context, "Home");
+                      Navigator.popAndPushNamed(context, "Check");
                     } catch (e) {
                       ScaffoldMessenger.of(context)
                           .showSnackBar(SnackBar(content: Text(e.toString())));
