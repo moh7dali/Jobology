@@ -3,10 +3,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobology/constants.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:validators/validators.dart';
 
 class Sign_up extends StatefulWidget {
   Sign_up({
@@ -18,7 +23,6 @@ class Sign_up extends StatefulWidget {
 }
 
 class _Sign_upState extends State<Sign_up> {
-<<<<<<< HEAD
   bool isEmailcorrect = false;
   bool success = false;
 
@@ -64,8 +68,6 @@ class _Sign_upState extends State<Sign_up> {
   }
 
   String Location1 = "";
-=======
->>>>>>> 27ca1a1492f77ba349de624c4839f9831ae6078d
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -206,7 +208,6 @@ class _Sign_upState extends State<Sign_up> {
                             ),
                             controller: passController,
                           ),
-<<<<<<< HEAD
                           SizedBox(
                             height: 5,
                           ),
@@ -244,8 +245,6 @@ class _Sign_upState extends State<Sign_up> {
                                 },
                                 child: Text("add your location")),
                           )
-=======
->>>>>>> 27ca1a1492f77ba349de624c4839f9831ae6078d
                         ],
                       ),
                     ),
@@ -272,7 +271,6 @@ class _Sign_upState extends State<Sign_up> {
                                       password: passController.text.trim());
                               us_id = myuser.user!.uid;
 
-<<<<<<< HEAD
                               FirebaseFirestore.instance
                                   .collection('Users')
                                   .doc(myuser.user!.uid)
@@ -298,30 +296,6 @@ class _Sign_upState extends State<Sign_up> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text(e.message.toString())));
-=======
-                            FirebaseFirestore.instance
-                                .collection('Users')
-                                .doc(myuser.user!.uid)
-                                .set({
-                              'user_id': us_id,
-                              'Fullname': nameController.text,
-                              'Email': emailController.text,
-                              'phone': phoneController.text,
-                              'img': "",
-                              'address': "",
-                              'age': "",
-                              'major': "",
-                              'bio': "",
-                              'rules': "User",
-                              'Githuburl': "",
-                              'linkedinurl': "",
-                              'skills': [],
-                              'cv': ""
-                            });
-                            print(myuser.additionalUserInfo!.isNewUser);
-                            if (myuser.additionalUserInfo!.isNewUser) {
-                              Navigator.popAndPushNamed(context, "Login");
->>>>>>> 27ca1a1492f77ba349de624c4839f9831ae6078d
                             }
                           }
                         },
@@ -363,28 +337,7 @@ class _Sign_upState extends State<Sign_up> {
                           UserCredential myuser =
                               await auth.signInWithCredential(credential);
 
-                          us_id = myuser.user!.uid;
-                          FirebaseFirestore.instance
-                              .collection('Users')
-                              .doc(myuser.user!.uid)
-                              .set({
-                            'user_id': us_id,
-                            'Fullname': myuser.user!.displayName,
-                            'Email': myuser.user!.email,
-                            'phone': "",
-                            'img': "",
-                            'address': "",
-                            'age': "",
-                            'major': "",
-                            'bio': "",
-                            'rules': "User",
-                            'Githuburl': "",
-                            'linkedinurl': "",
-                            'skills': [],
-                            'cv': ""
-                          });
-
-                          Navigator.popAndPushNamed(context, "Check");
+                          Navigator.pushNamed(context, "Home");
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(e.toString())));
