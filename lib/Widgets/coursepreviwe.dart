@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Company/company_info.dart';
-import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/open_url.dart';
 import 'package:jobology/constants.dart';
@@ -218,13 +217,29 @@ class _Course_previweState extends State<Course_previwe> {
                                   context: context,
                                   builder: (context) {
                                     return CupertinoAlertDialog(
-                                      content: const Text(
-                                        "Applied Successfully!",
-                                        style: TextStyle(
-                                          fontSize: subTitleSize,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color.fromARGB(255, 0, 0, 0),
-                                        ),
+                                      content: Column(
+                                        children: [
+                                          const Text(
+                                            "Applied Successfully!",
+                                            style: TextStyle(
+                                              fontSize: subTitleSize,
+                                              fontWeight: FontWeight.bold,
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(
+                                            "We will contact you soon..",
+                                            style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 96, 96, 96),
+                                              fontSize: ParagraphSize,
+                                            ),
+                                          )
+                                        ],
                                       ),
                                       actions: [
                                         MaterialButton(

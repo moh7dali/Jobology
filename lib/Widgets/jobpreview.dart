@@ -115,6 +115,21 @@ class _job_previweState extends State<job_previwe> {
                               child: Icon(Icons.info))
                         ],
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          children: [
+                            Icon(Ionicons.link_outline),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Open_url(
+                              url: widget.url!,
+                              text: "Visit the website",
+                            ),
+                          ],
+                        ),
+                      ),
                       const Divider(
                         height: 15,
                         thickness: 2,
@@ -221,11 +236,6 @@ class _job_previweState extends State<job_previwe> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16),
-                        child: Open_url(
-                            url: widget.url!, text: "Visit the website"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16),
                         child: Center(
                           child: MaterialButton(
                             height: 60,
@@ -245,13 +255,28 @@ class _job_previweState extends State<job_previwe> {
                                 context: context,
                                 builder: (context) {
                                   return CupertinoAlertDialog(
-                                    content: const Text(
-                                      "Applied Successfully!",
-                                      style: TextStyle(
-                                        fontSize: subTitleSize,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      ),
+                                    content: Column(
+                                      children: const [
+                                        Text(
+                                          "Applied Successfully!",
+                                          style: TextStyle(
+                                            fontSize: subTitleSize,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          "We will contact you soon..",
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 96, 96, 96),
+                                            fontSize: ParagraphSize,
+                                          ),
+                                        )
+                                      ],
                                     ),
                                     actions: [
                                       MaterialButton(

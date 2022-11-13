@@ -237,7 +237,7 @@ class _personalInfoState extends State<personalInfo> {
                       ),
                     ),
                     Icon_Url(
-                      icon: const Icon(Ionicons.book_outline),
+                      icon: const Icon(Ionicons.document_sharp),
                       url: cv,
                     ),
                   ],
@@ -332,16 +332,20 @@ class _personalInfoState extends State<personalInfo> {
                   Visibility(
                     visible: visibilty,
                     child: TextButton(
-                        onPressed: () async {
-                          await getlocation();
-                          await FirebaseFirestore.instance
-                              .collection('Users')
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .update({
-                            'address': Location1,
-                          });
-                        },
-                        child: Icon(Ionicons.locate)),
+                      onPressed: () async {
+                        await getlocation();
+                        await FirebaseFirestore.instance
+                            .collection('Users')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .update({
+                          'address': Location1,
+                        });
+                      },
+                      child: Icon(
+                        Ionicons.location_sharp,
+                        color: buttonColor,
+                      ),
+                    ),
                   )
                 ],
               ),
