@@ -135,7 +135,7 @@ class _CompanyHomeState extends State<CompanyHome> {
               StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('Jobs')
-                    .orderBy('date')
+                    .orderBy('date', descending: true)
                     .snapshots(),
                 builder: (context, snapshot) {
                   // if statement for loading page
@@ -390,7 +390,7 @@ class _CompanyHomeState extends State<CompanyHome> {
               StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('Training')
-                    .orderBy('date')
+                    .orderBy('date', descending: true)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
