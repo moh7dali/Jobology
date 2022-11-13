@@ -3,21 +3,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:flutter_pw_validator/flutter_pw_validator.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geolocator/geolocator.dart';
-=======
->>>>>>> 27ca1a1492f77ba349de624c4839f9831ae6078d
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobology/constants.dart';
-<<<<<<< HEAD
-import 'package:geocoding/geocoding.dart';
-import 'package:validators/validators.dart';
-=======
->>>>>>> 27ca1a1492f77ba349de624c4839f9831ae6078d
 
 class Sign_up extends StatefulWidget {
   Sign_up({

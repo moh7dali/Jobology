@@ -59,13 +59,9 @@ dependencies:
   flutter_launcher_icons: ^0.10.0
   geolocator: ^9.0.2
   geocoding: ^2.0.5
-<<<<<<< HEAD
   validators: ^3.0.0
   flutter_pw_validator: ^1.4.2
-=======
   file_picker: ^5.2.2
- 
->>>>>>> 27ca1a1492f77ba349de624c4839f9831ae6078d
 
 dev_dependencies:
   flutter_test:
