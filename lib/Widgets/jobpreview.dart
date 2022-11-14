@@ -42,6 +42,7 @@ class job_previwe extends StatefulWidget {
 class _job_previweState extends State<job_previwe> {
   double? destance;
   String destance1 = "";
+  bool loc = true;
   List userLocation = [];
   List companyLocation = [];
   @override
@@ -65,13 +66,18 @@ class _job_previweState extends State<job_previwe> {
         userLocation = event['location'];
       });
     });
-    double destance = Geolocator.distanceBetween(userLocation[0],
-        userLocation[1], companyLocation[0], companyLocation[1]);
 
-    setState(() {
-      destance = destance / 1000;
-      destance1 = (destance.toInt()).toString();
-    });
+    if (!userLocation.isEmpty && !companyLocation.isEmpty) {
+      double destance = Geolocator.distanceBetween(userLocation[0],
+          userLocation[1], companyLocation[0], companyLocation[1]);
+
+      setState(() {
+        destance = destance / 1000;
+        destance1 = (destance.toInt()).toString();
+        loc = true;
+      });
+    } else
+      loc = false;
     return Scaffold(
       body: SizedBox(
         width: double.maxFinite,
@@ -153,20 +159,24 @@ class _job_previweState extends State<job_previwe> {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Image.asset(
-                            "images/route.png",
-                            width: 25,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              "$destance1 Km",
-                              style: TextStyle(fontSize: subTitleSize),
-                            ),
-                          ),
-                        ],
+                      Container(
+                        child: loc
+                            ? Row(
+                                children: [
+                                  Image.asset(
+                                    "images/route.png",
+                                    width: 25,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      "$destance1 Km",
+                                      style: TextStyle(fontSize: subTitleSize),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Text(""),
                       ),
                       const Divider(
                         height: 15,
