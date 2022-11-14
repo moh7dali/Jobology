@@ -287,20 +287,20 @@ class _Company_infoState extends State<Company_info> {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 16),
-                child: CircleAvatar(
-                  backgroundColor: iconColor,
-                  child: Visibility(
-                    visible: visibilty,
-                    child: TextButton(
-                      onPressed: () async {
-                        await getlocation();
-                        await FirebaseFirestore.instance
-                            .collection('Users')
-                            .doc(FirebaseAuth.instance.currentUser!.uid)
-                            .update({
-                          'address': Location1,
-                        });
-                      },
+                child: Visibility(
+                  visible: visibilty,
+                  child: TextButton(
+                    onPressed: () async {
+                      await getlocation();
+                      await FirebaseFirestore.instance
+                          .collection('Users')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .update({
+                        'address': Location1,
+                      });
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: iconColor,
                       child: Icon(
                         Ionicons.location_sharp,
                         color: buttonColor,
