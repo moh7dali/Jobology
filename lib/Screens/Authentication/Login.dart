@@ -148,7 +148,7 @@ class _LoginState extends State<Login> {
                         controller: passController,
                         minLength: 7,
                         width: 400,
-                        height: 150,
+                        height: 50,
                         onSuccess: () {
                           setState(() {
                             success = true;
