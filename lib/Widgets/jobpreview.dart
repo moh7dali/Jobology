@@ -82,7 +82,7 @@ class _job_previweState extends State<job_previwe> {
                 width: MediaQuery.of(context).size.width,
                 height: height * 0.7,
                 decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: backgroud,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(35),
                         topRight: Radius.circular(35))),
@@ -103,16 +103,20 @@ class _job_previweState extends State<job_previwe> {
                             mycolor: Colors.black54.withOpacity(0.9),
                           ),
                           TextButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) {
-                                    return Company_info(
-                                      user_id: widget.comp_id,
-                                    );
-                                  },
-                                ));
-                              },
-                              child: Icon(Icons.info))
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return Company_info(
+                                    user_id: widget.comp_id,
+                                  );
+                                },
+                              ));
+                            },
+                            child: Icon(
+                              Icons.info,
+                              color: buttonColor,
+                            ),
+                          ),
                         ],
                       ),
                       Padding(
@@ -137,7 +141,7 @@ class _job_previweState extends State<job_previwe> {
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(160, 158, 158, 158),
+                            color: containerBackgroun,
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
                           padding: const EdgeInsets.all(10),
@@ -146,6 +150,7 @@ class _job_previweState extends State<job_previwe> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: subTitleSize,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -162,7 +167,7 @@ class _job_previweState extends State<job_previwe> {
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(160, 158, 158, 158),
+                            color: containerBackgroun,
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
                           padding: const EdgeInsets.all(10),
@@ -171,6 +176,7 @@ class _job_previweState extends State<job_previwe> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: subTitleSize,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -187,7 +193,7 @@ class _job_previweState extends State<job_previwe> {
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(160, 158, 158, 158),
+                            color: containerBackgroun,
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
                           padding: const EdgeInsets.all(10),
@@ -196,6 +202,7 @@ class _job_previweState extends State<job_previwe> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: subTitleSize,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -212,7 +219,7 @@ class _job_previweState extends State<job_previwe> {
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(160, 158, 158, 158),
+                            color: containerBackgroun,
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
                           padding: const EdgeInsets.all(10),
@@ -221,6 +228,7 @@ class _job_previweState extends State<job_previwe> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: subTitleSize,
+                              color: Colors.white,
                             ),
                           ),
                         ),

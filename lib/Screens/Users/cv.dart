@@ -5,12 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/cvpreview.dart';
-import 'package:jobology/Widgets/open_url.dart';
 import 'package:jobology/Widgets/texts.dart';
-import 'package:jobology/Widgets/vedio.dart';
 import 'package:jobology/constants.dart';
 
 class Cv extends StatefulWidget {

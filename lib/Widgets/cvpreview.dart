@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/constants.dart';
 import 'open_url.dart';
@@ -33,6 +32,7 @@ class _cv_previweState extends State<cv_previwe> {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: backgroud,
         body: SizedBox(
           width: double.maxFinite,
           height: double.infinity,
@@ -91,7 +91,7 @@ class _cv_previweState extends State<cv_previwe> {
                                   fontSize: titleSize,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            Divider(
                               height: 20,
                             ),
                             widget.TextNumber!,
@@ -152,7 +152,6 @@ class _cv_previweState extends State<cv_previwe> {
                   ));
                 },
               ),
-            
             ]),
       ),
     );

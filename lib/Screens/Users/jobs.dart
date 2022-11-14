@@ -6,7 +6,6 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
-import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/jobpreview.dart';
 import 'package:jobology/constants.dart';
@@ -35,6 +34,7 @@ class _jobsState extends State<jobs> {
       });
     });
     return Scaffold(
+      backgroundColor: backgroud,
       appBar: AppBar(
         toolbarHeight: 75,
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),

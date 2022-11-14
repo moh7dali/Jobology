@@ -34,6 +34,7 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
       });
     });
     return Scaffold(
+      backgroundColor: backgroud,
       appBar: AppBar(
         toolbarHeight: 75,
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
@@ -126,10 +127,7 @@ class _Interviwe_PreviewState extends State<Interviwe_Preview> {
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.popAndPushNamed(
-                  context,"Login"
-                
-                );
+                Navigator.popAndPushNamed(context, "Login");
               },
             ),
             SpeedDialChild(

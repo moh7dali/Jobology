@@ -10,7 +10,6 @@ import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/constants.dart';
 import '../../Widgets/questin_wedget.dart';
-import '../Authentication/Login.dart';
 
 class InterView extends StatefulWidget {
   InterView({required this.questionList});
@@ -119,17 +118,14 @@ class _InterViewState extends State<InterView> {
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.popAndPushNamed(
-                  context,
-                 "Login"
-                );
+                Navigator.popAndPushNamed(context, "Login");
               },
             ),
             SpeedDialChild(
               child: const Icon(Ionicons.person),
               label: 'Profile',
               onTap: () {
-               Navigator.push(context, MaterialPageRoute(
+                Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
                     return personalInfo(
                       user_id: FirebaseAuth.instance.currentUser!.uid,
@@ -138,7 +134,6 @@ class _InterViewState extends State<InterView> {
                 ));
               },
             ),
-           
           ]),
     );
   }

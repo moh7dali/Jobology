@@ -341,7 +341,7 @@ class _personalInfoState extends State<personalInfo> {
                           'address': Location1,
                         });
                       },
-                      child: Icon(
+                      child: const Icon(
                         Ionicons.location_sharp,
                         color: buttonColor,
                       ),

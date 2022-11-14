@@ -80,7 +80,7 @@ class _Course_previweState extends State<Course_previwe> {
                 width: MediaQuery.of(context).size.width,
                 height: height * 0.7,
                 decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: backgroud,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(35),
                         topRight: Radius.circular(35))),
@@ -88,19 +88,20 @@ class _Course_previweState extends State<Course_previwe> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "${widget.title!.toString().toUpperCase()}",
-                                style: const TextStyle(
-                                    fontSize: titleSize,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              TextButton(
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "${widget.title!.toString().toUpperCase()}",
+                                  style: const TextStyle(
+                                      fontSize: titleSize,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                TextButton(
                                   onPressed: () {
                                     Navigator.push(context, MaterialPageRoute(
                                       builder: (context) {
@@ -110,10 +111,15 @@ class _Course_previweState extends State<Course_previwe> {
                                       },
                                     ));
                                   },
-                                  child: Icon(Icons.info))
-                            ],
-                          ),
-                        ],
+                                  child: Icon(
+                                    Icons.info,
+                                    color: buttonColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       MyText(
                           text: "${widget.price}" + "\$",
@@ -144,7 +150,7 @@ class _Course_previweState extends State<Course_previwe> {
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(160, 158, 158, 158),
+                            color: containerBackgroun,
                             borderRadius: BorderRadius.circular(15)),
                         child: const Padding(
                           padding: EdgeInsets.all(10),
@@ -153,6 +159,7 @@ class _Course_previweState extends State<Course_previwe> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: subTitleSize,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -169,7 +176,7 @@ class _Course_previweState extends State<Course_previwe> {
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(160, 158, 158, 158),
+                            color: containerBackgroun,
                             borderRadius: BorderRadius.circular(15)),
                         child: const Padding(
                           padding: EdgeInsets.all(10),
@@ -178,6 +185,7 @@ class _Course_previweState extends State<Course_previwe> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: subTitleSize,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -193,8 +201,16 @@ class _Course_previweState extends State<Course_previwe> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16),
-                        child: Open_url(
-                            url: widget.url!, text: "Visit the website"),
+                        child: Row(
+                          children: [
+                            const Icon(Ionicons.link_outline),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Open_url(
+                                url: widget.url!, text: "Visit the website"),
+                          ],
+                        ),
                       ),
                       Padding(
                           padding: EdgeInsets.all(10),
@@ -218,8 +234,8 @@ class _Course_previweState extends State<Course_previwe> {
                                   builder: (context) {
                                     return CupertinoAlertDialog(
                                       content: Column(
-                                        children: [
-                                          const Text(
+                                        children: const [
+                                          Text(
                                             "Applied Successfully!",
                                             style: TextStyle(
                                               fontSize: subTitleSize,
@@ -279,16 +295,16 @@ class _Course_previweState extends State<Course_previwe> {
         ),
       ),
       floatingActionButton: SpeedDial(
-          buttonSize: Size(70, 70),
+          buttonSize: const Size(70, 70),
           spaceBetweenChildren: 15,
-          child: Icon(
+          child: const Icon(
             Ionicons.menu,
             size: 30,
           ),
           backgroundColor: buttonColor,
           children: [
             SpeedDialChild(
-              child: Icon(Icons.logout),
+              child: const Icon(Icons.logout),
               label: 'Logout',
               onTap: () async {
                 await FirebaseAuth.instance.signOut();

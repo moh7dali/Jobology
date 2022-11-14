@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
-import 'package:jobology/Screens/Users/Home.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/coursepreviwe.dart';
 import 'package:jobology/constants.dart';
@@ -36,6 +35,7 @@ class _CourseState extends State<Course> with TickerProviderStateMixin {
     });
 
     return Scaffold(
+      backgroundColor: backgroud,
       appBar: AppBar(
         toolbarHeight: 75,
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
