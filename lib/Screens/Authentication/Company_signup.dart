@@ -82,15 +82,20 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                                     Icons.email_outlined,
                                     color: Colors.black87,
                                   ),
-                                  suffixIcon: isEmailcorrect == false
+                                  suffixIcon: emailController.text.isEmpty
                                       ? Icon(
-                                          Icons.close_sharp,
-                                          color: Colors.red,
+                                          Icons.note_alt_outlined,
+                                          color: Colors.white,
                                         )
-                                      : Icon(
-                                          Icons.done,
-                                          color: Colors.green,
-                                        ),
+                                      : isEmailcorrect == false
+                                          ? Icon(
+                                              Icons.close_sharp,
+                                              color: Colors.red,
+                                            )
+                                          : Icon(
+                                              Icons.done,
+                                              color: Colors.green,
+                                            ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.black54,
@@ -99,9 +104,11 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: isEmailcorrect == false
-                                          ? Colors.red
-                                          : Colors.green,
+                                      color: emailController.text.isEmpty
+                                          ? Colors.grey
+                                          : isEmailcorrect == false
+                                              ? Colors.red
+                                              : Colors.green,
                                       width: 2,
                                     ),
                                   ),
@@ -134,16 +141,20 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: success == false
-                                        ? Colors.red
-                                        : Colors.green,
+                                    color: passController.text.isEmpty
+                                        ? Colors.grey
+                                        : success == false
+                                            ? Colors.red
+                                            : Colors.green,
                                     width: 2,
                                   ),
                                 ),
                                 suffixIcon: IconButton(
-                                  color: success == false
-                                      ? Colors.red
-                                      : Colors.green,
+                                  color: passController.text.isEmpty
+                                      ? Colors.grey
+                                      : success == false
+                                          ? Colors.red
+                                          : Colors.green,
                                   icon: Icon(
                                     _isObscure
                                         ? Icons.visibility
@@ -158,9 +169,6 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                               ),
                               controller: passController,
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
                             FlutterPwValidator(
                               controller: passController,
                               minLength: 7,
@@ -171,9 +179,6 @@ class _Company_Sign_upState extends State<Company_Sign_up> {
                                   success = true;
                                 });
                                 print("MATCHED");
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text("Password is matched")));
                               },
                               onFail: () {
                                 setState(() {
