@@ -50,15 +50,17 @@ class _AddNewJobState extends State<AddNewJob> {
       });
     });
     return Scaffold(
+      backgroundColor: backgroud,
       appBar: AppBar(
         toolbarHeight: 75,
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
         elevation: 0,
         leading: Builder(
           builder: (context) => IconButton(
-              icon: Image.asset(
-                "images/back.png",
-                width: 26,
+              icon: const Icon(
+                Ionicons.arrow_back,
+                color: Colors.black,
+                size: 35,
               ),
               onPressed: () {
                 Navigator.pop(context);

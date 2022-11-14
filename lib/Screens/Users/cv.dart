@@ -214,7 +214,7 @@ class _CvState extends State<Cv> {
                                 url:
                                     "https://www.indeed.com/career-advice/resumes-cover-letters/10-resume-writing-tips",
                                 urlTitle:
-                                    "10 Resume Writing Tips To Help\n You Land a Position",
+                                    "10 Resume Writing Tips To Help You Land a Position",
                               );
                             },
                           ));
@@ -286,7 +286,7 @@ class _CvState extends State<Cv> {
                                 url:
                                     "https://www.indeed.com/career-advice/resumes-cover-letters/difference-between-resume-and-cv",
                                 urlTitle:
-                                    "What’s the Difference Between \na Resume and a CV?",
+                                    "What’s the Difference Between a Resume and a CV?",
                               );
                             },
                           ));
@@ -358,7 +358,7 @@ class _CvState extends State<Cv> {
                                 url:
                                     "https://www.indeed.com/career-advice/resumes-cover-letters/cv-template",
                                 urlTitle:
-                                    "Curriculum Vitae (CV) Templates \nfor a Successful Application",
+                                    "Curriculum Vitae (CV) Templates for a Successful Application",
                               );
                             },
                           ));

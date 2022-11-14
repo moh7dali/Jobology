@@ -111,10 +111,10 @@ class _Company_infoState extends State<Company_info> {
             Navigator.pop(context);
           },
           icon: const Icon(
-            Ionicons.chevron_back,
-            size: 30,
+            Ionicons.arrow_back,
+            color: Colors.black,
+            size: 35,
           ),
-          color: Colors.black,
         ),
         actions: [
           Visibility(
@@ -134,7 +134,10 @@ class _Company_infoState extends State<Company_info> {
                   );
                 }));
               },
-              icon: const Icon(Icons.edit),
+              icon: const Icon(
+                Icons.edit,
+                size: 30,
+              ),
               color: Colors.black,
             ),
           ),
@@ -272,33 +275,39 @@ class _Company_infoState extends State<Company_info> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Center(
-                      child: Text(
-                        address,
-                        style: const TextStyle(fontSize: ParagraphSize),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 16, right: 16, top: 16, bottom: 10),
+                child: Center(
+                  child: Text(
+                    address,
+                    style: const TextStyle(fontSize: subTitleSize),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: CircleAvatar(
+                  backgroundColor: iconColor,
+                  child: Visibility(
+                    visible: visibilty,
+                    child: TextButton(
+                      onPressed: () async {
+                        await getlocation();
+                        await FirebaseFirestore.instance
+                            .collection('Users')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .update({
+                          'address': Location1,
+                        });
+                      },
+                      child: Icon(
+                        Ionicons.location_sharp,
+                        color: buttonColor,
                       ),
                     ),
                   ),
-                  Visibility(
-                    visible: visibilty,
-                    child: TextButton(
-                        onPressed: () async {
-                          await getlocation();
-                          await FirebaseFirestore.instance
-                              .collection('Users')
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .update({
-                            'address': Location1,
-                          });
-                        },
-                        child: Icon(Ionicons.locate)),
-                  )
-                ],
+                ),
               ),
               Container(
                 width: double.infinity,
