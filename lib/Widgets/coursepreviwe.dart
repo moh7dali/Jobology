@@ -62,16 +62,17 @@ class _Course_previweState extends State<Course_previwe> {
               top: 30,
               left: 15,
               child: Container(
-                  child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Ionicons.chevron_back_outline,
-                  size: 35,
-                  color: Colors.white,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Ionicons.arrow_back,
+                    color: Colors.black,
+                    size: 35,
+                  ),
                 ),
-              )),
+              ),
             ),
             Positioned(
               top: 290,
@@ -111,7 +112,7 @@ class _Course_previweState extends State<Course_previwe> {
                                       },
                                     ));
                                   },
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.info,
                                     color: buttonColor,
                                   ),

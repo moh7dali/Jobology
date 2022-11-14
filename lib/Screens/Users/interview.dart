@@ -45,12 +45,13 @@ class _InterViewState extends State<InterView> {
         elevation: 0,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: Image.asset(
-              "images/back.png",
-              width: 26,
+            icon: const Icon(
+              Ionicons.arrow_back,
+              color: Colors.black,
+              size: 35,
             ),
             onPressed: () async {
-              Navigator.pushNamed(context, "Home");
+              Navigator.pop(context);
             },
           ),
         ),

@@ -69,9 +69,9 @@ class _job_previweState extends State<job_previwe> {
                   Navigator.pop(context);
                 },
                 icon: const Icon(
-                  Ionicons.chevron_back_outline,
+                  Ionicons.arrow_back,
+                  color: Colors.black,
                   size: 35,
-                  color: Colors.white,
                 ),
               )),
             ),

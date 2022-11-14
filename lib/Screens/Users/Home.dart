@@ -7,13 +7,8 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/constants.dart';
-import 'package:jobology/Screens/Users/cv.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
 import 'package:jobology/Widgets/sectionscard.dart';
-import 'package:jobology/Screens/Authentication/Login.dart';
-import 'package:jobology/Screens/Users/interview_preview.dart';
-import 'package:jobology/Screens/Users/course.dart';
-import 'package:jobology/Screens/Users/jobs.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
@@ -50,9 +45,10 @@ class _HomeState extends State<Home> {
         elevation: 0,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: Image.asset(
-              "images/back.png",
-              width: 26,
+            icon: Icon(
+              Ionicons.arrow_back,
+              color: Colors.black,
+              size: 35,
             ),
             onPressed: () async {
               await FirebaseAuth.instance.signOut();

@@ -118,10 +118,10 @@ class _personalInfoState extends State<personalInfo> {
             Navigator.pop(context);
           },
           icon: const Icon(
-            Ionicons.chevron_back,
-            size: 30,
+            Ionicons.arrow_back,
+            color: Colors.black,
+            size: 35,
           ),
-          color: Colors.black,
         ),
         actions: [
           Visibility(
@@ -143,7 +143,10 @@ class _personalInfoState extends State<personalInfo> {
                       cv: cv);
                 }));
               },
-              icon: const Icon(Icons.edit),
+              icon: const Icon(
+                Icons.edit,
+                size: 30,
+              ),
               color: Colors.black,
             ),
           ),
@@ -317,37 +320,39 @@ class _personalInfoState extends State<personalInfo> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Center(
-                      child: Text(
-                        address,
-                        style: const TextStyle(fontSize: subTitleSize),
-                      ),
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 16, right: 16, top: 16, bottom: 5),
+                child: Center(
+                  child: Text(
+                    address,
+                    style: const TextStyle(fontSize: subTitleSize),
                   ),
-                  Visibility(
-                    visible: visibilty,
-                    child: TextButton(
-                      onPressed: () async {
-                        await getlocation();
-                        await FirebaseFirestore.instance
-                            .collection('Users')
-                            .doc(FirebaseAuth.instance.currentUser!.uid)
-                            .update({
-                          'address': Location1,
-                        });
-                      },
-                      child: const Icon(
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Visibility(
+                  visible: visibilty,
+                  child: TextButton(
+                    onPressed: () async {
+                      await getlocation();
+                      await FirebaseFirestore.instance
+                          .collection('Users')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .update({
+                        'address': Location1,
+                      });
+                    },
+                    child: const CircleAvatar(
+                      backgroundColor: iconColor,
+                      child: Icon(
                         Ionicons.location_sharp,
                         color: buttonColor,
                       ),
                     ),
-                  )
-                ],
+                  ),
+                ),
               ),
               Container(
                 width: double.infinity,
