@@ -178,7 +178,7 @@ class _Sign_upState extends State<Sign_up> {
                             controller: passController,
                             minLength: 7,
                             width: 400,
-                            height: 150,
+                            height: 50,
                             onSuccess: () {
                               setState(() {
                                 success = true;
