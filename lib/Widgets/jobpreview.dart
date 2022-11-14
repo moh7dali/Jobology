@@ -41,40 +41,37 @@ class job_previwe extends StatefulWidget {
 
 class _job_previweState extends State<job_previwe> {
   double? destance;
- String destance1="";
-List userLocation = [];
-List companyLocation = [];
+  String destance1 = "";
+  List userLocation = [];
+  List companyLocation = [];
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-   FirebaseFirestore.instance
-                            .collection('Users')
-                            .doc(widget.comp_id)
-                            .snapshots()
-                            .listen((event) {
-                          setState(() {
-                            companyLocation = event['location'];
-                          });
-                        });
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(widget.comp_id)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        companyLocation = event['location'];
+      });
+    });
     FirebaseFirestore.instance
         .collection('Users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .snapshots()
         .listen((event) {
       setState(() {
-        
         userLocation = event['location'];
       });
     });
-    double destance =   Geolocator.distanceBetween(userLocation[0], userLocation[1], companyLocation[0], companyLocation[1]);
-                         print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                        print(companyLocation);
-                        print(destance);
-                        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-setState(() {
-  destance=destance/1000;
-  destance1=(destance.toInt()).toString();
-});
+    double destance = Geolocator.distanceBetween(userLocation[0],
+        userLocation[1], companyLocation[0], companyLocation[1]);
+
+    setState(() {
+      destance = destance / 1000;
+      destance1 = (destance.toInt()).toString();
+    });
     return Scaffold(
       body: SizedBox(
         width: double.maxFinite,
@@ -129,11 +126,15 @@ setState(() {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          MyText(
-                            text:
-                                "${widget.company_name!.toString().toUpperCase()}",
-                            size: titleSize,
-                            mycolor: Colors.black54.withOpacity(0.9),
+                          Row(
+                            children: [
+                              MyText(
+                                text:
+                                    "${widget.company_name!.toString().toUpperCase()}",
+                                size: titleSize,
+                                mycolor: Colors.black54.withOpacity(0.9),
+                              ),
+                            ],
                           ),
                           TextButton(
                             onPressed: () {
@@ -152,20 +153,20 @@ setState(() {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Row(
-                          children: [
-                            Icon(Ionicons.link_outline),
-                            SizedBox(
-                              width: 10,
+                      Row(
+                        children: [
+                          Image.asset(
+                            "images/route.png",
+                            width: 25,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              "$destance1 Km",
+                              style: TextStyle(fontSize: subTitleSize),
                             ),
-                            Open_url(
-                              url: widget.url!,
-                              text: "Visit the website",
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       const Divider(
                         height: 15,
@@ -275,26 +276,20 @@ setState(() {
                           ),
                         ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: containerBackgroun,
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Text(
-                            "destance between you and the company: ",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text("$destance1 K/M",style: TextStyle(fontSize: 16),),
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          children: [
+                            Icon(Ionicons.link_outline),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Open_url(
+                              url: widget.url!,
+                              text: "Visit the website",
+                            ),
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16),

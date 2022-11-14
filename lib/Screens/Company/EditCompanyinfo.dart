@@ -120,7 +120,7 @@ class _EditCompanyInfoState extends State<EditCompanyInfo> {
             TextFormField(
               decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.person_outline_outlined),
-                  labelText: 'Full Company name',
+                  labelText: 'Company name',
                   hintText: 'Edit Company name',
                   border: OutlineInputBorder()),
               controller: Fullnameconrller,
@@ -141,7 +141,7 @@ class _EditCompanyInfoState extends State<EditCompanyInfo> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.calendar_month),
+                  prefixIcon: Icon(Icons.email),
                   labelText: 'Email',
                   hintText: 'Enter Company Email',
                   border: OutlineInputBorder()),
@@ -190,6 +190,9 @@ class _EditCompanyInfoState extends State<EditCompanyInfo> {
                   hintText: 'Enter Company linkedIn account',
                   border: OutlineInputBorder()),
               controller: linkedinController,
+            ),
+            const SizedBox(
+              height: 50,
             ),
             ElevatedButton(
               style: OutlinedButton.styleFrom(

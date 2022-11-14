@@ -108,7 +108,7 @@ class _AddNewJobState extends State<AddNewJob> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Ionicons.text_outline),
                     labelText: 'Ad title',
                     hintText: 'Enter Your Ad title',
                     border: OutlineInputBorder()),
@@ -119,7 +119,7 @@ class _AddNewJobState extends State<AddNewJob> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Ionicons.document_text_outline),
                     labelText: 'Brief',
                     hintText: 'Enter a brief about job',
                     border: OutlineInputBorder()),
@@ -130,7 +130,7 @@ class _AddNewJobState extends State<AddNewJob> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Ionicons.calendar_outline),
                     labelText: 'Experience years',
                     hintText: '0-3, 4-7, 8 and more',
                     border: OutlineInputBorder()),
@@ -141,9 +141,9 @@ class _AddNewJobState extends State<AddNewJob> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
-                    labelText: 'Requirments',
-                    hintText: 'Add requirments',
+                    prefixIcon: Icon(Ionicons.alert_outline),
+                    labelText: 'Requirements',
+                    hintText: 'Add requirements',
                     border: OutlineInputBorder()),
                 controller: reqController,
               ),
@@ -152,7 +152,7 @@ class _AddNewJobState extends State<AddNewJob> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Ionicons.link_outline),
                     labelText: 'Url',
                     hintText: 'Add url to your course',
                     border: OutlineInputBorder()),

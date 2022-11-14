@@ -109,7 +109,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Ionicons.text_outline),
                     labelText: 'Ad title',
                     hintText: 'Enter Your Ad title',
                     border: OutlineInputBorder()),
@@ -120,7 +120,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Ionicons.document_text_outline),
                     labelText: 'Brief',
                     hintText: 'Enter a brief about job',
                     border: OutlineInputBorder()),
@@ -131,7 +131,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Ionicons.cash_outline),
                     labelText: 'price',
                     hintText: 'Add price',
                     border: OutlineInputBorder()),
@@ -142,7 +142,7 @@ class _AddNewTrainingState extends State<AddNewTraining> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
+                    prefixIcon: Icon(Ionicons.link_outline),
                     labelText: 'Url',
                     hintText: 'Add url to your ad',
                     border: OutlineInputBorder()),

@@ -115,7 +115,7 @@ class _Update_jobState extends State<Update_job> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person_outline_outlined),
+                  prefixIcon: Icon(Ionicons.text_outline),
                   labelText: 'Ad Title',
                   hintText: 'Edit Title name',
                   border: OutlineInputBorder()),
@@ -126,7 +126,7 @@ class _Update_jobState extends State<Update_job> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.location_pin),
+                  prefixIcon: Icon(Ionicons.document_text_outline),
                   labelText: 'Brief',
                   hintText: 'Edit Brief',
                   border: OutlineInputBorder()),
@@ -138,8 +138,8 @@ class _Update_jobState extends State<Update_job> {
             TextFormField(
               decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.calendar_month),
-                  labelText: 'Years',
-                  hintText: 'Edit Years',
+                  labelText: 'Experience',
+                  hintText: 'Edit Years of Experience',
                   border: OutlineInputBorder()),
               controller: yearsController,
             ),
@@ -148,9 +148,9 @@ class _Update_jobState extends State<Update_job> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.book),
-                  labelText: 'Requiermints',
-                  hintText: 'Edit Requiermints',
+                  prefixIcon: Icon(Ionicons.alert_outline),
+                  labelText: 'Requirements',
+                  hintText: 'Edit Requirements',
                   border: OutlineInputBorder()),
               controller: reqController,
             ),
@@ -159,7 +159,7 @@ class _Update_jobState extends State<Update_job> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.phone),
+                  prefixIcon: Icon(Ionicons.link_outline),
                   labelText: 'URL',
                   hintText: 'Edit URL',
                   border: OutlineInputBorder()),

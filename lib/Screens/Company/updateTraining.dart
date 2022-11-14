@@ -112,7 +112,7 @@ class _Update_trainingState extends State<Update_training> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person_outline_outlined),
+                  prefixIcon: Icon(Ionicons.text_outline),
                   labelText: 'Ad Title',
                   hintText: 'Edit Title name',
                   border: OutlineInputBorder()),
@@ -123,7 +123,7 @@ class _Update_trainingState extends State<Update_training> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.location_pin),
+                  prefixIcon: Icon(Ionicons.document_text_outline),
                   labelText: 'Brief',
                   hintText: 'Edit Brief',
                   border: OutlineInputBorder()),
@@ -134,7 +134,7 @@ class _Update_trainingState extends State<Update_training> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.calendar_month),
+                  prefixIcon: Icon(Ionicons.cash_outline),
                   labelText: 'Price',
                   hintText: 'Edit Price',
                   border: OutlineInputBorder()),
@@ -145,7 +145,7 @@ class _Update_trainingState extends State<Update_training> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.phone),
+                  prefixIcon: Icon(Ionicons.link_outline),
                   labelText: 'URL',
                   hintText: 'Edit URL',
                   border: OutlineInputBorder()),
