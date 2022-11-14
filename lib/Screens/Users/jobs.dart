@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Authentication/Login.dart';
 import 'package:jobology/Screens/Users/peronalPage/personalpage.dart';
@@ -31,6 +32,7 @@ class _jobsState extends State<jobs> {
       setState(() {
         username = event['Fullname'];
         img_url = event['img'];
+       
       });
     });
     return Scaffold(

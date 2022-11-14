@@ -51,10 +51,10 @@ class _Company_infoState extends State<Company_info> {
     _determinePosition();
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    double latitude = position.latitude;
-    double longtude = position.longitude;
+     latitude = position.latitude;
+   longtude = position.longitude;
     List<Placemark> placemarks =
-        await placemarkFromCoordinates(latitude, longtude);
+        await placemarkFromCoordinates(latitude!, longtude!);
 
     setState(() {
       Location1 =
@@ -62,7 +62,8 @@ class _Company_infoState extends State<Company_info> {
       print(Location1);
     });
   }
-
+double ?latitude ;
+    double?longtude;
   String Location1 = "";
   Icon Icon1 = const Icon(
     Icons.thumb_up,
@@ -297,6 +298,7 @@ class _Company_infoState extends State<Company_info> {
                           .doc(FirebaseAuth.instance.currentUser!.uid)
                           .update({
                         'address': Location1,
+                        'location': FieldValue.arrayUnion([latitude,longtude]),
                       });
                     },
                     child: CircleAvatar(

@@ -19,6 +19,7 @@ class personalInfo extends StatefulWidget {
 }
 
 class _personalInfoState extends State<personalInfo> {
+  
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -48,12 +49,12 @@ class _personalInfoState extends State<personalInfo> {
     _determinePosition();
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    double latitude = position.latitude;
-    double longtude = position.longitude;
+     latitude = position.latitude;
+     longtude = position.longitude;
     print(latitude);
     print(longtude);
     List<Placemark> placemarks =
-        await placemarkFromCoordinates(latitude, longtude);
+        await placemarkFromCoordinates(latitude!, longtude!);
 
     setState(() {
       Location1 =
@@ -61,7 +62,8 @@ class _personalInfoState extends State<personalInfo> {
       print(Location1);
     });
   }
-
+double? latitude;
+  double? longtude;
   String Location1 = "";
   Icon Icon1 = const Icon(
     Icons.thumb_up,
@@ -342,6 +344,7 @@ class _personalInfoState extends State<personalInfo> {
                           .doc(FirebaseAuth.instance.currentUser!.uid)
                           .update({
                         'address': Location1,
+                        'location':[latitude,longtude],
                       });
                     },
                     child: const CircleAvatar(

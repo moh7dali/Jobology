@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:jobology/Screens/Company/company_info.dart';
 import 'package:jobology/Screens/Users/Home.dart';
@@ -39,9 +40,41 @@ class job_previwe extends StatefulWidget {
 }
 
 class _job_previweState extends State<job_previwe> {
+  double? destance;
+ String destance1="";
+List userLocation = [];
+List companyLocation = [];
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
+   FirebaseFirestore.instance
+                            .collection('Users')
+                            .doc(widget.comp_id)
+                            .snapshots()
+                            .listen((event) {
+                          setState(() {
+                            companyLocation = event['location'];
+                          });
+                        });
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        
+        userLocation = event['location'];
+      });
+    });
+    double destance =   Geolocator.distanceBetween(userLocation[0], userLocation[1], companyLocation[0], companyLocation[1]);
+                         print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                        print(companyLocation);
+                        print(destance);
+                        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+setState(() {
+  destance=destance/1000;
+  destance1=(destance.toInt()).toString();
+});
     return Scaffold(
       body: SizedBox(
         width: double.maxFinite,
@@ -241,6 +274,27 @@ class _job_previweState extends State<job_previwe> {
                             fontSize: subTitleSize,
                           ),
                         ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: containerBackgroun,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "destance between you and the company: ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text("$destance1 K/M",style: TextStyle(fontSize: 16),),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16),

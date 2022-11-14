@@ -235,7 +235,8 @@ class _Sign_upState extends State<Sign_up> {
                                 'Githuburl': "",
                                 'linkedinurl': "",
                                 'skills': [],
-                                'cv': ""
+                                'cv': "",
+                                'location':[],
                               });
                               print(myuser.additionalUserInfo!.isNewUser);
                               if (myuser.additionalUserInfo!.isNewUser) {
@@ -304,7 +305,8 @@ class _Sign_upState extends State<Sign_up> {
                             'Githuburl': "",
                             'linkedinurl': "",
                             'skills': [],
-                            'cv': ""
+                            'cv': "",
+                            'location':[],
                           });
 
                           Navigator.popAndPushNamed(context, "Check");
