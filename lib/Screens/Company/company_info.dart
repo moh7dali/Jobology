@@ -298,7 +298,7 @@ double ?latitude ;
                           .doc(FirebaseAuth.instance.currentUser!.uid)
                           .update({
                         'address': Location1,
-                        'location': FieldValue.arrayUnion([latitude,longtude]),
+                        'location': [latitude,longtude],
                       });
                     },
                     child: CircleAvatar(
