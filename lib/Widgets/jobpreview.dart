@@ -174,6 +174,19 @@ class _job_previweState extends State<job_previwe> {
                                       style: TextStyle(fontSize: subTitleSize),
                                     ),
                                   ),
+                                  SizedBox(
+                                    width: 25,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Open_url(
+                                        text: "show in maps",
+                                        url:
+                                            "https://www.google.com/maps/place/" +
+                                                companyLocation[0].toString() +
+                                                "," +
+                                                companyLocation[1].toString()),
+                                  ),
                                 ],
                               )
                             : Text(""),
