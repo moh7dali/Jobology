@@ -23,10 +23,10 @@ Instead of job advertisements and training courses in random places on various p
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Background Color | ![#0a192f](https://via.placeholder.com/10/0a192f?text=+) #0a192f |
-| Button Color | ![#0a192f](https://via.placeholder.com/10/0a192f?text=+) #0a192f |
-| Contanair Color |![#0a192f](https://via.placeholder.com/10/0a192f?text=+) #0a192f |
-| Icon Color | ![#0a192f](https://via.placeholder.com/10/0a192f?text=+) #0a192f |
+| Background Color | #0a192f |
+| Button Color | #0a192f |
+| Contanair Color #0a192f |
+| Icon Color | #0a192f |
 
 
 ## Tech Stack
