@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 //colors
-const backgroud = Color(0xFFF7F7F7);
+const backgroud = Color(0xFFF9F5EB);
 const buttonColor = Color(0xFF1C3879);
 const containerBackgroun = Color(0xFF607EAA);
 const iconColor = Color(0xFFEAE3D2);
