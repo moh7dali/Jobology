@@ -1,4 +1,4 @@
-![logo2](https://user-images.githubusercontent.com/70016377/202569710-885c11b8-ed51-42a1-9c4d-09297bd731c5.png)
+<img src="https://user-images.githubusercontent.com/70016377/202569710-885c11b8-ed51-42a1-9c4d-09297bd731c5.png" width="200" height="200">
 # Jobology
 
 ### Why Jobology?
@@ -59,7 +59,7 @@ This project is used by the following Users:
 - Show the cv for applicants and their contact information
 
 ## Screenshots
-<img src="https://user-images.githubusercontent.com/70016377/202572736-ec034cec-d1d5-423a-b290-d420eebd0922.png" width="100" height="100">
+<img src="https://user-images.githubusercontent.com/70016377/202572736-ec034cec-d1d5-423a-b290-d420eebd0922.png" width="200" height="200">
 <img src="https://user-images.githubusercontent.com/70016377/202572739-5c4010c4-e0b5-429e-a1db-1677029f06b1.png" width="100" height="100">
 <img src="https://user-images.githubusercontent.com/70016377/202572740-082949f2-ce64-4d1f-b98f-78404015be9c.png" width="100" height="100">
 <img src="https://user-images.githubusercontent.com/70016377/202572761-965d22d1-a106-4d17-94e5-f618832e1510.png" width="100" height="100">
