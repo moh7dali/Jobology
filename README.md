@@ -1,4 +1,4 @@
-
+![logo2](https://user-images.githubusercontent.com/70016377/202569710-885c11b8-ed51-42a1-9c4d-09297bd731c5.png)
 # Jobology
 
 ### Why Jobology?
@@ -16,7 +16,7 @@ Instead of job advertisements and training courses in random places on various p
  - [karimhijazi1](https://github.com/karimhijazi1)
  - [raghadromaneh](https://github.com/raghadromaneh1)
 
-![logo2](https://user-images.githubusercontent.com/70016377/202569710-885c11b8-ed51-42a1-9c4d-09297bd731c5.png)
+
 
 
 ## Color Reference
