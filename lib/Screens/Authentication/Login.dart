@@ -1,12 +1,10 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jobology/Widgets/ck_login.dart';
 import 'package:jobology/constants.dart';
 import 'package:validators/validators.dart';
 
@@ -61,7 +59,7 @@ class _LoginState extends State<Login> {
                           showCursor: true,
                           decoration: InputDecoration(
                             labelText: 'Email',
-                            hintText: 'something@gmail.com',
+                            hintText: 'example@example.com',
                             hintStyle:
                                 TextStyle(color: Colors.grey, fontSize: 18),
                             prefixIcon: Icon(

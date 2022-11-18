@@ -16,7 +16,7 @@ class _Start_pageState extends State<Start_page> {
     return Scaffold(
         backgroundColor: backgroud,
         body: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -25,22 +25,16 @@ class _Start_pageState extends State<Start_page> {
                 // width: 600,
                 height: height * 0.5,
               ),
-              Column(
-                children: [
-                  Text(
-                    "Jobology,",
-                    style: GoogleFonts.montserrat(
-                        fontSize: 25, fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.all(13),
+                child: Text(
+                  "Your guide to find your dream job,",
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Your guide to find your dream job,",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(fontSize: 20),
-                  ),
-                ],
+                ),
               ),
               Row(
                 children: [

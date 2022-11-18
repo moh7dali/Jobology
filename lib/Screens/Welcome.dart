@@ -31,7 +31,7 @@ class _WelcomeState extends State<Welcome> {
                 height: height,
                 title: "Find a Job Easily !",
                 Subtitle:
-                    "Do you want Find a job ? just discover our job section and start your career",
+                    "Choose a job you love, and you will never have to work a day in your life",
                 img_url: "images/job.png",
                 num: "1/4",
               )),
@@ -40,7 +40,7 @@ class _WelcomeState extends State<Welcome> {
             child: Welcome_widget(
               height: height,
               title: "Discover a new Courses",
-              Subtitle: "this is Sub title of courses",
+              Subtitle: "Learning never exhausts the mind",
               img_url: "images/Courses.png",
               num: "2/4",
             ),
@@ -50,7 +50,7 @@ class _WelcomeState extends State<Welcome> {
             child: Welcome_widget(
               height: height,
               title: "Start build your cv",
-              Subtitle: "this is Sub title for cv",
+              Subtitle: "Your cv is just a commodity, package yourself",
               img_url: "images/cv.png",
               num: "3/4",
             ),
@@ -60,7 +60,7 @@ class _WelcomeState extends State<Welcome> {
             child: Welcome_widget(
               height: height,
               title: "Interview Questions",
-              Subtitle: "this is Sub title interview questions",
+              Subtitle: "Opportunities don't happen, you create them",
               img_url: "images/interview.png",
               num: "4/4",
             ),
