@@ -49,14 +49,14 @@ This project is used by the following Users:
 ### for Users
 - Know more about companies and the distance to reach to the company
 - Find all jobs and courses in one application
-- Apply to a cretin job through jobology
+- Apply to a certain job through Jobology
 - Tips to create a professional CV
 - Bank of interview questions
 
 ### for companies
 - Post about available jobs
-- Announcing training course
-- Show the cv for applicants and their contact information
+- Announce training courses
+- View applicants’ CVs and their contact informationn
 
 ## Screenshots
 <img src="https://user-images.githubusercontent.com/70016377/202572736-ec034cec-d1d5-423a-b290-d420eebd0922.png" width="250" height="500">
