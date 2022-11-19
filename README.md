@@ -56,7 +56,7 @@ This project is used by the following Users:
 ### for companies
 - Post about available jobs
 - Announce training courses
-- View applicants’ CVs and their contact informationn
+- View applicants’ CVs and their contact information
 
 ## Screenshots
 <img src="https://user-images.githubusercontent.com/70016377/202572736-ec034cec-d1d5-423a-b290-d420eebd0922.png" width="250" height="500">
