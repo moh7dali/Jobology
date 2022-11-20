@@ -23,6 +23,15 @@ class CompanyHome extends StatefulWidget {
 class _CompanyHomeState extends State<CompanyHome> {
   String comp_name = "";
   String img_url = "";
+  Stream t = FirebaseFirestore.instance
+      .collection('Training')
+      .orderBy('date', descending: true)
+      .snapshots();
+
+  Stream s = FirebaseFirestore.instance
+      .collection('Jobs')
+      .orderBy('date', descending: true)
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore.instance
@@ -134,10 +143,7 @@ class _CompanyHomeState extends State<CompanyHome> {
             children: [
               // stream builder to read data from firestore
               StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection('Jobs')
-                    .orderBy('date', descending: true)
-                    .snapshots(),
+                stream: s,
                 builder: (context, snapshot) {
                   // if statement for loading page
                   if (snapshot.hasData) {
@@ -389,10 +395,7 @@ class _CompanyHomeState extends State<CompanyHome> {
                 },
               ),
               StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection('Training')
-                    .orderBy('date', descending: true)
-                    .snapshots(),
+                stream: t,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final docs = snapshot.data!.docs;

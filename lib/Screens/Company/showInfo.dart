@@ -19,6 +19,7 @@ class _Show_infoState extends State<Show_info> {
   List Applied = [];
   String comp_name = "";
   String img_url = "";
+  Stream s = FirebaseFirestore.instance.collection('Users').snapshots();
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore.instance
@@ -103,7 +104,7 @@ class _Show_infoState extends State<Show_info> {
         ],
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('Users').snapshots(),
+        stream: s,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final docs = snapshot.data!.docs;
