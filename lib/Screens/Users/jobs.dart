@@ -20,6 +20,10 @@ class jobs extends StatefulWidget {
 
 String username = "";
 String img_url = "";
+Stream s = FirebaseFirestore.instance
+    .collection('Jobs')
+    .orderBy('date', descending: true)
+    .snapshots();
 
 class _jobsState extends State<jobs> {
   @override
@@ -32,7 +36,6 @@ class _jobsState extends State<jobs> {
       setState(() {
         username = event['Fullname'];
         img_url = event['img'];
-       
       });
     });
     return Scaffold(
@@ -99,10 +102,7 @@ class _jobsState extends State<jobs> {
         ],
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('Jobs')
-            .orderBy('date', descending: true)
-            .snapshots(),
+        stream: s,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final docs = snapshot.data!.docs;
