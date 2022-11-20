@@ -2,7 +2,7 @@
 # Jobology
 
 ### Why Jobology?
-Jobology facilitate the process of communication between those interested in programming and companies, as it is through Jobology that the user can find all the jobs or training that suits him and he can apply for them in an easy way without facing any difficulties, and not only that, but there are many services such as tests with interview questions and tips for creating a professional CV.
+Jobology facilitate the process of communication between those interested in programming and companies. As it is through Jobology that the user can find all the jobs or training that suits him and can apply for them in an easy way without facing any difficulties. Not only that, but there are many services such as tests with interview questions and tips for creating a professional CV.
 
 ### Problems Jobology solve :
 Instead of job advertisements and training courses in random places on various platforms, Jobology has one place that collects all advertisements, which facilitates programmers' access to jobs and courses. In addition, it is considered a data bank that helps inexperienced programmers to create their resumes and see and test themselves with everything related to job interviews
@@ -49,14 +49,14 @@ This project is used by the following Users:
 ### for Users
 - Know more about companies and the distance to reach to the company
 - Find all jobs and courses in one application
-- Apply to a cretin job through jobology
+- Apply to a certain job through Jobology
 - Tips to create a professional CV
 - Bank of interview questions
 
 ### for companies
 - Post about available jobs
-- Announcing training course
-- Show the cv for applicants and their contact information
+- Announce training courses
+- View applicants’ CVs and their contact information
 
 ## Screenshots
 <img src="https://user-images.githubusercontent.com/70016377/202572736-ec034cec-d1d5-423a-b290-d420eebd0922.png" width="250" height="500">
