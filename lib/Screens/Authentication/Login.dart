@@ -51,11 +51,6 @@ class _LoginState extends State<Login> {
                     children: [
                       TextFormField(
                           controller: emailController,
-                          onChanged: (val) {
-                            setState(() {
-                              isEmailcorrect = isEmail(val);
-                            });
-                          },
                           showCursor: true,
                           decoration: InputDecoration(
                             labelText: 'Email',
@@ -66,20 +61,10 @@ class _LoginState extends State<Login> {
                               Icons.email_outlined,
                               color: Colors.black87,
                             ),
-                            suffixIcon: emailController.text.isEmpty
-                                ? Icon(
-                                    Icons.note_alt_outlined,
-                                    color: Colors.white,
-                                  )
-                                : isEmailcorrect == false
-                                    ? Icon(
-                                        Icons.close_sharp,
-                                        color: Colors.red,
-                                      )
-                                    : Icon(
-                                        Icons.done,
-                                        color: Colors.green,
-                                      ),
+                            suffixIcon: Icon(
+                              Icons.note_alt_outlined,
+                              color: Colors.white,
+                            ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black54,
@@ -88,11 +73,7 @@ class _LoginState extends State<Login> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: emailController.text.isEmpty
-                                    ? Colors.grey
-                                    : isEmailcorrect == false
-                                        ? Colors.red
-                                        : Colors.green,
+                                color: Colors.grey,
                                 width: 2,
                               ),
                             ),
@@ -114,20 +95,12 @@ class _LoginState extends State<Login> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: passController.text.isEmpty
-                                  ? Colors.grey
-                                  : success == false
-                                      ? Colors.red
-                                      : Colors.green,
+                              color: Colors.grey,
                               width: 2,
                             ),
                           ),
                           suffixIcon: IconButton(
-                            color: passController.text.isEmpty
-                                ? Colors.grey
-                                : success == false
-                                    ? Colors.red
-                                    : Colors.green,
+                            color: Colors.grey,
                             icon: Icon(
                               _isObscure
                                   ? Icons.visibility
@@ -141,24 +114,6 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         controller: passController,
-                      ),
-                      FlutterPwValidator(
-                        controller: passController,
-                        minLength: 7,
-                        width: 400,
-                        height: 50,
-                        onSuccess: () {
-                          setState(() {
-                            success = true;
-                          });
-                          print("MATCHED");
-                        },
-                        onFail: () {
-                          setState(() {
-                            success = false;
-                          });
-                          print("NOT MATCHED");
-                        },
                       ),
                     ],
                   ),
@@ -183,9 +138,7 @@ class _LoginState extends State<Login> {
                 width: double.infinity,
                 child: ElevatedButton(
                     style: OutlinedButton.styleFrom(
-                        backgroundColor: isEmailcorrect == false
-                            ? Colors.black45
-                            : buttonColor,
+                        backgroundColor: buttonColor,
                         shape: RoundedRectangleBorder(),
                         padding: EdgeInsets.symmetric(vertical: 15)),
                     onPressed: () async {
